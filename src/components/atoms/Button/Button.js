@@ -4,6 +4,7 @@ const Button = styled.button`
 padding:10px;
 background: '#FFD8B2';
 width: 220px;
+color: ${({ theme }) => theme.primary};
 height: '47px';
 border:none;
 border-radius:50px;
