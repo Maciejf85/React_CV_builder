@@ -1,10 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
-
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800&display=swap&subset=latin-ext');
 
-    *, *::before, *::after{
+/* CSS RESET */
+
+
+
+*, *::before, *::after{
         box-sizing:border-box;
     }
     html{
@@ -18,6 +21,5 @@ const GlobalStyle = createGlobalStyle`
 
 
 `;
-
 
 export default GlobalStyle;

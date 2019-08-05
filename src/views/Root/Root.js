@@ -1,13 +1,13 @@
 import React from 'react';
 import Main from 'views/Main';
 import GlobalStyle from 'theme/GlobalStyle';
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components';
+import theme from 'theme/mainTheme';
+
 
 // import { createStore } from 'redux'
 
-const theme = {
-  primary: 'orange'
-}
+
 function Root() {
   return (
     <>

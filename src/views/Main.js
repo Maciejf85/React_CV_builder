@@ -3,7 +3,9 @@ import Button from 'components/atoms/Button/Button';
 
 const Main = () => (
   <>
-    <Button >Push me</Button>
+    <Button>Push me</Button>
+    <Button secondary>Push me</Button>
+    <Button third>Push me</Button>
   </>
 );
 
