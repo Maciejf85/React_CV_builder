@@ -8,6 +8,7 @@
       }
     ]
   },
+  // Fix eslint unresolved import
   "settings": {
     "import/resolver": {
       "node": {
