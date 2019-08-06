@@ -6,7 +6,8 @@
       {
         "extensions": [".js"]
       }
-    ]
+    ],
+    "react/destructuring-assignment": ["error", "never", { "ignoreClassFields": true }]
   },
   // Fix eslint unresolved import
   "settings": {
@@ -23,5 +24,15 @@
   },
   "globals": {
     "document": false
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
   }
 }

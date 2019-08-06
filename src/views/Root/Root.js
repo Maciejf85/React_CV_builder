@@ -12,7 +12,6 @@ function Root() {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <>
-          <h1>Hello React</h1>
           <Main />
         </>
       </ThemeProvider>
