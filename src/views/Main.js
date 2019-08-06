@@ -1,14 +1,10 @@
 import React from 'react';
-import Button from 'components/atoms/Button/Button';
-import Logo from 'components/atoms/Logo/Logo';
+import NavBar from 'components/organisms/Navigation/NavBar';
 
 const Main = () => {
   return (
     <>
-      <Logo />
-      <Button>Push me</Button>
-      <Button secondary>Push me </Button>
-      <Button third>Push me</Button>
+      <NavBar />
     </>
   );
 };
