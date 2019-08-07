@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
 
 
 
+
 *, *::before, *::after{
         box-sizing:border-box;
         -webkit-font-smoothing: antialiased;
@@ -21,6 +22,10 @@ const GlobalStyle = createGlobalStyle`
         padding:0;
         font-size:1.6rem;
         font-family: "Montserrat", sans-serif;
+    }
+    a{
+        text-decoration:none;
+        color:inherit;
     }
 
 

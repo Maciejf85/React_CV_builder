@@ -15,6 +15,7 @@ const theme = {
   colors: {
     primaryGrey: 'hsl(220,14%,25%)',
     lightGrey: 'hsl(220,9.4%,37.6%)',
+    buttonActive: 'hsl(220,8%,44%)',
   },
   media: {
     tablet: '@media (min-width: 728px)',

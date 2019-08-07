@@ -6,7 +6,7 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
   min-width: 100px;
-  height: 30px;
+  height: 40px;
   border: 1px solid ${({ theme }) => theme.colors.lightGrey};
   padding: 0 10px;
   color: white;
