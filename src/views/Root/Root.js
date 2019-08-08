@@ -7,12 +7,14 @@ import GlobalStyle from 'theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme/mainTheme';
 import NavBar from 'components/organisms/Navigation/NavBar';
+import { Provider } from 'react-redux';
+import store from 'store';
 
 // import { createStore } from 'redux'
 
 function Root() {
   return (
-    <>
+    <Provider store={store}>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <>
@@ -26,7 +28,7 @@ function Root() {
           </Router>
         </>
       </ThemeProvider>
-    </>
+    </Provider>
   );
 }
 

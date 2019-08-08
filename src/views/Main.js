@@ -1,11 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Main = () => {
+const Main = props => {
   return (
     <>
       <h1>Main Component</h1>
+      {console.log(props.notes)}
     </>
   );
 };
 
-export default Main;
+const mapStateToProps = ({ notes }) => ({ notes });
+export default connect(mapStateToProps)(Main);
