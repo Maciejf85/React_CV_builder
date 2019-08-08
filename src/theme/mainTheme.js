@@ -13,7 +13,7 @@ const theme = {
     xxl: '2.2rem',
   },
   colors: {
-    primaryGrey: 'hsl(220,14%,25%)',
+    primaryGrey: 'hsl(220,14%,20%)',
     lightGrey: 'hsl(220,9.4%,37.6%)',
     buttonActive: 'hsl(220,8%,44%)',
   },

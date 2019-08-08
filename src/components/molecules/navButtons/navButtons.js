@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const StyledWrapper = styled.ul`
   width: 100%;
+  height:40px;
   list-style: none;
   display: flex;
   justify-content: start;
@@ -17,7 +18,7 @@ const StyledWrapper = styled.ul`
     align-items: center;
     padding: 10px;
     min-width: 80px;
-    height: 45px;
+    height: 100%;
     color: white;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     margin: 0 10px;
@@ -43,7 +44,7 @@ const StyledWrapper = styled.ul`
   
   }
   .active{
-        font-weight: ${({ theme }) => theme.font.normal};
+        font-weight: ${({ theme }) => theme.font.bold};
     background: ${({ theme }) => theme.colors.buttonActive};
     }
 `;

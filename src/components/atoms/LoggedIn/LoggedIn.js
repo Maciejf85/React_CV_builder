@@ -8,7 +8,7 @@ const StyledWrapper = styled.div`
   min-width: 100px;
   height: 40px;
   border: 1px solid ${({ theme }) => theme.colors.lightGrey};
-  padding: 0 10px;
+  padding: 0 30px;
   color: white;
 
   p {
