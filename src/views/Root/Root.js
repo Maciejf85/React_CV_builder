@@ -7,28 +7,24 @@ import GlobalStyle from 'theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme/mainTheme';
 import NavBar from 'components/organisms/Navigation/NavBar';
-import { Provider } from 'react-redux';
-import store from 'store';
 
-// import { createStore } from 'redux'
+
 
 function Root() {
   return (
-    <Provider store={store}>
+    <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <>
-          <Router>
-            <>
-              <NavBar />
-              <Route path="/" exact component={Main} />
-              <Route path="/edit" exact component={Edit} />
-              <Route path="/preview" exact component={Preview} />
-            </>
-          </Router>
-        </>
+        <Router>
+          <>
+            <NavBar />
+            <Route path="/" exact component={Main} />
+            <Route path="/edit" exact component={Edit} />
+            <Route path="/preview" exact component={Preview} />
+          </>
+        </Router>
       </ThemeProvider>
-    </Provider>
+    </>
   );
 }
 

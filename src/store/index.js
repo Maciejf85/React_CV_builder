@@ -1,5 +1,6 @@
 import { createStore } from 'redux';
-import data from 'reducers';
+import rootReducer from 'reducers';
 
-const store = createStore(data);
+// eslint-disable-next-line no-underscore-dangle
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 export default store;

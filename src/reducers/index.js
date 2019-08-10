@@ -1,9 +1,9 @@
-const initialState = {
-  notes: [{ notes: '1 notatka' }],
-};
+import userName from 'reducers/userData';
+import { combineReducers } from 'redux'
 
-const rootReducer = (state = initialState, action) => {
-  return state;
-};
+const rootReducer = combineReducers({
+  userName
+})
+
 
 export default rootReducer;
