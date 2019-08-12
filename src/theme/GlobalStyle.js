@@ -5,9 +5,6 @@ const GlobalStyle = createGlobalStyle`
 
 /* CSS RESET */
 
-
-
-
 *, *::before, *::after{
         box-sizing:border-box;
         -webkit-font-smoothing: antialiased;

@@ -1,10 +1,13 @@
 const initialState = {
-    name: 'Maciej',
-    surname: 'Fiałkowski'
+  name: 'Maciej',
+  surname: 'Fiałkowski',
 };
 
 const userName = (state = initialState, action) => {
-    return state;
+  switch (action.type) {
+    default:
+      return state;
+  }
 };
 
 export default userName;

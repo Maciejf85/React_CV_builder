@@ -7,7 +7,10 @@
         "extensions": [".js"]
       }
     ],
-    "react/destructuring-assignment": ["error", "never", { "ignoreClassFields": true }]
+    "react/destructuring-assignment": ["error", "never", { "ignoreClassFields": true }],
+    "react/prop-types": [0, { "ignoreClassFields": 0 }],
+    // off console log warning
+    "no-console": "off"
   },
   // Fix eslint unresolved import
   "settings": {

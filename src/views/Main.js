@@ -5,10 +5,10 @@ const Main = props => {
   return (
     <>
       <h1>Main Component</h1>
-      {console.log(props.notes)}
+      {console.log(props.userName)}
     </>
   );
 };
 
-const mapStateToProps = ({ notes }) => ({ notes });
+const mapStateToProps = ({ userName }) => ({ userName });
 export default connect(mapStateToProps)(Main);
