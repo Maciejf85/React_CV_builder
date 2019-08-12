@@ -1,9 +1,8 @@
 import userName from 'reducers/userData';
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-  userName
-})
-
+  userName,
+});
 
 export default rootReducer;

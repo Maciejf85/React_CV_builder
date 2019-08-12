@@ -8,9 +8,13 @@
       }
     ],
     "react/destructuring-assignment": ["error", "never", { "ignoreClassFields": true }],
-    "react/prop-types": [0, { "ignoreClassFields": 0 }],
+    "react/prop-types": [1, { "ignoreClassFields": 0 }],
     // off console log warning
-    "no-console": "off"
+    "no-console": "off",
+    "react/forbid-prop-types": [
+      0,
+      { "forbid": "object", "checkContextTypes": 1, "checkChildContextTypes": 1 }
+    ]
   },
   // Fix eslint unresolved import
   "settings": {
