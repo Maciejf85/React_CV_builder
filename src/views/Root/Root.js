@@ -8,8 +8,6 @@ import { ThemeProvider } from 'styled-components';
 import theme from 'theme/mainTheme';
 import NavBar from 'components/organisms/Navigation/NavBar';
 
-
-
 function Root() {
   return (
     <>

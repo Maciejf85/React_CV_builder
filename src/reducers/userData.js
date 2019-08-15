@@ -1,7 +1,11 @@
 const initialState = {
   name: 'Maciej',
   surname: 'Fiałkowski',
-  age: 34,
+  adress: '',
+  email: '',
+  birthday: '',
+  github: '',
+  linkedin: '',
 };
 
 const userName = (state = initialState, { type, payload }) => {
