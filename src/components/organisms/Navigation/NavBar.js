@@ -3,6 +3,7 @@ import Logo from 'components/atoms/Logo/Logo';
 import LoggedIn from 'components/atoms/LoggedIn/LoggedIn';
 import NavButtons from 'components/molecules/navButtons/navButtons';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledWrapper = styled.nav`
   display: flex;
@@ -14,12 +15,20 @@ const StyledWrapper = styled.nav`
   background-color: ${({ theme }) => theme.colors.primaryGrey};
 `;
 
-const NavBar = () => (
+const NavBar = props => (
   <StyledWrapper>
-    <Logo />
+    {props.logo && <Logo />}
     <NavButtons />
     <LoggedIn />
   </StyledWrapper>
 );
+
+NavBar.propTypes = {
+  logo: PropTypes.bool,
+};
+
+NavBar.defaultProps = {
+  logo: false,
+};
 
 export default NavBar;

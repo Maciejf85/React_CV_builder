@@ -5,14 +5,26 @@ const initialState = {
   tools: ['VScode'],
 };
 
+// const skills = (state = initialState, { type, payload }) => {
+//   if (type === 'tools') {
+//     return {
+//       ...state,
+//       tools: [...state.tools, payload],
+//     };
+//   }
+//   return state;
+// };
+
 const skills = (state = initialState, { type, payload }) => {
-  if (type === 'tools') {
-    return {
-      ...state,
-      tools: [...state.tools, payload],
-    };
+  switch (type) {
+    case 'tools':
+      return {
+        ...state,
+        tools: [...state.tools, payload],
+      };
+    default:
+      return state;
   }
-  return state;
 };
 
 export default skills;
