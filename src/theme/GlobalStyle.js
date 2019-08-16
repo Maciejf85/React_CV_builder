@@ -24,6 +24,10 @@ const GlobalStyle = createGlobalStyle`
         text-decoration:none;
         color:inherit;
     }
+    ul{
+        padding:0;
+    list-style: none;
+    }
 
 
 `;

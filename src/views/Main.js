@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import NavBar from 'components/organisms/Navigation/NavBar';
 import Footer from 'components/organisms/Footer/footer';
+import MainPage from 'components/organisms/MainPage/MainPage';
 
 const StyledWrapper = styled.div`
   /* margin: 0 20px; */
@@ -13,7 +14,7 @@ const Main = () => {
   return (
     <StyledWrapper>
       <NavBar logo />
-      <h1>Main Component</h1>
+      <MainPage />
 
       <Footer />
     </StyledWrapper>
