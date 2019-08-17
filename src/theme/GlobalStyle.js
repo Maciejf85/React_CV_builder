@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   -moz-osx-font-smoothing: grayscale;
     }
     html{
-        font-size:62.5%; // happy rems
+        font-size:62.5%; // happy rems 10px
     }
 
     body{

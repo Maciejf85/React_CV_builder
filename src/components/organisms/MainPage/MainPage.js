@@ -9,7 +9,7 @@ const StyledWrapper = styled.div`
   min-height: 50vh;
   padding: 10px;
   margin: 0 auto;
-  background: #f0f0f0;
+  /* background: #f0f0f0; */
 `;
 
 const MainPage = () => (

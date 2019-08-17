@@ -4,18 +4,15 @@ import NavListItem from 'components/atoms/List/MainPageNavList';
 
 const StyledWrapper = styled.ul`
   height: auto;
-  width: 30%;
-  border: 2px solid black;
+  width: 250px;
 `;
 
 const SideBar = () => {
   const array = [
-    {
-      name: 'Twoje CV',
-      link: 'url...',
-      active: true,
-    },
-    { name: 'Twoje dokumenty', link: 'url...', active: false },
+    { name: 'Moje CV', link: 'url...', active: true },
+    { name: 'Moje dokumenty', link: 'url...', active: false },
+    { name: 'Moje konto', link: 'url...', active: false },
+    { name: 'Klauzula poufności', link: 'url...', active: false },
   ];
   return (
     <StyledWrapper>

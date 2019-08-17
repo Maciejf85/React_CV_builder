@@ -23,7 +23,7 @@ const StyledWrapper = styled.ul`
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     margin: 0 10px;
     border-radius: 5px;
-    font-size: ${({ theme }) => theme.fontSize.l};
+    font-size: ${({ theme }) => theme.fontSize.ms};
     font-family: 'Montserrat';
     font-weight: ${({ theme }) => theme.font.thin};
     outline: none;

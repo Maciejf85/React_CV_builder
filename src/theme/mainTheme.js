@@ -5,11 +5,12 @@ const theme = {
     bold: '800',
   },
   fontSize: {
-    xs: '0.5rem',
-    s: '0.8rem',
-    m: '1rem',
-    l: '1.2rem',
-    xl: '1.8rem',
+    xs: '0.8rem',
+    s: '1rem',
+    ms: '1.3rem',
+    m: '1.5rem',
+    l: '1.8rem',
+    xl: '2rem',
     xxl: '2.2rem',
   },
   colors: {

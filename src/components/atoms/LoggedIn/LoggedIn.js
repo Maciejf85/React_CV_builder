@@ -12,7 +12,7 @@ const StyledWrapper = styled.div`
   color: white;
 
   p {
-    font-size: ${({ theme }) => theme.fontSize.l};
+    font-size: ${({ theme }) => theme.fontSize.ms};
   }
 `;
 

@@ -9,17 +9,22 @@ const StyledWrapper = styled.footer`
   bottom: 0;
   left: 0;
   height: 40px;
-  font-size: ${({ theme }) => theme.fontSize.l};
+  font-size: ${({ theme }) => theme.fontSize.ms};
   background: ${({ theme }) => theme.colors.primaryGrey};
   width: 100%;
   color: white;
   padding: 10px;
+
+  span {
+    font-weight: ${({ theme }) => theme.font.bold};
+    letter-spacing: 1px;
+  }
 `;
 
 const Footer = () => (
   <StyledWrapper>
     <p>
-      Wszystkie prawa zastrzeżone <b>Maciej Fiałkowski 2019 </b>
+      Wszystkie prawa zastrzeżone <span>Maciej Fiałkowski 2019 </span>
     </p>
   </StyledWrapper>
 );
