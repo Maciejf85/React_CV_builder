@@ -22,7 +22,11 @@ const StyledWrapper = styled.li`
 `;
 
 const MainPageListItem = props => {
-  return <StyledWrapper active={props.active}>{props.name}</StyledWrapper>;
+  return (
+    <StyledWrapper active={props.active} onClick={() => console.log('link was clicked')}>
+      {props.name}
+    </StyledWrapper>
+  );
 };
 
 MainPageListItem.propTypes = {

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SideBar from 'components/molecules/sideBar/sideBar';
+import { useSelector } from 'react-redux';
 
 const StyledWrapper = styled.div`
   width: 900px;
@@ -12,13 +13,17 @@ const StyledWrapper = styled.div`
   /* background: #f0f0f0; */
 `;
 
-const MainPage = () => (
-  <>
-    <StyledWrapper>
-      <h1>Main page</h1>
-      <SideBar />
-    </StyledWrapper>
-  </>
-);
+const MainPage = () => {
+  const currentPath = useSelector(state => state.path.currentPath);
+  return (
+    <>
+      <StyledWrapper>
+        <h1>Main page</h1>
+        <h4>{`current path "${currentPath}"`}</h4>
+        <SideBar />
+      </StyledWrapper>
+    </>
+  );
+};
 
 export default MainPage;
