@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import path from '../../../path';
 
 const StyledWrapper = styled.ul`
   width: 100%;
@@ -28,6 +29,8 @@ const StyledWrapper = styled.ul`
     font-weight: ${({ theme }) => theme.font.thin};
     outline: none;
     background: inherit;
+    transition: 0.5s;
+
     &:hover {
       background: ${({ theme }) => theme.colors.buttonActive};
       cursor: pointer;
@@ -52,17 +55,17 @@ const StyledWrapper = styled.ul`
 const navButtons = () => (
   <StyledWrapper>
     <li>
-      <NavLink activeClassName="active" exact to="/">
+      <NavLink activeClassName="active" exact to={path.main}>
         Main
       </NavLink>
     </li>
     <li>
-      <NavLink activeClassName="active" to="/edit">
+      <NavLink activeClassName="active" to={path.edit}>
         Editor
       </NavLink>
     </li>
     <li>
-      <NavLink activeClassName="active" to="/preview">
+      <NavLink activeClassName="active" to={path.preview}>
         Preview
       </NavLink>
     </li>

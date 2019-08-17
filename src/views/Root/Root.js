@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import GlobalStyle from 'theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme/mainTheme';
+import path from '../../path';
 
 function Root() {
   return (
@@ -14,9 +15,9 @@ function Root() {
       <ThemeProvider theme={theme}>
         <Router>
           <>
-            <Route path="/" exact component={Main} />
-            <Route path="/edit" exact component={Edit} />
-            <Route path="/preview" exact component={Preview} />
+            <Route path={path.main} exact component={Main} />
+            <Route path={path.edit} exact component={Edit} />
+            <Route path={path.preview} exact component={Preview} />
           </>
         </Router>
       </ThemeProvider>

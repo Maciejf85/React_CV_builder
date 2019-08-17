@@ -13,6 +13,7 @@ const StyledWrapper = styled.li`
   background: ${({ theme, active }) =>
     active ? theme.colors.primaryBlue : theme.colors.secondaryGrey};
   border-left: 2px solid ${({ theme }) => theme.colors.primaryGrey};
+  transition: 0.3s;
 
   &:hover {
     cursor: pointer;
