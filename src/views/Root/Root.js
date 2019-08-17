@@ -6,25 +6,19 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import GlobalStyle from 'theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme/mainTheme';
-import NavBar from 'components/organisms/Navigation/NavBar';
-
-// import { createStore } from 'redux'
 
 function Root() {
   return (
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <>
-          <Router>
-            <>
-              <NavBar />
-              <Route path="/" exact component={Main} />
-              <Route path="/edit" exact component={Edit} />
-              <Route path="/preview" exact component={Preview} />
-            </>
-          </Router>
-        </>
+        <Router>
+          <>
+            <Route path="/" exact component={Main} />
+            <Route path="/edit" exact component={Edit} />
+            <Route path="/preview" exact component={Preview} />
+          </>
+        </Router>
       </ThemeProvider>
     </>
   );

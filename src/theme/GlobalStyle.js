@@ -5,16 +5,13 @@ const GlobalStyle = createGlobalStyle`
 
 /* CSS RESET */
 
-
-
-
 *, *::before, *::after{
         box-sizing:border-box;
         -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
     }
     html{
-        font-size:62.5%; // happy rems
+        font-size:62.5%; // happy rems 10px
     }
 
     body{
@@ -26,6 +23,10 @@ const GlobalStyle = createGlobalStyle`
     a{
         text-decoration:none;
         color:inherit;
+    }
+    ul{
+        padding:0;
+    list-style: none;
     }
 
 
