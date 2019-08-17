@@ -14,12 +14,12 @@ const StyledWrapper = styled.div`
 `;
 
 const MainPage = () => {
-  const currentPath = useSelector(state => state.path.currentPath);
+  const currentPath = useSelector(({ path }) => path.currentPath);
   return (
     <>
       <StyledWrapper>
         <h1>Main page</h1>
-        <h4>{`current path "${currentPath}"`}</h4>
+        <h4>{`current path ${currentPath}`}</h4>
         <SideBar />
       </StyledWrapper>
     </>
