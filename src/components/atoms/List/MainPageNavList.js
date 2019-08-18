@@ -33,7 +33,6 @@ const StyledWrapper = styled(PosedLi)`
     background: ${({ theme }) => theme.colors.primaryBlue};
   }
 `;
-
 class MainPageListItem extends Component {
   handlePathChange = e => {
     const newPath = e.currentTarget.dataset.id;

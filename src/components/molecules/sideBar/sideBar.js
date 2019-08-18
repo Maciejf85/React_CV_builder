@@ -4,6 +4,7 @@ import NavListItem from 'components/atoms/List/MainPageNavList';
 
 const StyledWrapper = styled.ul`
   min-width: 250px;
+  margin-right: 15px;
   /* border: 1px solid black; */
 `;
 
