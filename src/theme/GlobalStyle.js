@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
     }
     ul{
         padding:0;
-    list-style: none;
+        list-style: none;
     }
 
 

@@ -6,7 +6,7 @@ const theme = {
   },
   fontSize: {
     xs: '0.8rem',
-    s: '1rem',
+    s: '1.1rem',
     ms: '1.3rem',
     m: '1.5rem',
     l: '1.8rem',

@@ -15,7 +15,7 @@ const StyledWrapper = styled.li`
   font-size: ${({ theme }) => theme.fontSize.m};
   background: ${({ theme, active }) =>
     active ? theme.colors.primaryBlue : theme.colors.secondaryGrey};
-  border-left: 2px solid ${({ theme }) => theme.colors.primaryGrey};
+  border-left: 4px solid ${({ theme }) => theme.colors.primaryGrey};
   transition: 0.3s;
 
   &:hover {

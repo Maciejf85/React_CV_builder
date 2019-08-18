@@ -9,7 +9,7 @@ const StyledWrapper = styled.footer`
   bottom: 0;
   left: 0;
   height: 40px;
-  font-size: ${({ theme }) => theme.fontSize.ms};
+  font-size: ${({ theme }) => theme.fontSize.s};
   background: ${({ theme }) => theme.colors.primaryGrey};
   width: 100%;
   color: white;
