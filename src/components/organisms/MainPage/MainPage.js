@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SideBar from 'components/molecules/sideBar/SideBar';
+import SideBar from 'components/molecules/sideBar/sideBar';
 import MyCv from 'components/molecules/MainPageViews/MyCv';
 import MyDocuments from 'components/molecules/MainPageViews/MyDocuments';
 import MyAccount from 'components/molecules/MainPageViews/MyAccount';

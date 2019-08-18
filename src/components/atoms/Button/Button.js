@@ -2,13 +2,11 @@ import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 
 const PosedButton = posed.button({
-  visible: {
-    x: 0,
-    opacity: 1,
+  active: {
+    x: '10%',
   },
-  hidden: {
-    x: '-150%',
-    opacity: 0,
+  noActive: {
+    x: 0,
   },
 });
 

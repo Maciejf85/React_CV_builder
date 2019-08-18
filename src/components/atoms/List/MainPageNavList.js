@@ -4,8 +4,18 @@ import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 import store from 'store';
 import { currentView } from 'actions';
+import posed from 'react-pose';
 
-const StyledWrapper = styled.li`
+const PosedLi = posed.li({
+  active: {
+    x: '5px',
+  },
+  noActive: {
+    x: 0,
+  },
+});
+
+const StyledWrapper = styled(PosedLi)`
   height: 40px;
   color: white;
   display: flex;
@@ -34,7 +44,13 @@ class MainPageListItem extends Component {
     const { name, link, path } = this.props;
     const isActive = link === path.currentView;
     return (
-      <StyledWrapper active={isActive} name={name} data-id={link} onClick={this.handlePathChange}>
+      <StyledWrapper
+        active={isActive}
+        pose={isActive ? 'active' : 'noActive'}
+        name={name}
+        data-id={link}
+        onClick={this.handlePathChange}
+      >
         {name}
       </StyledWrapper>
     );
