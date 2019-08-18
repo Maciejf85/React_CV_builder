@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import changeName from 'actions';
+import { changeName } from 'actions';
 import NavBar from 'components/organisms/Navigation/NavBar';
 
 const Edit = () => {

@@ -1,21 +1,26 @@
 const initialState = {
-  currentPath: '/',
+  currentView: 'cv',
 };
 
 const path = (state = initialState, { type }) => {
   switch (type) {
-    case 'main':
+    case 'cv':
       return {
-        currentPath: '/',
+        currentView: 'cv',
       };
-    case 'edit':
+    case 'documents':
       return {
-        currentPath: '/edit',
+        currentView: 'documents',
       };
-    case 'preview':
+    case 'account':
       return {
-        currentPath: '/preview',
+        currentView: 'account',
       };
+    case 'confidentiality':
+      return {
+        currentView: 'confidentiality',
+      };
+
     default:
       return state;
   }

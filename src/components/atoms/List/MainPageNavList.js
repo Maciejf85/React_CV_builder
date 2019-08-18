@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 import store from 'store';
-import changePath from 'actions/path';
+import { currentView } from 'actions';
 
 const StyledWrapper = styled.li`
   height: 40px;
@@ -27,13 +27,14 @@ const StyledWrapper = styled.li`
 class MainPageListItem extends Component {
   handlePathChange = e => {
     const newPath = e.currentTarget.dataset.id;
-    store.dispatch(changePath(newPath));
+    store.dispatch(currentView(newPath));
   };
 
   render() {
-    const { name, active, link } = this.props;
+    const { name, link, path } = this.props;
+    const isActive = link === path.currentView;
     return (
-      <StyledWrapper active={active} name={name} data-id={link} onClick={this.handlePathChange}>
+      <StyledWrapper active={isActive} name={name} data-id={link} onClick={this.handlePathChange}>
         {name}
       </StyledWrapper>
     );
@@ -42,14 +43,9 @@ class MainPageListItem extends Component {
 
 MainPageListItem.propTypes = {
   name: Proptypes.string.isRequired,
-  active: Proptypes.bool,
+  path: Proptypes.object.isRequired,
   link: Proptypes.string.isRequired,
 };
 
-MainPageListItem.defaultProps = {
-  active: false,
-};
-
 const mapStateToProps = ({ path }) => ({ path });
-
 export default connect(mapStateToProps)(MainPageListItem);

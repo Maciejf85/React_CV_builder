@@ -3,25 +3,24 @@ import styled from 'styled-components';
 import NavListItem from 'components/atoms/List/MainPageNavList';
 
 const StyledWrapper = styled.ul`
-  height: auto;
-  width: 250px;
-  background: white;
+  min-width: 250px;
+  border: 1px solid black;
 `;
 
-const SideBar = () => {
+const sideBar = () => {
   const array = [
-    { name: 'Moje CV', link: 'main', active: true },
-    { name: 'Moje dokumenty', link: 'edit', active: false },
-    { name: 'Moje konto', link: 'preview', active: false },
-    { name: 'Klauzula poufności', link: 'url...', active: false },
+    { name: 'Moje CV', link: 'cv' },
+    { name: 'Moje dokumenty', link: 'documents' },
+    { name: 'Moje konto', link: 'account' },
+    { name: 'Klauzula poufności', link: 'confidentiality' },
   ];
   return (
     <StyledWrapper>
       {array.map(item => (
-        <NavListItem key={item.name} name={item.name} link={item.link} active={item.active} />
+        <NavListItem key={item.name} name={item.name} link={item.link} />
       ))}
     </StyledWrapper>
   );
 };
 
-export default SideBar;
+export default sideBar;
