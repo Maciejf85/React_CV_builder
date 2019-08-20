@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import SideBar from 'components/molecules/sideBar/sideBar';
-import MyCv from 'components/molecules/MainPageViews/MyCv';
-import MyDocuments from 'components/molecules/MainPageViews/MyDocuments';
-import MyAccount from 'components/molecules/MainPageViews/MyAccount';
-import Confidential from 'components/molecules/MainPageViews/Confidential';
+import MyCv from 'components/organisms/MainPageViews/MyCv';
+import MyDocuments from 'components/organisms/MainPageViews/MyDocuments';
+import MyAccount from 'components/organisms/MainPageViews/MyAccount';
+import Confidential from 'components/organisms/MainPageViews/Confidential';
 import { useSelector } from 'react-redux';
 
 const StyledWrapper = styled.div`

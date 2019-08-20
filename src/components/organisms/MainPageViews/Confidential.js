@@ -19,9 +19,21 @@ const confidentialText = {
 };
 
 class Confidential extends Component {
+  state = {
+    userData: {},
+  };
+
   componentDidMount() {
     console.log('component did mount');
+    console.log(Object.entries(this.state.userData).length === 0);
+    this.handleDataSend();
   }
+
+  setData = response => {
+    this.setState({
+      userData: response,
+    });
+  };
 
   handleDataSend = () => {
     console.log('data send');
@@ -29,26 +41,29 @@ class Confidential extends Component {
       method: 'post',
       url: 'https://cors-anywhere.herokuapp.com/http://www.maciejf.pl/cv-builder/data.php',
       data: {
-        type: 'file',
+        type: 'save',
         name: 'Maciej Fiałkowski',
         age: 34,
         confidential: JSON.stringify(confidentialText.description),
       },
     })
-      .then(response => console.log(response))
+      .then(response => this.setData(response.data))
       .catch(error => {
         console.log(error);
       });
   };
 
   render() {
+    console.log(this.state.userData);
+    console.log(Object.entries(this.state.userData).length === 0);
+
     return (
       <StyleWrapper>
         <h1>Confidential component</h1>
         {/* <h4>{confidentialText.title}</h4> */}
         {/* <p>{confidentialText.description}</p> */}
         <Button type="button" onClick={this.handleDataSend}>
-          Send data
+          get data
         </Button>
       </StyleWrapper>
     );
