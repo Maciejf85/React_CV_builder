@@ -20,16 +20,21 @@ const confidentialText = {
 
 class Confidential extends Component {
   componentDidMount() {
-    console.log('component Confidential mounted');
-    const json = JSON.stringify(confidentialText);
-    const obj = JSON.parse(json);
-    console.log(obj);
+    console.log('component did mount');
   }
 
   handleDataSend = () => {
     console.log('data send');
-    axios
-      .get('https://api.ipify.org')
+    axios({
+      method: 'post',
+      url: 'https://cors-anywhere.herokuapp.com/http://www.maciejf.pl/cv-builder/data.php',
+      data: {
+        type: 'file',
+        name: 'Maciej Fiałkowski',
+        age: 34,
+        confidential: JSON.stringify(confidentialText.description),
+      },
+    })
       .then(response => console.log(response))
       .catch(error => {
         console.log(error);
