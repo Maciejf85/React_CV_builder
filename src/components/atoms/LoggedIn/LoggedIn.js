@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -16,10 +17,13 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const LoggedIn = () => (
-  <StyledWrapper>
-    <p>Fialek85@gmail.com</p>
-  </StyledWrapper>
-);
+const LoggedIn = () => {
+  const email = useSelector(state => state.userName.email);
+  return (
+    <StyledWrapper>
+      <p>{email}</p>
+    </StyledWrapper>
+  );
+};
 
 export default LoggedIn;

@@ -1,26 +1,33 @@
-import React from 'react';
-import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import NavBar from 'components/organisms/Navigation/NavBar';
-import Footer from 'components/organisms/Footer/Footer';
+import Footer from 'components/organisms/Footer/footer';
 import MainPage from 'components/organisms/MainPage/MainPage';
+import store from 'store';
+import { getData } from 'actions';
 
 const StyledWrapper = styled.div`
   /* margin: 0 20px; */
-  border: 1px solid orange;
+  /* border: 1px solid orange; */
 `;
 
-const Main = () => {
-  return (
-    <StyledWrapper>
-      <NavBar logo />
-      <MainPage />
+class Main extends Component {
+  componentDidMount() {
+    console.log(' Main Component Did mount');
+    store.dispatch(getData());
+  }
 
-      <Footer />
-    </StyledWrapper>
-  );
-};
+  render() {
+    console.log(this.props);
+    return (
+      <StyledWrapper>
+        <NavBar logo />
+        <MainPage />
 
-const mapStateToProps = ({ userName, skills }) => ({ userName, skills });
-export default connect(mapStateToProps)(Main);
+        <Footer />
+      </StyledWrapper>
+    );
+  }
+}
+
+export default Main;

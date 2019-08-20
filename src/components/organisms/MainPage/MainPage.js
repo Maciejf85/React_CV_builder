@@ -15,8 +15,6 @@ const StyledWrapper = styled.div`
   min-height: 50vh;
   padding: 10px;
   margin: 0 auto;
-  border: 1px solid #aaa;
-  /* background: #f0f0f0; */
 `;
 
 const MainPage = () => {
