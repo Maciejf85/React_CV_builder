@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
+import Button from 'components/atoms/Button/Button';
 import styled from 'styled-components';
 
 const StyleWrapper = styled.div`
@@ -19,15 +20,31 @@ const confidentialText = {
 
 class Confidential extends Component {
   componentDidMount() {
-    console.log('component  Confidential mounted');
+    console.log('component Confidential mounted');
+    const json = JSON.stringify(confidentialText);
+    const obj = JSON.parse(json);
+    console.log(obj);
   }
+
+  handleDataSend = () => {
+    console.log('data send');
+    axios
+      .get('https://api.ipify.org')
+      .then(response => console.log(response))
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   render() {
     return (
       <StyleWrapper>
         <h1>Confidential component</h1>
-        <h4>{confidentialText.title}</h4>
-        <p>{confidentialText.description}</p>
+        {/* <h4>{confidentialText.title}</h4> */}
+        {/* <p>{confidentialText.description}</p> */}
+        <Button type="button" onClick={this.handleDataSend}>
+          Send data
+        </Button>
       </StyleWrapper>
     );
   }
