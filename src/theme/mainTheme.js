@@ -20,7 +20,7 @@ const theme = {
     darkGrey: 'hsl(220,9.4%,37.6%)',
     buttonActive: 'hsl(220,8%,44%)',
     primaryBlue: 'hsl(204, 100%, 50%)',
-    secondaryBlue: 'hsl(204, 100%, 30%)',
+    secondaryBlue: 'hsl(204, 100%, 40%)',
   },
   media: {
     tablet: '@media (min-width: 728px)',

@@ -1,7 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { Component } from 'react';
 import { Textarea } from 'components/atoms/Inputs';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -17,18 +17,25 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Body = props => {
-  const text = useSelector(state => state.confidential);
-  return (
-    <StyledWrapper>
-      <p>{text.confidential}</p>
-      {props.active && (
-        <form>
-          <Textarea value={text.confidential} />
-        </form>
-      )}
-    </StyledWrapper>
-  );
-};
+class Body extends Component {
+  state = {};
 
-export default Body;
+  render() {
+    const { confidential, edit } = this.props;
+
+    return (
+      <StyledWrapper>
+        {edit ? (
+          <form>
+            <Textarea value={confidential} />
+          </form>
+        ) : (
+          <p>{confidential}</p>
+        )}
+      </StyledWrapper>
+    );
+  }
+}
+
+const mapStateTProps = state => state.confidential;
+export default connect(mapStateTProps)(Body);

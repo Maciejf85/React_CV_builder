@@ -13,7 +13,7 @@ const StyledWrapper = styled.div`
 
 class Main extends Component {
   componentDidMount() {
-    console.log(' Main Component Did mount');
+    // console.log(' Main Component Did mount');
     store.dispatch(getData());
   }
 

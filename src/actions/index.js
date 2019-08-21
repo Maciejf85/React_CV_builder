@@ -15,7 +15,7 @@ export const tools = (payload = 'Webstorm') => {
   };
 };
 
-// change component on main view
+// CHANGE VIEW IN MAIN PAGE
 
 export const currentView = (type = 'cv') => {
   return {
@@ -23,10 +23,12 @@ export const currentView = (type = 'cv') => {
   };
 };
 
-export const getData = () => dispatch => {
-  dispatch({ type: 'UPDATE_CONFIDENTIAL' });
+//  GET CONFIDENTIAL TEXT FROM SERVER
 
-  return axios(`${path.cors}http://www.maciejf.pl/cv-builder/data.php`)
+export const getData = () => dispatch => {
+  // dispatch({ type: 'UPDATE_CONFIDENTIAL' });
+
+  return axios(`${path.cors}data.php`)
     .then(({ data }) => {
       const payload = data.confidential;
       return dispatch({ type: 'UPDATE_CONFIDENTIAL', payload });
@@ -34,4 +36,27 @@ export const getData = () => dispatch => {
     .catch(error => {
       console.log(error);
     });
+};
+
+// EDIT CONFIDENTIAL TEXT
+
+export const editConfidential = (type = 'EDIT_CONFIDENTIAL') => {
+  return {
+    type,
+  };
+};
+
+export const newConfidential = (type = 'NEW_CONFIDENTIAL', payload) => {
+  return {
+    type,
+    payload,
+  };
+};
+
+// CHANGE CONFIDENTIAL TEXT
+export const newConfidentialText = (type = 'UPDATE_CONFIDENTIAL', payload) => {
+  return {
+    type,
+    payload,
+  };
 };

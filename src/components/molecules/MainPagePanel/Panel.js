@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from 'components/atoms/Panel/header';
 import Body from 'components/atoms/Panel/body';
-import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -20,8 +19,6 @@ const Panel = () => {
     <StyledWrapper>
       <Header name="Klauzula poufności" />
       <Body />
-      <PrimaryButton type="button">Edytuj</PrimaryButton>
-      <PrimaryButton type="button">Zapisz</PrimaryButton>
     </StyledWrapper>
   );
 };

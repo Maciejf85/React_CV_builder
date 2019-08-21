@@ -4,7 +4,8 @@ const path = {
   main: basePath,
   edit: `${basePath}edit`,
   preview: `${basePath}preview`,
-  cors: 'https://cors-anywhere.herokuapp.com/',
+  // cors: '',
+  cors: 'https://cors-anywhere.herokuapp.com/http://www.maciejf.pl/cv-builder/',
 };
 
 export default path;
