@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import { connect } from 'react-redux';
 import { Textarea } from 'components/atoms/Inputs';
+import { newConfidentialText } from 'actions';
+import store from 'store';
+import axios from 'axios';
+import path from '../../../path';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -46,27 +51,58 @@ class Panel extends Component {
   };
 
   handleEditMode = () => {
-    this.setState(prevState => ({ editValue: !prevState.editValue }));
+    this.setState(prevState => ({
+      editValue: !prevState.editValue,
+      localConf: this.props.confidential,
+    }));
+  };
+
+  updateConfidential = () => {
+    const { localConf } = this.state;
+
+    axios
+      .post(`${path.cors}data.php`, {
+        type: 'save',
+        data: localConf,
+      })
+      .then(response => {
+        const confidential = response.data;
+        return store.dispatch(newConfidentialText(confidential.confidential));
+      })
+      .catch(error => console.log('error :', error))
+      .finally(this.handleEditMode());
+  };
+
+  handleTextarea = e => {
+    const { value } = e.target;
+    this.setState({
+      localConf: value,
+    });
   };
 
   render() {
-    const { editValue } = this.state;
+    const { editValue, localConf } = this.state;
     const { confidential } = this.props;
 
-    console.log('this.props :', this.props);
     return (
       <StyledWrapper>
         <header>
           <p>Klauza poufności</p>
-          <h5>{editValue.toString()}</h5>
-          <PrimaryButton type="button" onClick={this.handleEditMode}>
-            {editValue ? 'Zapisz' : 'Edytuj'}
-          </PrimaryButton>
+          <div>
+            {editValue && (
+              <PrimaryButton type="button" onClick={this.updateConfidential}>
+                zapisz
+              </PrimaryButton>
+            )}
+            <PrimaryButton type="button" onClick={this.handleEditMode}>
+              {editValue ? 'anuluj' : 'edytuj'}
+            </PrimaryButton>
+          </div>
         </header>
         <section>
           {editValue ? (
             <form>
-              <Textarea value={confidential} />
+              <Textarea value={localConf} onChange={this.handleTextarea} />
             </form>
           ) : (
             <p>{confidential}</p>
@@ -76,6 +112,9 @@ class Panel extends Component {
     );
   }
 }
+Panel.propTypes = {
+  confidential: PropTypes.string.isRequired,
+};
 
 const mapStateToProps = state => state.confidential;
 export default connect(mapStateToProps)(Panel);

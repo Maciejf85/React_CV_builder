@@ -39,9 +39,9 @@ export const getData = () => dispatch => {
 };
 
 // CHANGE CONFIDENTIAL TEXT
-export const newConfidentialText = (type = 'UPDATE_CONFIDENTIAL', payload) => {
+export const newConfidentialText = payload => {
   return {
-    type,
+    type: 'UPDATE_CONFIDENTIAL',
     payload,
   };
 };
