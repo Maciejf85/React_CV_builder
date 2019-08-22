@@ -38,21 +38,6 @@ export const getData = () => dispatch => {
     });
 };
 
-// EDIT CONFIDENTIAL TEXT
-
-export const editConfidential = (type = 'EDIT_CONFIDENTIAL') => {
-  return {
-    type,
-  };
-};
-
-export const newConfidential = (type = 'NEW_CONFIDENTIAL', payload) => {
-  return {
-    type,
-    payload,
-  };
-};
-
 // CHANGE CONFIDENTIAL TEXT
 export const newConfidentialText = (type = 'UPDATE_CONFIDENTIAL', payload) => {
   return {

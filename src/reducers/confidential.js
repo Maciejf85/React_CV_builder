@@ -1,5 +1,5 @@
 const initialState = {
-  confidential: 'confidential empty',
+  confidential: '',
   edit: false,
 };
 
@@ -8,18 +8,7 @@ const confidential = (state = initialState, { type, payload }) => {
     case 'UPDATE_CONFIDENTIAL':
       return {
         confidential: payload,
-        edit: false,
       };
-    case 'NEW_CONFIDENTIAL':
-      return {
-        confidential: payload,
-      };
-    case 'EDIT_CONFIDENTIAL':
-      return {
-        ...state,
-        edit: !state.edit,
-      };
-
     default:
       return state;
   }
