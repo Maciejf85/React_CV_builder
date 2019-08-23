@@ -48,8 +48,9 @@ export const newConfidentialText = payload => {
 
 // CHANGE_SIDEPANEL_STATE
 
-export const changeSidePanelState = () => {
+export const changeSidePanelState = payload => {
   return {
     type: 'CHANGE_SIDEPANEL_STATE',
+    payload,
   };
 };

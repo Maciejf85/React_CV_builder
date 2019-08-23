@@ -4,21 +4,22 @@ import posed from 'react-pose';
 import Proptypes from 'prop-types';
 
 const PosedPanel = posed.div({
-  visible: { x: '0', opacity: 1 },
-  hidden: { x: '100%', opacity: 0 },
+  visible: { x: '30px', opacity: 1, transition: { duration: 300 } },
+  hidden: { x: '100%', opacity: 0, transition: { ease: [0.28, -0.64, 0.3, 1.26], duration: 700 } },
 });
 
 const StyledWrapper = styled(PosedPanel)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
+  width: 200px;
   height: 50px;
   background: ${({ theme }) => theme.colors.primaryBlue};
   border-bottom-left-radius: 7px;
   border-top-left-radius: 7px;
   position: absolute;
   padding: 10px;
+  padding-right: 30px;
   right: 0;
   bottom: 100px;
   color: white;
@@ -28,14 +29,16 @@ const StyledWrapper = styled(PosedPanel)`
   ${({ error }) =>
     error &&
     css`
-      background: red;
+      background: ${({ theme }) => theme.colors.alertColor};
     `}
 `;
 
-const ConfirmSidePanel = ({ pose }) => {
+const ConfirmSidePanel = ({ pose, error }) => {
   return (
-    <StyledWrapper pose={pose}>
-      <p>zapisane</p>
+    <StyledWrapper pose={pose} error={error}>
+      <div>
+        <p>{error ? 'błąd serwera' : 'zapisane'}</p>
+      </div>
     </StyledWrapper>
   );
 };

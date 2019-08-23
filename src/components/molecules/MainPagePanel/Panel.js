@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import { connect } from 'react-redux';
 import { Textarea } from 'components/atoms/Inputs';
-import { newConfidentialText } from 'actions';
+import { newConfidentialText, changeSidePanelState } from 'actions';
 import store from 'store';
 import axios from 'axios';
 import path from '../../../path';
@@ -67,10 +67,19 @@ class Panel extends Component {
       })
       .then(response => {
         const confidential = response.data;
-        return store.dispatch(newConfidentialText(confidential.confidential));
+        return (
+          store.dispatch(newConfidentialText(confidential.confidential)),
+          store.dispatch(changeSidePanelState(false))
+        );
       })
-      .catch(error => console.log('error :', error))
-      .finally(this.handleEditMode());
+      .catch(error => {
+        console.log('error :', error);
+        store.dispatch(changeSidePanelState(true));
+      })
+      .finally(() => {
+        this.handleEditMode();
+        setTimeout(() => store.dispatch(changeSidePanelState(false)), 2000);
+      });
   };
 
   handleTextarea = e => {
@@ -113,7 +122,11 @@ class Panel extends Component {
   }
 }
 Panel.propTypes = {
-  confidential: PropTypes.string.isRequired,
+  confidential: PropTypes.string,
+};
+
+Panel.defaultProps = {
+  confidential: '',
 };
 
 const mapStateToProps = state => state.confidential;

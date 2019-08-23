@@ -21,6 +21,7 @@ const theme = {
     buttonActive: 'hsl(220,8%,44%)',
     primaryBlue: 'hsl(204, 100%, 50%)',
     secondaryBlue: 'hsl(204, 100%, 40%)',
+    alertColor: 'hsl(0,100%,42%)',
   },
   media: {
     tablet: '@media (min-width: 728px)',
