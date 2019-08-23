@@ -45,3 +45,11 @@ export const newConfidentialText = payload => {
     payload,
   };
 };
+
+// CHANGE_SIDEPANEL_STATE
+
+export const changeSidePanelState = () => {
+  return {
+    type: 'CHANGE_SIDEPANEL_STATE',
+  };
+};

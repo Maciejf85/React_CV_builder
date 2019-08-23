@@ -1,6 +1,5 @@
 const initialState = {
   confidential: '',
-  edit: false,
 };
 
 const confidential = (state = initialState, { type, payload }) => {

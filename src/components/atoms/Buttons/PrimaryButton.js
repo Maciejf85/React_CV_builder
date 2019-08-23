@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const PrimaryButton = styled.button`
   width: 80px;
@@ -17,6 +17,12 @@ const PrimaryButton = styled.button`
     background: ${({ theme }) => theme.colors.primaryGrey};
     cursor: pointer;
   }
+
+  ${({ primary }) =>
+    primary &&
+    css`
+      background: red;
+    `}
 `;
 
 export default PrimaryButton;

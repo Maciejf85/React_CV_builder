@@ -1,12 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import posed from 'react-pose';
+import Proptypes from 'prop-types';
 
-// const PosedPanel = posed.div({
-//   visible: { opacity: 1 },
-//   hidden: { opacity: 0 },
-// });
+const PosedPanel = posed.div({
+  visible: { x: '0', opacity: 1 },
+  hidden: { x: '100%', opacity: 0 },
+});
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled(PosedPanel)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,19 +25,27 @@ const StyledWrapper = styled.div`
   font-weight: ${({ theme }) => theme.font.bold};
   font-size: ${({ theme }) => theme.fontSize.ms};
 
-  ${props =>
-    props.primary &&
+  ${({ error }) =>
+    error &&
     css`
-      background: #000;
+      background: red;
     `}
 `;
 
-const ConfirmSidePanel = () => {
+const ConfirmSidePanel = ({ pose }) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper pose={pose}>
       <p>zapisane</p>
     </StyledWrapper>
   );
+};
+
+ConfirmSidePanel.propTypes = {
+  pose: Proptypes.string,
+};
+
+ConfirmSidePanel.defaultProps = {
+  pose: 'hidden',
 };
 
 export default ConfirmSidePanel;
