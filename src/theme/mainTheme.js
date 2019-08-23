@@ -21,6 +21,7 @@ const theme = {
     buttonActive: 'hsl(220,8%,44%)',
     primaryBlue: 'hsl(204, 100%, 50%)',
     secondaryBlue: 'hsl(204, 100%, 40%)',
+    lightBlue: 'hsl(204, 100%, 58%)',
     alertColor: 'hsl(0,100%,42%)',
   },
   media: {

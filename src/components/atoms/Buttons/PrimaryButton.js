@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const PrimaryButton = styled.button`
-  width: 80px;
+  min-width: 80px;
   height: 25px;
   background: ${({ theme }) => theme.colors.secondaryGrey};
   border: 2px solid ${({ theme }) => theme.colors.darkGrey};
@@ -15,13 +15,33 @@ const PrimaryButton = styled.button`
 
   &:hover {
     background: ${({ theme }) => theme.colors.primaryGrey};
+    border-color: ${({ theme }) => theme.colors.primaryGrey};
     cursor: pointer;
+  }
+
+  &:disabled {
+    background: ${({ theme }) => theme.colors.secondaryGrey};
+    border-color: ${({ theme }) => theme.colors.secondaryGrey};
   }
 
   ${({ primary }) =>
     primary &&
     css`
-      background: red;
+      background: ${({ theme }) => theme.colors.primaryBlue};
+      border-color: ${({ theme }) => theme.colors.primaryBlue};
+
+      &:hover {
+        background: ${({ theme }) => theme.colors.lightBlue};
+        border-color: ${({ theme }) => theme.colors.lightBlue};
+      }
+    `}
+
+  ${({ dafault }) =>
+    dafault &&
+    css`
+      margin: 0 15px;
+      float: right;
+      clear: both;
     `}
 `;
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import { connect } from 'react-redux';
 import { Textarea } from 'components/atoms/Inputs';
-import { newConfidentialText, changeSidePanelState } from 'actions';
+import { newConfidentialText, changeSidePanelState, getData } from 'actions';
 import store from 'store';
 import axios from 'axios';
 import path from '../../../path';
@@ -48,6 +48,7 @@ class Panel extends Component {
   state = {
     editValue: false,
     localConf: '',
+    disabled: false,
   };
 
   handleEditMode = () => {
@@ -57,16 +58,27 @@ class Panel extends Component {
     }));
   };
 
+  saveButtonState = () => {
+    this.setState(prevState => ({ disabled: !prevState.disabled }));
+  };
+
+  handleTextarea = e => {
+    const { value } = e.target;
+    this.setState({
+      localConf: value,
+    });
+  };
+
   updateConfidential = () => {
     const { localConf } = this.state;
-
+    this.saveButtonState();
     axios
       .post(`${path.cors}data.php`, {
         type: 'save',
         data: localConf,
       })
-      .then(response => {
-        const confidential = response.data;
+      .then(({ data }) => {
+        const confidential = data;
         return (
           store.dispatch(newConfidentialText(confidential.confidential)),
           store.dispatch(changeSidePanelState(false))
@@ -78,46 +90,51 @@ class Panel extends Component {
       })
       .finally(() => {
         this.handleEditMode();
+        this.saveButtonState();
         setTimeout(() => store.dispatch(changeSidePanelState(false)), 2000);
       });
   };
 
-  handleTextarea = e => {
-    const { value } = e.target;
-    this.setState({
-      localConf: value,
-    });
-  };
-
   render() {
-    const { editValue, localConf } = this.state;
+    const { editValue, localConf, disabled } = this.state;
     const { confidential } = this.props;
 
     return (
-      <StyledWrapper>
-        <header>
-          <p>Klauza poufności</p>
-          <div>
-            {editValue && (
-              <PrimaryButton type="button" onClick={this.updateConfidential}>
-                zapisz
+      <>
+        <StyledWrapper>
+          <header>
+            <p>Klauza poufności</p>
+            <div>
+              {editValue && (
+                <PrimaryButton
+                  type="button"
+                  primary
+                  disabled={disabled}
+                  onClick={this.updateConfidential}
+                >
+                  zapisz
+                </PrimaryButton>
+              )}
+              <PrimaryButton type="button" onClick={this.handleEditMode}>
+                {editValue ? 'anuluj' : 'edytuj'}
               </PrimaryButton>
+            </div>
+          </header>
+          <section>
+            {editValue ? (
+              <form>
+                <Textarea value={localConf} onChange={this.handleTextarea} />
+              </form>
+            ) : (
+              <p>{confidential}</p>
             )}
-            <PrimaryButton type="button" onClick={this.handleEditMode}>
-              {editValue ? 'anuluj' : 'edytuj'}
-            </PrimaryButton>
-          </div>
-        </header>
-        <section>
-          {editValue ? (
-            <form>
-              <Textarea value={localConf} onChange={this.handleTextarea} />
-            </form>
-          ) : (
-            <p>{confidential}</p>
-          )}
-        </section>
-      </StyledWrapper>
+          </section>
+        </StyledWrapper>
+
+        <PrimaryButton type="button" dafault onClick={() => store.dispatch(getData('default'))}>
+          przywróć domyślne
+        </PrimaryButton>
+      </>
     );
   }
 }

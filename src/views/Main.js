@@ -21,7 +21,6 @@ class Main extends Component {
 
   render() {
     const { isVisible, error } = this.props;
-    console.log('this.props', this.props);
     return (
       <>
         <StyledWrapper>

@@ -25,12 +25,13 @@ export const currentView = (type = 'cv') => {
 
 //  GET CONFIDENTIAL TEXT FROM SERVER
 
-export const getData = () => dispatch => {
-  // dispatch({ type: 'UPDATE_CONFIDENTIAL' });
-
-  return axios(`${path.cors}data.php`)
+export const getData = (request = 'read') => dispatch => {
+  return axios
+    .post(`${path.cors}data.php`, {
+      type: request,
+    })
     .then(({ data }) => {
-      const payload = data.confidential;
+      const payload = data;
       return dispatch({ type: 'UPDATE_CONFIDENTIAL', payload });
     })
     .catch(error => {
