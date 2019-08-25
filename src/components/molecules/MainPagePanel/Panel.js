@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import { connect } from 'react-redux';
 import { Textarea } from 'components/atoms/Inputs';
-import { newConfidentialText, changeSidePanelState, getData } from 'actions';
+import { newConfidentialText, changeSidePanelState, getData as getDataConf } from 'actions';
 import store from 'store';
 import axios from 'axios';
 import path from '../../../path';
@@ -97,7 +97,7 @@ class Panel extends Component {
 
   render() {
     const { editValue, localConf, disabled } = this.state;
-    const { confidential } = this.props;
+    const { confidential, getData } = this.props;
 
     return (
       <>
@@ -131,7 +131,7 @@ class Panel extends Component {
           </section>
         </StyledWrapper>
 
-        <PrimaryButton type="button" dafault onClick={() => store.dispatch(getData('default'))}>
+        <PrimaryButton type="button" dafault onClick={() => getData('default')}>
           przywróć domyślne
         </PrimaryButton>
       </>
@@ -147,4 +147,10 @@ Panel.defaultProps = {
 };
 
 const mapStateToProps = state => state.confidential;
-export default connect(mapStateToProps)(Panel);
+const mapDispatchToProps = dispatch => ({
+  getData: info => dispatch(getDataConf(info)),
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Panel);
