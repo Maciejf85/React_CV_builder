@@ -7,7 +7,7 @@
         "extensions": [".js"]
       }
     ],
-    "react/destructuring-assignment": ["error", "never", { "ignoreClassFields": true }],
+    "react/destructuring-assignment": [0, "never", { "ignoreClassFields": true }],
     "react/prop-types": [1, { "ignoreClassFields": 0 }],
     // off console log warning
     "no-console": "off",

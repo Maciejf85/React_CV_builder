@@ -1,7 +1,11 @@
+const basePath = '/';
+
 const path = {
-  main: '/',
-  edit: '/edit',
-  preview: '/preview',
+  main: basePath,
+  edit: `${basePath}edit`,
+  preview: `${basePath}preview`,
+  // cors: '',
+  cors: 'https://cors-anywhere.herokuapp.com/http://www.maciejf.pl/cv-builder/',
 };
 
 export default path;

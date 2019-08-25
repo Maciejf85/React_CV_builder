@@ -5,7 +5,7 @@ const Button = styled.button`
   min-width: 80px;
   height: 45px;
   color: white;
-  border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+  border: 1px solid ${({ theme }) => theme.colors.darkGrey};
   margin:0 10px;
   border-radius: 5px;
   font-size: ${({ theme }) => theme.fontSize.m};

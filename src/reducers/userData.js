@@ -2,7 +2,7 @@ const initialState = {
   name: 'Maciej',
   surname: 'Fiałkowski',
   adress: '',
-  email: '',
+  email: 'Fialek85@gmail.com',
   birthday: '',
   github: '',
   linkedin: '',

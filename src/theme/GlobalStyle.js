@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,800&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600&display=swap&subset=latin-ext');
 
 /* CSS RESET */
 
@@ -19,6 +19,8 @@ const GlobalStyle = createGlobalStyle`
         padding:0;
         font-size:1.6rem;
         font-family: "Montserrat", sans-serif;
+        background: hsl(0, 0%, 96%);
+        overflow-x:hidden;
     }
     a{
         text-decoration:none;
@@ -26,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
     }
     ul{
         padding:0;
-    list-style: none;
+        list-style: none;
     }
 
 

@@ -2,26 +2,19 @@ import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 
 const PosedButton = posed.button({
-  visible: {
-    x: 0,
-    opacity: 1,
-  },
-  hidden: {
-    x: '-150%',
-    opacity: 0,
-  },
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
 });
 
 const Button = styled(PosedButton)`
-  padding: 10px;
   background: '#FFD8B2';
-  width: 180px;
-  height: 37px;
+  width: 100px;
+  height: 27px;
   color: ${({ theme }) => theme.font.primary};
   border: none;
   margin:0 10px;
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 10px;
   font-family:"Montserrat";
   font-weight: ${({ theme }) => theme.font.thin};
   text-transform: uppercase;
