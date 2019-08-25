@@ -140,6 +140,7 @@ class Panel extends Component {
 }
 Panel.propTypes = {
   confidential: PropTypes.string,
+  getData: PropTypes.func.isRequired,
 };
 
 Panel.defaultProps = {
