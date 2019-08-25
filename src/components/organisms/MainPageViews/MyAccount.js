@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Section from 'components/molecules/Section/Section';
 
 const StyleWrapper = styled.div`
   width: 100%;
@@ -11,7 +12,8 @@ const StyleWrapper = styled.div`
 const myAccount = () => {
   return (
     <StyleWrapper>
-      <h1>myAccount component</h1>
+      <h3>myAccount component</h3>
+      <Section />
     </StyleWrapper>
   );
 };

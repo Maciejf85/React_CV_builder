@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from 'components/atoms/Logo/Logo';
 import LoggedIn from 'components/atoms/LoggedIn/LoggedIn';
-import NavButtons from 'components/molecules/TopNavButtons/NavButtons';
+import NavButtons from 'components/molecules/TopNavButtons/navButtons';
 import styled from 'styled-components';
 // import PropTypes from 'prop-types';
 
