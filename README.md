@@ -1,1 +1,2 @@
-# Aplikacja do tworzenia CV i exportu do pdf.
+### Aplikacja do tworzenia CV i exportu do pdf.
+#### w trakcie tworzenia ...
