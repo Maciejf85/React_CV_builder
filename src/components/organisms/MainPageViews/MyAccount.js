@@ -12,7 +12,6 @@ const StyleWrapper = styled.div`
 const myAccount = () => {
   return (
     <StyleWrapper>
-      <h3>myAccount component</h3>
       <Section />
     </StyleWrapper>
   );
