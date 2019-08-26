@@ -32,6 +32,7 @@ export const getData = (request = 'read') => dispatch => {
     })
     .then(({ data }) => {
       const payload = data;
+      if (typeof payload === 'string') payload.trimEnd();
       return dispatch({ type: 'UPDATE_CONFIDENTIAL', payload });
     })
     .catch(error => {

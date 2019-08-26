@@ -1,4 +1,4 @@
-const basePath = '/';
+const basePath = '/cv-builder/';
 
 const path = {
   main: basePath,

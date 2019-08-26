@@ -21,7 +21,7 @@ const SectionHeader = props => {
   );
 };
 
-SectionHeader.prototype = {
+SectionHeader.propTypes = {
   name: propTypes.string.isRequired,
 };
 
