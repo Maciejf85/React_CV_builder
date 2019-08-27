@@ -20,10 +20,12 @@ const StyledWrapper = styled.div`
     font-weight: ${({ theme }) => theme.font.bold};
     text-transform: uppercase;
     font-size: ${({ theme }) => theme.fontSize.s};
+    color: black;
   }
   li {
     font-size: ${({ theme }) => theme.fontSize.ms};
     letter-spacing: 1px;
+    color: ${({ theme }) => theme.colors.secondaryGrey};
   }
 `;
 
