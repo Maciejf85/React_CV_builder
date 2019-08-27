@@ -11,6 +11,7 @@
     "react/prop-types": [1, { "ignoreClassFields": 0 }],
     // off console log warning
     "no-console": "off",
+    "react/jsx-no-target-blank": [2, { "enforceDynamicLinks": 0 }],
     "react/forbid-prop-types": [
       0,
       { "forbid": "object", "checkContextTypes": 1, "checkChildContextTypes": 1 }

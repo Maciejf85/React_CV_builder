@@ -35,16 +35,14 @@ const GlobalStyle = createGlobalStyle`
         font-weight:600;
     }
     h1{
-        font-size:2.2rem
+        font-size:2.1rem
     }
     h2{
-        font-size:2rem
+        font-size:1.8rem
     }
     h3{
-        font-size:1.8rem;
+        font-size:1.5rem;
     }
-
-
 `;
 
 export default GlobalStyle;

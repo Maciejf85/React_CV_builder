@@ -1,14 +1,14 @@
 const initialState = {
   name: 'Maciej',
   surname: 'Fiałkowski',
-  adress: '',
+  adress: 'Wrocław, Polska',
   email: 'Fialek85@gmail.com',
-  birthday: '',
-  github: '',
-  linkedin: '',
+  birthday: '12.08.1985',
+  github: 'https://github.com/Maciejf85',
+  linkedin: 'https://www.linkedin.com/in/maciej-fia%C5%82kowski-527813176/',
 };
 
-const userName = (state = initialState, { type, payload }) => {
+const userData = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'changeName':
       return payload;
@@ -18,4 +18,4 @@ const userName = (state = initialState, { type, payload }) => {
   }
 };
 
-export default userName;
+export default userData;
