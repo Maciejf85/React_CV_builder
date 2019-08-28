@@ -77,6 +77,12 @@ class SectionBody extends Component {
     }
   };
 
+  handleToggleEdit = () => {
+    this.setState({
+      edit: false,
+    });
+  };
+
   handleForm = event => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -90,9 +96,16 @@ class SectionBody extends Component {
       <StyledWrapper>
         <div className="header">
           <h1>Twoje konto</h1>
-          <PrimaryButton type="button" onClick={this.handleEdit}>
-            {!edit ? 'edytuj' : 'zapisz'}
-          </PrimaryButton>
+          <div>
+            <PrimaryButton type="button" primary={!!edit} onClick={this.handleEdit}>
+              {!edit ? 'edytuj' : 'zapisz'}
+            </PrimaryButton>
+            {edit && (
+              <PrimaryButton type="button" onClick={this.handleToggleEdit}>
+                anuluj
+              </PrimaryButton>
+            )}
+          </div>
         </div>
         {!edit ? (
           <ul>
@@ -141,7 +154,7 @@ class SectionBody extends Component {
             <input type="text" name="adress" value={this.state.adress} onChange={this.handleForm} />
             <span>data urodzenia: </span>
             <input
-              type="text"
+              type="date"
               name="birthday"
               value={this.state.birthday}
               onChange={this.handleForm}
