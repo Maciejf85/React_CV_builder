@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SectionHeader from 'components/atoms/Section/SectionHeader';
-import SectionBody from 'components/atoms/Section/SectionBody';
+import SectionBody from 'components/atoms/Section/SectionBodyUser';
 
 const StyledWrapper = styled.section`
   width: 100%;
@@ -16,7 +16,7 @@ const StyledWrapper = styled.section`
 const Section = () => {
   return (
     <StyledWrapper>
-      <SectionHeader name="Twoje konto" />
+      <SectionHeader name="Moje dane" />
       <SectionBody />
     </StyledWrapper>
   );

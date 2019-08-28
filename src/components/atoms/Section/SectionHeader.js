@@ -11,12 +11,13 @@ const StyledWrapper = styled.header`
   padding: 0 10px;
   font-weight: ${({ theme }) => theme.font.bold};
   background: ${({ theme }) => theme.colors.lightGrey};
+  font-size: ${({ theme }) => theme.fontSize.xl};
 `;
 const SectionHeader = props => {
   const { name } = props;
   return (
     <StyledWrapper>
-      <h6>{name}</h6>
+      <h3>{name}</h3>
     </StyledWrapper>
   );
 };

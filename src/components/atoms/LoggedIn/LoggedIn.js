@@ -18,7 +18,7 @@ const StyledWrapper = styled.div`
 `;
 
 const LoggedIn = () => {
-  const email = useSelector(state => state.userName.email);
+  const email = useSelector(state => state.userData.email);
   return (
     <StyledWrapper>
       <p>{email}</p>
