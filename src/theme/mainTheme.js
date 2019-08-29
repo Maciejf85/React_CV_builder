@@ -12,6 +12,7 @@ const theme = {
     l: '1.8rem',
     xl: '2rem',
     xxl: '2.2rem',
+    xxxl: '3rem',
   },
   colors: {
     primaryGrey: 'hsl(220,14%,20%)',
