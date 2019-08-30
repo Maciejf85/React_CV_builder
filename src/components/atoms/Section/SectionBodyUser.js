@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
-import image from 'assets/pic1.jpg';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -42,28 +41,6 @@ const StyledWrapper = styled.div`
     display: inline-block;
     width: 100%;
     padding: 5px;
-  }
-  .mainContent {
-    display: flex;
-    flex-wrap: wrap;
-    align-items:center;
-    font-size: ${({ theme }) => theme.fontSize.xxxl};
-    padding: 20px 0;
-
-    img {
-      height: 140px;
-      width: 93px;
-      margin-right: 30px;
-    }
-    .name,
-    .surname {
-      margin-top: 5px;
-      margin-bottom: 10px;
-      /* color: ${({ theme }) => theme.colors.secondaryGrey}; */
-      font-weight: ${({ theme }) => theme.font.thin};
-      font-style: italic;
-      /* padding:15px; */
-    }
   }
 `;
 
@@ -131,38 +108,35 @@ class SectionBody extends Component {
           </div>
         </div>
         {!edit ? (
-          <>
-            <div className="mainContent">
-              <img src={image} alt="user_photo" />
-              <div>
-                <div className="name">{name}</div>
-                <div className="surname">{surname}</div>
-              </div>
-            </div>
-            <ul>
-              <li>
-                <span>email:</span> {email}
-              </li>
-              <li>
-                <span>adres:</span> {adress}
-              </li>
-              <li>
-                <span>data urodzenia:</span> {birthday}
-              </li>
-              <li>
-                <span>github:</span>
-                <a href={github} target="_blank" rel="noopener noreferrer">
-                  {github}
-                </a>
-              </li>
-              <li>
-                <span>linkedin:</span>
-                <a href={linkedin} target="_blank" rel="noopener noreferrer">
-                  {linkedin}
-                </a>
-              </li>
-            </ul>
-          </>
+          <ul>
+            <li>
+              <span>imię:</span> {name}
+            </li>
+            <li>
+              <span>nazwisko:</span> {surname}
+            </li>
+            <li>
+              <span>email:</span> {email}
+            </li>
+            <li>
+              <span>adres:</span> {adress}
+            </li>
+            <li>
+              <span>data urodzenia:</span> {birthday}
+            </li>
+            <li>
+              <span>github:</span>
+              <a href={github} target="_blank" rel="noopener noreferrer">
+                {github}
+              </a>
+            </li>
+            <li>
+              <span>linkedin:</span>
+              <a href={linkedin} target="_blank" rel="noopener noreferrer">
+                {linkedin}
+              </a>
+            </li>
+          </ul>
         ) : (
           <form>
             <span>imię </span>
