@@ -70,7 +70,7 @@ class Panel extends Component {
     });
   };
 
-  handleGetSelection = e => {
+  handleGetSelection = () => {
     const selection = window.getSelection();
     console.log(selection.toString());
   };
