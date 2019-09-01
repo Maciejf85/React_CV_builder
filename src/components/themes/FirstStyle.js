@@ -2,6 +2,7 @@ import React from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
 // Create styles
+
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
@@ -10,8 +11,11 @@ const styles = StyleSheet.create({
   section: {
     margin: 10,
     padding: 10,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     height: '300px',
+  },
+  text: {
+    fontFamily: 'Montserrat',
   },
 });
 
@@ -20,16 +24,7 @@ const MyDocument = () => (
   <Document title="Moje CV" author="Maciej Fiałkowski">
     <Page size="A4" style={styles.page} wrap unbreakable>
       <View style={styles.section}>
-        <Text>Section #1</Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Section #2</Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Section #3</Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Section #4</Text>
+        <Text>Maciej Fiałkowski</Text>
       </View>
     </Page>
   </Document>
