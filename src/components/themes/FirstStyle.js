@@ -11,7 +11,7 @@ Font.register({
 });
 
 const Heading = styled.Text`
-  font-size: 12pt;
+  font-size: 13pt;
   margin-left: 5pt;
 
   font-family: 'Montserrat';
@@ -27,7 +27,7 @@ const LeftColumn = styled.View`
   background: hsl(220, 14%, 20%);
   color: white;
 `;
-
+const arr = ['Maciej', 'Fiałkowski'];
 // Create Document Component
 class MyDocument extends Component {
   state = {
@@ -42,8 +42,11 @@ class MyDocument extends Component {
       <Document title="Moje CV" author="Maciej Fiałkowski">
         <Page size="A4" wrap>
           <LeftColumn>
-            <Heading>{name}</Heading>
-            <Heading bold>{surname}</Heading>
+            {arr.map(item => (
+              <Heading>{item}</Heading>
+            ))}
+            {/* <Heading>{name}</Heading>
+            <Heading bold>{surname}</Heading> */}
             <Image src={image} />
             <Heading>{email}</Heading>
           </LeftColumn>

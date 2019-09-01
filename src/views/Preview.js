@@ -26,22 +26,26 @@ const styles = StyleSheet.create({
   view: {
     minWidth: '800px',
     minHeight: '800px',
-    width: '50vw',
+    width: '98vw',
+    height: '80vh',
   },
 });
 const StyledWrapper = styled.div`
   position: relative;
   width: 100%;
-  border: 1px solid black;
+  display: flex;
+  justify-content: center;
 `;
 
 const Preview = () => {
   return (
     <>
       <NavBar />
-      <PDFViewer style={styles.view}>
-        <FirstStyle />
-      </PDFViewer>
+      <StyledWrapper>
+        <PDFViewer style={styles.view}>
+          <FirstStyle />
+        </PDFViewer>
+      </StyledWrapper>
 
       <StyledWrapper>
         <PDFDownloadLink document={<FirstStyle />} fileName="myCV.pdf">
