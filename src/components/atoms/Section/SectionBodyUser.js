@@ -110,10 +110,10 @@ class SectionBody extends Component {
         {!edit ? (
           <ul>
             <li>
-              <span>imię </span> {name}
+              <span>imię:</span> {name}
             </li>
             <li>
-              <span>nazwisko </span> {surname}
+              <span>nazwisko:</span> {surname}
             </li>
             <li>
               <span>email:</span> {email}

@@ -40,6 +40,7 @@ const StyledWrapper = styled.div`
     p {
       cursor: default;
       user-select: none;
+      white-space: pre-line;
     }
   }
 `;
@@ -54,7 +55,7 @@ class Panel extends Component {
   handleEditMode = () => {
     this.setState(prevState => ({
       editValue: !prevState.editValue,
-      localConf: this.props.confidential,
+      localConf: this.props.confidential.trimEnd(),
     }));
   };
 
@@ -67,6 +68,11 @@ class Panel extends Component {
     this.setState({
       localConf: value,
     });
+  };
+
+  handleGetSelection = () => {
+    const selection = window.getSelection();
+    console.log(selection.toString());
   };
 
   updateConfidential = () => {
@@ -117,6 +123,9 @@ class Panel extends Component {
               )}
               <PrimaryButton type="button" onClick={this.handleEditMode}>
                 {editValue ? 'anuluj' : 'edytuj'}
+              </PrimaryButton>
+              <PrimaryButton type="button" onClick={this.handleGetSelection}>
+                pobierz zaznaczenie
               </PrimaryButton>
             </div>
           </header>

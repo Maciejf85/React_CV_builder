@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
         font-size:62.5%; // happy rems 10px
     }
 
+
     body{
         margin:0;
         padding:0;

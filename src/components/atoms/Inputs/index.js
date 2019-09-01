@@ -9,6 +9,7 @@ export const Textarea = styled.textarea`
   font-size: ${({ theme }) => theme.fontSize.ms};
   line-height: 25px;
   resize: none;
+  white-space: pre-line;
 `;
 
 export const Input = styled.input`
