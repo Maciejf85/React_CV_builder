@@ -1,8 +1,9 @@
-import React from 'react';
-import { Page, View, Document, Font } from '@react-pdf/renderer';
+import React, { Component } from 'react';
+import { Page, Document, Font } from '@react-pdf/renderer';
 import styled from '@react-pdf/styled-components';
 import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
+import image from 'assets/pic1.jpg';
 
 Font.register({
   family: 'Montserrat',
@@ -10,20 +11,46 @@ Font.register({
 });
 
 const Heading = styled.Text`
-  font-size: 22px;
+  font-size: 12pt;
+  margin-left: 5pt;
+
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
+const Image = styled.Image`
+  width: 100%;
+  height: 210pt;
+`;
+const LeftColumn = styled.View`
+  width: 150pt;
+  height: 100%;
+  background: hsl(220, 14%, 20%);
+  color: white;
+`;
 
 // Create Document Component
-const MyDocument = () => (
-  <Document title="Moje CV" author="Maciej Fiałkowski">
-    <Page size="A4" wrap unbreakable>
-      <View>
-        <Heading>Maciej Fiałkowski</Heading>
-        <Heading bold>Maciej Fiałkowski</Heading>
-      </View>
-    </Page>
-  </Document>
-);
+class MyDocument extends Component {
+  state = {
+    name: 'Maciej',
+    surname: 'Fiałkowski',
+    email: 'Fialek85@gmail.com',
+  };
+
+  render() {
+    const { name, surname, email } = this.state;
+    return (
+      <Document title="Moje CV" author="Maciej Fiałkowski">
+        <Page size="A4" wrap>
+          <LeftColumn>
+            <Heading>{name}</Heading>
+            <Heading bold>{surname}</Heading>
+            <Image src={image} />
+            <Heading>{email}</Heading>
+          </LeftColumn>
+        </Page>
+      </Document>
+    );
+  }
+}
+
 export default MyDocument;

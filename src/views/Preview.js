@@ -25,14 +25,13 @@ const styles = StyleSheet.create({
   },
   view: {
     minWidth: '800px',
-    minHeight: '600px',
-    width: '100vw',
+    minHeight: '800px',
+    width: '50vw',
   },
 });
 const StyledWrapper = styled.div`
   position: relative;
   width: 100%;
-  padding: 50px;
   border: 1px solid black;
 `;
 
@@ -45,8 +44,8 @@ const Preview = () => {
       </PDFViewer>
 
       <StyledWrapper>
-        <PDFDownloadLink document={<FirstStyle />} fileName="somename.pdf">
-          Download
+        <PDFDownloadLink document={<FirstStyle />} fileName="myCV.pdf">
+          {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
         </PDFDownloadLink>
       </StyledWrapper>
     </>
