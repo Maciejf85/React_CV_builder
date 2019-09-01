@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     margin: '10px',
-    fontFamily: 'Montserrat',
     outline: 'none',
   },
   view: {
@@ -46,7 +45,7 @@ const Preview = () => {
       </PDFViewer>
 
       <StyledWrapper>
-        <PDFDownloadLink document={<FirstStyle />} fileName="somename.pdf" style={styles.button}>
+        <PDFDownloadLink document={<FirstStyle />} fileName="somename.pdf">
           Download
         </PDFDownloadLink>
       </StyledWrapper>
