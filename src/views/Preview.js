@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     minHeight: '800px',
     width: '98vw',
     height: '80vh',
+    border: 'none',
   },
 });
 const StyledWrapper = styled.div`

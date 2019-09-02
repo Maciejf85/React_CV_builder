@@ -31,19 +31,19 @@ const arr = ['Maciej', 'Fiałkowski'];
 // Create Document Component
 class MyDocument extends Component {
   state = {
-    name: 'Maciej',
-    surname: 'Fiałkowski',
+    // name: 'Maciej',
+    // surname: 'Fiałkowski',
     email: 'Fialek85@gmail.com',
   };
 
   render() {
-    const { name, surname, email } = this.state;
+    const { email } = this.state;
     return (
       <Document title="Moje CV" author="Maciej Fiałkowski">
         <Page size="A4" wrap>
           <LeftColumn>
             {arr.map(item => (
-              <Heading>{item}</Heading>
+              <Heading key={item}>{item}</Heading>
             ))}
             {/* <Heading>{name}</Heading>
             <Heading bold>{surname}</Heading> */}
