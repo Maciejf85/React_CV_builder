@@ -1,32 +1,59 @@
-import React from 'react';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import React, { Component } from 'react';
+import { Page, Document, Font } from '@react-pdf/renderer';
+import styled from '@react-pdf/styled-components';
+import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
+import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
+import image from 'assets/pic1.jpg';
 
-// Create styles
-
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: 'column',
-    backgroundColor: 'white',
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    backgroundColor: 'white',
-    height: '300px',
-  },
-  text: {
-    fontFamily: 'Montserrat',
-  },
+Font.register({
+  family: 'Montserrat',
+  fonts: [{ src: Montserrat, fontWeight: 'normal' }, { src: MontserratBold, fontWeight: 'bold' }],
 });
 
+const Heading = styled.Text`
+  font-size: 13pt;
+  margin-left: 5pt;
+
+  font-family: 'Montserrat';
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+`;
+const Image = styled.Image`
+  width: 100%;
+  height: 210pt;
+`;
+const LeftColumn = styled.View`
+  width: 150pt;
+  height: 100%;
+  background: hsl(220, 14%, 20%);
+  color: white;
+`;
+const arr = ['Maciej', 'Fiałkowski'];
 // Create Document Component
-const MyDocument = () => (
-  <Document title="Moje CV" author="Maciej Fiałkowski">
-    <Page size="A4" style={styles.page} wrap unbreakable>
-      <View style={styles.section}>
-        <Text>Maciej Fiałkowski</Text>
-      </View>
-    </Page>
-  </Document>
-);
+class MyDocument extends Component {
+  state = {
+    // name: 'Maciej',
+    // surname: 'Fiałkowski',
+    email: 'Fialek85@gmail.com',
+  };
+
+  render() {
+    const { email } = this.state;
+    return (
+      <Document title="Moje CV" author="Maciej Fiałkowski">
+        <Page size="A4" wrap>
+          <LeftColumn>
+            {arr.map(item => (
+              <Heading key={item}>{item}</Heading>
+            ))}
+            {/* <Heading>{name}</Heading>
+            <Heading bold>{surname}</Heading> */}
+            <Image src={image} />
+            <Heading>{email}</Heading>
+          </LeftColumn>
+        </Page>
+      </Document>
+    );
+  }
+}
+
 export default MyDocument;
