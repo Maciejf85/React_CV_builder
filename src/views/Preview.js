@@ -39,11 +39,12 @@ const StyledWrapper = styled.div`
 `;
 
 const Preview = () => {
+  const name = 'Maciej';
   return (
     <>
       <NavBar />
       <StyledWrapper>
-        <PDFViewer style={styles.view}>
+        <PDFViewer style={styles.view} name={name}>
           <FirstStyle />
         </PDFViewer>
       </StyledWrapper>
