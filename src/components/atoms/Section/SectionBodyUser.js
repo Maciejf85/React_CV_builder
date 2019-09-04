@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import image from 'assets/pic1.jpg';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -53,15 +52,18 @@ const StyledWrapper = styled.div`
     overflow: hidden;
   }
 `;
-
+const path = 'http://www.maciejf.pl/cv-builder/';
 const SectionBody = props => {
-  const { name, surname, email, adress, birthday, github, linkedin } = props;
+  const { id, name, surname, email, adress, birthday, github, linkedin } = props;
   return (
     <StyledWrapper>
       <div className="header">
         <h1>Twoje konto</h1>
       </div>
       <ul>
+        <li>
+          <span>ID:</span> {id}
+        </li>
         <li>
           <span>imię:</span> {name}
         </li>
@@ -90,12 +92,13 @@ const SectionBody = props => {
           </a>
         </li>
       </ul>
-      <img src={image} alt="user" />
+      <img src={`${path}users/${id}/images/pic1.jpg`} alt="user" />
     </StyledWrapper>
   );
 };
 
 SectionBody.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string,
   surname: PropTypes.string,
   email: PropTypes.string,

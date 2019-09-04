@@ -1,4 +1,5 @@
 const initialState = {
+  id: 'bad3e7665d3c14b042a18f72082ddf76',
   name: 'Maciej',
   surname: 'Fiałkowski',
   adress: 'Wrocław, Polska',
