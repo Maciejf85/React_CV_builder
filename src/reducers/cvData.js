@@ -10,6 +10,16 @@ const initialState = {
       description:
         'JavaScript Developer : React Języki i technologie nauczane podczas kursu : HTML5, CSS3, SASS, RWD, JavaScript,  ES6, React, jQuery, AJAX, Gulp, Webpack, Git. Kurs trwał 320 godzin wykładów i ćwiczeń przygotowujących do pracy na stanowisku Frontend Developera.',
     },
+    {
+      id: 2,
+      name: 'Coders Lab',
+      startYear: 2018,
+      startMonth: 8,
+      endYear: 2019,
+      endMonth: 4,
+      description:
+        'JavaScript Developer : React Języki i technologie nauczane podczas kursu : HTML5, CSS3, SASS, RWD, JavaScript,  ES6, React, jQuery, AJAX, Gulp, Webpack, Git. Kurs trwał 320 godzin wykładów i ćwiczeń przygotowujących do pracy na stanowisku Frontend Developera.',
+    },
   ],
   skills: [
     { id: 1, description: 'Języki programowania : JavaScript: ES6' },

@@ -34,19 +34,17 @@ const LeftColumn = styled.View`
 const RightColumn = styled.View`
   width: 446pt;
   height: 100%;
-  background: #ccc;
   font-family: 'Montserrat';
-  color: white;
   padding: 10px;
 `;
 
 const Section = styled.Text`
+  display: inline-block;
   color: black;
-  font-size: 12px;
+  font-size: 10pt;
   padding: 5px 0;
 `;
 const TextSection = styled.View`
-  background: white;
   margin: 20px 0;
   padding: 10px 0;
 `;
@@ -74,7 +72,7 @@ class MyDocument extends Component {
           </LeftColumn>
           <RightColumn>
             {cvData.education.map(item => (
-              <TextSection key={item}>
+              <TextSection key={item.id}>
                 <Section>{` ID: ${item.id}`}</Section>
                 <Section>{` Name: ${item.name}`}</Section>
                 <Section>{` CONTENT: ${item.description}`}</Section>
