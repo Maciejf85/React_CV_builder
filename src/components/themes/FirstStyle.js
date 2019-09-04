@@ -3,7 +3,6 @@ import { Document, Font } from '@react-pdf/renderer';
 import styled from '@react-pdf/styled-components';
 import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
-import image from 'assets/pic1.jpg';
 import store from 'store';
 
 Font.register({
@@ -48,7 +47,7 @@ const TextSection = styled.View`
   margin: 20px 0;
   padding: 10px 0;
 `;
-
+const path = 'https://cors-anywhere.herokuapp.com/http://www.maciejf.pl/cv-builder/';
 // Create Document Component
 class MyDocument extends Component {
   state = {
@@ -61,13 +60,15 @@ class MyDocument extends Component {
     const { email, name, surname } = this.state;
     const CVdata = store.getState();
     const { cvData } = CVdata;
+    const { userData } = store.getState();
+    const { id } = userData;
     return (
       <Document title="Moje CV" author="Maciej Fiałkowski">
         <MainContainer size="A4" wrap>
           <LeftColumn>
             <Heading>{name}</Heading>
             <Heading bold>{surname}</Heading>
-            <Image src={image} />
+            <Image src={`${path}users/${id}/images/pic1.jpg`} />
             <Heading>{email}</Heading>
           </LeftColumn>
           <RightColumn>
