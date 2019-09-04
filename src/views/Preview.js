@@ -21,33 +21,37 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     margin: '10px',
-    fontFamily: 'Montserrat',
     outline: 'none',
   },
   view: {
     minWidth: '800px',
-    minHeight: '600px',
-    width: '100vw',
+    minHeight: '800px',
+    width: '98vw',
+    height: '80vh',
+    border: 'none',
   },
 });
 const StyledWrapper = styled.div`
   position: relative;
   width: 100%;
-  padding: 50px;
-  border: 1px solid black;
+  display: flex;
+  justify-content: center;
 `;
 
 const Preview = () => {
+  const name = 'Maciej';
   return (
     <>
       <NavBar />
-      <PDFViewer style={styles.view}>
-        <FirstStyle />
-      </PDFViewer>
+      <StyledWrapper>
+        <PDFViewer style={styles.view} name={name}>
+          <FirstStyle />
+        </PDFViewer>
+      </StyledWrapper>
 
       <StyledWrapper>
-        <PDFDownloadLink document={<FirstStyle />} fileName="somename.pdf" style={styles.button}>
-          Download
+        <PDFDownloadLink document={<FirstStyle />} fileName="myCV.pdf">
+          {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
         </PDFDownloadLink>
       </StyledWrapper>
     </>

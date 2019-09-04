@@ -70,10 +70,10 @@ class Panel extends Component {
     });
   };
 
-  handleGetSelection = () => {
-    const selection = window.getSelection();
-    console.log(selection.toString());
-  };
+  // handleGetSelection = () => {
+  //   const selection = window.getSelection();
+  //   console.log(selection.toString());
+  // };
 
   updateConfidential = () => {
     const { localConf } = this.state;
@@ -123,9 +123,6 @@ class Panel extends Component {
               )}
               <PrimaryButton type="button" onClick={this.handleEditMode}>
                 {editValue ? 'anuluj' : 'edytuj'}
-              </PrimaryButton>
-              <PrimaryButton type="button" onClick={this.handleGetSelection}>
-                pobierz zaznaczenie
               </PrimaryButton>
             </div>
           </header>

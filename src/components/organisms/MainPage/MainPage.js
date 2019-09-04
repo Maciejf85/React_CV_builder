@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SideBar from 'components/molecules/sideBar/sideBar';
+import SideBar from 'components/molecules/SideBar/SideBar';
 import MyCv from 'components/organisms/MainPageViews/MyCv';
 import MyDocuments from 'components/organisms/MainPageViews/MyDocuments';
 import MyAccount from 'components/organisms/MainPageViews/MyAccount';
