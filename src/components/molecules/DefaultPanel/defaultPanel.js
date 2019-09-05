@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
   min-width: 300px;
-  min-height: 100px;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.colors.lightGrey};
 
@@ -20,11 +19,14 @@ const StyledWrapper = styled.div`
   }
   section {
     width: 100%;
-    /* border: 1px solid black; */
+    min-height: 140px;
     padding: 10px 20px;
     font-family: 'Montserrat', sans-serif;
     font-size: ${({ theme }) => theme.fontSize.ms};
     line-height: 25px;
+    background: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     p {
       font-size: ${({ theme }) => theme.fontSize.ms};
     }

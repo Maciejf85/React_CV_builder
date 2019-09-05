@@ -9,6 +9,7 @@ const PosedPanel = posed.div({
 });
 
 const StyledWrapper = styled(PosedPanel)`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,6 +26,14 @@ const StyledWrapper = styled(PosedPanel)`
   color: white;
   font-weight: ${({ theme }) => theme.font.bold};
   font-size: ${({ theme }) => theme.fontSize.ms};
+
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 10px;
+    background: ${({ theme }) => theme.colors.secondaryBlue};
+  }
 
   ${({ error }) =>
     error &&
