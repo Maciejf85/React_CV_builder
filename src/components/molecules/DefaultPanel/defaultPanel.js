@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Strip from 'components/molecules/DefaultPanel/InfoStrip';
+import TitleStrip from 'components/molecules/DefaultPanel/TitleStrip';
 
 const StyledWrapper = styled.div`
   min-width: 300px;
@@ -39,9 +41,8 @@ const defaultPanel = props => {
     <StyledWrapper>
       <header>{title}</header>
       <section>
-        <p>{id}</p>
-        <p>{token}</p>
-        <p>{date}</p>
+        <TitleStrip />
+        <Strip />
       </section>
     </StyledWrapper>
   );
