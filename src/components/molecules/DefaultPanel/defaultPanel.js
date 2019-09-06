@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Strip from 'components/molecules/DefaultPanel/InfoStrip';
-import TitleStrip from 'components/molecules/DefaultPanel/TitleStrip';
+import StripBody from 'components/molecules/DefaultPanel/StripBody';
+import StripTitle from 'components/molecules/DefaultPanel/StripTitle';
 
 const StyledWrapper = styled.div`
   min-width: 300px;
@@ -13,7 +13,7 @@ const StyledWrapper = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    height: 35px;
+    height: 30px;
     padding: 0 10px;
     font-size: ${({ theme }) => theme.fontSize.ms};
     font-weight: ${({ theme }) => theme.font.bold};
@@ -36,24 +36,24 @@ const StyledWrapper = styled.div`
 `;
 
 const defaultPanel = props => {
-  const { id, token, date, title } = props;
+  const { title } = props;
   return (
     <StyledWrapper>
       <header>{title}</header>
       <section>
-        <TitleStrip />
-        <Strip />
+        <StripTitle />
+        <StripBody />
       </section>
     </StyledWrapper>
   );
 };
 
-defaultPanel.propTypes = {
-  id: PropTypes.string,
-  token: PropTypes.string,
-  date: PropTypes.string,
-  title: PropTypes.string,
-};
+// defaultPanel.propTypes = {
+//   id: PropTypes.string,
+//   token: PropTypes.string,
+//   date: PropTypes.string,
+//   title: PropTypes.string,
+// };
 defaultPanel.defaultProps = {
   id: 'no id',
   token: 'no token',

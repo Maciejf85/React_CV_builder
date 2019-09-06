@@ -4,16 +4,17 @@ import styled from 'styled-components';
 const StyleWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
+  align-items: center;
   width: 100%;
   height: 35px;
-  line-height: 35px;
   padding: 0 10px;
+  margin-bottom: 10px;
   font-style: italic;
   font-size: ${({ theme }) => theme.fontSize.ms};
   font-weight: ${({ theme }) => theme.font.bold};
   color: ${({ theme }) => theme.colors.lightBlue};
 `;
-const TitleStrip = () => {
+const StripTitle = () => {
   return (
     <StyleWrapper>
       <div>tytuł</div>
@@ -23,4 +24,4 @@ const TitleStrip = () => {
   );
 };
 
-export default TitleStrip;
+export default StripTitle;
