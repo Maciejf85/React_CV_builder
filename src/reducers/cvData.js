@@ -1,4 +1,8 @@
 const initialState = {
+  info: {
+    title: 'Moje CV_1',
+    date: 1567704304,
+  },
   education: [
     {
       id: 1,

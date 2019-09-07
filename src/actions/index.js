@@ -56,3 +56,10 @@ export const changeSidePanelState = payload => {
     payload,
   };
 };
+
+export const showFullData = payload => {
+  return {
+    type: 'CHANGE_SIDEPANEL_STATE',
+    payload,
+  };
+};
