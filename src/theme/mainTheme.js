@@ -18,6 +18,7 @@ const theme = {
     primaryGrey: 'hsl(220,14%,20%)',
     secondaryGrey: 'hsl(212, 14%, 37%)',
     lightGrey: 'hsl(210,3%,92%)',
+    mediumGrey: 'hsl(210,3%,72%)',
     darkGrey: 'hsl(220,9.4%,37.6%)',
     buttonActive: 'hsl(220,8%,44%)',
     primaryBlue: 'hsl(204, 100%, 50%)',

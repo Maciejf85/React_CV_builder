@@ -8,6 +8,7 @@ const initialState = {
   github: 'https://github.com/Maciejf85',
   linkedin: 'https://www.linkedin.com/in/maciej-fia%C5%82kowski-527813176/',
   profession: 'Junior Frontend Developer',
+  created: '04-09-2019',
 };
 
 const userData = (state = initialState, { type, payload }) => {
