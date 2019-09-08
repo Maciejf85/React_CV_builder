@@ -1,5 +1,5 @@
 const initialState = {
-  currentView: 'account',
+  currentView: 'confidentiality',
 };
 
 const path = (state = initialState, { type }) => {

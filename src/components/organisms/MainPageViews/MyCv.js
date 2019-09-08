@@ -26,7 +26,6 @@ class cvList extends Component {
       })
       .then(response => {
         this.handleGetData(response);
-        console.log('response', response);
       })
       .catch(error => {
         console.log('error :', error);

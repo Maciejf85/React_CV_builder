@@ -42,6 +42,7 @@ const StyledWrapper = styled.div`
     span {
       line-height: 15px;
       margin-left: 15px;
+      width: 100%;
       font-style: italic;
       text-transform: lowercase;
       font-size: ${({ theme }) => theme.fontSize.s};
@@ -70,7 +71,7 @@ const SectionBody = props => {
     <StyledWrapper>
       <div className="header">
         <h1>Twoje konto</h1>
-        <span>{`( utworzone : ${created} )`}</span>
+        <span>{`( utworzone ${created} )`}</span>
       </div>
       <ul>
         <li>
