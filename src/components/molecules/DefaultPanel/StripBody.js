@@ -21,7 +21,7 @@ const StyleWrapper = styled.div`
 
   ul {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     color: ${({ theme }) => theme.colors.buttonActive};
   }
   li {

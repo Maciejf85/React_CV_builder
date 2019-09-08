@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+// import axios from 'axios';
 import Panel from 'components/molecules/DefaultPanel/defaultPanel';
-import path from '../../../path';
+// import path from '../../../path';
 
 const StyleWrapper = styled.div`
   width: 100%;
@@ -16,29 +16,6 @@ class cvList extends Component {
     id: '',
     token: '',
     date: '',
-  };
-
-  componentDidMount() {
-    axios
-      .post(`${path.cors}login.php`, {
-        text: 'fialek85@gmail.com',
-        password: '123',
-      })
-      .then(response => {
-        this.handleGetData(response);
-      })
-      .catch(error => {
-        console.log('error :', error);
-      });
-  }
-
-  handleGetData = response => {
-    const { data } = response;
-    this.setState({
-      id: data.id,
-      token: data.token,
-      date: data.date,
-    });
   };
 
   render() {
