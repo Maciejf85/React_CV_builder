@@ -19,7 +19,7 @@ const StripTitle = () => {
     <StyleWrapper>
       <div>tytuł</div>
       <div>data utworzenia</div>
-      <div>opcje</div>
+      <div style={{ justifySelf: 'center' }}>opcje</div>
     </StyleWrapper>
   );
 };

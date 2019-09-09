@@ -1,5 +1,6 @@
 const initialState = {
   info: {
+    id: '0507e9d80f2dd6da461e8e9775046698',
     title: 'Moje CV_1',
     date: 1567704304,
   },

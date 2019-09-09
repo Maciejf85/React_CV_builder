@@ -34,9 +34,21 @@ const StyledWrapper = styled.div`
   }
   .header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
     width: 100%;
+    h1 {
+      margin: 20px 0 0;
+    }
+    span {
+      line-height: 15px;
+      margin-left: 15px;
+      width: 100%;
+      font-style: italic;
+      text-transform: lowercase;
+      font-size: ${({ theme }) => theme.fontSize.s};
+      color: ${({ theme }) => theme.colors.darkGrey};
+      font-weight: ${({ theme }) => theme.font.normal};
+    }
   }
   input {
     display: inline-block;
@@ -54,11 +66,12 @@ const StyledWrapper = styled.div`
 `;
 const path = 'http://www.maciejf.pl/cv-builder/';
 const SectionBody = props => {
-  const { id, name, surname, email, adress, birthday, github, linkedin } = props;
+  const { id, name, surname, email, adress, birthday, github, linkedin, created } = props;
   return (
     <StyledWrapper>
       <div className="header">
         <h1>Twoje konto</h1>
+        <span>{`( utworzone ${created} )`}</span>
       </div>
       <ul>
         <li>

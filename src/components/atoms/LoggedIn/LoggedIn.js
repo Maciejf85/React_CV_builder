@@ -16,6 +16,10 @@ const StyledWrapper = styled.div`
   color: white;
   .iconStyle {
     color: ${({ theme }) => theme.colors.lightBlue};
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   p {

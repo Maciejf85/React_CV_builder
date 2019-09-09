@@ -8,13 +8,6 @@ export const changeName = (payload = { name: 'MACIEJ' }) => {
   };
 };
 
-export const tools = (payload = 'Webstorm') => {
-  return {
-    type: 'tools',
-    payload,
-  };
-};
-
 // CHANGE VIEW IN MAIN PAGE
 
 export const currentView = (type = 'cv') => {
