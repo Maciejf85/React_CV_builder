@@ -24,7 +24,7 @@ const StyledWrapper = styled.footer`
 const Footer = () => (
   <StyledWrapper>
     <p>
-      Wszystkie prawa zastrzeżone <span>Maciej Fiałkowski 2019 </span>
+      Wszystkie prawa zastrzeżone - <span>Maciej Fiałkowski 2019 </span>
     </p>
   </StyledWrapper>
 );
