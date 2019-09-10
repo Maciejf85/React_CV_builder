@@ -27,8 +27,8 @@ const MainContainer = styled.Page`
 const LeftColumn = styled.View`
   width: 150pt;
   height: 100%;
-  background: hsl(220, 14%, 20%);
   color: white;
+  background-color: #001f62;
 `;
 const RightColumn = styled.View`
   width: 446pt;
