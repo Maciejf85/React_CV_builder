@@ -20,8 +20,8 @@ const StyleWrapper = styled.div`
 
 const StripBody = () => {
   const { info } = useSelector(state => state.cvData);
-  const date = new Date();
-  const day = date.getDay();
+  const date = new Date(info.date * 1000);
+  const day = date.getDate();
   const month = date.getMonth();
   const year = date.getUTCFullYear();
   const monthArr = [
