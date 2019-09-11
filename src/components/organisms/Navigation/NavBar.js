@@ -12,7 +12,6 @@ const StyledWrapper = styled.nav`
   padding: 0 10px;
   width: 100%;
   height: 50px;
-  margin-bottom: 30px;
   background-color: ${({ theme }) => theme.colors.primaryGrey};
 `;
 
