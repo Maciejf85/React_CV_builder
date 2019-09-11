@@ -16,6 +16,14 @@ export const currentView = (type = 'cv') => {
   };
 };
 
+// CHANGE VIEW IN EDIT PAGE
+
+export const currentEditView = (type = 'personal') => {
+  return {
+    type,
+  };
+};
+
 //  GET CONFIDENTIAL TEXT FROM SERVER
 
 export const getData = (request = 'read') => dispatch => {

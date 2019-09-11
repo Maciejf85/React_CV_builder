@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavListItem from 'components/atoms/List/MainPageNavList';
+import { mainViews } from 'data';
 
 const StyledWrapper = styled.ul`
   min-width: 250px;
@@ -9,15 +10,9 @@ const StyledWrapper = styled.ul`
 `;
 
 const sideBar = () => {
-  const navPages = [
-    { name: 'Moje CV', link: 'cv' },
-    { name: 'Moje dokumenty', link: 'documents' },
-    { name: 'Moje konto', link: 'account' },
-    { name: 'Klauzula poufności', link: 'confidentiality' },
-  ];
   return (
     <StyledWrapper>
-      {navPages.map(item => (
+      {mainViews.map(item => (
         <NavListItem key={item.name} name={item.name} link={item.link} />
       ))}
     </StyledWrapper>

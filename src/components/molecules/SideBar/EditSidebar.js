@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import EditNavList from 'components/atoms/List/EditNavList';
+import { editViews } from 'data';
 
 const StyledWrapper = styled.div`
   width: 270px;
@@ -15,30 +16,15 @@ const StyledWrapper = styled.div`
 `;
 
 const EditSidebar = () => {
-  const cvValues = [
-    { name: 'Dane osobowe', link: 'userData', icon: 'user', isActive: true },
-    { name: 'Edukacja', link: 'education', icon: 'graduation-cap' },
-    { name: 'Języki obce', link: 'languages', icon: 'flag' },
-    { name: 'Umiejętności', link: 'skills', icon: 'coffee' },
-    { name: 'Zainteresowania', link: 'interest', icon: 'graduation-cap' },
-    { name: 'Klauzula poufności', link: 'confidential', icon: 'apple-alt' },
-  ];
   return (
     <StyledWrapper>
       <ul>
         <div>Tytuł</div>
-        {cvValues.map(item => (
-          <EditNavList
-            key={item.link}
-            name={item.name}
-            link={item.link}
-            icons={item.icon}
-            active={item.isActive}
-          />
+        {editViews.map(item => (
+          <EditNavList key={item.link} name={item.name} link={item.link} icons={item.icon} />
         ))}
       </ul>
     </StyledWrapper>
   );
 };
-
 export default EditSidebar;
