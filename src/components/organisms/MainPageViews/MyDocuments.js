@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Panel from 'components/molecules/DefaultPanel/defaultPanel';
 
 const StyleWrapper = styled.div`
   width: 100%;
@@ -11,7 +12,7 @@ const StyleWrapper = styled.div`
 const myDocuments = () => {
   return (
     <StyleWrapper>
-      <h1>Documents component</h1>
+      <Panel title="Moje dokumenty" />
     </StyleWrapper>
   );
 };
