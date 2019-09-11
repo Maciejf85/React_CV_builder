@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { currentEditView } from 'actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import store from 'store';
+import { connect } from 'react-redux';
 
 const StyledWrapper = styled.li`
   position: relative;
@@ -26,15 +29,16 @@ const StyledWrapper = styled.li`
 `;
 
 class EditNavList extends Component {
-  componentDidMount() {
-    console.log('this.props', this.props);
-  }
+  handlePathChange = e => {
+    const newPath = e.currentTarget.dataset.id;
+    store.dispatch(currentEditView(newPath));
+  };
 
   render() {
-    const { name, icons, active } = this.props;
-    console.log('icon', icons);
+    const { name, icons, link, currentView } = this.props;
+    const isActive = link === currentView;
     return (
-      <StyledWrapper active={active}>
+      <StyledWrapper active={isActive} data-id={link} onClick={this.handlePathChange}>
         <div>
           <FontAwesomeIcon icon={icons} />
         </div>
@@ -44,4 +48,5 @@ class EditNavList extends Component {
     );
   }
 }
-export default EditNavList;
+const mapStateToProps = state => state.editComponentView;
+export default connect(mapStateToProps)(EditNavList);

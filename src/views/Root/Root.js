@@ -3,16 +3,14 @@ import Main from 'views/Main';
 import Edit from 'views/Edit';
 import Preview from 'views/Preview';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import GlobalStyle from 'theme/globalStyle';
+import GlobalStyle from 'theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme/mainTheme';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
 import path from '../../path';
 
-library.add(fab, fas, far);
+library.add(fas);
 
 function Root() {
   return (
