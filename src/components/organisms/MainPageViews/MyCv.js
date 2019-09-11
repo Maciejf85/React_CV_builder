@@ -22,7 +22,7 @@ class cvList extends Component {
     const { id, token, date } = this.state;
     return (
       <StyleWrapper>
-        <Panel id={id} token={token} date={date} />
+        <Panel id={id} token={token} date={date} title="Moje CV" />
       </StyleWrapper>
     );
   }

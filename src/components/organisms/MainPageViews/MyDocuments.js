@@ -12,7 +12,7 @@ const StyleWrapper = styled.div`
 const myDocuments = () => {
   return (
     <StyleWrapper>
-      <Panel />
+      <Panel title="Moje dokumenty" />
     </StyleWrapper>
   );
 };
