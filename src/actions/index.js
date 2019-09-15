@@ -24,6 +24,21 @@ export const currentEditView = (type = 'personal') => {
   };
 };
 
+//  GET MAIN DATA FROM SERVER
+
+export const getMainData = (request = 'mainData') => () => {
+  return axios
+    .post(`${path.cors}data.php`, {
+      type: request,
+    })
+    .then(response => {
+      console.log('response', response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
 //  GET CONFIDENTIAL TEXT FROM SERVER
 
 export const getData = (request = 'read') => dispatch => {

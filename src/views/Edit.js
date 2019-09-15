@@ -12,7 +12,7 @@ const StyledWrapper = styled.div`
 `;
 class Edit extends Component {
   componentDidMount() {
-    console.log('Component did mount');
+    console.log('Component Edit did mount');
   }
 
   render() {

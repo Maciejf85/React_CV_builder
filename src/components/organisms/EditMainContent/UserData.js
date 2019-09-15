@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
   width: 100%;
   margin: 20px;
-  height: (100vh - 50px);
   background: #000;
   color: white;
 `;
 
-const UserData = () => {
-  return <StyledWrapper>UserData</StyledWrapper>;
-};
+export default class UserData extends Component {
+  state = {
+    name: 'UserData',
+  };
 
-export default UserData;
+  render() {
+    const { name } = this.state;
+    return <StyledWrapper>{name}</StyledWrapper>;
+  }
+}
