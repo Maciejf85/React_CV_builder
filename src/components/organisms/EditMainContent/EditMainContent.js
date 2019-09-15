@@ -7,6 +7,7 @@ import Education from 'components/organisms/EditMainContent/Education';
 import Interests from 'components/organisms/EditMainContent/Interests';
 import Skills from 'components/organisms/EditMainContent/Skills';
 import UserData from 'components/organisms/EditMainContent/UserData';
+import Languages from 'components/organisms/EditMainContent/Languages';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -20,6 +21,7 @@ const StyledWrapper = styled.div`
 class EditMainContent extends Component {
   handleNewUser = () => {
     const { cvData } = this.props;
+    console.log('path', this.props);
     Axios.post(`${path.cors}newUser.php`, {
       data: JSON.stringify(cvData),
     })
@@ -32,19 +34,22 @@ class EditMainContent extends Component {
   };
 
   render() {
+    console.log('this.props', this.props);
+    const { currentView } = this.props.editComponentView;
     return (
       <StyledWrapper>
-        Main Page
+        Main Page {` path - ${currentView}`}
         <div>
           <button type="button" onClick={this.handleNewUser}>
             newfile
           </button>
         </div>
-        <Confidential />
-        <Education />
-        <Interests />
-        <Skills />
-        <UserData />
+        {currentView === 'personal' && <UserData />}
+        {currentView === 'education' && <Education />}
+        {currentView === 'languages' && <Languages />}
+        {currentView === 'skills' && <Skills />}
+        {currentView === 'interest' && <Interests />}
+        {currentView === 'confidential' && <Confidential />}
       </StyledWrapper>
     );
   }
