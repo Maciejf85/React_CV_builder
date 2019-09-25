@@ -16,6 +16,7 @@ const StyledWrapper = styled.li`
   justify-items: self-start;
   align-items: center;
   padding-left: 25px;
+  padding-right: 10px;
   font-size: ${({ theme }) => theme.fontSize.ms};
   transition: 0.3s;
   :hover {

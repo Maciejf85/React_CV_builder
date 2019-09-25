@@ -10,8 +10,9 @@ const StyledWrapper = styled.ul`
   color: ${({ theme }) => theme.colors.buttonActive};
 
   li {
-    font-size: 17px;
-    margin: 0 8px;
+    font-size: 15px;
+    padding: 0 5px;
+    margin: 0 7px;
 
     &:hover {
       color: ${({ theme }) => theme.colors.primaryBlue};

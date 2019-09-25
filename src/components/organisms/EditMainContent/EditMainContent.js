@@ -34,7 +34,6 @@ class EditMainContent extends Component {
   };
 
   render() {
-    console.log('this.props', this.props);
     const { currentView } = this.props.editComponentView;
     return (
       <StyledWrapper>

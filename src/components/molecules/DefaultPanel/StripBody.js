@@ -1,7 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import OptionPanel from 'components/atoms/Buttons/OptionPanel';
 
 const StyleWrapper = styled.div`
@@ -9,7 +8,7 @@ const StyleWrapper = styled.div`
   grid-template-columns: 1fr 1fr 2fr;
   align-items: center;
   width: 100%;
-  height: 60px;
+  height: 50px;
   border: 1px solid ${({ theme }) => theme.colors.lightGrey};
   border-radius: 4px;
   padding: 0 10px;
@@ -18,38 +17,28 @@ const StyleWrapper = styled.div`
   color: ${({ theme }) => theme.colors.secondaryGrey};
 `;
 
-const StripBody = () => {
-  const { info } = useSelector(state => state.cvData);
-  const date = new Date(info.date * 1000);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getUTCFullYear();
-  const monthArr = [
-    'styczeń',
-    'luty',
-    'marzec',
-    'kwiecień',
-    'maj',
-    'czerwiec',
-    'lipiec',
-    'sierpień',
-    'wrzesień',
-    'październik',
-    'listopad',
-    'grudzień',
-  ];
-
+const StripBody = props => {
+  const { title, date, id } = props;
   return (
     <StyleWrapper>
-      <div>{info.title}</div>
-      <div>{`${day}  ${monthArr[month]}  ${year}`}</div>
+      <div>{title}</div>
+      <div>{`${date}`}</div>
       <div>
-        <OptionPanel />
+        <OptionPanel id={id} />
       </div>
     </StyleWrapper>
   );
 };
 
-StripBody.propTypes = {};
+StripBody.propTypes = {
+  title: PropTypes.string,
+  date: PropTypes.number,
+  id: PropTypes.string,
+};
+StripBody.defaultProps = {
+  title: 'pusty',
+  date: 'pusty',
+  id: '',
+};
 
 export default StripBody;

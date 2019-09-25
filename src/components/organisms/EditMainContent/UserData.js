@@ -9,12 +9,11 @@ const StyledWrapper = styled.div`
 `;
 
 class UserData extends Component {
-  state = {
-    name: 'UserData',
-  };
+  componentDidMount() {
+    console.log('UserData did mount');
+  }
 
   render() {
-    // const { name } = this.state;
     const { id, name, surname } = this.props;
     return (
       <StyledWrapper>
@@ -26,6 +25,5 @@ class UserData extends Component {
   }
 }
 
-const mapStateToProps = state => state.userData;
-console.log('mapStateToProps', mapStateToProps);
+const mapStateToProps = state => state.myCv[0];
 export default connect(mapStateToProps)(UserData);

@@ -12,7 +12,7 @@ const StyleWrapper = styled.div`
 const myDocuments = () => {
   return (
     <StyleWrapper>
-      <Panel title="Moje listy motywacyjne" />
+      <Panel title="Moje listy motywacyjne" content={[]} />
     </StyleWrapper>
   );
 };
