@@ -41,7 +41,7 @@ export const getMainData = () => dispatch => {
   return axios
     .post(`${path.cors}getData.php`)
     .then(({ data }) => {
-      const { userData, cvList, confidential } = data;
+      const { personalData, cvList, confidential } = data;
 
       const confidentialData = JSON.parse(confidential);
       const payload = confidentialData.confidential;
@@ -50,8 +50,8 @@ export const getMainData = () => dispatch => {
       if (typeof payload === 'string') payload.trimEnd();
       return (
         dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),
-        dispatch({ type: 'CHANGE_NAME', payload: userData }),
-        dispatch({ type: 'SHOW_DATA', payload: list })
+        dispatch({ type: 'CHANGE_NAME', payload: personalData }),
+        dispatch({ type: 'SAVE_DATA', payload: list })
       );
     })
     .catch(error => {
@@ -107,9 +107,9 @@ export const changeSidePanelState = payload => {
   };
 };
 
-export const showFullData = payload => {
-  return {
-    type: 'CHANGE_SIDEPANEL_STATE',
-    payload,
-  };
-};
+// export const showFullData = payload => {
+//   return {
+//     type: 'CHANGE_SIDEPANEL_STATE',
+//     payload,
+//   };
+// };

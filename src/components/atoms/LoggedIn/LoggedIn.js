@@ -29,7 +29,7 @@ const StyledWrapper = styled.div`
 `;
 
 const LoggedIn = () => {
-  const email = useSelector(state => state.userData.email);
+  const email = useSelector(state => state.personalData.email);
   return (
     <StyledWrapper>
       {/* <FontAwesomeIcon icon={faUser} /> */}

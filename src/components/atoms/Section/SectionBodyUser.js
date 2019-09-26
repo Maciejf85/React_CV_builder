@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { reverseDate } from 'data/formatDate';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -36,6 +37,7 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 20px;
     h1 {
       margin: 20px 0 0;
     }
@@ -82,7 +84,7 @@ const SectionBody = props => {
     <StyledWrapper>
       <div className="header">
         <h1>{profession}</h1>
-        <span>{`( utworzone ${created} )`}</span>
+        <span>{`( utworzone ${reverseDate(created)} )`}</span>
       </div>
       <ul>
         <li>
@@ -98,7 +100,7 @@ const SectionBody = props => {
           <span>adres:</span> {adress}
         </li>
         <li>
-          <span>data urodzenia:</span> {birthday}
+          <span>data urodzenia:</span> {reverseDate(birthday)}
         </li>
         <li>
           <span>github:</span>
@@ -140,7 +142,7 @@ SectionBody.defaultProps = {
   linkedin: 'puste',
 };
 
-const mapStateToProps = state => state.userData;
+const mapStateToProps = state => state.personalData;
 
 export default connect(mapStateToProps)(SectionBody);
 

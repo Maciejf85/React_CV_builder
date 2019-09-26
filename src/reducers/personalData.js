@@ -11,7 +11,7 @@ const initialState = {
   created: '',
 };
 
-const userData = (state = initialState, { type, payload }) => {
+const personalData = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'CHANGE_NAME':
       return payload;
@@ -21,4 +21,4 @@ const userData = (state = initialState, { type, payload }) => {
   }
 };
 
-export default userData;
+export default personalData;

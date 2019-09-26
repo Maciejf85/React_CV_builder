@@ -46,7 +46,7 @@ const defaultPanel = props => {
     <StyledWrapper>
       <header>{name}</header>
       <section>
-        <StripTitle />
+        {!content.length || <StripTitle />}
         {content.length ? (
           content.map(({ id, title, date }) => (
             <StripBody key={date} id={id} title={title} date={date} />

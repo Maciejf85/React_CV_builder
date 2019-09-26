@@ -2,27 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import OptionPanel from 'components/atoms/Buttons/OptionPanel';
+import { formatDate } from 'data/formatDate';
 
 const StyleWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
-  align-items: center;
+  grid-gap: 5px;
   width: 100%;
-  height: 50px;
+  padding: 5px 0;
+  margin-bottom: 10px;
+  align-items: start;
   border: 1px solid ${({ theme }) => theme.colors.lightGrey};
   border-radius: 4px;
-  padding: 0 10px;
-  margin: 10px 0;
-  font-size: ${({ theme }) => theme.fontSize.m};
+  font-size: ${({ theme }) => theme.fontSize.ms};
   color: ${({ theme }) => theme.colors.secondaryGrey};
+  div {
+    align-self: center;
+    text-align: center;
+  }
 `;
 
 const StripBody = props => {
   const { title, date, id } = props;
+
   return (
     <StyleWrapper>
       <div>{title}</div>
-      <div>{`${date}`}</div>
+      <div>{formatDate(date)}</div>
       <div>
         <OptionPanel id={id} />
       </div>

@@ -1,4 +1,4 @@
-import userData from 'reducers/userData';
+import personalData from 'reducers/personalData';
 import path from 'reducers/path';
 import confidential from 'reducers/confidential';
 import appState from 'reducers/appState';
@@ -8,7 +8,7 @@ import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   path,
-  userData,
+  personalData,
   confidential,
   appState,
   myCv,

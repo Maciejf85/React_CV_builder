@@ -16,13 +16,9 @@ const StyledWrapper = styled.div`
 
 class Main extends Component {
   componentDidMount() {
-    console.log('Main did mount');
+    console.log('Getting Main data');
     store.dispatch(getMainData());
   }
-
-  getData = () => {
-    store.dispatch(getMainData());
-  };
 
   render() {
     const { isVisible, error } = this.props;
@@ -31,9 +27,6 @@ class Main extends Component {
         <StyledWrapper>
           <NavBar />
           <MainPage />
-          <button type="button" onClick={this.getData}>
-            Get Data
-          </button>
           <Footer />
           <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
         </StyledWrapper>

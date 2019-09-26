@@ -13,8 +13,6 @@ const StyleWrapper = styled.div`
 const CvList = () => {
   const cvList = useSelector(state => state.myCv);
   const list = cvList.map(item => item);
-
-  console.log('cvList', cvList);
   return (
     <StyleWrapper>
       <Panel name="Moje CV" content={list} />

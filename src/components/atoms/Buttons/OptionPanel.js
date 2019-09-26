@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ const StyledWrapper = styled.ul`
   li {
     font-size: 15px;
     padding: 0 5px;
-    margin: 0 7px;
+    margin: 0 5px;
 
     &:hover {
       color: ${({ theme }) => theme.colors.primaryBlue};
@@ -26,29 +26,38 @@ const StyledWrapper = styled.ul`
   }
 `;
 
-const OptionPanel = () => {
-  return (
-    <StyledWrapper>
-      <li>
-        <span data-tip="edytuj" data-for="edit">
-          <FontAwesomeIcon icon={faEdit} />
-        </span>
-        <ReactTooltip id="edit" place="top" effect="solid" className="customeTheme" />
-      </li>
-      <li>
-        <span data-tip="pobierz PDF" data-for="download">
-          <FontAwesomeIcon icon={faDownload} />
-        </span>
-        <ReactTooltip id="download" effect="solid" className="customeTheme" />
-      </li>
-      <li>
-        <span data-tip="usuń CV" data-for="delete">
-          <FontAwesomeIcon icon={faTimes} />
-        </span>
-        <ReactTooltip id="delete" effect="solid" className="customeTheme" />
-      </li>
-    </StyledWrapper>
-  );
-};
+class OptionPanel extends Component {
+  handleClick = e => {
+    console.log('dataset.name', e.currentTarget.dataset.name);
+    console.log('dataset.id', e.currentTarget.id);
+  };
+
+  render() {
+    const { id } = this.props;
+
+    return (
+      <StyledWrapper>
+        <li>
+          <span data-tip="edytuj" data-for="edit">
+            <FontAwesomeIcon icon={faEdit} id={id} data-name="edit" onClick={this.handleClick} />
+          </span>
+          <ReactTooltip id="edit" place="top" effect="solid" className="customeTheme" />
+        </li>
+        <li>
+          <span data-tip="pobierz PDF" data-for="download">
+            <FontAwesomeIcon icon={faDownload} />
+          </span>
+          <ReactTooltip id="download" effect="solid" className="customeTheme" />
+        </li>
+        <li>
+          <span data-tip="usuń CV" data-for="delete">
+            <FontAwesomeIcon icon={faTimes} />
+          </span>
+          <ReactTooltip id="delete" effect="solid" className="customeTheme" />
+        </li>
+      </StyledWrapper>
+    );
+  }
+}
 
 export default OptionPanel;
