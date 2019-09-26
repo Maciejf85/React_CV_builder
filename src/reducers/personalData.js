@@ -13,7 +13,7 @@ const initialState = {
 
 const personalData = (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'CHANGE_NAME':
+    case 'SET_PERSONAL_DATA':
       return payload;
 
     default:

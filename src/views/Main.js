@@ -16,7 +16,6 @@ const StyledWrapper = styled.div`
 
 class Main extends Component {
   componentDidMount() {
-    console.log('Getting Main data');
     store.dispatch(getMainData());
   }
 

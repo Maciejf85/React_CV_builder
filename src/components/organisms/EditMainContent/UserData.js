@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  background: #333;
-  color: white;
+  color: black;
 `;
 
 class UserData extends Component {
@@ -14,16 +13,21 @@ class UserData extends Component {
   }
 
   render() {
-    const { id, name, surname } = this.props;
+    const { name, surname, email, birthday, adress, github, linkedin, profession } = this.props;
     return (
       <StyledWrapper>
         <div>{name}</div>
-        <div>{id}</div>
         <div>{surname}</div>
+        <div>{email}</div>
+        <div>{birthday}</div>
+        <div>{adress}</div>
+        <div>{github}</div>
+        <div>{linkedin}</div>
+        <div>{profession}</div>
       </StyledWrapper>
     );
   }
 }
 
-const mapStateToProps = state => state.myCv[0];
+const mapStateToProps = state => state.personalData;
 export default connect(mapStateToProps)(UserData);

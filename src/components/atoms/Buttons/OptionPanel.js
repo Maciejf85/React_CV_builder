@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { deleteCvItem } from 'actions';
 import ReactTooltip from 'react-tooltip';
+import { getCvData } from 'actions';
 import store from 'store';
 
 const StyledWrapper = styled.ul`
@@ -32,8 +32,9 @@ class OptionPanel extends Component {
   handleClick = e => {
     const { id } = e.currentTarget;
     const { name } = e.currentTarget.dataset;
-    if (name === 'delete') {
-      store.dispatch(deleteCvItem(id));
+    if (name === 'edit') {
+      const userId = sessionStorage.getItem('userID');
+      store.dispatch(getCvData('get', id, userId));
     }
   };
 
