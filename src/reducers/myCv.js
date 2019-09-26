@@ -6,7 +6,7 @@ const myCV = (state = initialState, { type, payload }) => {
       return state;
     }
     case 'DELETE_ITEM': {
-      return payload;
+      return state.filter(item => item.id !== payload);
     }
     case 'SAVE_DATA': {
       return payload;
