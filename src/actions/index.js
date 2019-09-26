@@ -107,6 +107,13 @@ export const changeSidePanelState = payload => {
   };
 };
 
+export const deleteCvItem = payload => {
+  return {
+    type: 'DELETE_ITEM',
+    payload,
+  };
+};
+
 // export const showFullData = payload => {
 //   return {
 //     type: 'CHANGE_SIDEPANEL_STATE',

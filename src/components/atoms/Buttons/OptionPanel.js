@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { deleteCvItem } from 'actions';
 import ReactTooltip from 'react-tooltip';
 
 const StyledWrapper = styled.ul`
