@@ -5,7 +5,7 @@ import Footer from 'components/organisms/Footer/Footer';
 import MainPage from 'components/organisms/MainPage/MainPage';
 import Proptypes from 'prop-types';
 import store from 'store';
-import { getData, getMainData } from 'actions';
+import { getMainData } from 'actions';
 import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
 import { connect } from 'react-redux';
 
@@ -16,9 +16,13 @@ const StyledWrapper = styled.div`
 
 class Main extends Component {
   componentDidMount() {
-    store.dispatch(getData());
+    console.log('Main did mount');
     store.dispatch(getMainData());
   }
+
+  getData = () => {
+    store.dispatch(getMainData());
+  };
 
   render() {
     const { isVisible, error } = this.props;
@@ -27,6 +31,9 @@ class Main extends Component {
         <StyledWrapper>
           <NavBar />
           <MainPage />
+          <button type="button" onClick={this.getData}>
+            Get Data
+          </button>
           <Footer />
           <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
         </StyledWrapper>

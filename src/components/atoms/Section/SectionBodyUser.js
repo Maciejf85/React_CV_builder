@@ -64,19 +64,27 @@ const StyledWrapper = styled.div`
     overflow: hidden;
   }
 `;
-const path = 'http://www.maciejf.pl/cv-builder/';
 const SectionBody = props => {
-  const { id, name, surname, email, adress, birthday, github, linkedin, created } = props;
+  const {
+    name,
+    surname,
+    email,
+    adress,
+    birthday,
+    github,
+    linkedin,
+    created,
+    profession,
+    token,
+  } = props;
+  const path = 'http://maciejf.pl/cv-builder/';
   return (
     <StyledWrapper>
       <div className="header">
-        <h1>Twoje konto</h1>
+        <h1>{profession}</h1>
         <span>{`( utworzone ${created} )`}</span>
       </div>
       <ul>
-        <li>
-          <span>ID:</span> {id}
-        </li>
         <li>
           <span>imię:</span> {name}
         </li>
@@ -105,13 +113,15 @@ const SectionBody = props => {
           </a>
         </li>
       </ul>
-      <img src={`${path}users/${id}/images/pic1.jpg`} alt="user" />
+      <img
+        src={`${path}/users/${token}/0507e9d80f2dd6da461e8e9775046698/images/pic1.jpg`}
+        alt="user"
+      />
     </StyledWrapper>
   );
 };
 
 SectionBody.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string,
   surname: PropTypes.string,
   email: PropTypes.string,

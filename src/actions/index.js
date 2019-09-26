@@ -26,18 +26,52 @@ export const currentEditView = (type = 'personal') => {
 
 //  GET MAIN DATA FROM SERVER
 
-export const getMainData = (request = 'mainData') => () => {
+// export const getMainData = () => () => {
+//   return axios
+//     .post(`${path.cors}getData.php`)
+//     .then(response => {
+//       console.log('response = ', response.data);
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+// };
+
+export const getMainData = () => dispatch => {
   return axios
-    .post(`${path.cors}data.php`, {
-      type: request,
-    })
-    .then(response => {
-      console.log('response', response);
+    .post(`${path.cors}getData.php`)
+    .then(({ data }) => {
+      const { userData, cvList, confidential } = data;
+
+      const confidentialData = JSON.parse(confidential);
+      const payload = confidentialData.confidential;
+      const list = JSON.parse(cvList);
+
+      if (typeof payload === 'string') payload.trimEnd();
+      return (
+        dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),
+        dispatch({ type: 'CHANGE_NAME', payload: userData }),
+        dispatch({ type: 'SHOW_DATA', payload: list })
+      );
     })
     .catch(error => {
       console.log(error);
     });
 };
+//  GET MAIN DATA FROM SERVER
+
+// export const getMainData = (request = 'mainData') => () => {
+//   return axios
+//     .post(`${path.cors}data.php`, {
+//       type: request,
+//     })
+//     .then(response => {
+//       console.log('response', response);
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+// };
 
 //  GET CONFIDENTIAL TEXT FROM SERVER
 
