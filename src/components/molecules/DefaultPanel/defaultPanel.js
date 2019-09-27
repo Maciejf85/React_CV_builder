@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StripBody from 'components/molecules/DefaultPanel/StripBody';
 import StripTitle from 'components/molecules/DefaultPanel/StripTitle';
@@ -32,33 +32,40 @@ const StyledWrapper = styled.div`
     p {
       font-size: ${({ theme }) => theme.fontSize.ms};
     }
+    .empty {
+      margin-top: 30px;
+      text-align: center;
+      color: ${({ theme }) => theme.colors.secondaryGrey};
+    }
   }
 `;
 
 const defaultPanel = props => {
-  const { title } = props;
+  const { name, content } = props;
   return (
     <StyledWrapper>
-      <header>{title}</header>
+      <header>{name}</header>
       <section>
-        <StripTitle />
-        <StripBody />
+        {!content.length || <StripTitle />}
+        {content.length ? (
+          content.map(({ id, title, date }) => (
+            <StripBody key={date} id={id} title={title} date={date} />
+          ))
+        ) : (
+          <div className="empty">brak dokumentów</div>
+        )}
       </section>
     </StyledWrapper>
   );
 };
 
-// defaultPanel.propTypes = {
-//   id: PropTypes.string,
-//   token: PropTypes.string,
-//   date: PropTypes.string,
-//   title: PropTypes.string,
-// };
+defaultPanel.propTypes = {
+  name: PropTypes.string,
+  content: PropTypes.array,
+};
 defaultPanel.defaultProps = {
-  id: 'no id',
-  token: 'no token',
-  date: 'no date',
-  title: 'panel title',
+  name: 'panel title',
+  content: [],
 };
 
 export default defaultPanel;

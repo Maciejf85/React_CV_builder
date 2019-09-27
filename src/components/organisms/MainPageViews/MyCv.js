@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-// import axios from 'axios';
 import Panel from 'components/molecules/DefaultPanel/defaultPanel';
-// import path from '../../../path';
+import { useSelector } from 'react-redux';
 
 const StyleWrapper = styled.div`
   width: 100%;
@@ -11,20 +10,14 @@ const StyleWrapper = styled.div`
   margin: 15px;
 `;
 
-class cvList extends Component {
-  state = {
-    id: '',
-    token: '',
-    date: '',
-  };
+const CvList = () => {
+  const cvList = useSelector(state => state.myCv);
+  const list = cvList.map(item => item);
+  return (
+    <StyleWrapper>
+      <Panel name="Moje CV" content={list} />
+    </StyleWrapper>
+  );
+};
 
-  render() {
-    const { id, token, date } = this.state;
-    return (
-      <StyleWrapper>
-        <Panel id={id} token={token} date={date} title="Moje CV" />
-      </StyleWrapper>
-    );
-  }
-}
-export default cvList;
+export default CvList;

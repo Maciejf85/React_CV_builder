@@ -9,7 +9,7 @@ export const editViews = [
 
 export const mainViews = [
   { name: 'Moje CV', link: 'cv' },
-  { name: 'Moje dokumenty', link: 'documents' },
+  { name: 'Moje listy motywacyjne', link: 'documents' },
   { name: 'Moje konto', link: 'account' },
   { name: 'Klauzula poufności', link: 'confidentiality' },
 ];

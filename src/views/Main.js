@@ -5,7 +5,7 @@ import Footer from 'components/organisms/Footer/Footer';
 import MainPage from 'components/organisms/MainPage/MainPage';
 import Proptypes from 'prop-types';
 import store from 'store';
-import { getData } from 'actions';
+import { getMainData } from 'actions';
 import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
 import { connect } from 'react-redux';
 
@@ -16,7 +16,7 @@ const StyledWrapper = styled.div`
 
 class Main extends Component {
   componentDidMount() {
-    store.dispatch(getData());
+    store.dispatch(getMainData());
   }
 
   render() {

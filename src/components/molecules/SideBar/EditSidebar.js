@@ -4,9 +4,9 @@ import EditNavList from 'components/atoms/List/EditNavList';
 import { editViews } from 'data';
 
 const StyledWrapper = styled.div`
-  width: 270px;
+  width: 280px;
   height: calc(100vh - 50px);
-  background-color: ${({ theme }) => theme.colors.primaryGrey};
+  background-color: ${({ theme }) => theme.colors.mainGrey};
   display: flex;
   flex-direction: column;
   color: white;

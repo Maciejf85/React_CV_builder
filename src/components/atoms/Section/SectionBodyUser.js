@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { reverseDate } from 'data/formatDate';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -36,6 +37,7 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 20px;
     h1 {
       margin: 20px 0 0;
     }
@@ -64,19 +66,27 @@ const StyledWrapper = styled.div`
     overflow: hidden;
   }
 `;
-const path = 'http://www.maciejf.pl/cv-builder/';
 const SectionBody = props => {
-  const { id, name, surname, email, adress, birthday, github, linkedin, created } = props;
+  const {
+    name,
+    surname,
+    email,
+    adress,
+    birthday,
+    github,
+    linkedin,
+    created,
+    profession,
+    token,
+  } = props;
+  const path = 'http://maciejf.pl/cv-builder/';
   return (
     <StyledWrapper>
       <div className="header">
-        <h1>Twoje konto</h1>
-        <span>{`( utworzone ${created} )`}</span>
+        <h1>{profession}</h1>
+        <span>{`( utworzone ${reverseDate(created)} )`}</span>
       </div>
       <ul>
-        <li>
-          <span>ID:</span> {id}
-        </li>
         <li>
           <span>imię:</span> {name}
         </li>
@@ -90,7 +100,7 @@ const SectionBody = props => {
           <span>adres:</span> {adress}
         </li>
         <li>
-          <span>data urodzenia:</span> {birthday}
+          <span>data urodzenia:</span> {reverseDate(birthday)}
         </li>
         <li>
           <span>github:</span>
@@ -105,13 +115,15 @@ const SectionBody = props => {
           </a>
         </li>
       </ul>
-      <img src={`${path}users/${id}/images/pic1.jpg`} alt="user" />
+      <img
+        src={`${path}/users/${token}/0507e9d80f2dd6da461e8e9775046698/images/pic1.jpg`}
+        alt="user"
+      />
     </StyledWrapper>
   );
 };
 
 SectionBody.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string,
   surname: PropTypes.string,
   email: PropTypes.string,
@@ -130,7 +142,7 @@ SectionBody.defaultProps = {
   linkedin: 'puste',
 };
 
-const mapStateToProps = state => state.userData;
+const mapStateToProps = state => state.personalData;
 
 export default connect(mapStateToProps)(SectionBody);
 
