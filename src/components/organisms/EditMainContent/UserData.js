@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import store from 'store';
-import { changeSidePanelState } from 'actions';
+import { changeSidePanelState, updatePersonalFromState } from 'actions';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -41,6 +41,8 @@ class UserData extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    this.updated = true;
+
     if (this.mounted) {
       const { name, surname, email, birthday, adress, github, linkedin, profession } = this.props;
       if (prevProps.name !== name) {
@@ -102,6 +104,10 @@ class UserData extends Component {
     }
   };
 
+  handleStoreUpdate = () => {
+    store.dispatch(updatePersonalFromState(this.state));
+  };
+
   render() {
     const { name, surname, email, birthday, adress, github, linkedin, profession } = this.props;
     const {
@@ -123,6 +129,7 @@ class UserData extends Component {
           placeholder="imię"
           value={currentName}
           onChange={this.handleForm}
+          onBlur={this.handleStoreUpdate}
         />
         <input
           type="text"
@@ -130,6 +137,7 @@ class UserData extends Component {
           placeholder="nazwisko"
           value={currentSurname}
           onChange={this.handleForm}
+          onBlur={this.handleStoreUpdate}
         />
         <input
           type="text"
@@ -137,6 +145,7 @@ class UserData extends Component {
           placeholder="email"
           value={currentEmail}
           onChange={this.handleForm}
+          onBlur={this.handleStoreUpdate}
         />
         <div> </div>
         <div>----------store values-----------</div>

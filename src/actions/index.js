@@ -17,20 +17,8 @@ export const currentEditView = (type = 'personal') => {
   };
 };
 
-//  GET MAIN DATA FROM SERVER
+// //  GET ALL INFORMATIONS OF CURRENT CV
 
-// export const getMainData = () => () => {
-//   return axios
-//     .post(`${path.cors}getData.php`)
-//     .then(response => {
-//       console.log('response = ', response.data);
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     });
-// };
-
-// //  GET CURRENT CV
 export const getCvData = (type, id, token) => dispatch => {
   return axios
     .post(`${path.cors}handleCv.php`, {
@@ -47,7 +35,8 @@ export const getCvData = (type, id, token) => dispatch => {
     });
 };
 
-//  GET CONFIDENTIAL,
+//  GET USER CONFIDENTIAL AND PERSONAL DATA
+
 export const getMainData = (type = 'main') => dispatch => {
   return axios
     .post(`${path.cors}getData.php`, {
@@ -73,6 +62,19 @@ export const getMainData = (type = 'main') => dispatch => {
       console.log(error);
     });
 };
+export const updatePersonalData = (type = 'update') => dispatch => {
+  return axios
+    .post(`${path.cors}getPersonalData.php`, {
+      type,
+    })
+    .then(({ data }) => {
+      const { personalData } = data;
+      return dispatch({ type: 'SET_PERSONAL_DATA', payload: personalData });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
 
 //  GET CONFIDENTIAL TEXT FROM SERVER
 
@@ -92,6 +94,7 @@ export const getData = (request = 'read') => dispatch => {
 };
 
 // CHANGE CONFIDENTIAL TEXT
+
 export const newConfidentialText = payload => {
   return {
     type: 'UPDATE_CONFIDENTIAL',
@@ -108,9 +111,11 @@ export const changeSidePanelState = payload => {
   };
 };
 
-// export const showFullData = payload => {
-//   return {
-//     type: 'CHANGE_SIDEPANEL_STATE',
-//     payload,
-//   };
-// };
+// CHANGE_SIDEPANEL_STATE
+
+export const updatePersonalFromState = payload => {
+  return {
+    type: 'UPDATE_PERSONAL_DATA',
+    payload,
+  };
+};
