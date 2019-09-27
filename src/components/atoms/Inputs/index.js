@@ -13,5 +13,8 @@ export const Textarea = styled.textarea`
 `;
 
 export const Input = styled.input`
-  width: 100px;
+  width: 100%;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 7px;
 `;

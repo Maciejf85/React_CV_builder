@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import store from 'store';
 import { changeSidePanelState, updatePersonalFromState } from 'actions';
+import { Input } from 'components/atoms/Inputs/index';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
-  width: 100%;
+  margin: 0 auto;
+  width: 800px;
   color: black;
+  border: 1px solid red;
 `;
 
 class UserData extends Component {
@@ -123,7 +126,7 @@ class UserData extends Component {
     } = this.state;
     return (
       <StyledWrapper>
-        <input
+        <Input
           type="text"
           name="currentName"
           placeholder="imię"
@@ -131,7 +134,7 @@ class UserData extends Component {
           onChange={this.handleForm}
           onBlur={this.handleStoreUpdate}
         />
-        <input
+        <Input
           type="text"
           name="currentSurname"
           placeholder="nazwisko"
@@ -139,7 +142,7 @@ class UserData extends Component {
           onChange={this.handleForm}
           onBlur={this.handleStoreUpdate}
         />
-        <input
+        <Input
           type="text"
           name="currentEmail"
           placeholder="email"
