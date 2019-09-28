@@ -11,6 +11,7 @@ const StyledWrapper = styled.div`
   margin: 0 auto;
   width: 800px;
   color: black;
+  padding: 10px;
   border: 1px solid red;
 `;
 
@@ -72,11 +73,26 @@ class UserData extends Component {
   handleTimer = () => {
     if (this.mounted) {
       setTimeout(() => {
+        const {
+          currentName,
+          currentSurname,
+          currentEmail,
+          currentBirthday,
+          currentAdress,
+          currentGithub,
+          currentLinkedin,
+          currentProfession,
+        } = this.state;
         axios
           .post(`${path.cors}updatePersonalData.php`, {
-            name: this.state.currentName,
-            surname: this.state.currentSurname,
-            email: this.state.currentEmail,
+            name: currentName,
+            surname: currentSurname,
+            email: currentEmail,
+            birthday: currentBirthday,
+            adress: currentAdress,
+            github: currentGithub,
+            linkedin: currentLinkedin,
+            profession: currentProfession,
             token: sessionStorage.getItem('userID'),
           })
           .then(result => {
@@ -99,7 +115,7 @@ class UserData extends Component {
 
   handleForm = e => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.id]: e.target.value,
       statusActive: true,
     });
     if (!this.state.statusActive) {
@@ -128,7 +144,7 @@ class UserData extends Component {
       <StyledWrapper>
         <Input
           type="text"
-          name="currentName"
+          id="currentName"
           placeholder="imię"
           value={currentName}
           onChange={this.handleForm}
@@ -136,7 +152,7 @@ class UserData extends Component {
         />
         <Input
           type="text"
-          name="currentSurname"
+          id="currentSurname"
           placeholder="nazwisko"
           value={currentSurname}
           onChange={this.handleForm}
@@ -144,12 +160,55 @@ class UserData extends Component {
         />
         <Input
           type="text"
-          name="currentEmail"
+          id="currentEmail"
           placeholder="email"
           value={currentEmail}
           onChange={this.handleForm}
           onBlur={this.handleStoreUpdate}
         />
+
+        <Input
+          type="text"
+          id="currentBirthday"
+          placeholder="data urodzenia"
+          value={currentBirthday}
+          onChange={this.handleForm}
+          onBlur={this.handleStoreUpdate}
+        />
+
+        <Input
+          type="text"
+          id="currentAdress"
+          placeholder="miasto , kraj"
+          value={currentAdress}
+          onChange={this.handleForm}
+          onBlur={this.handleStoreUpdate}
+        />
+        <Input
+          type="text"
+          id="currentGithub"
+          placeholder="konto na github"
+          value={currentGithub}
+          onChange={this.handleForm}
+          onBlur={this.handleStoreUpdate}
+        />
+        <Input
+          type="text"
+          id="currentLinkedin"
+          placeholder="konto na linkedin"
+          value={currentLinkedin}
+          onChange={this.handleForm}
+          onBlur={this.handleStoreUpdate}
+        />
+        <Input
+          type="text"
+          id="currentProfession"
+          placeholder="zawód"
+          value={currentProfession}
+          onChange={this.handleForm}
+          onBlur={this.handleStoreUpdate}
+        />
+
         <div> </div>
         <div>----------store values-----------</div>
         <div>{name}</div>
