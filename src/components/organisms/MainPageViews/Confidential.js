@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import Panel from 'components/molecules/MainPagePanel/Panel';
 
 const StyleWrapper = styled.div`

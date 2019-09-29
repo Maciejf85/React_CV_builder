@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SectionHeader from 'components/atoms/Section/SectionHeader';
 import SectionBody from 'components/atoms/Section/SectionBodyUser';
+import { mainViews } from 'data/index';
 
 const StyledWrapper = styled.section`
   width: 100%;
@@ -16,7 +17,7 @@ const StyledWrapper = styled.section`
 const Section = () => {
   return (
     <StyledWrapper>
-      <SectionHeader name="Moje dane" />
+      <SectionHeader name={mainViews} />
       <SectionBody />
     </StyledWrapper>
   );
