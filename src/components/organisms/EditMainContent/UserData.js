@@ -7,13 +7,14 @@ import { changeSidePanelState, updatePersonalFromState } from 'actions';
 import Input from 'components/atoms/Inputs/Input';
 import personalData from 'data/personalDataValues';
 import path from '../../../path';
+import { read } from 'fs';
 
 const StyledWrapper = styled.div`
   margin: 0 auto;
   width: 800px;
   color: black;
   padding: 10px;
-  border: 1px solid red;
+  border: 3px dashed #ccc;
 `;
 
 class UserData extends Component {
@@ -28,6 +29,7 @@ class UserData extends Component {
     currentLinkedin: '',
     currentProfession: '',
     currentImage: undefined,
+    currentImageSrc: undefined,
   };
 
   componentDidMount() {
@@ -118,24 +120,31 @@ class UserData extends Component {
   handleFile = e => {
     if (e.target.files[0]) {
       const file = e.target.files[0];
+
+      console.log('file.type', file.type);
+      console.log('file.name', file);
       console.log('file.name', file.name);
       console.log('file.size', (file.size / 1024).toFixed(2), 'Kb');
       console.log('lastModifiedDate', file.lastModifiedDate.toLocaleString());
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        const img = new Image();
+        img.src = reader.result;
+        this.setState({
+          currentImageSrc: img.src,
+        });
+      };
     }
   };
 
   handleForm = e => {
-    if (e.target.id === 'image') {
-      console.log('e.target.files[0]', e.target.files[0]);
-      this.setState({
-        currentImage: e.target.files[0].name,
-      });
-    } else {
-      this.setState({
-        [e.target.id]: e.target.value,
-        statusActive: true,
-      });
-    }
+    this.setState({
+      [e.target.id]: e.target.value,
+      statusActive: true,
+    });
+
     if (!this.state.statusActive) {
       this.handleTimer();
     }
@@ -171,7 +180,7 @@ class UserData extends Component {
             onBlur={this.handleStoreUpdate}
           />
         ))}
-        <Input type="file" onChange={this.handleFile} accept="image/png,image/jpg,image/jpeg" />
+        <Input type="file" onChange={this.handleFile} accept="image/*" />
 
         <div> </div>
         <div>----------store values-----------</div>
@@ -183,6 +192,9 @@ class UserData extends Component {
         <div>{github}</div>
         <div>{linkedin}</div>
         <div>{profession}</div>
+        <div>{this.state.currentImage ? this.state.currentImage.name : undefined}</div>
+        <div>{this.state.currentImageSrc ? this.state.currentImageSrc : undefined}</div>
+        {/* <div>{this.state.currentImageSrc}</div> */}
         <div> </div>
         <div>-------------state values----------</div>
         <div>{currentName}</div>
@@ -194,6 +206,7 @@ class UserData extends Component {
         <div>{currentLinkedin}</div>
         <div>{currentProfession}</div>
         <div>status : {statusActive.toString()}</div>
+        <img src={this.state.currentImageSrc} width="300px" alt="contentInside" />
       </StyledWrapper>
     );
   }
