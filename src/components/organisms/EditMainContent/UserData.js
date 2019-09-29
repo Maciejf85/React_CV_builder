@@ -3,12 +3,17 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import store from 'store';
-import { changeSidePanelState } from 'actions';
+import { changeSidePanelState, updatePersonalFromState } from 'actions';
+import Input from 'components/atoms/Inputs/Input';
+import personalData from 'data/personalDataValues';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
-  width: 100%;
+  margin: 0 auto;
+  width: 800px;
   color: black;
+  padding: 10px;
+  border: 1px solid red;
 `;
 
 class UserData extends Component {
@@ -22,6 +27,7 @@ class UserData extends Component {
     currentGithub: '',
     currentLinkedin: '',
     currentProfession: '',
+    currentImage: undefined,
   };
 
   componentDidMount() {
@@ -41,6 +47,8 @@ class UserData extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    this.updated = true;
+
     if (this.mounted) {
       const { name, surname, email, birthday, adress, github, linkedin, profession } = this.props;
       if (prevProps.name !== name) {
@@ -67,11 +75,26 @@ class UserData extends Component {
   handleTimer = () => {
     if (this.mounted) {
       setTimeout(() => {
+        const {
+          currentName,
+          currentSurname,
+          currentEmail,
+          currentBirthday,
+          currentAdress,
+          currentGithub,
+          currentLinkedin,
+          currentProfession,
+        } = this.state;
         axios
           .post(`${path.cors}updatePersonalData.php`, {
-            name: this.state.currentName,
-            surname: this.state.currentSurname,
-            email: this.state.currentEmail,
+            name: currentName,
+            surname: currentSurname,
+            email: currentEmail,
+            birthday: currentBirthday,
+            adress: currentAdress,
+            github: currentGithub,
+            linkedin: currentLinkedin,
+            profession: currentProfession,
             token: sessionStorage.getItem('userID'),
           })
           .then(result => {
@@ -87,19 +110,39 @@ class UserData extends Component {
             statusActive: false,
           });
         }
-        setTimeout(() => store.dispatch(changeSidePanelState(false)), 2000);
+        setTimeout(() => store.dispatch(changeSidePanelState(false)), 2100);
       }, 3500);
     }
   };
 
+  handleFile = e => {
+    if (e.target.files[0]) {
+      const file = e.target.files[0];
+      console.log('file.name', file.name);
+      console.log('file.size', (file.size / 1024).toFixed(2), 'Kb');
+      console.log('lastModifiedDate', file.lastModifiedDate.toLocaleString());
+    }
+  };
+
   handleForm = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-      statusActive: true,
-    });
+    if (e.target.id === 'image') {
+      console.log('e.target.files[0]', e.target.files[0]);
+      this.setState({
+        currentImage: e.target.files[0].name,
+      });
+    } else {
+      this.setState({
+        [e.target.id]: e.target.value,
+        statusActive: true,
+      });
+    }
     if (!this.state.statusActive) {
       this.handleTimer();
     }
+  };
+
+  handleStoreUpdate = () => {
+    store.dispatch(updatePersonalFromState(this.state));
   };
 
   render() {
@@ -117,27 +160,19 @@ class UserData extends Component {
     } = this.state;
     return (
       <StyledWrapper>
-        <input
-          type="text"
-          name="currentName"
-          placeholder="imię"
-          value={currentName}
-          onChange={this.handleForm}
-        />
-        <input
-          type="text"
-          name="currentSurname"
-          placeholder="nazwisko"
-          value={currentSurname}
-          onChange={this.handleForm}
-        />
-        <input
-          type="text"
-          name="currentEmail"
-          placeholder="email"
-          value={currentEmail}
-          onChange={this.handleForm}
-        />
+        {personalData.map(item => (
+          <Input
+            key={item.id}
+            type={item.type}
+            id={item.id}
+            placeholder={item.placeholder}
+            value={this.state[item.value]}
+            onChange={this.handleForm}
+            onBlur={this.handleStoreUpdate}
+          />
+        ))}
+        <Input type="file" onChange={this.handleFile} accept="image/png,image/jpg,image/jpeg" />
+
         <div> </div>
         <div>----------store values-----------</div>
         <div>{name}</div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Panel from 'components/molecules/DefaultPanel/defaultPanel';
+import { useSelector } from 'react-redux';
 
 const StyleWrapper = styled.div`
   width: 100%;
@@ -9,12 +10,13 @@ const StyleWrapper = styled.div`
   margin: 15px;
 `;
 
-const myDocuments = () => {
+const MyDocuments = () => {
+  const name = useSelector(state => state.path.name);
   return (
     <StyleWrapper>
-      <Panel title="Moje listy motywacyjne" content={[]} />
+      <Panel name={name} content={[]} />
     </StyleWrapper>
   );
 };
 
-export default myDocuments;
+export default MyDocuments;

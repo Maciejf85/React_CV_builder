@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ReactTooltip from 'react-tooltip';
 import { getCvData } from 'actions';
+import { Link } from 'react-router-dom';
 import store from 'store';
 
 const StyledWrapper = styled.ul`
@@ -44,10 +45,12 @@ class OptionPanel extends Component {
     return (
       <StyledWrapper>
         <li>
-          <span data-tip="edytuj" data-for="edit">
-            <FontAwesomeIcon icon={faEdit} id={id} data-name="edit" onClick={this.handleClick} />
-          </span>
-          <ReactTooltip id="edit" place="top" effect="solid" className="customeTheme" />
+          <Link to="/edit">
+            <span data-tip="edytuj" data-for="edit">
+              <FontAwesomeIcon icon={faEdit} id={id} data-name="edit" onClick={this.handleClick} />
+            </span>
+            <ReactTooltip id="edit" place="top" effect="solid" className="customeTheme" />
+          </Link>
         </li>
         <li>
           <span data-tip="pobierz PDF" data-for="download">

@@ -58,27 +58,28 @@ class MyDocument extends Component {
 
   render() {
     const { email, name, surname } = this.state;
-    const CVdata = store.getState();
-    const { cvData } = CVdata;
-    const { userData } = store.getState();
-    const { id } = userData;
+    const CurrentCv = store.getState();
+    const { currentItem } = CurrentCv;
+    const { PersonalData } = store.getState();
+    console.log('PersonalData', PersonalData)
+    console.log('currentItem', currentItem)
     return (
       <Document title="Moje CV" author="Maciej Fiałkowski">
         <MainContainer size="A4" wrap>
           <LeftColumn>
             <Heading>{name}</Heading>
             <Heading bold>{surname}</Heading>
-            <Image src={`${path}users/${id}/images/pic1.jpg`} />
+            {/* <Image src={`${path}users/${token}/images/pic1.jpg`} /> */}
             <Heading>{email}</Heading>
           </LeftColumn>
           <RightColumn>
-            {cvData.education.map(item => (
+            {/* {cvData.education.map(item => (
               <TextSection key={item.id}>
                 <Section>{` ID: ${item.id}`}</Section>
                 <Section>{` Name: ${item.name}`}</Section>
                 <Section>{` CONTENT: ${item.description}`}</Section>
               </TextSection>
-            ))}
+            ))} */}
           </RightColumn>
         </MainContainer>
       </Document>
