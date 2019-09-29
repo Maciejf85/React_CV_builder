@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ReactTooltip from 'react-tooltip';
 import { getCvData } from 'actions';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import store from 'store';
 
 const StyledWrapper = styled.ul`
@@ -36,7 +36,6 @@ class OptionPanel extends Component {
     if (name === 'edit') {
       const userId = sessionStorage.getItem('userID');
       store.dispatch(getCvData('get', id, userId));
-
     }
   };
 
@@ -70,7 +69,6 @@ class OptionPanel extends Component {
           </span>
           <ReactTooltip id="delete" effect="solid" className="customeTheme" />
         </li>
-
       </StyledWrapper>
     );
   }

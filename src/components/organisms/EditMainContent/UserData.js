@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import store from 'store';
 import { changeSidePanelState, updatePersonalFromState } from 'actions';
-import { Input } from 'components/atoms/Inputs/index';
+import Input from 'components/atoms/Inputs/Input';
+import personalData from 'data/personalDataValues';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -26,6 +27,7 @@ class UserData extends Component {
     currentGithub: '',
     currentLinkedin: '',
     currentProfession: '',
+    currentImage: undefined,
   };
 
   componentDidMount() {
@@ -108,16 +110,32 @@ class UserData extends Component {
             statusActive: false,
           });
         }
-        setTimeout(() => store.dispatch(changeSidePanelState(false)), 2000);
+        setTimeout(() => store.dispatch(changeSidePanelState(false)), 2100);
       }, 3500);
     }
   };
 
+  handleFile = e => {
+    if (e.target.files[0]) {
+      const file = e.target.files[0];
+      console.log('file.name', file.name);
+      console.log('file.size', (file.size / 1024).toFixed(2), 'Kb');
+      console.log('lastModifiedDate', file.lastModifiedDate.toLocaleString());
+    }
+  };
+
   handleForm = e => {
-    this.setState({
-      [e.target.id]: e.target.value,
-      statusActive: true,
-    });
+    if (e.target.id === 'image') {
+      console.log('e.target.files[0]', e.target.files[0]);
+      this.setState({
+        currentImage: e.target.files[0].name,
+      });
+    } else {
+      this.setState({
+        [e.target.id]: e.target.value,
+        statusActive: true,
+      });
+    }
     if (!this.state.statusActive) {
       this.handleTimer();
     }
@@ -142,72 +160,18 @@ class UserData extends Component {
     } = this.state;
     return (
       <StyledWrapper>
-        <Input
-          type="text"
-          id="currentName"
-          placeholder="imię"
-          value={currentName}
-          onChange={this.handleForm}
-          onBlur={this.handleStoreUpdate}
-        />
-        <Input
-          type="text"
-          id="currentSurname"
-          placeholder="nazwisko"
-          value={currentSurname}
-          onChange={this.handleForm}
-          onBlur={this.handleStoreUpdate}
-        />
-        <Input
-          type="text"
-          id="currentEmail"
-          placeholder="email"
-          value={currentEmail}
-          onChange={this.handleForm}
-          onBlur={this.handleStoreUpdate}
-        />
-
-        <Input
-          type="text"
-          id="currentBirthday"
-          placeholder="data urodzenia"
-          value={currentBirthday}
-          onChange={this.handleForm}
-          onBlur={this.handleStoreUpdate}
-        />
-
-        <Input
-          type="text"
-          id="currentAdress"
-          placeholder="miasto , kraj"
-          value={currentAdress}
-          onChange={this.handleForm}
-          onBlur={this.handleStoreUpdate}
-        />
-        <Input
-          type="text"
-          id="currentGithub"
-          placeholder="konto na github"
-          value={currentGithub}
-          onChange={this.handleForm}
-          onBlur={this.handleStoreUpdate}
-        />
-        <Input
-          type="text"
-          id="currentLinkedin"
-          placeholder="konto na linkedin"
-          value={currentLinkedin}
-          onChange={this.handleForm}
-          onBlur={this.handleStoreUpdate}
-        />
-        <Input
-          type="text"
-          id="currentProfession"
-          placeholder="zawód"
-          value={currentProfession}
-          onChange={this.handleForm}
-          onBlur={this.handleStoreUpdate}
-        />
+        {personalData.map(item => (
+          <Input
+            key={item.id}
+            type={item.type}
+            id={item.id}
+            placeholder={item.placeholder}
+            value={this.state[item.value]}
+            onChange={this.handleForm}
+            onBlur={this.handleStoreUpdate}
+          />
+        ))}
+        <Input type="file" onChange={this.handleFile} accept="image/png,image/jpg,image/jpeg" />
 
         <div> </div>
         <div>----------store values-----------</div>
