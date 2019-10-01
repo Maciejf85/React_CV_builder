@@ -185,6 +185,7 @@ class UserData extends Component {
       console.log('file.size', (file.size / 1024).toFixed(2), 'Kb');
       console.log('lastModifiedDate', file.lastModifiedDate.toLocaleString());
       const reader = new FileReader();
+      console.log('file', file);
       reader.readAsDataURL(file);
 
       reader.onload = () => {
