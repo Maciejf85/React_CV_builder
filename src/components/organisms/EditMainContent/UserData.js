@@ -5,7 +5,6 @@ import axios from 'axios';
 import store from 'store';
 import { changeSidePanelState, updatePersonalFromState } from 'actions';
 import Input from 'components/atoms/Inputs/Input';
-import personalData from 'data/personalDataValues';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -14,6 +13,16 @@ const StyledWrapper = styled.div`
   color: black;
   padding: 10px;
   border: 3px dashed #ccc;
+`;
+const StyledInputSection = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 135px;
+  padding: 15px;
+  border-radius: 7px;
+  background: white;
+  margin-bottom: 15px;
 `;
 
 class UserData extends Component {
@@ -168,18 +177,84 @@ class UserData extends Component {
     } = this.state;
     return (
       <StyledWrapper>
-        {personalData.map(item => (
+        <StyledInputSection>
           <Input
-            key={item.id}
-            type={item.type}
-            id={item.id}
-            placeholder={item.placeholder}
-            value={this.state[item.value]}
+            key="currentName"
+            type="text"
+            id="currentName"
+            placeholder="Imię"
+            value={this.state.currentName}
             onChange={this.handleForm}
             onBlur={this.handleStoreUpdate}
           />
-        ))}
-        <Input type="file" onChange={this.handleFile} accept="image/*" />
+          <Input
+            key="currentSurname"
+            type="text"
+            id="currentSurname"
+            placeholder="Nazwisko"
+            value={this.state.currentSurname}
+            onChange={this.handleForm}
+            onBlur={this.handleStoreUpdate}
+          />
+          <Input
+            key="currentProfession"
+            type="text"
+            id="currentProfession"
+            placeholder="zawód"
+            value={this.state.currentProfession}
+            onChange={this.handleForm}
+            onBlur={this.handleStoreUpdate}
+          />
+        </StyledInputSection>
+        <StyledInputSection>
+          <Input
+            key="currentEmail"
+            type="text"
+            id="currentEmail"
+            placeholder="e-mail"
+            value={this.state.currentEmail}
+            onChange={this.handleForm}
+            onBlur={this.handleStoreUpdate}
+          />
+          <Input
+            key="currentBirthday"
+            type="text"
+            id="currentBirthday"
+            placeholder="urodziny w formacie xxxx-xx-xx"
+            value={this.state.currentBirthday}
+            onChange={this.handleForm}
+            onBlur={this.handleStoreUpdate}
+          />
+          <Input
+            key="currentAdress"
+            type="text"
+            id="currentAdress"
+            placeholder="Miasto, Kraj"
+            value={this.state.currentAdress}
+            onChange={this.handleForm}
+            onBlur={this.handleStoreUpdate}
+          />
+          <Input
+            key="currentGithub"
+            type="text"
+            id="currentGithub"
+            placeholder="Github"
+            value={this.state.currentGithub}
+            onChange={this.handleForm}
+            onBlur={this.handleStoreUpdate}
+          />
+          <Input
+            key="currentLinkedin"
+            type="text"
+            id="currentLinkedin"
+            placeholder="LinkedIn"
+            value={this.state.currentLinkedin}
+            onChange={this.handleForm}
+            onBlur={this.handleStoreUpdate}
+          />
+        </StyledInputSection>
+
+        <input type="file" onChange={this.handleFile} accept="image/*" />
 
         <div> </div>
         <div>----------store values-----------</div>
