@@ -7,7 +7,6 @@ import { changeSidePanelState, updatePersonalFromState } from 'actions';
 import Input from 'components/atoms/Inputs/Input';
 import personalData from 'data/personalDataValues';
 import path from '../../../path';
-import { read } from 'fs';
 
 const StyledWrapper = styled.div`
   margin: 0 auto;
@@ -194,7 +193,6 @@ class UserData extends Component {
         <div>{profession}</div>
         <div>{this.state.currentImage ? this.state.currentImage.name : undefined}</div>
         <div>{this.state.currentImageSrc ? this.state.currentImageSrc : undefined}</div>
-        {/* <div>{this.state.currentImageSrc}</div> */}
         <div> </div>
         <div>-------------state values----------</div>
         <div>{currentName}</div>
