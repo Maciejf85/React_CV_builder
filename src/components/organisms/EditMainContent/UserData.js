@@ -97,7 +97,19 @@ class UserData extends Component {
     this.updated = true;
 
     if (this.mounted) {
-      const { name, surname, email, birthday, adress, github, linkedin, profession } = this.props;
+      const {
+        name,
+        surname,
+        email,
+        birthday,
+        adress,
+        github,
+        linkedin,
+        profession,
+        image,
+      } = this.props;
+      const imgPath =
+        'http://maciejf.pl/cv-builder/users/bad3e7665d3c14b042a18f72082ddf76/0507e9d80f2dd6da461e8e9775046698/images/';
       if (prevProps.name !== name) {
         console.log('component did update');
         // eslint-disable-next-line react/no-did-update-set-state
@@ -110,6 +122,7 @@ class UserData extends Component {
           currentGithub: github,
           currentLinkedin: linkedin,
           currentProfession: profession,
+          currentImageSrc: imgPath + image,
         });
       }
     }
@@ -211,6 +224,7 @@ class UserData extends Component {
       currentLinkedin,
       currentProfession,
       statusActive,
+      currentImageSrc,
     } = this.state;
     return (
       <>
@@ -247,11 +261,7 @@ class UserData extends Component {
             />
           </StyledInputSection>
           <StyledInputSection width="25%">
-            {this.state.currentImageSrc ? (
-              <img src={this.state.currentImageSrc} alt="user" />
-            ) : (
-              <div style={{ border: '1px solid black', padding: '5px 10px' }}>dodaj zdjęcie</div>
-            )}
+            <img src={this.state.currentImageSrc} alt="user" />
             <div className="image">
               <div>
                 <PrimaryButton type="button">usuń zdjęcie</PrimaryButton>
@@ -329,6 +339,7 @@ class UserData extends Component {
         <div>{currentGithub}</div>
         <div>{currentLinkedin}</div>
         <div>{currentProfession}</div>
+        <div>{currentImageSrc}</div>
         <div>status : {statusActive.toString()}</div>
       </>
     );
