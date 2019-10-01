@@ -5,24 +5,61 @@ import axios from 'axios';
 import store from 'store';
 import { changeSidePanelState, updatePersonalFromState } from 'actions';
 import Input from 'components/atoms/Inputs/Input';
+import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin: 0 auto;
   width: 800px;
   color: black;
   padding: 10px;
-  border: 3px dashed #ccc;
+  /* border: 3px dashed #ccc; */
 `;
 const StyledInputSection = styled.div`
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: ${({ width }) => width || '100%'};
   min-height: 135px;
   padding: 15px;
   border-radius: 7px;
   background: white;
   margin-bottom: 15px;
+  overflow: hidden;
+
+  img {
+    max-height: 160px;
+  }
+  .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    color: white;
+    div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+    }
+  }
+  :hover .image {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0.6s, opacity 0.6s;
+    background: rgba(0, 0, 0, 0.5);
+  }
 `;
 
 class UserData extends Component {
@@ -176,86 +213,102 @@ class UserData extends Component {
       statusActive,
     } = this.state;
     return (
-      <StyledWrapper>
-        <StyledInputSection>
-          <Input
-            key="currentName"
-            type="text"
-            id="currentName"
-            placeholder="Imię"
-            value={this.state.currentName}
-            onChange={this.handleForm}
-            onBlur={this.handleStoreUpdate}
-          />
-          <Input
-            key="currentSurname"
-            type="text"
-            id="currentSurname"
-            placeholder="Nazwisko"
-            value={this.state.currentSurname}
-            onChange={this.handleForm}
-            onBlur={this.handleStoreUpdate}
-          />
-          <Input
-            key="currentProfession"
-            type="text"
-            id="currentProfession"
-            placeholder="zawód"
-            value={this.state.currentProfession}
-            onChange={this.handleForm}
-            onBlur={this.handleStoreUpdate}
-          />
-        </StyledInputSection>
-        <StyledInputSection>
-          <Input
-            key="currentEmail"
-            type="text"
-            id="currentEmail"
-            placeholder="e-mail"
-            value={this.state.currentEmail}
-            onChange={this.handleForm}
-            onBlur={this.handleStoreUpdate}
-          />
-          <Input
-            key="currentBirthday"
-            type="text"
-            id="currentBirthday"
-            placeholder="urodziny w formacie xxxx-xx-xx"
-            value={this.state.currentBirthday}
-            onChange={this.handleForm}
-            onBlur={this.handleStoreUpdate}
-          />
-          <Input
-            key="currentAdress"
-            type="text"
-            id="currentAdress"
-            placeholder="Miasto, Kraj"
-            value={this.state.currentAdress}
-            onChange={this.handleForm}
-            onBlur={this.handleStoreUpdate}
-          />
-          <Input
-            key="currentGithub"
-            type="text"
-            id="currentGithub"
-            placeholder="Github"
-            value={this.state.currentGithub}
-            onChange={this.handleForm}
-            onBlur={this.handleStoreUpdate}
-          />
-          <Input
-            key="currentLinkedin"
-            type="text"
-            id="currentLinkedin"
-            placeholder="LinkedIn"
-            value={this.state.currentLinkedin}
-            onChange={this.handleForm}
-            onBlur={this.handleStoreUpdate}
-          />
-        </StyledInputSection>
+      <>
+        <StyledWrapper>
+          <StyledInputSection width="73%">
+            <Input
+              key="currentName"
+              type="text"
+              id="currentName"
+              placeholder="Imię"
+              value={this.state.currentName}
+              onChange={this.handleForm}
+              onBlur={this.handleStoreUpdate}
+              isSmall
+            />
+            <Input
+              key="currentSurname"
+              type="text"
+              id="currentSurname"
+              placeholder="Nazwisko"
+              value={this.state.currentSurname}
+              onChange={this.handleForm}
+              onBlur={this.handleStoreUpdate}
+              isSmall
+            />
+            <Input
+              key="currentProfession"
+              type="text"
+              id="currentProfession"
+              placeholder="zawód"
+              value={this.state.currentProfession}
+              onChange={this.handleForm}
+              onBlur={this.handleStoreUpdate}
+            />
+          </StyledInputSection>
+          <StyledInputSection width="25%">
+            {this.state.currentImageSrc ? (
+              <img src={this.state.currentImageSrc} alt="user" />
+            ) : (
+              <div style={{ border: '1px solid black', padding: '5px 10px' }}>dodaj zdjęcie</div>
+            )}
+            <div className="image">
+              <div>
+                <PrimaryButton type="button">usuń zdjęcie</PrimaryButton>
+                <PrimaryButton type="button">edytuj</PrimaryButton>
+              </div>
+            </div>
+          </StyledInputSection>
+          <StyledInputSection>
+            <Input
+              key="currentEmail"
+              type="text"
+              id="currentEmail"
+              placeholder="e-mail"
+              value={this.state.currentEmail}
+              onChange={this.handleForm}
+              onBlur={this.handleStoreUpdate}
+            />
+            <Input
+              key="currentBirthday"
+              type="text"
+              id="currentBirthday"
+              placeholder="Data ur."
+              value={this.state.currentBirthday}
+              onChange={this.handleForm}
+              onBlur={this.handleStoreUpdate}
+            />
+            <Input
+              key="currentAdress"
+              type="text"
+              id="currentAdress"
+              placeholder="Miasto, Kraj"
+              value={this.state.currentAdress}
+              onChange={this.handleForm}
+              onBlur={this.handleStoreUpdate}
+            />
+            <Input
+              key="currentGithub"
+              type="text"
+              id="currentGithub"
+              placeholder="Github"
+              value={this.state.currentGithub}
+              onChange={this.handleForm}
+              onBlur={this.handleStoreUpdate}
+            />
+            <Input
+              key="currentLinkedin"
+              type="text"
+              id="currentLinkedin"
+              placeholder="LinkedIn"
+              value={this.state.currentLinkedin}
+              onChange={this.handleForm}
+              onBlur={this.handleStoreUpdate}
+            />
+          </StyledInputSection>
 
-        <input type="file" onChange={this.handleFile} accept="image/*" />
-
+          <input type="file" onChange={this.handleFile} accept="image/*" />
+        </StyledWrapper>
         <div> </div>
         <div>----------store values-----------</div>
         <div>{name}</div>
@@ -266,8 +319,6 @@ class UserData extends Component {
         <div>{github}</div>
         <div>{linkedin}</div>
         <div>{profession}</div>
-        <div>{this.state.currentImage ? this.state.currentImage.name : undefined}</div>
-        <div>{this.state.currentImageSrc ? this.state.currentImageSrc : undefined}</div>
         <div> </div>
         <div>-------------state values----------</div>
         <div>{currentName}</div>
@@ -279,8 +330,7 @@ class UserData extends Component {
         <div>{currentLinkedin}</div>
         <div>{currentProfession}</div>
         <div>status : {statusActive.toString()}</div>
-        <img src={this.state.currentImageSrc} width="300px" alt="contentInside" />
-      </StyledWrapper>
+      </>
     );
   }
 }

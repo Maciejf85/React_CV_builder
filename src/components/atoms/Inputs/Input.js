@@ -5,12 +5,16 @@ import PropTypes from 'prop-types';
 const StyledInput = styled.input`
   height: 45px;
   border-radius: 7px;
-  padding: 10px 15px;
-  margin: 5px;
+  padding: 5px 15px;
+  margin: 5px 15px;
   outline: none;
   border: none;
   background: ${({ theme }) => theme.colors.lightGrey};
   border-top: 2px solid ${({ theme }) => theme.colors.mediumGrey};
+
+  &:focus {
+    border-top: 2px solid ${({ theme }) => theme.colors.lightBlue};
+  }
 `;
 const StyledLabel = styled.label`
   width: 100%;
@@ -22,11 +26,12 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  width: ${({ isSmall }) => (isSmall ? '50%' : '100%')};
 `;
 
-const Input = ({ type, id, placeholder, value, onChange, onBlur }) => {
+const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall }) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper isSmall={isSmall}>
       <StyledLabel htmlFor={id}>{placeholder}</StyledLabel>
       <StyledInput
         type={type}
