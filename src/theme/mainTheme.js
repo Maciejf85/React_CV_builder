@@ -17,7 +17,7 @@ const theme = {
   colors: {
     primaryGrey: 'hsl(220,14%,20%)',
     secondaryGrey: 'hsl(212, 14%, 37%)',
-    lightGrey: 'hsl(210,3%,92%)',
+    lightGrey: 'hsl(210,3%,97%)',
     mediumGrey: 'hsl(210,3%,72%)',
     darkGrey: 'hsl(220,9.4%,37.6%)',
     mainGrey: 'hsl(206,7%,21%)',
