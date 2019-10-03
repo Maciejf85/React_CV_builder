@@ -16,7 +16,7 @@ const StyledWrapper = styled.div`
   width: 800px;
   color: black;
   padding: 10px;
-  /* border: 3px dashed #ccc; */
+  border: 3px dashed #ccc;
 `;
 const StyledInputSection = styled.div`
   position: relative;
@@ -79,7 +79,21 @@ class UserData extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    const { name, surname, email, birthday, adress, github, linkedin, profession } = this.props;
+    const imgPath =
+      'http://maciejf.pl/cv-builder/users/bad3e7665d3c14b042a18f72082ddf76/0507e9d80f2dd6da461e8e9775046698/images/';
+
+    const {
+      name,
+      surname,
+      email,
+      birthday,
+      adress,
+      github,
+      linkedin,
+      profession,
+      image,
+      currentImageSrc,
+    } = this.props;
 
     this.setState({
       currentName: name,
@@ -90,26 +104,36 @@ class UserData extends Component {
       currentGithub: github,
       currentLinkedin: linkedin,
       currentProfession: profession,
+      currentImageSrc: imgPath + image,
     });
+    console.log('currentImageSrc', currentImageSrc);
+    if (!currentImageSrc) {
+      const iPath =
+        'https://cors-anywhere.herokuapp.com/http://www.maciejf.pl/cv-builder/users/bad3e7665d3c14b042a18f72082ddf76/0507e9d80f2dd6da461e8e9775046698/images/pic1.jpg';
+      const request = new XMLHttpRequest();
+      request.open('GET', iPath, true);
+      request.responseType = 'blob';
+
+      request.onload = () => {
+        console.log('sending request');
+        const reader = new FileReader();
+        reader.readAsDataURL(request.response);
+        reader.onload = e => {
+          this.setState({
+            currentImageSrc: e.target.result,
+          });
+        };
+      };
+      request.send();
+    }
   }
 
   componentDidUpdate(prevProps) {
     this.updated = true;
 
     if (this.mounted) {
-      const {
-        name,
-        surname,
-        email,
-        birthday,
-        adress,
-        github,
-        linkedin,
-        profession,
-        image,
-      } = this.props;
-      const imgPath =
-        'http://maciejf.pl/cv-builder/users/bad3e7665d3c14b042a18f72082ddf76/0507e9d80f2dd6da461e8e9775046698/images/';
+      const { name, surname, email, birthday, adress, github, linkedin, profession } = this.props;
+
       if (prevProps.name !== name) {
         console.log('component did update');
         // eslint-disable-next-line react/no-did-update-set-state
@@ -122,7 +146,6 @@ class UserData extends Component {
           currentGithub: github,
           currentLinkedin: linkedin,
           currentProfession: profession,
-          currentImageSrc: imgPath + image,
         });
       }
     }
@@ -184,17 +207,6 @@ class UserData extends Component {
       console.log('file.name', file.name);
       console.log('file.size', (file.size / 1024).toFixed(2), 'Kb');
       console.log('lastModifiedDate', file.lastModifiedDate.toLocaleString());
-      const reader = new FileReader();
-      console.log('file', file);
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        const img = new Image();
-        img.src = reader.result;
-        this.setState({
-          currentImageSrc: img.src,
-        });
-      };
     }
   };
 
@@ -340,7 +352,7 @@ class UserData extends Component {
         <div>{currentGithub}</div>
         <div>{currentLinkedin}</div>
         <div>{currentProfession}</div>
-        <div>{currentImageSrc}</div>
+        {/* <div>{currentImageSrc}</div> */}
         <div>status : {statusActive.toString()}</div>
       </>
     );

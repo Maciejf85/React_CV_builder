@@ -48,9 +48,10 @@ export const getMainData = (type = 'main') => dispatch => {
       const confidentialData = JSON.parse(confidential);
       const payload = confidentialData.confidential;
       const list = JSON.parse(cvList);
-
       sessionStorage.setItem('userID', personalData.token);
-
+      console.log('window.location.pathname', window.location.pathname);
+      console.log('window.location.hostname', window.location.hostname);
+      console.log('window.location.href', window.location.href);
       if (typeof payload === 'string') payload.trimEnd();
       return (
         dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),
