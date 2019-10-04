@@ -77,9 +77,8 @@ const SectionBody = props => {
     linkedin,
     created,
     profession,
-    token,
-  } = props;
-  const path = 'http://maciejf.pl/cv-builder/';
+  } = props.personalData;
+  const { image } = props.image;
   return (
     <StyledWrapper>
       <div className="header">
@@ -115,10 +114,7 @@ const SectionBody = props => {
           </a>
         </li>
       </ul>
-      <img
-        src={`${path}/users/${token}/0507e9d80f2dd6da461e8e9775046698/images/pic1.jpg`}
-        alt="user"
-      />
+      <img src={image} alt="user" />
     </StyledWrapper>
   );
 };
@@ -136,13 +132,13 @@ SectionBody.defaultProps = {
   name: 'puste',
   surname: 'puste',
   email: 'puste',
-  adress: PropTypes.string,
+  adress: 'puste',
   birthday: 'puste',
   github: 'puste',
   linkedin: 'puste',
 };
 
-const mapStateToProps = state => state.personalData;
+const mapStateToProps = state => ({ personalData: state.personalData, image: state.image });
 
 export default connect(mapStateToProps)(SectionBody);
 
