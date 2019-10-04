@@ -21,6 +21,7 @@ const theme = {
     mediumGrey: 'hsl(210,3%,2%)',
     darkGrey: 'hsl(220,9.4%,37.6%)',
     mainGrey: 'hsl(206,7%,21%)',
+    inputGrey: 'hsl(210,3%,80%)',
     buttonActive: 'hsl(220,8%,44%)',
     primaryBlue: 'hsl(204, 100%, 50%)',
     secondaryBlue: 'hsl(204, 100%, 40%)',

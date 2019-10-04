@@ -141,5 +141,3 @@ SectionBody.defaultProps = {
 const mapStateToProps = state => ({ personalData: state.personalData, image: state.image });
 
 export default connect(mapStateToProps)(SectionBody);
-
-// TODO: 1) zamiana formularza na formik, 2) dodanie akcji wysyłającej stan do store, 3) stworzenie pliku na serwerze, pobieranie <-> wysyłanie danych z serwera

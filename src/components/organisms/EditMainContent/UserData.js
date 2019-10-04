@@ -214,7 +214,16 @@ class UserData extends Component {
   };
 
   render() {
-    const { name, surname, email, birthday, adress, github, linkedin, profession } = this.props;
+    const {
+      name,
+      surname,
+      email,
+      birthday,
+      adress,
+      github,
+      linkedin,
+      profession,
+    } = this.props.personalData;
     const {
       currentName,
       currentSurname,
@@ -317,7 +326,7 @@ class UserData extends Component {
             />
           </StyledInputSection>
 
-          <input type="file" onChange={this.handleFile} accept="image/*" />
+          <input type="file" onChange={this.handleFile} id="file" />
         </StyledWrapper>
         <div> </div>
         <div>----------store values-----------</div>
