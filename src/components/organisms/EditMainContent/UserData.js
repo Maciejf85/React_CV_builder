@@ -90,7 +90,6 @@ class UserData extends Component {
       linkedin,
       profession,
     } = this.props.personalData;
-    const { image } = this.props.image;
 
     this.setState({
       currentName: name,
@@ -101,7 +100,6 @@ class UserData extends Component {
       currentGithub: github,
       currentLinkedin: linkedin,
       currentProfession: profession,
-      currentImageSrc: image,
     });
   }
 
@@ -119,7 +117,6 @@ class UserData extends Component {
         linkedin,
         profession,
       } = this.props.personalData;
-      const { image } = this.props.image;
 
       if (prevProps.personalData.name !== name) {
         console.log('component did update');
@@ -133,7 +130,6 @@ class UserData extends Component {
           currentGithub: github,
           currentLinkedin: linkedin,
           currentProfession: profession,
-          currentImageSrc: image,
         });
       }
     }
@@ -224,6 +220,7 @@ class UserData extends Component {
       linkedin,
       profession,
     } = this.props.personalData;
+    const { image } = this.props.image;
     const {
       currentName,
       currentSurname,
@@ -234,6 +231,7 @@ class UserData extends Component {
       currentLinkedin,
       currentProfession,
       statusActive,
+      currentImageSrc,
     } = this.state;
     return (
       <>
@@ -270,11 +268,11 @@ class UserData extends Component {
             />
           </StyledInputSection>
           <StyledInputSection width="25%">
-            <img src={this.state.currentImageSrc} alt="user" />
+            <img src={image} alt="user" />
             <div className="image">
               <div>
-                <PrimaryButton type="button">usuń zdjęcie</PrimaryButton>
-                <PrimaryButton type="button">edytuj</PrimaryButton>
+                <PrimaryButton type="button">zmień zdjęcie</PrimaryButton>
+                <PrimaryButton type="button">usuń</PrimaryButton>
               </div>
             </div>
           </StyledInputSection>
@@ -348,7 +346,7 @@ class UserData extends Component {
         <div>{currentGithub}</div>
         <div>{currentLinkedin}</div>
         <div>{currentProfession}</div>
-        {/* <div>{currentImageSrc}</div> */}
+        <div>{currentImageSrc}</div>
         <div>status : {statusActive.toString()}</div>
       </>
     );
