@@ -27,7 +27,6 @@ export const getCvData = (type, id, token) => dispatch => {
       token,
     })
     .then(({ data }) => {
-      console.log('result', data);
       return dispatch({ type: 'SAVE_CURRENT_CV', payload: data });
     })
     .catch(error => {
@@ -48,20 +47,31 @@ export const getMainData = (type = 'main') => dispatch => {
       const confidentialData = JSON.parse(confidential);
       const payload = confidentialData.confidential;
       const list = JSON.parse(cvList);
-
       sessionStorage.setItem('userID', personalData.token);
-
       if (typeof payload === 'string') payload.trimEnd();
       return (
         dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),
         dispatch({ type: 'SET_PERSONAL_DATA', payload: personalData }),
-        dispatch({ type: 'SAVE_DATA', payload: list })
+        dispatch({ type: 'SAVE_DATA', payload: list }),
+        axios
+          .get(`${path.cors}/users/${personalData.token}/images/pic1.jpg`, {
+            responseType: 'blob',
+          })
+          .then(request => {
+            const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
+            const reader = new FileReader();
+            if (accepted.includes(request.data.type)) {
+              reader.readAsDataURL(request.data);
+              reader.onload = () => dispatch({ type: 'GET_IMAGE', payload: reader.result });
+            }
+          })
       );
     })
     .catch(error => {
       console.log(error);
     });
 };
+
 export const updatePersonalData = (type = 'update') => dispatch => {
   return axios
     .post(`${path.cors}getPersonalData.php`, {

@@ -1,5 +1,5 @@
 const initialState = {
-  id: '',
+  token: '',
   name: '',
   surname: '',
   adress: '',
@@ -8,6 +8,7 @@ const initialState = {
   github: '',
   linkedin: '',
   profession: '',
+  image: '',
   created: '',
 };
 
@@ -17,7 +18,7 @@ const personalData = (state = initialState, { type, payload }) => {
       return payload;
     case 'UPDATE_PERSONAL_DATA':
       return {
-        ...state,
+        state,
         name: payload.currentName,
         surname: payload.currentSurname,
         email: payload.currentEmail,
@@ -27,6 +28,7 @@ const personalData = (state = initialState, { type, payload }) => {
         linkedin: payload.currentLinkedin,
         profession: payload.currentProfession,
       };
+
     default:
       return state;
   }

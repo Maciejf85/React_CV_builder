@@ -16,7 +16,7 @@ const StyledWrapper = styled.div`
   width: 800px;
   color: black;
   padding: 10px;
-  /* border: 3px dashed #ccc; */
+  border: 3px dashed #ccc;
 `;
 const StyledInputSection = styled.div`
   position: relative;
@@ -79,7 +79,18 @@ class UserData extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    const { name, surname, email, birthday, adress, github, linkedin, profession } = this.props;
+
+    const {
+      name,
+      surname,
+      email,
+      birthday,
+      adress,
+      github,
+      linkedin,
+      profession,
+    } = this.props.personalData;
+    const { image } = this.props.image;
 
     this.setState({
       currentName: name,
@@ -90,6 +101,7 @@ class UserData extends Component {
       currentGithub: github,
       currentLinkedin: linkedin,
       currentProfession: profession,
+      currentImageSrc: image,
     });
   }
 
@@ -106,11 +118,10 @@ class UserData extends Component {
         github,
         linkedin,
         profession,
-        image,
-      } = this.props;
-      const imgPath =
-        'http://maciejf.pl/cv-builder/users/bad3e7665d3c14b042a18f72082ddf76/0507e9d80f2dd6da461e8e9775046698/images/';
-      if (prevProps.name !== name) {
+      } = this.props.personalData;
+      const { image } = this.props.image;
+
+      if (prevProps.personalData.name !== name) {
         console.log('component did update');
         // eslint-disable-next-line react/no-did-update-set-state
         this.setState({
@@ -122,7 +133,7 @@ class UserData extends Component {
           currentGithub: github,
           currentLinkedin: linkedin,
           currentProfession: profession,
-          currentImageSrc: imgPath + image,
+          currentImageSrc: image,
         });
       }
     }
@@ -184,16 +195,6 @@ class UserData extends Component {
       console.log('file.name', file.name);
       console.log('file.size', (file.size / 1024).toFixed(2), 'Kb');
       console.log('lastModifiedDate', file.lastModifiedDate.toLocaleString());
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        const img = new Image();
-        img.src = reader.result;
-        this.setState({
-          currentImageSrc: img.src,
-        });
-      };
     }
   };
 
@@ -213,7 +214,16 @@ class UserData extends Component {
   };
 
   render() {
-    const { name, surname, email, birthday, adress, github, linkedin, profession } = this.props;
+    const {
+      name,
+      surname,
+      email,
+      birthday,
+      adress,
+      github,
+      linkedin,
+      profession,
+    } = this.props.personalData;
     const {
       currentName,
       currentSurname,
@@ -224,7 +234,6 @@ class UserData extends Component {
       currentLinkedin,
       currentProfession,
       statusActive,
-      currentImageSrc,
     } = this.state;
     return (
       <>
@@ -317,7 +326,7 @@ class UserData extends Component {
             />
           </StyledInputSection>
 
-          <input type="file" onChange={this.handleFile} accept="image/*" />
+          <input type="file" onChange={this.handleFile} id="file" />
         </StyledWrapper>
         <div> </div>
         <div>----------store values-----------</div>
@@ -339,12 +348,12 @@ class UserData extends Component {
         <div>{currentGithub}</div>
         <div>{currentLinkedin}</div>
         <div>{currentProfession}</div>
-        <div>{currentImageSrc}</div>
+        {/* <div>{currentImageSrc}</div> */}
         <div>status : {statusActive.toString()}</div>
       </>
     );
   }
 }
 
-const mapStateToProps = state => state.personalData;
+const mapStateToProps = state => ({ personalData: state.personalData, image: state.image });
 export default connect(mapStateToProps)(UserData);

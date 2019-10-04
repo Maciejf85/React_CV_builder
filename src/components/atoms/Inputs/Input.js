@@ -10,7 +10,7 @@ const StyledInput = styled.input`
   outline: none;
   border: none;
   background: ${({ theme }) => theme.colors.lightGrey};
-  border-top: 2px solid ${({ theme }) => theme.colors.mediumGrey};
+  border-top: 2px solid ${({ theme }) => theme.colors.inputGrey};
 
   &:focus {
     border-top: 2px solid ${({ theme }) => theme.colors.lightBlue};
