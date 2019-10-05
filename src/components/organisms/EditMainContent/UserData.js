@@ -5,7 +5,7 @@ import axios from 'axios';
 import store from 'store';
 import { changeSidePanelState, updatePersonalFromState } from 'actions';
 import Input from 'components/atoms/Inputs/Input';
-import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
+import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -58,8 +58,18 @@ const StyledInputSection = styled.div`
     opacity: 1;
     visibility: visible;
     transition: visibility 0.6s, opacity 0.6s;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.75);
   }
+`;
+const Data = styled.div`
+  margin-top: 30px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  justify-items: center;
+  align-items: center;
+  font-size: 13px;
 `;
 
 class UserData extends Component {
@@ -271,8 +281,8 @@ class UserData extends Component {
             <img src={image} alt="user" />
             <div className="image">
               <div>
-                <PrimaryButton type="button">zmień zdjęcie</PrimaryButton>
-                <PrimaryButton type="button">usuń</PrimaryButton>
+                <ImageOptionButton type="button">zmień zdjęcie</ImageOptionButton>
+                <ImageOptionButton type="button">usuń</ImageOptionButton>
               </div>
             </div>
           </StyledInputSection>
@@ -326,28 +336,33 @@ class UserData extends Component {
 
           <input type="file" onChange={this.handleFile} id="file" />
         </StyledWrapper>
-        <div> </div>
-        <div>----------store values-----------</div>
-        <div>{name}</div>
-        <div>{surname}</div>
-        <div>{email}</div>
-        <div>{birthday}</div>
-        <div>{adress}</div>
-        <div>{github}</div>
-        <div>{linkedin}</div>
-        <div>{profession}</div>
-        <div> </div>
-        <div>-------------state values----------</div>
-        <div>{currentName}</div>
-        <div>{currentSurname}</div>
-        <div>{currentEmail}</div>
-        <div>{currentBirthday}</div>
-        <div>{currentAdress}</div>
-        <div>{currentGithub}</div>
-        <div>{currentLinkedin}</div>
-        <div>{currentProfession}</div>
-        <div>{currentImageSrc}</div>
-        <div>status : {statusActive.toString()}</div>
+        <Data>
+          <div>
+            <div>----------store values-----------</div>
+            <div>{name}</div>
+            <div>{surname}</div>
+            <div>{email}</div>
+            <div>{birthday}</div>
+            <div>{adress}</div>
+            <div>{github}</div>
+            <div>{linkedin}</div>
+            <div>{profession}</div>
+            <div> </div>
+          </div>
+          <div>
+            <div>-------------state values----------</div>
+            <div>{currentName}</div>
+            <div>{currentSurname}</div>
+            <div>{currentEmail}</div>
+            <div>{currentBirthday}</div>
+            <div>{currentAdress}</div>
+            <div>{currentGithub}</div>
+            <div>{currentLinkedin}</div>
+            <div>{currentProfession}</div>
+            <div>{currentImageSrc}</div>
+            <div>status : {statusActive.toString()}</div>
+          </div>
+        </Data>
       </>
     );
   }
