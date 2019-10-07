@@ -6,6 +6,7 @@ import store from 'store';
 import { changeSidePanelState, updatePersonalFromState } from 'actions';
 import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
+import Modal from 'components/organisms/Modal';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -85,6 +86,8 @@ class UserData extends Component {
     currentProfession: '',
     currentImage: undefined,
     currentImageSrc: undefined,
+    isModal: false,
+    isModalVisible: false,
   };
 
   componentDidMount() {
@@ -201,6 +204,7 @@ class UserData extends Component {
       console.log('file.name', file.name);
       console.log('file.size', (file.size / 1024).toFixed(2), 'Kb');
       console.log('lastModifiedDate', file.lastModifiedDate.toLocaleString());
+      this.handleModal();
     }
   };
 
@@ -217,6 +221,26 @@ class UserData extends Component {
 
   handleStoreUpdate = () => {
     store.dispatch(updatePersonalFromState(this.state));
+  };
+
+  handleModal = () => {
+    const { isModal } = this.state;
+    let modalDisplay;
+    let modalClass;
+
+    if (!isModal) {
+      modalDisplay = 0;
+      modalClass = 550;
+    } else {
+      modalDisplay = 750;
+      modalClass = 0;
+    }
+
+    setTimeout(
+      () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible })),
+      modalDisplay,
+    );
+    setTimeout(() => this.setState(prevState => ({ isModal: !prevState.isModal })), modalClass);
   };
 
   render() {
@@ -242,9 +266,19 @@ class UserData extends Component {
       currentProfession,
       statusActive,
       currentImageSrc,
+      isModal,
+      isModalVisible,
     } = this.state;
     return (
       <>
+        <Modal
+          className={isModal ? 'active' : ''}
+          style={isModalVisible ? { display: 'block' } : { display: 'none' }}
+        >
+          <button type="button" className="modaButton" onClick={this.handleModal}>
+            Modal
+          </button>
+        </Modal>
         <StyledWrapper>
           <StyledInputSection width="73%">
             <Input
