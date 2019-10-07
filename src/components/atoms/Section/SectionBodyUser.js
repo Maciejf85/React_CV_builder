@@ -120,22 +120,36 @@ const SectionBody = props => {
 };
 
 SectionBody.propTypes = {
-  name: PropTypes.string,
-  surname: PropTypes.string,
-  email: PropTypes.string,
-  adress: PropTypes.string,
-  birthday: PropTypes.string,
-  github: PropTypes.string,
-  linkedin: PropTypes.string,
+  personalData: PropTypes.shape({
+    name: PropTypes.string,
+    surname: PropTypes.string,
+    email: PropTypes.string,
+    adress: PropTypes.string,
+    birthday: PropTypes.string,
+    github: PropTypes.string,
+    linkedin: PropTypes.string,
+    profession: PropTypes.string,
+    created: PropTypes.string,
+  }),
+  image: PropTypes.shape({
+    image: PropTypes.string,
+  }),
 };
 SectionBody.defaultProps = {
-  name: 'puste',
-  surname: 'puste',
-  email: 'puste',
-  adress: 'puste',
-  birthday: 'puste',
-  github: 'puste',
-  linkedin: 'puste',
+  personalData: PropTypes.shape({
+    name: 'puste',
+    surname: 'puste',
+    email: 'puste',
+    adress: 'puste',
+    birthday: 'puste',
+    github: 'puste',
+    linkedin: 'puste',
+    profession: 'puste',
+    created: 'puste',
+  }),
+  image: PropTypes.shape({
+    image: '',
+  }),
 };
 
 const mapStateToProps = state => ({ personalData: state.personalData, image: state.image });

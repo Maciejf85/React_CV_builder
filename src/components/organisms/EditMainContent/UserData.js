@@ -6,6 +6,7 @@ import store from 'store';
 import { changeSidePanelState, updatePersonalFromState } from 'actions';
 import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
+import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
 import Modal from 'components/organisms/Modal';
 import path from '../../../path';
 
@@ -204,6 +205,7 @@ class UserData extends Component {
       console.log('file.name', file.name);
       console.log('file.size', (file.size / 1024).toFixed(2), 'Kb');
       console.log('lastModifiedDate', file.lastModifiedDate.toLocaleString());
+
       this.handleModal();
     }
   };
@@ -275,7 +277,7 @@ class UserData extends Component {
           className={isModal ? 'active' : ''}
           style={isModalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <button type="button" className="modaButton" onClick={this.handleModal}>
+          <button type="button" className="modalButton" onClick={this.handleModal}>
             Modal
           </button>
         </Modal>
@@ -315,8 +317,16 @@ class UserData extends Component {
             <img src={image} alt="user" />
             <div className="image">
               <div>
-                <ImageOptionButton type="button">zmień zdjęcie</ImageOptionButton>
-                <ImageOptionButton type="button">usuń</ImageOptionButton>
+                <ImageOptionLabel htmlFor="imageInput">
+                  <input
+                    type="file"
+                    onChange={this.handleFile}
+                    id="imageInput"
+                    style={{ display: 'none' }}
+                  />
+                  zmień zdjęcie
+                </ImageOptionLabel>
+                <ImageOptionButton type="button">usuń zdjęcie</ImageOptionButton>
               </div>
             </div>
           </StyledInputSection>
@@ -367,8 +377,6 @@ class UserData extends Component {
               onBlur={this.handleStoreUpdate}
             />
           </StyledInputSection>
-
-          <input type="file" onChange={this.handleFile} id="file" />
         </StyledWrapper>
         <Data>
           <div>

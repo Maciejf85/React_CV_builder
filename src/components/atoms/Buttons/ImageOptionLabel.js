@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-const ImageOptionButton = styled.button`
+const ImageOptionButton = styled.label`
+  display: inline-block;
   width: 150px;
   height: 30px;
   background: transparent;
