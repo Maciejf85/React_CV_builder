@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
+import { image64toCanvasRef } from 'functions';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
@@ -6,7 +9,7 @@ const StyledWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 900px;
+  width: 1024px;
   height: 700px;
   background: ${({ theme }) => theme.colors.mainGrey};
   border: 1px solid red;
@@ -30,10 +33,11 @@ const StyledWrapper = styled.div`
       justify-content: center;
       align-items: center;
       flex-grow: 10;
-      /* border: 1px solid white; */
+      border: 1px solid white;
       margin: 0 5px;
-      img {
-        max-height: 90%;
+      .image {
+        width: 400px;
+        max-height: 620px;
       }
     }
     .preview {
@@ -41,6 +45,10 @@ const StyledWrapper = styled.div`
       grid-template-rows: 1fr 1fr;
       /* border: 1px solid yellow; */
       margin: 0 5px;
+      canvas {
+        border: 1px solid orange;
+        height: 300px;
+      }
     }
   }
   button {
@@ -50,25 +58,52 @@ const StyledWrapper = styled.div`
 `;
 
 class ImageResizer extends Component {
-  state = {
-    proportions: '3x4',
-    image: this.props.imageSrc,
+  constructor(props) {
+    super(props);
+    this.imagePreviewOnCanvas = React.createRef();
+
+    this.state = {
+      crop: {
+        width: 400,
+        x: 0,
+        y: 0,
+        aspect: 3 / 4,
+      },
+    };
+  }
+
+  handleCropImage = crop => {
+    this.setState({ crop });
+  };
+
+  handleCropComplete = (crop, percentCrop) => {
+    const canvasRef = this.imagePreviewOnCanvas.current;
+    const { imageSrc } = this.props;
+    console.log('canvasRef', canvasRef);
+    image64toCanvasRef(canvasRef, imageSrc, crop);
   };
 
   render() {
-    const { proportions, image } = this.state;
+    const { crop } = this.state;
     const { imageSrc } = this.props;
-    console.log('image', image);
-    console.log('this.props.imageSrc', imageSrc);
     return (
       <StyledWrapper>
         <header>Kadrowanie zdjęcia</header>
         <section>
           <div className="imageContainer">
-            <img src={imageSrc} alt="user" />
+            <div className="image">
+              <ReactCrop
+                src={imageSrc}
+                crop={crop}
+                onChange={this.handleCropImage}
+                onComplete={this.handleCropComplete}
+                on
+                keepSelection
+              />
+            </div>
           </div>
           <div className="preview">
-            <div>image preview</div>
+            <canvas ref={this.imagePreviewOnCanvas} />
             <button type="button" onClick={this.props.click}>
               Modal
             </button>
