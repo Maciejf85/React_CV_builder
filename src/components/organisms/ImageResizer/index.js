@@ -35,9 +35,8 @@ const StyledWrapper = styled.div`
       flex-grow: 10;
       border: 1px solid white;
       margin: 0 5px;
-      .image {
+      img {
         width: 400px;
-        max-height: 620px;
       }
     }
     .preview {
@@ -76,10 +75,9 @@ class ImageResizer extends Component {
     this.setState({ crop });
   };
 
-  handleCropComplete = (crop, percentCrop) => {
+  handleCropComplete = crop => {
     const canvasRef = this.imagePreviewOnCanvas.current;
     const { imageSrc } = this.props;
-    console.log('canvasRef', canvasRef);
     image64toCanvasRef(canvasRef, imageSrc, crop);
   };
 
