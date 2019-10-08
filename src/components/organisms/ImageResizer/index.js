@@ -44,9 +44,9 @@ const StyledWrapper = styled.div`
       grid-template-rows: 1fr 1fr;
       /* border: 1px solid yellow; */
       margin: 0 5px;
+      text-align:center;
       canvas {
-        border: 1px solid orange;
-        height: 300px;
+        width: 200px;
       }
     }
   }

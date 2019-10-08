@@ -44,12 +44,13 @@ export const image64toCanvasRef = (canvasRef, image64, pixelCrop) => {
   canvas.width = pixelCrop.width;
   canvas.height = pixelCrop.height;
   const ctx = canvas.getContext('2d');
-  const image = new Image(400, 617);
+  const image = new Image();
   image.src = image64;
   const scaleX = image.naturalWidth / image.width;
   const scaleY = image.naturalHeight / image.height;
   console.log('scaleX', scaleX);
   console.log('scaleY', scaleY);
+  console.log('image', image)
   image.onload = () => {
     ctx.drawImage(
       image,
