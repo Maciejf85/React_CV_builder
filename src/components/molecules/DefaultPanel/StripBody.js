@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import OptionPanel from 'components/atoms/Buttons/OptionPanel';
-import { formatDate } from 'data/formatDate';
+import { formatDate } from 'functions/index';
 
 const StyleWrapper = styled.div`
   display: grid;

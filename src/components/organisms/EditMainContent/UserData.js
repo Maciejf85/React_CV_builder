@@ -5,7 +5,10 @@ import axios from 'axios';
 import store from 'store';
 import { changeSidePanelState, updatePersonalFromState } from 'actions';
 import Input from 'components/atoms/Inputs/Input';
-import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
+import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
+import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
+import Modal from 'components/organisms/Modal';
+import ImageResizer from 'components/organisms/ImageResizer';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -58,8 +61,18 @@ const StyledInputSection = styled.div`
     opacity: 1;
     visibility: visible;
     transition: visibility 0.6s, opacity 0.6s;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.75);
   }
+`;
+const Data = styled.div`
+  margin-top: 30px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  justify-items: center;
+  align-items: center;
+  font-size: 13px;
 `;
 
 class UserData extends Component {
@@ -73,8 +86,9 @@ class UserData extends Component {
     currentGithub: '',
     currentLinkedin: '',
     currentProfession: '',
-    currentImage: undefined,
     currentImageSrc: undefined,
+    isModal: false,
+    isModalVisible: false,
   };
 
   componentDidMount() {
@@ -90,7 +104,6 @@ class UserData extends Component {
       linkedin,
       profession,
     } = this.props.personalData;
-    const { image } = this.props.image;
 
     this.setState({
       currentName: name,
@@ -101,7 +114,6 @@ class UserData extends Component {
       currentGithub: github,
       currentLinkedin: linkedin,
       currentProfession: profession,
-      currentImageSrc: image,
     });
   }
 
@@ -119,7 +131,6 @@ class UserData extends Component {
         linkedin,
         profession,
       } = this.props.personalData;
-      const { image } = this.props.image;
 
       if (prevProps.personalData.name !== name) {
         console.log('component did update');
@@ -133,7 +144,6 @@ class UserData extends Component {
           currentGithub: github,
           currentLinkedin: linkedin,
           currentProfession: profession,
-          currentImageSrc: image,
         });
       }
     }
@@ -186,17 +196,30 @@ class UserData extends Component {
     }
   };
 
+  // HANDLE IMAGE FILE
+
   handleFile = e => {
     if (e.target.files[0]) {
       const file = e.target.files[0];
+      const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
+      // imageBase64Data
+      const reader = new FileReader();
+      if (accepted.includes(file.type)) {
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.setState({
+            currentImageSrc: reader.result,
+          });
 
-      console.log('file.type', file.type);
-      console.log('file.name', file);
-      console.log('file.name', file.name);
-      console.log('file.size', (file.size / 1024).toFixed(2), 'Kb');
-      console.log('lastModifiedDate', file.lastModifiedDate.toLocaleString());
+          this.handleModal();
+        };
+      } else {
+        alert('Akceptowalne rozszerzenia plików : jpg , jpeg, png');
+      }
     }
   };
+
+  // HANDLE IMAGE FILE
 
   handleForm = e => {
     this.setState({
@@ -213,6 +236,26 @@ class UserData extends Component {
     store.dispatch(updatePersonalFromState(this.state));
   };
 
+  handleModal = () => {
+    const { isModal } = this.state;
+    let modalDisplay;
+    let modalClass;
+
+    if (!isModal) {
+      modalDisplay = 0;
+      modalClass = 550;
+    } else {
+      modalDisplay = 750;
+      modalClass = 0;
+    }
+
+    setTimeout(
+      () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible })),
+      modalDisplay,
+    );
+    setTimeout(() => this.setState(prevState => ({ isModal: !prevState.isModal })), modalClass);
+  };
+
   render() {
     const {
       name,
@@ -224,6 +267,7 @@ class UserData extends Component {
       linkedin,
       profession,
     } = this.props.personalData;
+    const { image } = this.props.image;
     const {
       currentName,
       currentSurname,
@@ -234,9 +278,18 @@ class UserData extends Component {
       currentLinkedin,
       currentProfession,
       statusActive,
+      currentImageSrc,
+      isModal,
+      isModalVisible,
     } = this.state;
     return (
       <>
+        <Modal
+          className={isModal ? 'active' : ''}
+          style={isModalVisible ? { display: 'block' } : { display: 'none' }}
+        >
+          <ImageResizer click={this.handleModal} imageSrc={currentImageSrc} />
+        </Modal>
         <StyledWrapper>
           <StyledInputSection width="73%">
             <Input
@@ -270,11 +323,19 @@ class UserData extends Component {
             />
           </StyledInputSection>
           <StyledInputSection width="25%">
-            <img src={this.state.currentImageSrc} alt="user" />
+            <img src={image} alt="user" />
             <div className="image">
               <div>
-                <PrimaryButton type="button">usuń zdjęcie</PrimaryButton>
-                <PrimaryButton type="button">edytuj</PrimaryButton>
+                <ImageOptionLabel htmlFor="imageInput">
+                  <input
+                    type="file"
+                    onChange={this.handleFile}
+                    id="imageInput"
+                    style={{ display: 'none' }}
+                  />
+                  zmień zdjęcie
+                </ImageOptionLabel>
+                <ImageOptionButton type="button">usuń zdjęcie</ImageOptionButton>
               </div>
             </div>
           </StyledInputSection>
@@ -325,31 +386,33 @@ class UserData extends Component {
               onBlur={this.handleStoreUpdate}
             />
           </StyledInputSection>
-
-          <input type="file" onChange={this.handleFile} id="file" />
         </StyledWrapper>
-        <div> </div>
-        <div>----------store values-----------</div>
-        <div>{name}</div>
-        <div>{surname}</div>
-        <div>{email}</div>
-        <div>{birthday}</div>
-        <div>{adress}</div>
-        <div>{github}</div>
-        <div>{linkedin}</div>
-        <div>{profession}</div>
-        <div> </div>
-        <div>-------------state values----------</div>
-        <div>{currentName}</div>
-        <div>{currentSurname}</div>
-        <div>{currentEmail}</div>
-        <div>{currentBirthday}</div>
-        <div>{currentAdress}</div>
-        <div>{currentGithub}</div>
-        <div>{currentLinkedin}</div>
-        <div>{currentProfession}</div>
-        {/* <div>{currentImageSrc}</div> */}
-        <div>status : {statusActive.toString()}</div>
+        <Data>
+          <div>
+            <div>----------store values-----------</div>
+            <div>{name}</div>
+            <div>{surname}</div>
+            <div>{email}</div>
+            <div>{birthday}</div>
+            <div>{adress}</div>
+            <div>{github}</div>
+            <div>{linkedin}</div>
+            <div>{profession}</div>
+            <div> </div>
+          </div>
+          <div>
+            <div>-------------state values----------</div>
+            <div>{currentName}</div>
+            <div>{currentSurname}</div>
+            <div>{currentEmail}</div>
+            <div>{currentBirthday}</div>
+            <div>{currentAdress}</div>
+            <div>{currentGithub}</div>
+            <div>{currentLinkedin}</div>
+            <div>{currentProfession}</div>
+            <div>status : {statusActive.toString()}</div>
+          </div>
+        </Data>
       </>
     );
   }
