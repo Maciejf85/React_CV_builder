@@ -8,6 +8,7 @@ import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
 import Modal from 'components/organisms/Modal';
+import ImageResizer from 'components/organisms/ImageResizer';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -85,7 +86,6 @@ class UserData extends Component {
     currentGithub: '',
     currentLinkedin: '',
     currentProfession: '',
-    currentImage: undefined,
     currentImageSrc: undefined,
     isModal: false,
     isModalVisible: false,
@@ -196,19 +196,30 @@ class UserData extends Component {
     }
   };
 
+  // HANDLE IMAGE FILE
+
   handleFile = e => {
     if (e.target.files[0]) {
       const file = e.target.files[0];
+      const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
+      // imageBase64Data
+      const reader = new FileReader();
+      if (accepted.includes(file.type)) {
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.setState({
+            currentImageSrc: reader.result,
+          });
 
-      console.log('file.type', file.type);
-      console.log('file.name', file);
-      console.log('file.name', file.name);
-      console.log('file.size', (file.size / 1024).toFixed(2), 'Kb');
-      console.log('lastModifiedDate', file.lastModifiedDate.toLocaleString());
-
-      this.handleModal();
+          this.handleModal();
+        };
+      } else {
+        alert('Akceptowalne rozszerzenia plików : jpg , jpeg, png');
+      }
     }
   };
+
+  // HANDLE IMAGE FILE
 
   handleForm = e => {
     this.setState({
@@ -277,9 +288,7 @@ class UserData extends Component {
           className={isModal ? 'active' : ''}
           style={isModalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <button type="button" className="modalButton" onClick={this.handleModal}>
-            Modal
-          </button>
+          <ImageResizer click={this.handleModal} imageSrc={currentImageSrc} />
         </Modal>
         <StyledWrapper>
           <StyledInputSection width="73%">
@@ -401,7 +410,6 @@ class UserData extends Component {
             <div>{currentGithub}</div>
             <div>{currentLinkedin}</div>
             <div>{currentProfession}</div>
-            <div>{currentImageSrc}</div>
             <div>status : {statusActive.toString()}</div>
           </div>
         </Data>

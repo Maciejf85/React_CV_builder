@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 //  Change UNIX to date
 
 export const formatDate = date => {

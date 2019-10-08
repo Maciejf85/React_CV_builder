@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { reverseDate } from 'data/formatDate';
+import { reverseDate } from 'functions/';
 
 const StyledWrapper = styled.div`
   position: relative;
