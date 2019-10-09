@@ -40,8 +40,8 @@ export const reverseDate = date => {
 
 export const image64toCanvasRef = (canvasRef, image64, pixelCrop) => {
   const canvas = canvasRef;
-  canvas.width = pixelCrop.width - 2;
-  canvas.height = pixelCrop.height - 2;
+  canvas.width = pixelCrop.width;
+  canvas.height = pixelCrop.height;
   const ctx = canvas.getContext('2d');
   const image = new Image();
   image.src = image64;

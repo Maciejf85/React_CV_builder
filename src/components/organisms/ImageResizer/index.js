@@ -47,7 +47,6 @@ const StyledWrapper = styled.div`
       display: grid;
       grid-template-rows: 1fr 1fr;
       justify-content: center;
-
       border: 1px solid yellow;
       margin-right: 10px;
       canvas {
@@ -74,7 +73,7 @@ class ImageResizer extends Component {
         width: 200,
         x: 0,
         y: 0,
-        aspect: 0.67,
+        aspect: '0.67',
       },
     };
   }
@@ -140,13 +139,32 @@ class ImageResizer extends Component {
             <button type="button" onClick={this.props.click}>
               anuluj
             </button>
-            <button type="button" data-ratio="1" onClick={this.handleButtons}>
+            <button type="button" onClick={this.props.click}>
+              zapisz
+            </button>
+
+            <button
+              type="button"
+              className={crop.aspect === '1' ? 'active' : null}
+              data-ratio="1"
+              onClick={this.handleButtons}
+            >
               1
             </button>
-            <button type="button" data-ratio="0.67" onClick={this.handleButtons}>
+            <button
+              type="button"
+              className={crop.aspect === '0.67' ? 'active' : null}
+              data-ratio="0.67"
+              onClick={this.handleButtons}
+            >
               2/3
             </button>
-            <button type="button" data-ratio="0.75" onClick={this.handleButtons}>
+            <button
+              type="button"
+              className={crop.aspect === '0.75' ? 'active' : null}
+              data-ratio="0.75"
+              onClick={this.handleButtons}
+            >
               3/4
             </button>
           </div>
