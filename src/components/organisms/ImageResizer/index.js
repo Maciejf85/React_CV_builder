@@ -12,12 +12,13 @@ const StyledWrapper = styled.div`
   width: 1024px;
   height: 700px;
   background: ${({ theme }) => theme.colors.mainGrey};
-  border: 1px solid red;
+  border: 1px solid white;
 
   header {
     height: 45px;
     line-height: 45px;
     padding: 0 15px;
+    margin-bottom: 10px;
     background: ${({ theme }) => theme.colors.primaryBlue};
     font-size: ${({ theme }) => theme.fontSize.ml};
     color: white;
@@ -26,33 +27,40 @@ const StyledWrapper = styled.div`
     display: grid;
     grid-template-columns: 7fr 2fr;
     align-content: stretch;
-    height: calc(100% - 45px);
+    height: calc(100% - 55px);
 
     .imageContainer {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-grow: 10;
-      border: 1px solid white;
-      margin: 0 5px;
-      img {
-        width: 400px;
+      /* border: 1px solid white; */
+      margin: 0 10px;
+      .image {
+        text-align: center;
+        img {
+          height: 364px;
+        }
       }
     }
     .preview {
       display: grid;
       grid-template-rows: 1fr 1fr;
-      /* border: 1px solid yellow; */
-      margin: 0 5px;
-      text-align:center;
+      justify-content: center;
+
+      border: 1px solid yellow;
+      margin-right: 10px;
       canvas {
-        width: 200px;
+        width: 180px;
       }
     }
   }
   button {
     /* width: 200px; */
     height: 30px;
+    &.active {
+      color: red;
+    }
   }
 `;
 
@@ -63,10 +71,10 @@ class ImageResizer extends Component {
 
     this.state = {
       crop: {
-        width: 400,
+        width: 200,
         x: 0,
         y: 0,
-        aspect: 3 / 4,
+        aspect: 0.67,
       },
     };
   }
@@ -79,6 +87,34 @@ class ImageResizer extends Component {
     const canvasRef = this.imagePreviewOnCanvas.current;
     const { imageSrc } = this.props;
     image64toCanvasRef(canvasRef, imageSrc, crop);
+  };
+
+  handleButtons = e => {
+    const { width, unit, x, y } = this.state.crop;
+    const { ratio } = e.target.dataset;
+    parseFloat(ratio);
+
+    const crop = {
+      aspect: ratio,
+      width,
+      height: width / ratio,
+      unit,
+      x,
+      y,
+    };
+    this.setState({
+      crop: {
+        aspect: ratio,
+        width,
+        height: width / ratio,
+        unit,
+        x,
+        y,
+      },
+    });
+
+    this.handleCropImage(crop);
+    this.handleCropComplete(crop);
   };
 
   render() {
@@ -95,7 +131,6 @@ class ImageResizer extends Component {
                 crop={crop}
                 onChange={this.handleCropImage}
                 onComplete={this.handleCropComplete}
-                on
                 keepSelection
               />
             </div>
@@ -103,7 +138,16 @@ class ImageResizer extends Component {
           <div className="preview">
             <canvas ref={this.imagePreviewOnCanvas} />
             <button type="button" onClick={this.props.click}>
-              Modal
+              anuluj
+            </button>
+            <button type="button" data-ratio="1" onClick={this.handleButtons}>
+              1
+            </button>
+            <button type="button" data-ratio="0.67" onClick={this.handleButtons}>
+              2/3
+            </button>
+            <button type="button" data-ratio="0.75" onClick={this.handleButtons}>
+              3/4
             </button>
           </div>
         </section>

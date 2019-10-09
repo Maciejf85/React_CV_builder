@@ -39,18 +39,19 @@ export const reverseDate = date => {
 };
 
 export const image64toCanvasRef = (canvasRef, image64, pixelCrop) => {
-  console.log('canvasRef, image64, pixelCrop', canvasRef, image64, pixelCrop);
   const canvas = canvasRef;
-  canvas.width = pixelCrop.width;
-  canvas.height = pixelCrop.height;
+  canvas.width = pixelCrop.width - 2;
+  canvas.height = pixelCrop.height - 2;
   const ctx = canvas.getContext('2d');
   const image = new Image();
   image.src = image64;
-  const scaleX = image.naturalWidth / image.width;
-  const scaleY = image.naturalHeight / image.height;
-  console.log('scaleX', scaleX);
-  console.log('scaleY', scaleY);
-  console.log('image', image)
+  const countAspect = image.naturalWidth / image.naturalHeight;
+
+  const countWith = (354 * countAspect).toFixed(2);
+
+  const scaleY = image.naturalHeight / 364;
+  const scaleX = image.naturalWidth / countWith;
+
   image.onload = () => {
     ctx.drawImage(
       image,
