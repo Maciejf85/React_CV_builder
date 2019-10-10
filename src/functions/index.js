@@ -39,18 +39,19 @@ export const reverseDate = date => {
 };
 
 export const image64toCanvasRef = (canvasRef, image64, pixelCrop) => {
-  console.log('canvasRef, image64, pixelCrop', canvasRef, image64, pixelCrop);
   const canvas = canvasRef;
   canvas.width = pixelCrop.width;
   canvas.height = pixelCrop.height;
   const ctx = canvas.getContext('2d');
   const image = new Image();
   image.src = image64;
-  const scaleX = image.naturalWidth / image.width;
-  const scaleY = image.naturalHeight / image.height;
-  console.log('scaleX', scaleX);
-  console.log('scaleY', scaleY);
-  console.log('image', image)
+  const countAspect = image.naturalWidth / image.naturalHeight;
+
+  const countWith = (364 * countAspect).toFixed(0);
+
+  const scaleY = image.naturalHeight / 364;
+  const scaleX = image.naturalWidth / countWith;
+
   image.onload = () => {
     ctx.drawImage(
       image,
@@ -64,4 +65,20 @@ export const image64toCanvasRef = (canvasRef, image64, pixelCrop) => {
       pixelCrop.height,
     );
   };
+};
+
+export const extractImageFileExtensionFromBase64 = base64Data => {
+  return base64Data.substring('data:image/'.length, base64Data.indexOf(';base64'));
+};
+
+export const base64StringtoFile = (base64String, filename) => {
+  const arr = base64String.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
 };
