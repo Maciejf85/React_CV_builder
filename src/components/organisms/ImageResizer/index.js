@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import { image64toCanvasRef } from 'functions';
+import {
+  image64toCanvasRef,
+  extractImageFileExtensionFromBase64,
+  base64StringtoFile,
+} from 'functions';
 import styled from 'styled-components';
+import axios from 'axios';
+import { changeSidePanelState, updateImage } from 'actions';
+import store from 'store';
+import path from '../../../path';
 
 const StyledWrapper = styled.div`
   position: absolute;
@@ -26,8 +34,7 @@ const StyledWrapper = styled.div`
   section {
     display: grid;
     grid-template-columns: 7fr 2fr;
-    align-content: stretch;
-    height: calc(100% - 55px);
+    max-height: calc(100% - 55px);
 
     .imageContainer {
       display: flex;
@@ -50,7 +57,7 @@ const StyledWrapper = styled.div`
       border: 1px solid yellow;
       margin-right: 10px;
       canvas {
-        width: 180px;
+        width: 190px;
       }
     }
   }
@@ -116,6 +123,44 @@ class ImageResizer extends Component {
     this.handleCropComplete(crop);
   };
 
+  handleUploadImage = () => {
+    const canvasRef = this.imagePreviewOnCanvas.current;
+    const { imageSrc } = this.props;
+
+    const fileExtension = extractImageFileExtensionFromBase64(imageSrc);
+    const imageData = canvasRef.toDataURL(`image/${fileExtension}`);
+    const fileName = `userImage.${fileExtension}`;
+    const finalFile = base64StringtoFile(imageData, fileName);
+
+    const data = new FormData();
+    data.append('image', finalFile);
+    axios
+      .post(`${path.cors}handleImage.php`, data, {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      })
+      .then(result => {
+        console.log('result', result.data);
+        store.dispatch(changeSidePanelState(false));
+      })
+      .catch(error => {
+        console.log('error :', error);
+        store.dispatch(changeSidePanelState(true));
+      })
+      .finally(setTimeout(() => store.dispatch(changeSidePanelState(false)), 2100));
+
+    store.dispatch(updateImage(imageData));
+    this.props.click();
+    this.handleClearImage();
+  };
+
+  handleClearImage = () => {
+    const canvasRef = this.imagePreviewOnCanvas.current;
+    const ctx = canvasRef.getContext('2d');
+    ctx.clearRect(0, 0, canvasRef.width, canvasRef.height);
+  };
+
   render() {
     const { crop } = this.state;
     const { imageSrc } = this.props;
@@ -139,7 +184,7 @@ class ImageResizer extends Component {
             <button type="button" onClick={this.props.click}>
               anuluj
             </button>
-            <button type="button" onClick={this.props.click}>
+            <button type="button" onClick={this.handleUploadImage}>
               zapisz
             </button>
 

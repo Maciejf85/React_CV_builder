@@ -53,8 +53,9 @@ export const getMainData = (type = 'main') => dispatch => {
         dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),
         dispatch({ type: 'SET_PERSONAL_DATA', payload: personalData }),
         dispatch({ type: 'SAVE_DATA', payload: list }),
+        // .get(`${path.cors}/users/${personalData.token}/images/pic1.jpg`, {\
         axios
-          .get(`${path.cors}/users/${personalData.token}/images/pic1.jpg`, {
+          .get(`${path.cors}/users/userImage.jpeg`, {
             responseType: 'blob',
           })
           .then(request => {
@@ -70,6 +71,13 @@ export const getMainData = (type = 'main') => dispatch => {
     .catch(error => {
       console.log(error);
     });
+};
+
+export const updateImage = payload => {
+  return {
+    type: 'GET_IMAGE',
+    payload,
+  };
 };
 
 export const updatePersonalData = (type = 'update') => dispatch => {

@@ -8,6 +8,7 @@ const image = (state = initialState, { type, payload }) => {
       return {
         image: payload,
       };
+
     default:
       return state;
   }

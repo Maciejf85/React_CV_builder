@@ -185,13 +185,13 @@ class UserData extends Component {
           .catch(error => {
             console.log('error :', error);
             store.dispatch(changeSidePanelState(true));
-          });
+          })
+          .finally(setTimeout(() => store.dispatch(changeSidePanelState(false)), 2100));
         if (this.mounted) {
           this.setState({
             statusActive: false,
           });
         }
-        setTimeout(() => store.dispatch(changeSidePanelState(false)), 2100);
       }, 3500);
     }
   };
@@ -210,7 +210,6 @@ class UserData extends Component {
           this.setState({
             currentImageSrc: reader.result,
           });
-
           this.handleModal();
         };
       } else {
