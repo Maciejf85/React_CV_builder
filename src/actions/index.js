@@ -55,17 +55,18 @@ export const getMainData = (type = 'main') => dispatch => {
         dispatch({ type: 'SAVE_DATA', payload: list }),
         // .get(`${path.cors}/users/${personalData.token}/images/pic1.jpg`, {\
         axios
-          .get(`${path.cors}getImage.php`
-            , {
-              responseType: 'blob',
-            })
+          .get(`${path.cors}getImage.php`)
+          // , {
+          //   responseType: 'blob',
+          // })
           .then(request => {
-            const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
-            const reader = new FileReader();
-            if (accepted.includes(request.data.type)) {
-              reader.readAsDataURL(request.data);
-              reader.onload = () => dispatch({ type: 'GET_IMAGE', payload: reader.result });
-            }
+            console.log('request', request)
+            // const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
+            // const reader = new FileReader();
+            // if (accepted.includes(request.data.type)) {
+            //   reader.readAsDataURL(request.data);
+            //   reader.onload = () => dispatch({ type: 'GET_IMAGE', payload: reader.result });
+            // }
           })
       );
     })
