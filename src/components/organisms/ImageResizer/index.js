@@ -219,3 +219,8 @@ class ImageResizer extends Component {
   }
 }
 export default ImageResizer;
+
+// TODO: wystylizowanie kontenera ze zdjęciem i kontenera z podglądem
+// TODO: usuwanie pliku z <file input>
+// TODO: resetowanie zaznaczenia
+// TODO : wystyliowanie buttonow

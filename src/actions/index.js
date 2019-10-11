@@ -55,7 +55,7 @@ export const getMainData = (type = 'main') => dispatch => {
         dispatch({ type: 'SAVE_DATA', payload: list }),
         // .get(`${path.cors}/users/${personalData.token}/images/pic1.jpg`, {\
         axios
-          .get(`${path.cors}/users/userImage.jpeg`, {
+          .get(`${path.cors}getImage.php`, {
             responseType: 'blob',
           })
           .then(request => {
