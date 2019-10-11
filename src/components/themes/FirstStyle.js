@@ -61,6 +61,8 @@ class MyDocument extends Component {
     const CurrentCv = store.getState();
     const { currentItem } = CurrentCv;
     const { PersonalData } = store.getState();
+    const { image } = store.getState()
+    console.log('image', image)
     console.log('PersonalData', PersonalData)
     console.log('currentItem', currentItem)
     return (
@@ -69,7 +71,7 @@ class MyDocument extends Component {
           <LeftColumn>
             <Heading>{name}</Heading>
             <Heading bold>{surname}</Heading>
-            {/* <Image src={`${path}users/${token}/images/pic1.jpg`} /> */}
+            <Image src={image.image} />
             <Heading>{email}</Heading>
           </LeftColumn>
           <RightColumn>
