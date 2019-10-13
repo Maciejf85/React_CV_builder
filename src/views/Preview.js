@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from 'components/organisms/Navigation/NavBar';
 import { PDFDownloadLink, StyleSheet, PDFViewer } from '@react-pdf/renderer';
+
 import styled from 'styled-components';
 import FirstStyle from 'components/themes/FirstStyle';
 

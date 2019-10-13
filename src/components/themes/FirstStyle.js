@@ -17,9 +17,10 @@ const Heading = styled.Text`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const Image = styled.Image`
-  width: 100%;
+  /* width: 100%; */
   height: 210pt;
 `;
+
 const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
@@ -28,12 +29,12 @@ const LeftColumn = styled.View`
   width: 150pt;
   height: 100%;
   color: white;
-  background-color: #001f62;
+  background-color: #2c313a;
 `;
 const RightColumn = styled.View`
   width: 446pt;
   height: 100%;
-  font-family: 'Montserrat';
+  /* font-family: 'Montserrat'; */
   padding: 10px;
 `;
 
@@ -61,10 +62,10 @@ class MyDocument extends Component {
     const CurrentCv = store.getState();
     const { currentItem } = CurrentCv;
     const { PersonalData } = store.getState();
-    const { image } = store.getState()
-    console.log('image', image)
-    console.log('PersonalData', PersonalData)
-    console.log('currentItem', currentItem)
+    const { image } = store.getState();
+    console.log('image', image);
+    console.log('PersonalData', PersonalData);
+    console.log('currentItem', currentItem);
     return (
       <Document title="Moje CV" author="Maciej Fiałkowski">
         <MainContainer size="A4" wrap>
