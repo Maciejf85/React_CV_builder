@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import store from 'store';
-import { changeSidePanelState, updatePersonalFromState } from 'actions';
+import { changeSidePanelState, updatePersonalFromState, updateImage } from 'actions';
 import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
@@ -198,27 +198,37 @@ class UserData extends Component {
 
   // HANDLE IMAGE FILE
 
-  handleFile = e => {
-    if (e.target.files[0]) {
-      const file = e.target.files[0];
-      const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
-      // imageBase64Data
-      const reader = new FileReader();
-      if (accepted.includes(file.type)) {
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          this.setState({
-            currentImageSrc: reader.result,
-          });
-          this.handleModal();
-        };
-      } else {
-        alert('Akceptowalne rozszerzenia plików : jpg , jpeg, png');
+  handleImage = e => {
+
+    const { actiontype } = e.target.dataset;
+
+    if (actiontype === 'add') {
+
+      if (e.target.files[0]) {
+        const file = e.target.files[0];
+        const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
+        // imageBase64Data
+        const reader = new FileReader();
+        if (accepted.includes(file.type)) {
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            this.setState({
+              currentImageSrc: reader.result,
+            });
+            this.handleModal();
+          };
+
+
+        } else {
+          alert('Akceptowalne rozszerzenia plików : jpg , jpeg, png');
+        }
       }
+    } else if (actiontype === 'remove') {
+      store.dispatch(updateImage(null))
     }
   };
 
-  // HANDLE IMAGE FILE
+  // HANDLE FORM
 
   handleForm = e => {
     this.setState({
@@ -322,21 +332,38 @@ class UserData extends Component {
             />
           </StyledInputSection>
           <StyledInputSection width="25%">
-            <img src={image} alt="user" />
-            <div className="image">
-              <div>
-                <ImageOptionLabel htmlFor="imageInput">
-                  <input
-                    type="file"
-                    onChange={this.handleFile}
-                    id="imageInput"
-                    style={{ display: 'none' }}
-                  />
-                  zmień zdjęcie
+            {image
+              ?
+              (
+                <>
+                  <img src={image} alt="user" />
+                  <div className="image">
+                    <div>
+                      <ImageOptionLabel htmlFor="imageInput">
+                        <input
+                          type="file"
+                          data-actiontype='add'
+                          onChange={this.handleImage}
+                          id="imageInput"
+                          style={{ display: 'none' }}
+                        />
+                        zmień zdjęcie
                 </ImageOptionLabel>
-                <ImageOptionButton type="button">usuń zdjęcie</ImageOptionButton>
-              </div>
-            </div>
+                      <ImageOptionButton type="button" data-actiontype='remove' onClick={this.handleImage}>usuń zdjęcie</ImageOptionButton>
+                    </div>
+                  </div>
+                </>)
+              :
+              <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                <input
+                  type="file"
+                  data-actiontype='add'
+                  onChange={this.handleImage}
+                  id="imageInput"
+                  style={{ display: 'none' }}
+                />
+                dodaj zdjęcie
+                </ImageOptionLabel>}
           </StyledInputSection>
           <StyledInputSection>
             <Input
