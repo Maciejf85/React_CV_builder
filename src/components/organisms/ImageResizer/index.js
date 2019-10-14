@@ -11,6 +11,7 @@ import axios from 'axios';
 import { changeSidePanelState, updateImage } from 'actions';
 import store from 'store';
 import path from '../../../path';
+import { calc } from 'popmotion';
 
 const StyledWrapper = styled.div`
   position: absolute;
@@ -20,7 +21,8 @@ const StyledWrapper = styled.div`
   width: 1024px;
   height: 700px;
   background: ${({ theme }) => theme.colors.mainGrey};
-  border: 1px solid white;
+  overflow: hidden;
+  border-radius: 7px;
 
   header {
     height: 45px;
@@ -29,6 +31,7 @@ const StyledWrapper = styled.div`
     margin-bottom: 10px;
     background: ${({ theme }) => theme.colors.primaryBlue};
     font-size: ${({ theme }) => theme.fontSize.ml};
+    font-weight: ${({ theme }) => theme.font.bold};
     color: white;
   }
   section {
@@ -38,6 +41,7 @@ const StyledWrapper = styled.div`
 
     .imageContainer {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       flex-grow: 10;
@@ -45,16 +49,16 @@ const StyledWrapper = styled.div`
       margin: 0 10px;
       .image {
         text-align: center;
+        user-select: none;
         img {
           height: 364px;
         }
       }
     }
     .preview {
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      justify-content: center;
-      border: 1px solid yellow;
+      text-align: center;
+      height: 630px;
+      /* border: 1px solid yellow; */
       margin-right: 10px;
       canvas {
         width: 190px;
@@ -78,6 +82,7 @@ class ImageResizer extends Component {
     this.state = {
       crop: {
         width: 200,
+        height: 300,
         x: 0,
         y: 0,
         aspect: '0.67',
@@ -152,13 +157,22 @@ class ImageResizer extends Component {
 
     store.dispatch(updateImage(imageData));
     this.props.click();
-    this.handleClearImage();
+    // this.handleClearImage();
   };
 
   handleClearImage = () => {
     const canvasRef = this.imagePreviewOnCanvas.current;
     const ctx = canvasRef.getContext('2d');
     ctx.clearRect(0, 0, canvasRef.width, canvasRef.height);
+    this.state = {
+      crop: {
+        width: 200,
+        height: 298,
+        x: 0,
+        y: 0,
+        aspect: '0.67',
+      },
+    };
   };
 
   render() {
@@ -177,40 +191,41 @@ class ImageResizer extends Component {
                 onComplete={this.handleCropComplete}
                 keepSelection
               />
+              <div>
+                <button
+                  type="button"
+                  className={crop.aspect === '1' ? 'active' : null}
+                  data-ratio="1"
+                  onClick={this.handleButtons}
+                >
+                  1
+                </button>
+                <button
+                  type="button"
+                  className={crop.aspect === '0.67' ? 'active' : null}
+                  data-ratio="0.67"
+                  onClick={this.handleButtons}
+                >
+                  2/3
+                </button>
+                <button
+                  type="button"
+                  className={crop.aspect === '0.75' ? 'active' : null}
+                  data-ratio="0.75"
+                  onClick={this.handleButtons}
+                >
+                  3/4
+                </button>
+              </div>
             </div>
           </div>
           <div className="preview">
             <canvas ref={this.imagePreviewOnCanvas} />
-            <button type="button" onClick={this.props.click}>
-              anuluj
-            </button>
             <button type="button" onClick={this.handleUploadImage}>
               zapisz
             </button>
-
-            <button
-              type="button"
-              className={crop.aspect === '1' ? 'active' : null}
-              data-ratio="1"
-              onClick={this.handleButtons}
-            >
-              1
-            </button>
-            <button
-              type="button"
-              className={crop.aspect === '0.67' ? 'active' : null}
-              data-ratio="0.67"
-              onClick={this.handleButtons}
-            >
-              2/3
-            </button>
-            <button
-              type="button"
-              className={crop.aspect === '0.75' ? 'active' : null}
-              data-ratio="0.75"
-              onClick={this.handleButtons}
-            >
-              3/4
+            <button type="button" onClick={this.props.click}>
+              anuluj
             </button>
           </div>
         </section>

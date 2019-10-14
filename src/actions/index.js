@@ -59,11 +59,15 @@ export const getMainData = (type = 'main') => dispatch => {
             responseType: 'blob',
           })
           .then(request => {
-            const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
-            const reader = new FileReader();
-            if (accepted.includes(request.data.type)) {
-              reader.readAsDataURL(request.data);
-              reader.onload = () => dispatch({ type: 'GET_IMAGE', payload: reader.result });
+            const { size } = request.data;
+            if (size > 0) {
+
+              const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
+              const reader = new FileReader();
+              if (accepted.includes(request.data.type)) {
+                reader.readAsDataURL(request.data);
+                reader.onload = () => dispatch({ type: 'GET_IMAGE', payload: reader.result });
+              }
             }
           })
       );

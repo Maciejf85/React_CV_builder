@@ -17,9 +17,10 @@ const Heading = styled.Text`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const Image = styled.Image`
-  width: 100%;
+  /* width: 100%; */
   height: 210pt;
 `;
+
 const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
@@ -28,12 +29,12 @@ const LeftColumn = styled.View`
   width: 150pt;
   height: 100%;
   color: white;
-  background-color: #001f62;
+  background-color: #2c313a;
 `;
 const RightColumn = styled.View`
   width: 446pt;
   height: 100%;
-  font-family: 'Montserrat';
+  /* font-family: 'Montserrat'; */
   padding: 10px;
 `;
 
@@ -56,15 +57,20 @@ class MyDocument extends Component {
     email: 'Fialek85@gmail.com',
   };
 
+  componentDidMount() {
+    setTimeout(this.props.downloadButton, 300);
+  }
+
   render() {
     const { email, name, surname } = this.state;
     const CurrentCv = store.getState();
     const { currentItem } = CurrentCv;
     const { PersonalData } = store.getState();
-    const { image } = store.getState()
-    console.log('image', image)
-    console.log('PersonalData', PersonalData)
-    console.log('currentItem', currentItem)
+    const { image } = store.getState();
+    console.log('image', image);
+    console.log('PersonalData', PersonalData);
+    console.log('currentItem', currentItem);
+
     return (
       <Document title="Moje CV" author="Maciej Fiałkowski">
         <MainContainer size="A4" wrap>
@@ -76,12 +82,12 @@ class MyDocument extends Component {
           </LeftColumn>
           <RightColumn>
             {/* {cvData.education.map(item => (
-              <TextSection key={item.id}>
-                <Section>{` ID: ${item.id}`}</Section>
-                <Section>{` Name: ${item.name}`}</Section>
-                <Section>{` CONTENT: ${item.description}`}</Section>
-              </TextSection>
-            ))} */}
+          <TextSection key={item.id}>
+          <Section>{` ID: ${item.id}`}</Section>
+          <Section>{` Name: ${item.name}`}</Section>
+          <Section>{` CONTENT: ${item.description}`}</Section>
+          </TextSection>
+        ))} */}
           </RightColumn>
         </MainContainer>
       </Document>

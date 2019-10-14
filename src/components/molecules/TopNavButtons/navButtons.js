@@ -52,24 +52,26 @@ const StyledWrapper = styled.ul`
     }
 `;
 
-const navButtons = () => (
-  <StyledWrapper>
-    <li>
-      <NavLink activeClassName="active" exact to={path.main}>
-        Main
-      </NavLink>
-    </li>
-    <li>
-      <NavLink activeClassName="active" to={path.edit}>
-        Editor
-      </NavLink>
-    </li>
-    <li>
-      <NavLink activeClassName="active" to={path.preview}>
-        Preview
-      </NavLink>
-    </li>
-  </StyledWrapper>
-);
+const NavButtons = props => {
+  return (
+    <StyledWrapper>
+      <li>
+        <NavLink activeClassName="active" exact to={path.main}>
+          Main
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName="active" to={path.edit}>
+          Editor
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName="active" to={path.preview}>
+          Preview
+        </NavLink>
+      </li>
+    </StyledWrapper>
+  );
+};
 
-export default navButtons;
+export default NavButtons;
