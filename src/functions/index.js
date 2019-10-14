@@ -1,4 +1,7 @@
 //  Change UNIX to date
+import store from 'store';
+import { changeSidePanelState } from 'actions'
+
 
 export const formatDate = date => {
   const months = [
@@ -38,6 +41,8 @@ export const reverseDate = date => {
   return '';
 };
 
+// Base64 format to canvas
+
 export const image64toCanvasRef = (canvasRef, image64, pixelCrop) => {
   const canvas = canvasRef;
   canvas.width = pixelCrop.width;
@@ -67,10 +72,12 @@ export const image64toCanvasRef = (canvasRef, image64, pixelCrop) => {
   };
 };
 
+//  File extension from Base64
 export const extractImageFileExtensionFromBase64 = base64Data => {
   return base64Data.substring('data:image/'.length, base64Data.indexOf(';base64'));
 };
 
+//  File from Base64
 export const base64StringtoFile = (base64String, filename) => {
   const arr = base64String.split(',');
   const mime = arr[0].match(/:(.*?);/)[1];
@@ -82,3 +89,10 @@ export const base64StringtoFile = (base64String, filename) => {
   }
   return new File([u8arr], filename, { type: mime });
 };
+
+//  handle sidePanel
+export const sidePanel = result => {
+  const { content, error } = result
+  store.dispatch(changeSidePanelState({ content, error }))
+  setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), 2500)
+}

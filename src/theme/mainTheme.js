@@ -28,6 +28,7 @@ const theme = {
     secondaryBlue: 'hsl(204, 100%, 40%)',
     lightBlue: 'hsl(204, 100%, 58%)',
     alertColor: 'hsl(0,100%,42%)',
+    successColor: 'hsl(77,85%,46%)'
   },
   media: {
     tablet: '@media (min-width: 728px)',

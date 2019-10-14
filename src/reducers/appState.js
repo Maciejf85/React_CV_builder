@@ -8,7 +8,8 @@ const SidePanel = (state = initialState, { type, payload }) => {
     case 'CHANGE_SIDEPANEL_STATE':
       return {
         isVisible: !state.isVisible,
-        error: payload,
+        content: payload.content,
+        error: payload.error
       };
     default:
       return state;

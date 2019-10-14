@@ -5,13 +5,13 @@ import {
   image64toCanvasRef,
   extractImageFileExtensionFromBase64,
   base64StringtoFile,
+  sidePanel
 } from 'functions';
 import styled from 'styled-components';
 import axios from 'axios';
-import { changeSidePanelState, updateImage } from 'actions';
+import { updateImage } from 'actions';
 import store from 'store';
 import path from '../../../path';
-import { calc } from 'popmotion';
 
 const StyledWrapper = styled.div`
   position: absolute;
@@ -145,34 +145,31 @@ class ImageResizer extends Component {
           'content-type': 'multipart/form-data',
         },
       })
-      .then(result => {
-        console.log('result', result.data);
-        store.dispatch(changeSidePanelState(false));
+      .then(() => {
+        sidePanel({ content: 'zdjęcie zapisane', error: false });
+
       })
       .catch(error => {
         console.log('error :', error);
-        store.dispatch(changeSidePanelState(true));
+        sidePanel({ content: 'błąd sieci', error: true });
+
       })
-      .finally(setTimeout(() => store.dispatch(changeSidePanelState(false)), 2100));
+      .finally();
 
     store.dispatch(updateImage(imageData));
     this.props.click();
-    // this.handleClearImage();
+    this.handleClearImage();
   };
 
   handleClearImage = () => {
-    const canvasRef = this.imagePreviewOnCanvas.current;
-    const ctx = canvasRef.getContext('2d');
-    ctx.clearRect(0, 0, canvasRef.width, canvasRef.height);
-    this.state = {
-      crop: {
-        width: 200,
-        height: 298,
-        x: 0,
-        y: 0,
-        aspect: '0.67',
-      },
-    };
+    const crop = {
+      width: 200,
+      x: 0,
+      y: 0,
+      aspect: '0.67',
+    }
+
+    this.handleCropImage(crop);
   };
 
   render() {
@@ -236,6 +233,4 @@ class ImageResizer extends Component {
 export default ImageResizer;
 
 // TODO: wystylizowanie kontenera ze zdjęciem i kontenera z podglądem
-// TODO: usuwanie pliku z <file input>
-// TODO: resetowanie zaznaczenia
 // TODO : wystyliowanie buttonow

@@ -133,7 +133,7 @@ export const changeSidePanelState = payload => {
   };
 };
 
-// CHANGE_SIDEPANEL_STATE
+// CHANGE PERSONAL DATA FROM EDIT FORMS
 
 export const updatePersonalFromState = payload => {
   return {
