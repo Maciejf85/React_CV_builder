@@ -57,6 +57,10 @@ class MyDocument extends Component {
     email: 'Fialek85@gmail.com',
   };
 
+  componentDidMount() {
+    setTimeout(this.props.downloadButton, 300);
+  }
+
   render() {
     const { email, name, surname } = this.state;
     const CurrentCv = store.getState();
@@ -66,6 +70,7 @@ class MyDocument extends Component {
     console.log('image', image);
     console.log('PersonalData', PersonalData);
     console.log('currentItem', currentItem);
+
     return (
       <Document title="Moje CV" author="Maciej Fiałkowski">
         <MainContainer size="A4" wrap>
@@ -77,12 +82,12 @@ class MyDocument extends Component {
           </LeftColumn>
           <RightColumn>
             {/* {cvData.education.map(item => (
-              <TextSection key={item.id}>
-                <Section>{` ID: ${item.id}`}</Section>
-                <Section>{` Name: ${item.name}`}</Section>
-                <Section>{` CONTENT: ${item.description}`}</Section>
-              </TextSection>
-            ))} */}
+          <TextSection key={item.id}>
+          <Section>{` ID: ${item.id}`}</Section>
+          <Section>{` Name: ${item.name}`}</Section>
+          <Section>{` CONTENT: ${item.description}`}</Section>
+          </TextSection>
+        ))} */}
           </RightColumn>
         </MainContainer>
       </Document>

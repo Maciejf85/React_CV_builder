@@ -199,11 +199,9 @@ class UserData extends Component {
   // HANDLE IMAGE FILE
 
   handleImage = e => {
-
     const { actiontype } = e.target.dataset;
 
     if (actiontype === 'add') {
-
       if (e.target.files[0]) {
         const file = e.target.files[0];
         const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -217,14 +215,14 @@ class UserData extends Component {
             });
             this.handleModal();
           };
-
-
         } else {
           alert('Akceptowalne rozszerzenia plików : jpg , jpeg, png');
         }
       }
+      e.target.value = null;
     } else if (actiontype === 'remove') {
-      store.dispatch(updateImage(null))
+      store.dispatch(updateImage(null));
+      axios.post(`${path.cors}removeImage.php`);
     }
   };
 
@@ -241,9 +239,13 @@ class UserData extends Component {
     }
   };
 
+  // UPDATE STORE FORM DATA
+
   handleStoreUpdate = () => {
     store.dispatch(updatePersonalFromState(this.state));
   };
+
+  // HANDLE MODAL
 
   handleModal = () => {
     const { isModal } = this.state;
@@ -290,6 +292,7 @@ class UserData extends Component {
       currentImageSrc,
       isModal,
       isModalVisible,
+      key,
     } = this.state;
     return (
       <>
@@ -332,38 +335,44 @@ class UserData extends Component {
             />
           </StyledInputSection>
           <StyledInputSection width="25%">
-            {image
-              ?
-              (
-                <>
-                  <img src={image} alt="user" />
-                  <div className="image">
-                    <div>
-                      <ImageOptionLabel htmlFor="imageInput">
-                        <input
-                          type="file"
-                          data-actiontype='add'
-                          onChange={this.handleImage}
-                          id="imageInput"
-                          style={{ display: 'none' }}
-                        />
-                        zmień zdjęcie
-                </ImageOptionLabel>
-                      <ImageOptionButton type="button" data-actiontype='remove' onClick={this.handleImage}>usuń zdjęcie</ImageOptionButton>
-                    </div>
+            {image ? (
+              <>
+                <img src={image} alt="user" />
+                <div className="image">
+                  <div>
+                    <ImageOptionLabel htmlFor="imageInput">
+                      <input
+                        type="file"
+                        key={this.state.inputKey}
+                        data-actiontype="add"
+                        onChange={this.handleImage}
+                        id="imageInput"
+                        style={{ display: 'none' }}
+                      />
+                      zmień zdjęcie
+                    </ImageOptionLabel>
+                    <ImageOptionButton
+                      type="button"
+                      data-actiontype="remove"
+                      onClick={this.handleImage}
+                    >
+                      usuń zdjęcie
+                    </ImageOptionButton>
                   </div>
-                </>)
-              :
+                </div>
+              </>
+            ) : (
               <ImageOptionLabel htmlFor="imageInput" active={!image}>
                 <input
                   type="file"
-                  data-actiontype='add'
+                  data-actiontype="add"
                   onChange={this.handleImage}
                   id="imageInput"
                   style={{ display: 'none' }}
                 />
                 dodaj zdjęcie
-                </ImageOptionLabel>}
+              </ImageOptionLabel>
+            )}
           </StyledInputSection>
           <StyledInputSection>
             <Input

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import { reverseDate } from 'functions/';
 
 const StyledWrapper = styled.div`
@@ -57,13 +58,24 @@ const StyledWrapper = styled.div`
     width: 100%;
     padding: 5px;
   }
-  img {
+  img,
+  .emptyImage {
     position: absolute;
-    top: 27px;
+    top: 30px;
     right: 27px;
     width: 100px;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.colors.lightGrey};
+  }
+  .emptyImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+    color: ${({ theme }) => theme.colors.buttonActive};
+    user-select: none;
   }
 `;
 const SectionBody = props => {
@@ -114,7 +126,7 @@ const SectionBody = props => {
           </a>
         </li>
       </ul>
-      <img src={image} alt="user" />
+      {image ? <img src={image} alt="user" /> : <div className="emptyImage">Twoje zdjęcie</div>}
     </StyledWrapper>
   );
 };

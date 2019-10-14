@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import NavBar from 'components/organisms/Navigation/NavBar';
-import { PDFDownloadLink, StyleSheet, PDFViewer } from '@react-pdf/renderer';
+import { PDFDownloadLink, StyleSheet, PDFViewer, Font, BlobProvider } from '@react-pdf/renderer';
 
 import styled from 'styled-components';
 import FirstStyle from 'components/themes/FirstStyle';
+
+import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
+import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
+
+Font.register({
+  family: 'Montserrat',
+  fonts: [{ src: Montserrat, fontWeight: 'normal' }, { src: MontserratBold, fontWeight: 'bold' }],
+});
 
 const styles = StyleSheet.create({
   page: { backgroundColor: 'tomato' },
@@ -39,24 +47,44 @@ const StyledWrapper = styled.div`
   justify-content: center;
 `;
 
-const Preview = () => {
-  const name = 'Maciej';
-  return (
-    <>
-      <NavBar />
-      <StyledWrapper>
-        <PDFViewer style={styles.view} name={name}>
-          <FirstStyle />
-        </PDFViewer>
-      </StyledWrapper>
+class Preview extends Component {
+  state = {
+    isReady: false,
+  };
 
-      <StyledWrapper>
-        <PDFDownloadLink document={<FirstStyle />} fileName="myCV.pdf">
-          {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
-        </PDFDownloadLink>
-      </StyledWrapper>
-    </>
-  );
-};
+  handleButton = () => {
+    console.log('this.state.isReady', this.state.isReady);
+    this.setState({
+      isReady: true,
+    });
+  };
+
+  render() {
+    const name = 'Maciej';
+    const { isReady } = this.state;
+
+    return (
+      <>
+        <NavBar />
+        <StyledWrapper>
+          <PDFViewer style={styles.view} name={name}>
+            <FirstStyle downloadButton={this.handleButton} />
+          </PDFViewer>
+        </StyledWrapper>
+        <button type="button" onClick={this.handleButton}>
+          downloadButton{' '}
+        </button>
+
+        {isReady ? (
+          <StyledWrapper>
+            <PDFDownloadLink document={<FirstStyle />} fileName="myCV.pdf">
+              {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
+            </PDFDownloadLink>
+          </StyledWrapper>
+        ) : null}
+      </>
+    );
+  }
+}
 
 export default Preview;

@@ -5,6 +5,7 @@ import StripBody from 'components/molecules/DefaultPanel/StripBody';
 import StripTitle from 'components/molecules/DefaultPanel/StripTitle';
 
 const StyledWrapper = styled.div`
+  position: relative;
   min-width: 300px;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.colors.lightGrey};
@@ -33,7 +34,11 @@ const StyledWrapper = styled.div`
       font-size: ${({ theme }) => theme.fontSize.ms};
     }
     .empty {
-      margin-top: 30px;
+      position: absolute;
+      top: calc(50% + 10px);
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
       text-align: center;
       color: ${({ theme }) => theme.colors.secondaryGrey};
     }
