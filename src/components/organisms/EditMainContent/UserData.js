@@ -293,7 +293,6 @@ class UserData extends Component {
       currentImageSrc,
       isModal,
       isModalVisible,
-      key,
     } = this.state;
     return (
       <>

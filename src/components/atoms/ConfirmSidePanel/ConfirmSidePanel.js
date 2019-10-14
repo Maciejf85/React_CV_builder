@@ -67,12 +67,10 @@ const ConfirmSidePanel = ({ pose }) => {
 
 ConfirmSidePanel.propTypes = {
   pose: Proptypes.string,
-  error: Proptypes.bool,
 };
 
 ConfirmSidePanel.defaultProps = {
   pose: 'hidden',
-  error: false,
 };
 
 export default ConfirmSidePanel;
