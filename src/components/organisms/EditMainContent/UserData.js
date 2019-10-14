@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import store from 'store';
-import { changeSidePanelState, updatePersonalFromState, updateImage } from 'actions';
+import { updatePersonalFromState, updateImage } from 'actions';
 import { sidePanel } from 'functions'
 import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
@@ -293,7 +293,6 @@ class UserData extends Component {
       currentImageSrc,
       isModal,
       isModalVisible,
-      key,
     } = this.state;
     return (
       <>
