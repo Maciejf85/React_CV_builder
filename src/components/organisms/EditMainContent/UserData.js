@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import store from 'store';
 import { changeSidePanelState, updatePersonalFromState, updateImage } from 'actions';
+import { sidePanel } from 'functions'
 import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
@@ -180,13 +181,13 @@ class UserData extends Component {
           })
           .then(result => {
             console.log('result', result.data);
-            store.dispatch(changeSidePanelState({ content: 'dane zapisane', error: false }));
+            sidePanel({ content: 'dane zapisane', error: false })
+
           })
           .catch(error => {
             console.log('error :', error);
-            store.dispatch(changeSidePanelState({ content: 'błąd zapisu', error: true }));
+            sidePanel({ content: 'błąd zapisu', error: true })
           })
-          .finally(setTimeout(() => store.dispatch(changeSidePanelState({ content: '', error: false })), 2100));
         if (this.mounted) {
           this.setState({
             statusActive: false,

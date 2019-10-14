@@ -1,9 +1,9 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import posed from 'react-pose';
 import Proptypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import { useSelector } from 'react-redux'
 
 const PosedPanel = posed.div({
@@ -21,7 +21,7 @@ const StyledWrapper = styled(PosedPanel)`
   justify-items: center;
   width: 250px;
   height: 50px;
-  background: ${({ theme }) => theme.colors.primaryBlue};
+  background: ${({ error, theme }) => !error ? theme.colors.successColor : theme.colors.alertColor};
   border-bottom-left-radius: 7px;
   border-top-left-radius: 7px;
 
@@ -41,18 +41,14 @@ const StyledWrapper = styled(PosedPanel)`
     position: relative;
     width: 50px;
     height: 100%;
-    background: ${({ theme }) => theme.colors.secondaryBlue};
+    background: ${({ error, theme }) => !error ? theme.colors.successColor : theme.colors.alertColor};
   }
 
   p {
     margin-right: 60px;
   }
 
-  ${({ error }) =>
-    error &&
-    css`
-      background: ${({ theme }) => theme.colors.alertColor};
-    `}
+
 `;
 
 const ConfirmSidePanel = ({ pose }) => {
@@ -60,7 +56,7 @@ const ConfirmSidePanel = ({ pose }) => {
   return (
     <StyledWrapper pose={pose} error={error}>
       <div className="leftSide">
-        <FontAwesomeIcon icon={faCheckCircle} className="icon" />
+        <FontAwesomeIcon icon={!error ? faCheckCircle : faTimesCircle} className="icon" />
       </div>
       <div>
         <p>{content}</p>
