@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 //  Change UNIX to date
 import store from 'store';
 import { changeSidePanelState } from 'actions'
