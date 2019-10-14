@@ -180,13 +180,13 @@ class UserData extends Component {
           })
           .then(result => {
             console.log('result', result.data);
-            store.dispatch(changeSidePanelState(false));
+            store.dispatch(changeSidePanelState({ content: 'dane zapisane', error: false }));
           })
           .catch(error => {
             console.log('error :', error);
-            store.dispatch(changeSidePanelState(true));
+            store.dispatch(changeSidePanelState({ content: 'błąd zapisu', error: true }));
           })
-          .finally(setTimeout(() => store.dispatch(changeSidePanelState(false)), 2100));
+          .finally(setTimeout(() => store.dispatch(changeSidePanelState({ content: '', error: false })), 2100));
         if (this.mounted) {
           this.setState({
             statusActive: false,
@@ -362,17 +362,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-              <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                <input
-                  type="file"
-                  data-actiontype="add"
-                  onChange={this.handleImage}
-                  id="imageInput"
-                  style={{ display: 'none' }}
-                />
-                dodaj zdjęcie
+                <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                  <input
+                    type="file"
+                    data-actiontype="add"
+                    onChange={this.handleImage}
+                    id="imageInput"
+                    style={{ display: 'none' }}
+                  />
+                  dodaj zdjęcie
               </ImageOptionLabel>
-            )}
+              )}
           </StyledInputSection>
           <StyledInputSection>
             <Input

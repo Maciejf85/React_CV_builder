@@ -87,17 +87,17 @@ class Panel extends Component {
         const confidential = data;
         return (
           store.dispatch(newConfidentialText(confidential.confidential)),
-          store.dispatch(changeSidePanelState(false))
+          store.dispatch(changeSidePanelState({ content: 'Klauzula zapisana', error: false }))
         );
       })
       .catch(error => {
         console.log('error :', error);
-        store.dispatch(changeSidePanelState(true));
+        store.dispatch(changeSidePanelState({ content: 'błąd serwera', error: true }));
       })
       .finally(() => {
         this.handleEditMode();
         this.saveButtonState();
-        setTimeout(() => store.dispatch(changeSidePanelState(false)), 2000);
+        setTimeout(() => store.dispatch(changeSidePanelState({ content: '', error: false })), 2000);
       });
   };
 
@@ -132,8 +132,8 @@ class Panel extends Component {
                 <Textarea value={localConf} onChange={this.handleTextarea} />
               </form>
             ) : (
-              <p>{confidential}</p>
-            )}
+                <p>{confidential}</p>
+              )}
           </section>
         </StyledWrapper>
 

@@ -18,7 +18,7 @@ const ImageOptionButton = styled.label`
 
 
   &:hover {
-    background: ${({ theme }) => theme.colors.lightBlue};
+    background: ${({ active, theme }) => active ? theme.colors.secondaryBlue : theme.colors.lightBlue};
     cursor: pointer;
   }
 `;

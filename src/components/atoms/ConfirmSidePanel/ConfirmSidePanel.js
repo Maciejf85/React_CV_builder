@@ -4,6 +4,7 @@ import posed from 'react-pose';
 import Proptypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+import { useSelector } from 'react-redux'
 
 const PosedPanel = posed.div({
   visible: { x: '30px', opacity: 1, transition: { duration: 300 } },
@@ -54,14 +55,15 @@ const StyledWrapper = styled(PosedPanel)`
     `}
 `;
 
-const ConfirmSidePanel = ({ pose, error }) => {
+const ConfirmSidePanel = ({ pose }) => {
+  const { content, error } = useSelector(state => state.appState)
   return (
     <StyledWrapper pose={pose} error={error}>
       <div className="leftSide">
         <FontAwesomeIcon icon={faCheckCircle} className="icon" />
       </div>
       <div>
-        <p>{error ? 'błąd serwera' : 'zapisane'}</p>
+        <p>{content}</p>
       </div>
     </StyledWrapper>
   );
