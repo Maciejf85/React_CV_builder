@@ -8,6 +8,9 @@ const myCV = (state = initialState, { type, payload }) => {
     case 'SAVE_DATA': {
       return payload;
     }
+    case 'DELETE_ITEM': {
+      return state.filter(item => item.id !== payload);
+    }
 
     default:
       return state;

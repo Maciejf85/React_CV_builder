@@ -61,7 +61,6 @@ export const getMainData = (type = 'main') => dispatch => {
           .then(request => {
             const { size } = request.data;
             if (size > 0) {
-
               const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
               const reader = new FileReader();
               if (accepted.includes(request.data.type)) {
@@ -138,6 +137,13 @@ export const changeSidePanelState = payload => {
 export const updatePersonalFromState = payload => {
   return {
     type: 'UPDATE_PERSONAL_DATA',
+    payload,
+  };
+};
+
+export const deleteCvItem = payload => {
+  return {
+    type: 'DELETE_ITEM',
     payload,
   };
 };
