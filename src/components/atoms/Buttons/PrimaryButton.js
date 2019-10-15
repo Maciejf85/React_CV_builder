@@ -24,7 +24,7 @@ const PrimaryButton = styled.button`
     border-color: ${({ theme }) => theme.colors.secondaryGrey};
   }
 
-  ${({ primary }) =>
+  ${({ primary, secondary }) =>
     primary &&
     css`
       background: ${({ theme }) => theme.colors.primaryBlue};
@@ -33,6 +33,18 @@ const PrimaryButton = styled.button`
       &:hover {
         background: ${({ theme }) => theme.colors.lightBlue};
         border-color: ${({ theme }) => theme.colors.lightBlue};
+      }
+    `}
+
+  ${({ secondary }) =>
+    secondary &&
+    css`
+      background: ${({ theme }) => theme.colors.successColor};
+      border-color: ${({ theme }) => theme.colors.successColor};
+
+      &:hover {
+        background: ${({ theme }) => theme.colors.successColorHover};
+        border-color: ${({ theme }) => theme.colors.successColorHover};
       }
     `}
 

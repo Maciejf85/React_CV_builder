@@ -8,6 +8,7 @@ import {
   sidePanel
 } from 'functions';
 import styled from 'styled-components';
+import PrimaryButton from 'components/atoms/Buttons/PrimaryButton'
 import axios from 'axios';
 import { updateImage } from 'actions';
 import store from 'store';
@@ -62,15 +63,15 @@ const StyledWrapper = styled.div`
       margin-right: 10px;
       canvas {
         width: 190px;
+        padding:10px;
+        border:1px solid white;
       }
     }
   }
   button {
     /* width: 200px; */
     height: 30px;
-    &.active {
-      color: red;
-    }
+
   }
 `;
 
@@ -189,41 +190,41 @@ class ImageResizer extends Component {
                 keepSelection
               />
               <div>
-                <button
+                <PrimaryButton
                   type="button"
-                  className={crop.aspect === '1' ? 'active' : null}
+                  primary={crop.aspect === '1'}
                   data-ratio="1"
                   onClick={this.handleButtons}
                 >
-                  1
-                </button>
-                <button
+                  1/1
+                </PrimaryButton>
+                <PrimaryButton
                   type="button"
-                  className={crop.aspect === '0.67' ? 'active' : null}
+                  primary={crop.aspect === '0.67'}
                   data-ratio="0.67"
                   onClick={this.handleButtons}
                 >
                   2/3
-                </button>
-                <button
+                </PrimaryButton>
+                <PrimaryButton
                   type="button"
-                  className={crop.aspect === '0.75' ? 'active' : null}
+                  primary={crop.aspect === '0.75'}
                   data-ratio="0.75"
                   onClick={this.handleButtons}
                 >
                   3/4
-                </button>
+                </PrimaryButton>
               </div>
             </div>
           </div>
           <div className="preview">
             <canvas ref={this.imagePreviewOnCanvas} />
-            <button type="button" onClick={this.handleUploadImage}>
+            <PrimaryButton type="button" secondary onClick={this.handleUploadImage}>
               zapisz
-            </button>
-            <button type="button" onClick={this.props.click}>
+            </PrimaryButton>
+            <PrimaryButton type="button" onClick={this.props.click}>
               anuluj
-            </button>
+            </PrimaryButton>
           </div>
         </section>
       </StyledWrapper>
