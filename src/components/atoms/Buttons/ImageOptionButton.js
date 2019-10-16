@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const ImageOptionButton = styled.button`
   min-width: 150px;
@@ -23,7 +23,21 @@ const ImageOptionButton = styled.button`
   :disabled{
     cursor:default;
     background: ${({ theme }) => theme.colors.inputGrey};
+    border:none;
+    color:white;
   }  
+  ${({ primary }) => primary && css`
+  min-width:200px;
+  background:transparent;
+  color:hsl(204, 100%, 50%);
+  border:2px solid hsl(204, 100%, 50%);
+  &:hover {
+    cursor: pointer;
+    background:transparent;
+    border-color:hsl(204, 100%, 40%);
+    color:hsl(204, 100%, 40%);
+  }
+  `} 
 `;
 
 export default ImageOptionButton;

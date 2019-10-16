@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StripBody from 'components/molecules/DefaultPanel/StripBody';
 import StripTitle from 'components/molecules/DefaultPanel/StripTitle';
+import { Link } from 'react-router-dom';
 import OptionButton from 'components/atoms/Buttons/ImageOptionButton';
 
 const StyledWrapper = styled.div`
@@ -58,7 +59,15 @@ const defaultPanel = props => {
             <StripBody key={date} id={id} title={title} date={date} />
           ))
         ) : (
-            <div className="empty"><OptionButton active disabled={name === 'Moje listy motywacyjne'}>{`dodaj ${caption}`}</OptionButton></div>
+            <div className="empty">
+              <Link to='/edit'>
+                <OptionButton
+                  primary={name === 'Moje CV'}
+                  disabled={name === 'Moje listy motywacyjne'}>
+                  {`dodaj ${caption}`}
+                </OptionButton>
+              </Link>
+            </div>
           )}
       </section>
     </StyledWrapper>
