@@ -5,10 +5,10 @@ import {
   image64toCanvasRef,
   extractImageFileExtensionFromBase64,
   base64StringtoFile,
-  sidePanel
+  sidePanel,
 } from 'functions';
 import styled from 'styled-components';
-import PrimaryButton from 'components/atoms/Buttons/PrimaryButton'
+import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import axios from 'axios';
 import { updateImage } from 'actions';
 import store from 'store';
@@ -20,8 +20,8 @@ const StyledWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 1024px;
-  height: 700px;
-  background: ${({ theme }) => theme.colors.mainGrey};
+  height: 600px;
+  background: ${({ theme }) => theme.colors.secondaryGrey};
   overflow: hidden;
   border-radius: 7px;
 
@@ -38,18 +38,21 @@ const StyledWrapper = styled.div`
   section {
     display: grid;
     grid-template-columns: 7fr 2fr;
+    grid-gap: 10px;
     max-height: calc(100% - 55px);
+    /* border: 1px solid red; */
 
     .imageContainer {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-grow: 10;
       /* border: 1px solid white; */
+      background: ${({ theme }) => theme.colors.inputGrey};
       margin: 0 10px;
       .image {
         text-align: center;
+
         user-select: none;
         img {
           height: 364px;
@@ -57,21 +60,24 @@ const StyledWrapper = styled.div`
       }
     }
     .preview {
+      position: relative;
       text-align: center;
-      height: 630px;
+      height: 530px;
       /* border: 1px solid yellow; */
+      background: ${({ theme }) => theme.colors.inputGrey};
       margin-right: 10px;
+      div {
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+      }
       canvas {
         width: 190px;
-        padding:10px;
-        border:1px solid white;
+        padding: 10px;
+        border: 1px solid white;
+        background: white;
       }
     }
-  }
-  button {
-    /* width: 200px; */
-    height: 30px;
-
   }
 `;
 
@@ -148,12 +154,10 @@ class ImageResizer extends Component {
       })
       .then(() => {
         sidePanel({ content: 'zdjęcie zapisane', error: false });
-
       })
       .catch(error => {
         console.log('error :', error);
         sidePanel({ content: 'błąd sieci', error: true });
-
       })
       .finally();
 
@@ -168,7 +172,7 @@ class ImageResizer extends Component {
       x: 0,
       y: 0,
       aspect: '0.67',
-    }
+    };
 
     this.handleCropImage(crop);
   };
@@ -196,7 +200,7 @@ class ImageResizer extends Component {
                   data-ratio="1"
                   onClick={this.handleButtons}
                 >
-                  1/1
+                  1:1
                 </PrimaryButton>
                 <PrimaryButton
                   type="button"
@@ -204,7 +208,7 @@ class ImageResizer extends Component {
                   data-ratio="0.67"
                   onClick={this.handleButtons}
                 >
-                  2/3
+                  2:3
                 </PrimaryButton>
                 <PrimaryButton
                   type="button"
@@ -212,19 +216,21 @@ class ImageResizer extends Component {
                   data-ratio="0.75"
                   onClick={this.handleButtons}
                 >
-                  3/4
+                  3:4
                 </PrimaryButton>
               </div>
             </div>
           </div>
           <div className="preview">
             <canvas ref={this.imagePreviewOnCanvas} />
-            <PrimaryButton type="button" secondary onClick={this.handleUploadImage}>
-              zapisz
-            </PrimaryButton>
-            <PrimaryButton type="button" onClick={this.props.click}>
-              anuluj
-            </PrimaryButton>
+            <div>
+              <PrimaryButton type="button" primary onClick={this.handleUploadImage}>
+                zapisz
+              </PrimaryButton>
+              <PrimaryButton type="button" onClick={this.props.click}>
+                anuluj
+              </PrimaryButton>
+            </div>
           </div>
         </section>
       </StyledWrapper>

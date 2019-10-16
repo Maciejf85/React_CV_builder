@@ -4,7 +4,7 @@ import posed from 'react-pose';
 import Proptypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-regular-svg-icons';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
 const PosedPanel = posed.div({
   visible: { x: '30px', opacity: 1, transition: { duration: 300 } },
@@ -21,7 +21,8 @@ const StyledWrapper = styled(PosedPanel)`
   justify-items: center;
   width: 250px;
   height: 50px;
-  background: ${({ error, theme }) => !error ? theme.colors.successColor : theme.colors.alertColor};
+  background: ${({ error, theme }) =>
+    !error ? theme.colors.secondaryBlue : theme.colors.alertColor};
   border-bottom-left-radius: 7px;
   border-top-left-radius: 7px;
 
@@ -41,18 +42,17 @@ const StyledWrapper = styled(PosedPanel)`
     position: relative;
     width: 50px;
     height: 100%;
-    background: ${({ error, theme }) => !error ? theme.colors.successColor : theme.colors.alertColor};
+    background: ${({ error, theme }) =>
+      !error ? theme.colors.successColor : theme.colors.alertColor};
   }
 
   p {
     margin-right: 60px;
   }
-
-
 `;
 
 const ConfirmSidePanel = ({ pose }) => {
-  const { content, error } = useSelector(state => state.appState)
+  const { content, error } = useSelector(state => state.appState);
   return (
     <StyledWrapper pose={pose} error={error}>
       <div className="leftSide">

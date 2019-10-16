@@ -28,7 +28,7 @@ const theme = {
     secondaryBlue: 'hsl(204, 100%, 40%)',
     lightBlue: 'hsl(204, 100%, 58%)',
     alertColor: 'hsl(0,100%,42%)',
-    successColor: 'hsl(106,100%,44%)',
+    successColor: 'hsl(99,78%,60%)',
     successColorHover: 'hsl(106,100%,34%)',
   },
   media: {

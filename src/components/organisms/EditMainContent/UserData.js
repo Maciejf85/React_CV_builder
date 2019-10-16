@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import store from 'store';
 import { updatePersonalFromState, updateImage } from 'actions';
-import { sidePanel } from 'functions'
+import { sidePanel } from 'functions';
 import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
@@ -88,8 +88,8 @@ class UserData extends Component {
     currentLinkedin: '',
     currentProfession: '',
     currentImageSrc: undefined,
-    isModal: false,
-    isModalVisible: false,
+    isModal: true,
+    isModalVisible: true,
   };
 
   componentDidMount() {
@@ -181,13 +181,12 @@ class UserData extends Component {
           })
           .then(result => {
             console.log('result', result.data);
-            sidePanel({ content: 'dane zapisane', error: false })
-
+            sidePanel({ content: 'dane zapisane', error: false });
           })
           .catch(error => {
             console.log('error :', error);
-            sidePanel({ content: 'błąd zapisu', error: true })
-          })
+            sidePanel({ content: 'błąd zapisu', error: true });
+          });
         if (this.mounted) {
           this.setState({
             statusActive: false,
@@ -362,17 +361,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-                <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                  <input
-                    type="file"
-                    data-actiontype="add"
-                    onChange={this.handleImage}
-                    id="imageInput"
-                    style={{ display: 'none' }}
-                  />
-                  dodaj zdjęcie
+              <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                <input
+                  type="file"
+                  data-actiontype="add"
+                  onChange={this.handleImage}
+                  id="imageInput"
+                  style={{ display: 'none' }}
+                />
+                dodaj zdjęcie
               </ImageOptionLabel>
-              )}
+            )}
           </StyledInputSection>
           <StyledInputSection>
             <Input
