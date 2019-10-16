@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StripBody from 'components/molecules/DefaultPanel/StripBody';
 import StripTitle from 'components/molecules/DefaultPanel/StripTitle';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import OptionButton from 'components/atoms/Buttons/ImageOptionButton';
 
 const StyledWrapper = styled.div`
@@ -60,13 +60,14 @@ const defaultPanel = props => {
           ))
         ) : (
             <div className="empty">
-              <Link to='/edit'>
-                <OptionButton
-                  primary={name === 'Moje CV'}
-                  disabled={name === 'Moje listy motywacyjne'}>
-                  {`dodaj ${caption}`}
-                </OptionButton>
-              </Link>
+              {/* <Link to='/edit'> */}
+              <OptionButton
+                onClick={props.newCv}
+                primary={name === 'Moje CV'}
+                disabled={name === 'Moje listy motywacyjne'}>
+                {`dodaj ${caption}`}
+              </OptionButton>
+              {/* </Link> */}
             </div>
           )}
       </section>

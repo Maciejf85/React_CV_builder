@@ -97,3 +97,26 @@ export const sidePanel = result => {
   store.dispatch(changeSidePanelState({ content, error }))
   setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), 2500)
 }
+
+// handle new cv
+
+export const handleCVItem = () => {
+  /**
+  |--------------------------------------------------
+  | skrypt php 
+  - tworzy timestamp
+  - koduje timestamp do md5
+  - tworzy katalog o nazwie timestamp md5
+  - dopisuje do tablicy cvList.json nowy obiekt 
+  {
+        "id": "timestamp(md5)",
+    "title": "moje cv",
+    "date": timestamp
+  }
+  odświeżana lista cv
+
+
+
+  |--------------------------------------------------
+  */
+}

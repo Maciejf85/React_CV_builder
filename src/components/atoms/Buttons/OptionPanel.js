@@ -38,7 +38,6 @@ class OptionPanel extends Component {
       store.dispatch(getCvData('get', id, userId));
     } else if (name === 'delete') {
       store.dispatch(deleteCvItem(id));
-      console.log('id', id);
     }
   };
 
