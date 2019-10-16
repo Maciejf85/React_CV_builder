@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StripBody from 'components/molecules/DefaultPanel/StripBody';
 import StripTitle from 'components/molecules/DefaultPanel/StripTitle';
+import OptionButton from 'components/atoms/Buttons/ImageOptionButton';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -46,7 +47,7 @@ const StyledWrapper = styled.div`
 `;
 
 const defaultPanel = props => {
-  const { name, content } = props;
+  const { name, content, caption } = props;
   return (
     <StyledWrapper>
       <header>{name}</header>
@@ -57,8 +58,8 @@ const defaultPanel = props => {
             <StripBody key={date} id={id} title={title} date={date} />
           ))
         ) : (
-          <div className="empty">brak dokumentów</div>
-        )}
+            <div className="empty"><OptionButton active disabled={name === 'Moje listy motywacyjne'}>{`dodaj ${caption}`}</OptionButton></div>
+          )}
       </section>
     </StyledWrapper>
   );

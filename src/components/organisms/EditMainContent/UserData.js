@@ -20,7 +20,7 @@ const StyledWrapper = styled.div`
   width: 800px;
   color: black;
   padding: 10px;
-  border: 3px dashed #ccc;
+  /* border: 3px dashed #ccc; */
 `;
 const StyledInputSection = styled.div`
   position: relative;
@@ -88,8 +88,8 @@ class UserData extends Component {
     currentLinkedin: '',
     currentProfession: '',
     currentImageSrc: undefined,
-    isModal: true,
-    isModalVisible: true,
+    isModal: false,
+    isModalVisible: false,
   };
 
   componentDidMount() {
@@ -304,7 +304,6 @@ class UserData extends Component {
         <StyledWrapper>
           <StyledInputSection width="73%">
             <Input
-              key="currentName"
               type="text"
               id="currentName"
               placeholder="Imię"
@@ -314,7 +313,6 @@ class UserData extends Component {
               isSmall
             />
             <Input
-              key="currentSurname"
               type="text"
               id="currentSurname"
               placeholder="Nazwisko"
@@ -324,7 +322,6 @@ class UserData extends Component {
               isSmall
             />
             <Input
-              key="currentProfession"
               type="text"
               id="currentProfession"
               placeholder="zawód"
@@ -342,7 +339,6 @@ class UserData extends Component {
                     <ImageOptionLabel htmlFor="imageInput">
                       <input
                         type="file"
-                        key={this.state.inputKey}
                         data-actiontype="add"
                         onChange={this.handleImage}
                         id="imageInput"
@@ -361,21 +357,20 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-              <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                <input
-                  type="file"
-                  data-actiontype="add"
-                  onChange={this.handleImage}
-                  id="imageInput"
-                  style={{ display: 'none' }}
-                />
-                dodaj zdjęcie
+                <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                  <input
+                    type="file"
+                    data-actiontype="add"
+                    onChange={this.handleImage}
+                    id="imageInput"
+                    style={{ display: 'none' }}
+                  />
+                  dodaj zdjęcie
               </ImageOptionLabel>
-            )}
+              )}
           </StyledInputSection>
           <StyledInputSection>
             <Input
-              key="currentEmail"
               type="text"
               id="currentEmail"
               placeholder="e-mail"
@@ -384,7 +379,6 @@ class UserData extends Component {
               onBlur={this.handleStoreUpdate}
             />
             <Input
-              key="currentBirthday"
               type="text"
               id="currentBirthday"
               placeholder="Data ur."
@@ -393,7 +387,6 @@ class UserData extends Component {
               onBlur={this.handleStoreUpdate}
             />
             <Input
-              key="currentAdress"
               type="text"
               id="currentAdress"
               placeholder="Miasto, Kraj"
@@ -402,7 +395,6 @@ class UserData extends Component {
               onBlur={this.handleStoreUpdate}
             />
             <Input
-              key="currentGithub"
               type="text"
               id="currentGithub"
               placeholder="Github"
@@ -411,7 +403,6 @@ class UserData extends Component {
               onBlur={this.handleStoreUpdate}
             />
             <Input
-              key="currentLinkedin"
               type="text"
               id="currentLinkedin"
               placeholder="LinkedIn"

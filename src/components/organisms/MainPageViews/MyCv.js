@@ -13,11 +13,11 @@ const StyleWrapper = styled.div`
 const CvList = () => {
   const cvList = useSelector(state => state.myCv);
   const list = cvList.map(item => item);
-  const name = useSelector(state => state.path.name);
+  const { name, caption } = useSelector(state => state.path);
 
   return (
     <StyleWrapper>
-      <Panel name={name} content={list} />
+      <Panel name={name} content={list} caption={caption} />
     </StyleWrapper>
   );
 };

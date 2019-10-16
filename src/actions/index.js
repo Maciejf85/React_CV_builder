@@ -21,7 +21,7 @@ export const currentEditView = (type = 'personal') => {
 
 export const getCvData = (type, id, token) => dispatch => {
   return axios
-    .post(`${path.cors}handleCv.php`, {
+    .post(`${path.cors}handleCurrentCv.php.php`, {
       type,
       id,
       token,
@@ -34,7 +34,7 @@ export const getCvData = (type, id, token) => dispatch => {
     });
 };
 
-//  GET USER CONFIDENTIAL AND PERSONAL DATA
+//  GET USER CONFIDENTIAL PERSONAL DATA AND LIST OF CV's
 
 export const getMainData = (type = 'main') => dispatch => {
   return axios
