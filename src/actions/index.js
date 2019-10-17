@@ -21,7 +21,7 @@ export const currentEditView = (type = 'personal') => {
 
 export const getCvData = (type, id, token) => dispatch => {
   return axios
-    .post(`${path.cors}handleCv.php`, {
+    .post(`${path.cors}handleCurrentCv.php`, {
       type,
       id,
       token,
@@ -34,7 +34,7 @@ export const getCvData = (type, id, token) => dispatch => {
     });
 };
 
-//  GET USER CONFIDENTIAL AND PERSONAL DATA
+//  GET USER CONFIDENTIAL PERSONAL DATA AND LIST OF CV's
 
 export const getMainData = (type = 'main') => dispatch => {
   return axios
@@ -61,7 +61,6 @@ export const getMainData = (type = 'main') => dispatch => {
           .then(request => {
             const { size } = request.data;
             if (size > 0) {
-
               const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
               const reader = new FileReader();
               if (accepted.includes(request.data.type)) {
@@ -109,6 +108,26 @@ export const getData = (request = 'read') => dispatch => {
       const payload = data;
       if (typeof payload === 'string') payload.trimEnd();
       return dispatch({ type: 'UPDATE_CONFIDENTIAL', payload });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+// HANDLE ADD/REMOVE CV
+
+export const updateCVList = (type, token, cvId) => dispatch => {
+  return axios
+    .post(`${path.cors}handleCV.php`, {
+      type,
+      token,
+      cvId,
+    })
+    .then(({ data }) => {
+      console.log('data', data);
+      if (data.length !== 0) {
+        dispatch({ type: 'SAVE_DATA', payload: data });
+      }
     })
     .catch(error => {
       console.log(error);

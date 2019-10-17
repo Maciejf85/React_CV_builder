@@ -13,7 +13,7 @@ const StyledWrapper = styled.div`
   margin: 20px;
   height: (100vh - 50px);
   color: black;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 
 class EditMainContent extends Component {
@@ -25,7 +25,6 @@ class EditMainContent extends Component {
     const { currentView } = this.props.editComponentView;
     return (
       <StyledWrapper>
-        Main Page {` path - ${currentView}`}
         {currentView === 'personal' && <UserData />}
         {currentView === 'education' && <Education />}
         {currentView === 'languages' && <Languages />}

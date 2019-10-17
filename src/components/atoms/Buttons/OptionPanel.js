@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ReactTooltip from 'react-tooltip';
-import { getCvData } from 'actions';
+import { getCvData, updateCVList } from 'actions';
 import { Link } from 'react-router-dom';
 import store from 'store';
 
@@ -33,9 +33,11 @@ class OptionPanel extends Component {
   handleClick = e => {
     const { id } = e.currentTarget;
     const { name } = e.currentTarget.dataset;
+    const userId = sessionStorage.getItem('userID');
     if (name === 'edit') {
-      const userId = sessionStorage.getItem('userID');
       store.dispatch(getCvData('get', id, userId));
+    } else if (name === 'delete') {
+      store.dispatch(updateCVList('remove', userId, id));
     }
   };
 

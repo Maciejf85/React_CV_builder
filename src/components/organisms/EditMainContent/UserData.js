@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import store from 'store';
 import { updatePersonalFromState, updateImage } from 'actions';
-import { sidePanel } from 'functions'
+import { sidePanel } from 'functions';
 import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
 import Modal from 'components/organisms/Modal';
 import ImageResizer from 'components/organisms/ImageResizer';
+import PropTypes from 'prop-types';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -20,7 +21,7 @@ const StyledWrapper = styled.div`
   width: 800px;
   color: black;
   padding: 10px;
-  border: 3px dashed #ccc;
+  /* border: 3px dashed #ccc; */
 `;
 const StyledInputSection = styled.div`
   position: relative;
@@ -30,7 +31,7 @@ const StyledInputSection = styled.div`
   justify-content: center;
   align-items: center;
   width: ${({ width }) => width || '100%'};
-  min-height: 135px;
+  min-height: ${({ height }) => height || '135px;'};
   padding: 15px;
   border-radius: 7px;
   background: white;
@@ -79,6 +80,7 @@ const Data = styled.div`
 class UserData extends Component {
   state = {
     statusActive: false,
+    currentTitle: 'nowe CV',
     currentName: '',
     currentSurname: '',
     currentEmail: '',
@@ -181,13 +183,12 @@ class UserData extends Component {
           })
           .then(result => {
             console.log('result', result.data);
-            sidePanel({ content: 'dane zapisane', error: false })
-
+            sidePanel({ content: 'dane zapisane', error: false });
           })
           .catch(error => {
             console.log('error :', error);
-            sidePanel({ content: 'błąd zapisu', error: true })
-          })
+            sidePanel({ content: 'błąd zapisu', error: true });
+          });
         if (this.mounted) {
           this.setState({
             statusActive: false,
@@ -281,6 +282,7 @@ class UserData extends Component {
     } = this.props.personalData;
     const { image } = this.props.image;
     const {
+      currentTitle,
       currentName,
       currentSurname,
       currentEmail,
@@ -303,9 +305,9 @@ class UserData extends Component {
           <ImageResizer click={this.handleModal} imageSrc={currentImageSrc} />
         </Modal>
         <StyledWrapper>
+          <StyledInputSection height="50px">{currentTitle}</StyledInputSection>
           <StyledInputSection width="73%">
             <Input
-              key="currentName"
               type="text"
               id="currentName"
               placeholder="Imię"
@@ -315,7 +317,6 @@ class UserData extends Component {
               isSmall
             />
             <Input
-              key="currentSurname"
               type="text"
               id="currentSurname"
               placeholder="Nazwisko"
@@ -325,7 +326,6 @@ class UserData extends Component {
               isSmall
             />
             <Input
-              key="currentProfession"
               type="text"
               id="currentProfession"
               placeholder="zawód"
@@ -343,7 +343,6 @@ class UserData extends Component {
                     <ImageOptionLabel htmlFor="imageInput">
                       <input
                         type="file"
-                        key={this.state.inputKey}
                         data-actiontype="add"
                         onChange={this.handleImage}
                         id="imageInput"
@@ -362,21 +361,20 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-                <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                  <input
-                    type="file"
-                    data-actiontype="add"
-                    onChange={this.handleImage}
-                    id="imageInput"
-                    style={{ display: 'none' }}
-                  />
-                  dodaj zdjęcie
+              <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                <input
+                  type="file"
+                  data-actiontype="add"
+                  onChange={this.handleImage}
+                  id="imageInput"
+                  style={{ display: 'none' }}
+                />
+                dodaj zdjęcie
               </ImageOptionLabel>
-              )}
+            )}
           </StyledInputSection>
           <StyledInputSection>
             <Input
-              key="currentEmail"
               type="text"
               id="currentEmail"
               placeholder="e-mail"
@@ -385,7 +383,6 @@ class UserData extends Component {
               onBlur={this.handleStoreUpdate}
             />
             <Input
-              key="currentBirthday"
               type="text"
               id="currentBirthday"
               placeholder="Data ur."
@@ -394,7 +391,6 @@ class UserData extends Component {
               onBlur={this.handleStoreUpdate}
             />
             <Input
-              key="currentAdress"
               type="text"
               id="currentAdress"
               placeholder="Miasto, Kraj"
@@ -403,7 +399,6 @@ class UserData extends Component {
               onBlur={this.handleStoreUpdate}
             />
             <Input
-              key="currentGithub"
               type="text"
               id="currentGithub"
               placeholder="Github"
@@ -412,7 +407,6 @@ class UserData extends Component {
               onBlur={this.handleStoreUpdate}
             />
             <Input
-              key="currentLinkedin"
               type="text"
               id="currentLinkedin"
               placeholder="LinkedIn"
@@ -453,5 +447,19 @@ class UserData extends Component {
   }
 }
 
-const mapStateToProps = state => ({ personalData: state.personalData, image: state.image });
+UserData.propTypes = {
+  currentCv: PropTypes.shape({
+    title: PropTypes.string,
+  }),
+};
+UserData.defaultProps = {
+  currentCv: PropTypes.shape({
+    title: 'nowe CV',
+  }),
+};
+const mapStateToProps = state => ({
+  personalData: state.personalData,
+  image: state.image,
+  currentCv: state.currentCv,
+});
 export default connect(mapStateToProps)(UserData);

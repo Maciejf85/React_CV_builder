@@ -19,7 +19,6 @@ const EditSidebar = () => {
   return (
     <StyledWrapper>
       <ul>
-        <div>Tytuł</div>
         {editViews.map(item => (
           <EditNavList key={item.link} name={item.name} link={item.link} icons={item.icon} />
         ))}

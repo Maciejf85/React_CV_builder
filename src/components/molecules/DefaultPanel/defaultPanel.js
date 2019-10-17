@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StripBody from 'components/molecules/DefaultPanel/StripBody';
 import StripTitle from 'components/molecules/DefaultPanel/StripTitle';
+// import { Link } from 'react-router-dom';
+import OptionButton from 'components/atoms/Buttons/ImageOptionButton';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -46,7 +48,7 @@ const StyledWrapper = styled.div`
 `;
 
 const defaultPanel = props => {
-  const { name, content } = props;
+  const { name, content, caption } = props;
   return (
     <StyledWrapper>
       <header>{name}</header>
@@ -57,9 +59,26 @@ const defaultPanel = props => {
             <StripBody key={date} id={id} title={title} date={date} />
           ))
         ) : (
-          <div className="empty">brak dokumentów</div>
+          <div className="empty">
+            {/* <Link to='/edit'> */}
+            <OptionButton
+              onClick={props.newCv}
+              primary={name === 'Moje CV'}
+              disabled={name === 'Moje listy motywacyjne'}
+            >
+              {`dodaj ${caption}`}
+            </OptionButton>
+            {/* </Link> */}
+          </div>
         )}
       </section>
+      <OptionButton
+        onClick={props.newCv}
+        primary={name === 'Moje CV'}
+        disabled={name === 'Moje listy motywacyjne'}
+      >
+        {`dodaj ${caption}`}
+      </OptionButton>
     </StyledWrapper>
   );
 };

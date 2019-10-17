@@ -8,8 +8,8 @@ export const editViews = [
 ];
 
 export const mainViews = [
+  { name: 'Moje konto', link: 'account' },
   { name: 'Moje CV', link: 'cv' },
   { name: 'Moje listy motywacyjne', link: 'documents' },
-  { name: 'Moje konto', link: 'account' },
   { name: 'Klauzula poufności', link: 'confidentiality' },
 ];
