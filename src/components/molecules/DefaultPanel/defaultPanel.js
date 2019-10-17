@@ -59,18 +59,26 @@ const defaultPanel = props => {
             <StripBody key={date} id={id} title={title} date={date} />
           ))
         ) : (
-            <div className="empty">
-              {/* <Link to='/edit'> */}
-              <OptionButton
-                onClick={props.newCv}
-                primary={name === 'Moje CV'}
-                disabled={name === 'Moje listy motywacyjne'}>
-                {`dodaj ${caption}`}
-              </OptionButton>
-              {/* </Link> */}
-            </div>
-          )}
+          <div className="empty">
+            {/* <Link to='/edit'> */}
+            <OptionButton
+              onClick={props.newCv}
+              primary={name === 'Moje CV'}
+              disabled={name === 'Moje listy motywacyjne'}
+            >
+              {`dodaj ${caption}`}
+            </OptionButton>
+            {/* </Link> */}
+          </div>
+        )}
       </section>
+      <OptionButton
+        onClick={props.newCv}
+        primary={name === 'Moje CV'}
+        disabled={name === 'Moje listy motywacyjne'}
+      >
+        {`dodaj ${caption}`}
+      </OptionButton>
     </StyledWrapper>
   );
 };

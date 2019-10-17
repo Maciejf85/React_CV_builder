@@ -1,8 +1,7 @@
 /* eslint-disable no-plusplus */
 //  Change UNIX to date
 import store from 'store';
-import { changeSidePanelState } from 'actions'
-
+import { changeSidePanelState } from 'actions';
 
 export const formatDate = date => {
   const months = [
@@ -93,20 +92,20 @@ export const base64StringtoFile = (base64String, filename) => {
 
 //  handle sidePanel
 export const sidePanel = result => {
-  const { content, error } = result
-  store.dispatch(changeSidePanelState({ content, error }))
-  setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), 2500)
-}
+  const { content, error } = result;
+  store.dispatch(changeSidePanelState({ content, error }));
+  setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), 2500);
+};
 
 // handle new cv
 
 export const handleCVItem = () => {
   /**
   |--------------------------------------------------
-  | skrypt php 
-  - tworzy timestamp
-  - koduje timestamp do md5
-  - tworzy katalog o nazwie timestamp md5
+  | skrypt php x
+  - tworzy timestamp x
+  - koduje timestamp do md5 x
+  - tworzy katalog o nazwie timestamp md5 x
   - dopisuje do tablicy cvList.json nowy obiekt 
   {
         "id": "timestamp(md5)",
@@ -119,4 +118,4 @@ export const handleCVItem = () => {
 
   |--------------------------------------------------
   */
-}
+};

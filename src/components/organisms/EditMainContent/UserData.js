@@ -10,6 +10,7 @@ import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
 import Modal from 'components/organisms/Modal';
 import ImageResizer from 'components/organisms/ImageResizer';
+import PropTypes from 'prop-types';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -30,7 +31,7 @@ const StyledInputSection = styled.div`
   justify-content: center;
   align-items: center;
   width: ${({ width }) => width || '100%'};
-  min-height: 135px;
+  min-height: ${({ height }) => height || '135px;'};
   padding: 15px;
   border-radius: 7px;
   background: white;
@@ -79,6 +80,7 @@ const Data = styled.div`
 class UserData extends Component {
   state = {
     statusActive: false,
+    currentTitle: 'nowe CV',
     currentName: '',
     currentSurname: '',
     currentEmail: '',
@@ -280,6 +282,7 @@ class UserData extends Component {
     } = this.props.personalData;
     const { image } = this.props.image;
     const {
+      currentTitle,
       currentName,
       currentSurname,
       currentEmail,
@@ -302,6 +305,7 @@ class UserData extends Component {
           <ImageResizer click={this.handleModal} imageSrc={currentImageSrc} />
         </Modal>
         <StyledWrapper>
+          <StyledInputSection height="50px">{currentTitle}</StyledInputSection>
           <StyledInputSection width="73%">
             <Input
               type="text"
@@ -357,17 +361,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-                <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                  <input
-                    type="file"
-                    data-actiontype="add"
-                    onChange={this.handleImage}
-                    id="imageInput"
-                    style={{ display: 'none' }}
-                  />
-                  dodaj zdjęcie
+              <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                <input
+                  type="file"
+                  data-actiontype="add"
+                  onChange={this.handleImage}
+                  id="imageInput"
+                  style={{ display: 'none' }}
+                />
+                dodaj zdjęcie
               </ImageOptionLabel>
-              )}
+            )}
           </StyledInputSection>
           <StyledInputSection>
             <Input
@@ -443,5 +447,19 @@ class UserData extends Component {
   }
 }
 
-const mapStateToProps = state => ({ personalData: state.personalData, image: state.image });
+UserData.propTypes = {
+  currentCv: PropTypes.shape({
+    title: PropTypes.string,
+  }),
+};
+UserData.defaultProps = {
+  currentCv: PropTypes.shape({
+    title: 'nowe CV',
+  }),
+};
+const mapStateToProps = state => ({
+  personalData: state.personalData,
+  image: state.image,
+  currentCv: state.currentCv,
+});
 export default connect(mapStateToProps)(UserData);

@@ -67,15 +67,14 @@ const StyledWrapper = styled.div`
       background: ${({ theme }) => theme.colors.inputGrey};
       margin-right: 10px;
       div {
-        text-align: center;
         position: absolute;
+        width: 100%;
         bottom: 0;
       }
       canvas {
         width: 190px;
-        padding: 10px;
         border: 1px solid white;
-        background: white;
+        padding: 3px;
       }
     }
   }

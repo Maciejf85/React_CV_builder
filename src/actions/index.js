@@ -116,18 +116,18 @@ export const getData = (request = 'read') => dispatch => {
 
 // HANDLE ADD/REMOVE CV
 
-export const updateCVList = (type, userId, cvId = null) => dispatch => {
+export const updateCVList = (type, token, cvId) => dispatch => {
   return axios
     .post(`${path.cors}handleCV.php`, {
       type,
-      userId,
+      token,
       cvId,
     })
     .then(({ data }) => {
-      // const { cvList } = data;
-      // const list = JSON.parse(cvList);
-      // dispatch({ type: 'SAVE_DATA', payload: list }),
-      console.log('data = ', data)
+      console.log('data', data);
+      if (data.length !== 0) {
+        dispatch({ type: 'SAVE_DATA', payload: data });
+      }
     })
     .catch(error => {
       console.log(error);
@@ -157,13 +157,6 @@ export const changeSidePanelState = payload => {
 export const updatePersonalFromState = payload => {
   return {
     type: 'UPDATE_PERSONAL_DATA',
-    payload,
-  };
-};
-
-export const deleteCvItem = payload => {
-  return {
-    type: 'DELETE_ITEM',
     payload,
   };
 };
