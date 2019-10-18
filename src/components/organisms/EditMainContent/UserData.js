@@ -107,6 +107,8 @@ class UserData extends Component {
       linkedin,
       profession,
     } = this.props.personalData;
+    const { currentItem } = this.props.currentCv;
+    const { title } = currentItem;
 
     this.setState({
       currentName: name,
@@ -117,6 +119,7 @@ class UserData extends Component {
       currentGithub: github,
       currentLinkedin: linkedin,
       currentProfession: profession,
+      currentTitle: title,
     });
   }
 
@@ -281,6 +284,7 @@ class UserData extends Component {
       profession,
     } = this.props.personalData;
     const { image } = this.props.image;
+
     const {
       currentTitle,
       currentName,

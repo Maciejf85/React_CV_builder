@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {} from 'functions';
 import path from '../path';
 
 // CHANGE VIEW IN MAIN PAGE
@@ -19,7 +20,7 @@ export const currentEditView = (type = 'personal') => {
 
 // //  GET ALL INFORMATIONS OF CURRENT CV
 
-export const getCvData = (type, id, token) => dispatch => {
+export const getCvData = (type, id, token, redir) => dispatch => {
   return axios
     .post(`${path.cors}handleCurrentCv.php`, {
       type,
@@ -27,7 +28,10 @@ export const getCvData = (type, id, token) => dispatch => {
       token,
     })
     .then(({ data }) => {
-      return dispatch({ type: 'SAVE_CURRENT_CV', payload: data });
+      return (
+        dispatch({ type: 'SAVE_CURRENT_CV', payload: data }),
+        setTimeout(() => redir.push('/edit'), 10)
+      );
     })
     .catch(error => {
       console.log(error);

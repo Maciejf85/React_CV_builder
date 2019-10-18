@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ReactTooltip from 'react-tooltip';
 import { getCvData, updateCVList } from 'actions';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import store from 'store';
 
 const StyledWrapper = styled.ul`
@@ -35,7 +35,8 @@ class OptionPanel extends Component {
     const { name } = e.currentTarget.dataset;
     const userId = sessionStorage.getItem('userID');
     if (name === 'edit') {
-      store.dispatch(getCvData('get', id, userId));
+      const redir = this.props.history;
+      store.dispatch(getCvData('get', id, userId, redir));
     } else if (name === 'delete') {
       store.dispatch(updateCVList('remove', userId, id));
     }
@@ -47,12 +48,12 @@ class OptionPanel extends Component {
     return (
       <StyledWrapper>
         <li>
-          <Link to="/edit">
-            <span data-tip="edytuj" data-for="edit">
-              <FontAwesomeIcon icon={faEdit} id={id} data-name="edit" onClick={this.handleClick} />
-            </span>
-            <ReactTooltip id="edit" place="top" effect="solid" className="customeTheme" />
-          </Link>
+          {/* <Link to="/edit"> */}
+          <span data-tip="edytuj" data-for="edit">
+            <FontAwesomeIcon icon={faEdit} id={id} data-name="edit" onClick={this.handleClick} />
+          </span>
+          <ReactTooltip id="edit" place="top" effect="solid" className="customeTheme" />
+          {/* </Link> */}
         </li>
         <li>
           <span data-tip="pobierz PDF" data-for="download">
@@ -76,4 +77,4 @@ class OptionPanel extends Component {
   }
 }
 
-export default OptionPanel;
+export default withRouter(OptionPanel);
