@@ -32,7 +32,6 @@ const LoggedIn = () => {
   const email = useSelector(state => state.personalData.email);
   return (
     <StyledWrapper>
-      {/* <FontAwesomeIcon icon={faUser} /> */}
       <p>{email}</p>
       <FontAwesomeIcon icon={faAngleDown} className="iconStyle" />
     </StyledWrapper>

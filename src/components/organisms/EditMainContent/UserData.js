@@ -8,6 +8,7 @@ import { sidePanel } from 'functions';
 import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
+import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Modal from 'components/organisms/Modal';
 import ImageResizer from 'components/organisms/ImageResizer';
 import PropTypes from 'prop-types';
@@ -23,49 +24,7 @@ const StyledWrapper = styled.div`
   padding: 10px;
   /* border: 3px dashed #ccc; */
 `;
-const StyledInputSection = styled.div`
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: ${({ width }) => width || '100%'};
-  min-height: ${({ height }) => height || '135px;'};
-  padding: 15px;
-  border-radius: 7px;
-  background: white;
-  margin-bottom: 15px;
-  overflow: hidden;
 
-  img {
-    max-height: 160px;
-  }
-  .image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    visibility: hidden;
-    color: white;
-    div {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      text-align: center;
-    }
-  }
-  :hover .image {
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-    visibility: visible;
-    transition: visibility 0.6s, opacity 0.6s;
-    background: rgba(0, 0, 0, 0.75);
-  }
-`;
 const Data = styled.div`
   margin-top: 30px;
   width: 100%;

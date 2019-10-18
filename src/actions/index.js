@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {} from 'functions';
 import path from '../path';
 
 // CHANGE VIEW IN MAIN PAGE
@@ -56,7 +55,7 @@ export const getMainData = (type = 'main') => dispatch => {
       return (
         dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),
         dispatch({ type: 'SET_PERSONAL_DATA', payload: personalData }),
-        dispatch({ type: 'SAVE_DATA', payload: list }),
+        dispatch({ type: 'SAVE_CV_LIST', payload: list }),
         // .get(`${path.cors}/users/${personalData.token}/images/pic1.jpg`, {\
         axios
           .get(`${path.cors}getImage.php`, {
@@ -128,10 +127,14 @@ export const updateCVList = (type, token, cvId) => dispatch => {
       cvId,
     })
     .then(({ data }) => {
-      console.log('data', data);
-      if (data.length !== 0) {
-        dispatch({ type: 'SAVE_DATA', payload: data });
-      }
+      const { cvList, currentCv } = data;
+      const list = cvList ? JSON.parse(cvList) : null;
+      const currentItem = currentCv ? JSON.parse(currentCv) : null;
+
+      return (
+        dispatch({ type: 'SAVE_CV_LIST', payload: list }),
+        dispatch({ type: 'SAVE_CURRENT_CV', payload: currentItem })
+      );
     })
     .catch(error => {
       console.log(error);
