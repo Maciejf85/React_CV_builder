@@ -8,11 +8,12 @@ import { ThemeProvider } from 'styled-components';
 import theme from 'theme/mainTheme';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+
 import path from '../../path';
 
 library.add(fas);
 
-function Root() {
+const Root = () => {
   return (
     <>
       <GlobalStyle />
@@ -27,7 +28,7 @@ function Root() {
       </ThemeProvider>
     </>
   );
-}
+};
 
 export default Root;
 

@@ -5,7 +5,7 @@ const myCV = (state = initialState, { type, payload }) => {
     case 'SHOW_DATA': {
       return state;
     }
-    case 'SAVE_DATA': {
+    case 'SAVE_CV_LIST': {
       return payload;
     }
 

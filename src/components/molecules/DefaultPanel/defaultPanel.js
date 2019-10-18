@@ -54,31 +54,34 @@ const defaultPanel = props => {
       <header>{name}</header>
       <section>
         {!content.length || <StripTitle />}
-        {content.length ? (
-          content.map(({ id, title, date }) => (
-            <StripBody key={date} id={id} title={title} date={date} />
-          ))
-        ) : (
-          <div className="empty">
-            {/* <Link to='/edit'> */}
-            <OptionButton
-              onClick={props.newCv}
-              primary={name === 'Moje CV'}
-              disabled={name === 'Moje listy motywacyjne'}
-            >
-              {`dodaj ${caption}`}
-            </OptionButton>
-            {/* </Link> */}
-          </div>
-        )}
+        {content.length
+          ? (
+
+            content.map(({ id, title, date }) => (
+              <StripBody key={date} id={id} title={title} date={date} />
+            ))
+          )
+          : (
+            <div className="empty">
+              <OptionButton
+                onClick={props.newCv}
+                primary={name === 'Moje CV'}
+                disabled={name === 'Moje listy motywacyjne'}
+              >
+                {`dodaj ${caption}`}
+              </OptionButton>
+            </div>
+          )}
+        {content.length ? <OptionButton with="100px"
+          onClick={props.newCv}
+          primary={name === 'Moje CV'}
+          disabled={name === 'Moje listy motywacyjne'}
+        >
+          {`dodaj ${caption}`}
+        </OptionButton>
+          : null}
       </section>
-      <OptionButton
-        onClick={props.newCv}
-        primary={name === 'Moje CV'}
-        disabled={name === 'Moje listy motywacyjne'}
-      >
-        {`dodaj ${caption}`}
-      </OptionButton>
+
     </StyledWrapper>
   );
 };

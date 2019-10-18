@@ -60,11 +60,11 @@ const NavButtons = props => {
           Main
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink activeClassName="active" to={path.edit}>
           Editor
         </NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink activeClassName="active" to={path.preview}>
           Preview

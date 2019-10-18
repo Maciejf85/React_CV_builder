@@ -19,7 +19,7 @@ export const currentEditView = (type = 'personal') => {
 
 // //  GET ALL INFORMATIONS OF CURRENT CV
 
-export const getCvData = (type, id, token) => dispatch => {
+export const getCvData = (type, id, token, redir) => dispatch => {
   return axios
     .post(`${path.cors}handleCurrentCv.php`, {
       type,
@@ -27,7 +27,10 @@ export const getCvData = (type, id, token) => dispatch => {
       token,
     })
     .then(({ data }) => {
-      return dispatch({ type: 'SAVE_CURRENT_CV', payload: data });
+      return (
+        dispatch({ type: 'SAVE_CURRENT_CV', payload: data }),
+        setTimeout(() => redir.push('/edit'), 10)
+      );
     })
     .catch(error => {
       console.log(error);
@@ -52,7 +55,7 @@ export const getMainData = (type = 'main') => dispatch => {
       return (
         dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),
         dispatch({ type: 'SET_PERSONAL_DATA', payload: personalData }),
-        dispatch({ type: 'SAVE_DATA', payload: list }),
+        dispatch({ type: 'SAVE_CV_LIST', payload: list }),
         // .get(`${path.cors}/users/${personalData.token}/images/pic1.jpg`, {\
         axios
           .get(`${path.cors}getImage.php`, {
@@ -124,10 +127,14 @@ export const updateCVList = (type, token, cvId) => dispatch => {
       cvId,
     })
     .then(({ data }) => {
-      console.log('data', data);
-      if (data.length !== 0) {
-        dispatch({ type: 'SAVE_DATA', payload: data });
-      }
+      const { cvList, currentCv } = data;
+      const list = cvList ? JSON.parse(cvList) : null;
+      const currentItem = currentCv ? JSON.parse(currentCv) : null;
+
+      return (
+        dispatch({ type: 'SAVE_CV_LIST', payload: list }),
+        dispatch({ type: 'SAVE_CURRENT_CV', payload: currentItem })
+      );
     })
     .catch(error => {
       console.log(error);

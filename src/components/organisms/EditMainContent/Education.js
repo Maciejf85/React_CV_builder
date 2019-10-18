@@ -1,19 +1,38 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import { connect } from 'react-redux';
+import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 
-const StyledWrapper = styled.div`
-  width: 100%;
-  background: #000;
-  color: white;
-`;
-
-export default class Education extends Component {
-  state = {
-    name: 'Education',
-  };
+class Education extends Component {
+  componentDidMount() {
+    console.log('education did mount');
+  }
 
   render() {
-    const { name } = this.state;
-    return <StyledWrapper>{name}</StyledWrapper>;
+    const { education } = this.props;
+    return (
+      <>
+        {education ? (
+          education.map(item => {
+            const { id, name, startYear, startMonth, endYear, endMonth } = item;
+            return (
+              <StyledInputSection key={id}>
+                <div>{id}</div>
+                <div>{name}</div>
+                <div>{startYear}</div>
+                <div>{startMonth}</div>
+                <div>{endYear}</div>
+                <div>{endMonth}</div>
+              </StyledInputSection>
+            );
+          })
+        ) : (
+          <div>brak danych</div>
+        )}
+      </>
+    );
   }
 }
+const mapStateToProps = state => ({
+  education: state.currentCv.education,
+});
+export default connect(mapStateToProps)(Education);
