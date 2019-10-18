@@ -3,11 +3,10 @@ import NavBar from 'components/organisms/Navigation/NavBar';
 import EditSidebar from 'components/molecules/SideBar/EditSidebar';
 import EditMainContent from 'components/organisms/EditMainContent/EditMainContent';
 import styled from 'styled-components';
-// import store from 'store';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
-// import { getMainData } from 'actions';
+import path from '../path'
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -23,7 +22,7 @@ class Edit extends Component {
   render() {
     const { isVisible, error } = this.props.appState;
     if (this.props.isSet === undefined) {
-      return <Redirect to="/" />;
+      return <Redirect to={path.main} />;
     }
 
     return (

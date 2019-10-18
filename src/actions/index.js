@@ -29,7 +29,7 @@ export const getCvData = (type, id, token, redir) => dispatch => {
     .then(({ data }) => {
       return (
         dispatch({ type: 'SAVE_CURRENT_CV', payload: data }),
-        setTimeout(() => redir.push('/edit'), 10)
+        setTimeout(() => redir.push(path.edit), 10)
       );
     })
     .catch(error => {
