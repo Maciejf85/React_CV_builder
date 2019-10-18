@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 const PrimaryButton = styled.button`
   min-width: 80px;
   height: 25px;
-  background: ${({ theme }) => theme.colors.secondaryGrey};
-  border: 2px solid ${({ theme }) => theme.colors.darkGrey};
+  background: ${({ theme, title }) => title ? "transparent" : theme.colors.secondaryGrey};
+  border: 1px solid ${({ theme, title }) => title ? "white" : theme.colors.darkGrey};
   color: white;
   padding: 0 10px;
   margin: 5px;
@@ -24,7 +24,7 @@ const PrimaryButton = styled.button`
     border-color: ${({ theme }) => theme.colors.secondaryGrey};
   }
 
-  ${({ primary, secondary }) =>
+  ${({ primary }) =>
     primary &&
     css`
       background: ${({ theme }) => theme.colors.primaryBlue};

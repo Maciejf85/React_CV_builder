@@ -9,6 +9,7 @@ import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
+import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import Modal from 'components/organisms/Modal';
 import ImageResizer from 'components/organisms/ImageResizer';
 import PropTypes from 'prop-types';
@@ -267,13 +268,21 @@ class UserData extends Component {
         >
           <ImageResizer click={this.handleModal} imageSrc={currentImageSrc} />
         </Modal>
+
         <StyledWrapper>
-          <StyledInputSection height="50px">{currentTitle}</StyledInputSection>
+          <StyledInputSection height="40px" title>
+            <div className='title'>
+              {currentTitle}
+              <PrimaryButton title>zmień tytuł</PrimaryButton>
+            </div>
+          </StyledInputSection>
+
+
           <StyledInputSection width="73%">
             <Input
               type="text"
               id="currentName"
-              placeholder="Imię"
+              placeholder="imię"
               value={this.state.currentName}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
@@ -282,7 +291,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentSurname"
-              placeholder="Nazwisko"
+              placeholder="nazwisko"
               value={this.state.currentSurname}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
@@ -324,17 +333,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-              <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                <input
-                  type="file"
-                  data-actiontype="add"
-                  onChange={this.handleImage}
-                  id="imageInput"
-                  style={{ display: 'none' }}
-                />
-                dodaj zdjęcie
+                <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                  <input
+                    type="file"
+                    data-actiontype="add"
+                    onChange={this.handleImage}
+                    id="imageInput"
+                    style={{ display: 'none' }}
+                  />
+                  dodaj zdjęcie
               </ImageOptionLabel>
-            )}
+              )}
           </StyledInputSection>
           <StyledInputSection>
             <Input
@@ -348,7 +357,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentBirthday"
-              placeholder="Data ur."
+              placeholder="data ur."
               value={this.state.currentBirthday}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
@@ -356,7 +365,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentAdress"
-              placeholder="Miasto, Kraj"
+              placeholder="miasto, Kraj"
               value={this.state.currentAdress}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
@@ -364,7 +373,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentGithub"
-              placeholder="Github"
+              placeholder="github"
               value={this.state.currentGithub}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
@@ -372,7 +381,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentLinkedin"
-              placeholder="LinkedIn"
+              placeholder="linkedIn"
               value={this.state.currentLinkedin}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
