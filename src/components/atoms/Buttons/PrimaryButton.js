@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components';
 const PrimaryButton = styled.button`
   min-width: 80px;
   height: 25px;
-  background: ${({ theme, title }) => title ? "transparent" : theme.colors.secondaryGrey};
-  border: 1px solid ${({ theme, title }) => title ? "white" : theme.colors.darkGrey};
+  background: ${({ theme, titleButton }) =>
+    titleButton ? 'transparent' : theme.colors.secondaryGrey};
+  border: 1px solid ${({ theme, titleButton }) => (titleButton ? 'white' : theme.colors.darkGrey)};
   color: white;
   padding: 0 10px;
   margin: 5px;

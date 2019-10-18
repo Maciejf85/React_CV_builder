@@ -50,6 +50,7 @@ class UserData extends Component {
     currentLinkedin: '',
     currentProfession: '',
     currentImageSrc: undefined,
+    changeTitle: false,
     isModal: false,
     isModalVisible: false,
   };
@@ -232,6 +233,13 @@ class UserData extends Component {
     setTimeout(() => this.setState(prevState => ({ isModal: !prevState.isModal })), modalClass);
   };
 
+  // CHANGE TITLE
+  handleTitle = () => {
+    this.setState({
+      changeTitle: !this.state.changeTitle,
+    });
+  };
+
   render() {
     const {
       name,
@@ -257,6 +265,7 @@ class UserData extends Component {
       currentProfession,
       statusActive,
       currentImageSrc,
+      changeTitle,
       isModal,
       isModalVisible,
     } = this.state;
@@ -270,20 +279,30 @@ class UserData extends Component {
         </Modal>
 
         <StyledWrapper>
-          <StyledInputSection height="40px" title>
-            <div className='title'>
-              {currentTitle}
-              <PrimaryButton title>zmień tytuł</PrimaryButton>
+          <StyledInputSection height="40px" titleInput>
+            <div className="title">
+              {changeTitle ? (
+                <input
+                  type="text"
+                  id="currentTitle"
+                  value={currentTitle}
+                  onChange={this.handleForm}
+                />
+              ) : (
+                currentTitle
+              )}
+              <PrimaryButton onClick={this.handleTitle} titleButton>
+                zmień tytuł
+              </PrimaryButton>
             </div>
           </StyledInputSection>
-
 
           <StyledInputSection width="73%">
             <Input
               type="text"
               id="currentName"
               placeholder="imię"
-              value={this.state.currentName}
+              value={currentName}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
               isSmall
@@ -292,7 +311,7 @@ class UserData extends Component {
               type="text"
               id="currentSurname"
               placeholder="nazwisko"
-              value={this.state.currentSurname}
+              value={currentSurname}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
               isSmall
@@ -301,7 +320,7 @@ class UserData extends Component {
               type="text"
               id="currentProfession"
               placeholder="zawód"
-              value={this.state.currentProfession}
+              value={currentProfession}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
             />
@@ -333,17 +352,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-                <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                  <input
-                    type="file"
-                    data-actiontype="add"
-                    onChange={this.handleImage}
-                    id="imageInput"
-                    style={{ display: 'none' }}
-                  />
-                  dodaj zdjęcie
+              <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                <input
+                  type="file"
+                  data-actiontype="add"
+                  onChange={this.handleImage}
+                  id="imageInput"
+                  style={{ display: 'none' }}
+                />
+                dodaj zdjęcie
               </ImageOptionLabel>
-              )}
+            )}
           </StyledInputSection>
           <StyledInputSection>
             <Input
