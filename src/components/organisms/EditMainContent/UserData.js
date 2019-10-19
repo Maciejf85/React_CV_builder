@@ -132,9 +132,11 @@ class UserData extends Component {
           currentGithub,
           currentLinkedin,
           currentProfession,
+          currentTitle,
         } = this.state;
         axios
           .post(`${path.cors}updatePersonalData.php`, {
+            title: currentTitle,
             name: currentName,
             surname: currentSurname,
             email: currentEmail,
@@ -234,10 +236,10 @@ class UserData extends Component {
   };
 
   // CHANGE TITLE
-  handleTitle = (prevstate) => {
-    this.setState({
+  handleTitle = () => {
+    this.setState(prevstate => ({
       changeTitle: !prevstate.changeTitle,
-    });
+    }));
   };
 
   render() {
@@ -279,7 +281,7 @@ class UserData extends Component {
         </Modal>
 
         <StyledWrapper>
-          <StyledInputSection height="70px" titleInput>
+          <StyledInputSection height="55px" titleInput>
             <div className="title">
               {changeTitle ? (
                 <input
@@ -289,11 +291,18 @@ class UserData extends Component {
                   onChange={this.handleForm}
                 />
               ) : (
-                  currentTitle
+                currentTitle
+              )}
+              <div>
+                <PrimaryButton onClick={this.handleTitle} titleButton>
+                  zmień tytuł
+                </PrimaryButton>
+                {changeTitle && (
+                  <PrimaryButton onClick={this.handleTitle} titleButton>
+                    anuluj
+                  </PrimaryButton>
                 )}
-              <PrimaryButton onClick={this.handleTitle} titleButton>
-                zmień tytuł
-              </PrimaryButton>
+              </div>
             </div>
           </StyledInputSection>
 
@@ -352,17 +361,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-                <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                  <input
-                    type="file"
-                    data-actiontype="add"
-                    onChange={this.handleImage}
-                    id="imageInput"
-                    style={{ display: 'none' }}
-                  />
-                  dodaj zdjęcie
+              <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                <input
+                  type="file"
+                  data-actiontype="add"
+                  onChange={this.handleImage}
+                  id="imageInput"
+                  style={{ display: 'none' }}
+                />
+                dodaj zdjęcie
               </ImageOptionLabel>
-              )}
+            )}
           </StyledInputSection>
           <StyledInputSection>
             <Input

@@ -120,7 +120,6 @@ export const getData = (request = 'read') => dispatch => {
 // HANDLE ADD/REMOVE CV
 
 export const updateCVList = (type, token, cvId = null, redir) => dispatch => {
-  console.log(' redir - in action', type, token, cvId, redir);
   return axios
     .post(`${path.cors}handleCV.php`, {
       type,

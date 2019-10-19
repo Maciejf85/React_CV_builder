@@ -16,6 +16,7 @@ const StyledWrapper = styled.ul`
     font-size: 15px;
     padding: 0 5px;
     margin: 0 5px;
+    border: 1px solid red;
 
     &:hover {
       color: ${({ theme }) => theme.colors.primaryBlue};
