@@ -57,7 +57,6 @@ const PrimaryButton = styled.button`
       float: right;
       clear: both;
       font-size: 1.15rem;
-      width: 100px;
     `}
 `;
 

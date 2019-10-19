@@ -69,7 +69,7 @@ class UserData extends Component {
       profession,
     } = this.props.personalData;
     const { currentItem } = this.props.currentCv;
-    const { title } = currentItem;
+    const { title, id } = currentItem;
 
     this.setState({
       currentName: name,
@@ -134,9 +134,12 @@ class UserData extends Component {
           currentProfession,
           currentTitle,
         } = this.state;
+        const { id } = this.props.currentCv.currentItem
+
         axios
           .post(`${path.cors}updatePersonalData.php`, {
             title: currentTitle,
+            cvId: id,
             name: currentName,
             surname: currentSurname,
             email: currentEmail,
@@ -291,8 +294,8 @@ class UserData extends Component {
                   onChange={this.handleForm}
                 />
               ) : (
-                currentTitle
-              )}
+                  currentTitle
+                )}
               <div>
                 <PrimaryButton onClick={this.handleTitle} titleButton>
                   zmień tytuł
@@ -361,17 +364,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-              <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                <input
-                  type="file"
-                  data-actiontype="add"
-                  onChange={this.handleImage}
-                  id="imageInput"
-                  style={{ display: 'none' }}
-                />
-                dodaj zdjęcie
+                <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                  <input
+                    type="file"
+                    data-actiontype="add"
+                    onChange={this.handleImage}
+                    id="imageInput"
+                    style={{ display: 'none' }}
+                  />
+                  dodaj zdjęcie
               </ImageOptionLabel>
-            )}
+              )}
           </StyledInputSection>
           <StyledInputSection>
             <Input
