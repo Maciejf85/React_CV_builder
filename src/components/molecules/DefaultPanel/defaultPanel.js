@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StripBody from 'components/molecules/DefaultPanel/StripBody';
 import StripTitle from 'components/molecules/DefaultPanel/StripTitle';
-// import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import OptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 
@@ -50,7 +51,7 @@ const StyledWrapper = styled.div`
 `;
 
 const defaultPanel = props => {
-  const { name, content, caption } = props;
+  const { name, content, caption, disabled } = props;
   return (
     <>
       <StyledWrapper>
@@ -62,24 +63,27 @@ const defaultPanel = props => {
               <StripBody key={date} id={id} title={title} date={date} />
             ))
           ) : (
-              <div className="empty">
-                <OptionButton
-                  onClick={props.newCv}
-                  primary={name === 'Moje CV'}
-                  disabled={name === 'Moje listy motywacyjne'}
-                >
-                  {`${caption}`}
-                </OptionButton>
-              </div>
-            )}
+            <div className="empty">
+              <OptionButton
+                onClick={props.newCv}
+                primary={name === 'Moje CV'}
+                disabled={name === 'Moje listy motywacyjne'}
+              >
+                {`${caption}`}
+              </OptionButton>
+            </div>
+          )}
         </section>
       </StyledWrapper>
       {content.length ? (
-        <PrimaryButton
-          dafault
-          onClick={props.newCv}
-          disabled={name === 'Moje listy motywacyjne'}
-        >
+        <PrimaryButton dafault onClick={props.newCv} disabled={disabled}>
+          {disabled && (
+            <FontAwesomeIcon
+              icon={faSyncAlt}
+              spin
+              style={{ margin: '0 5px', color: 'hsl(220,8%,44%)' }}
+            />
+          )}
           {`${caption}`}
         </PrimaryButton>
       ) : null}

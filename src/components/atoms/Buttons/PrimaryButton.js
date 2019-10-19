@@ -21,8 +21,9 @@ const PrimaryButton = styled.button`
   }
 
   &:disabled {
-    background: ${({ theme }) => theme.colors.secondaryGrey};
-    border-color: ${({ theme }) => theme.colors.secondaryGrey};
+    background: ${({ theme }) => theme.colors.inputGrey};
+    border-color: ${({ theme }) => theme.colors.inputGrey};
+    
   }
 
   ${({ primary }) =>

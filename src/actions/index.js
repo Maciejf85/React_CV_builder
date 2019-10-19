@@ -134,8 +134,8 @@ export const updateCVList = (type, token, cvId = null, redir) => dispatch => {
 
       return (
         dispatch({ type: 'SAVE_CV_LIST', payload: list }),
-        dispatch({ type: 'SAVE_CURRENT_CV', payload: currentItem })
-        // redir.push('/edit')
+        dispatch({ type: 'SAVE_CURRENT_CV', payload: currentItem }),
+        type === 'add' ? redir.push(path.edit) : null
       );
     })
     .catch(error => {

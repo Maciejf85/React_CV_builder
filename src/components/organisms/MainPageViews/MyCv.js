@@ -14,7 +14,13 @@ const StyleWrapper = styled.div`
 `;
 
 class CvList extends Component {
+  state = {
+    requestActive: false,
+  };
+
   handleNewCv = () => {
+    this.setState({ requestActive: true });
+
     const userId = sessionStorage.getItem('userID');
     const redir = this.props.history;
     store.dispatch(updateCVList('add', userId, null, redir));
@@ -22,11 +28,18 @@ class CvList extends Component {
 
   render() {
     const { cvList, name, caption } = this.props;
+    const { requestActive } = this.state;
     const list = cvList.map(item => item);
 
     return (
       <StyleWrapper>
-        <Panel name={name} content={list} caption={caption} newCv={this.handleNewCv} />
+        <Panel
+          name={name}
+          content={list}
+          caption={caption}
+          newCv={this.handleNewCv}
+          disabled={requestActive}
+        />
       </StyleWrapper>
     );
   }
