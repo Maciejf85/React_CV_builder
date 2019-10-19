@@ -119,7 +119,8 @@ export const getData = (request = 'read') => dispatch => {
 
 // HANDLE ADD/REMOVE CV
 
-export const updateCVList = (type, token, cvId) => dispatch => {
+export const updateCVList = (type, token, cvId = null, redir) => dispatch => {
+  console.log('cvId, redir', cvId, redir);
   return axios
     .post(`${path.cors}handleCV.php`, {
       type,
@@ -134,6 +135,7 @@ export const updateCVList = (type, token, cvId) => dispatch => {
       return (
         dispatch({ type: 'SAVE_CV_LIST', payload: list }),
         dispatch({ type: 'SAVE_CURRENT_CV', payload: currentItem })
+        // redir.push('/edit')
       );
     })
     .catch(error => {

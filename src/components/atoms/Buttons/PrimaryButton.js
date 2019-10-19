@@ -52,9 +52,10 @@ const PrimaryButton = styled.button`
   ${({ dafault }) =>
     dafault &&
     css`
-      margin: 0 15px;
+      margin: 0 20px;
       float: right;
       clear: both;
+      font-size: 1.15rem;
     `}
 `;
 

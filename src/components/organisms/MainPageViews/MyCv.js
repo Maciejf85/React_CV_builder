@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Panel from 'components/molecules/DefaultPanel/defaultPanel';
 import { updateCVList } from 'actions';
+import { withRouter } from 'react-router-dom';
 import store from 'store';
 import { connect } from 'react-redux';
 
@@ -15,13 +16,13 @@ const StyleWrapper = styled.div`
 class CvList extends Component {
   handleNewCv = () => {
     const userId = sessionStorage.getItem('userID');
-    store.dispatch(updateCVList('add', userId))
-  }
+    const redir = this.props.history;
+    store.dispatch(updateCVList('add', userId, redir));
+  };
 
   render() {
     const { cvList, name, caption } = this.props;
     const list = cvList.map(item => item);
-
 
     return (
       <StyleWrapper>
@@ -29,7 +30,11 @@ class CvList extends Component {
       </StyleWrapper>
     );
   }
-};
+}
 
-const mapStateToProps = state => ({ cvList: state.myCv, name: state.path.name, caption: state.path.caption })
-export default connect(mapStateToProps)(CvList);
+const mapStateToProps = state => ({
+  cvList: state.myCv,
+  name: state.path.name,
+  caption: state.path.caption,
+});
+export default withRouter(connect(mapStateToProps)(CvList));
