@@ -17,7 +17,7 @@ class CvList extends Component {
   handleNewCv = () => {
     const userId = sessionStorage.getItem('userID');
     const redir = this.props.history;
-    store.dispatch(updateCVList('add', userId, redir));
+    store.dispatch(updateCVList('add', userId, null, redir));
   };
 
   render() {

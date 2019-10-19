@@ -234,9 +234,9 @@ class UserData extends Component {
   };
 
   // CHANGE TITLE
-  handleTitle = () => {
+  handleTitle = (prevstate) => {
     this.setState({
-      changeTitle: !this.state.changeTitle,
+      changeTitle: !prevstate.changeTitle,
     });
   };
 
@@ -279,7 +279,7 @@ class UserData extends Component {
         </Modal>
 
         <StyledWrapper>
-          <StyledInputSection height="40px" titleInput>
+          <StyledInputSection height="70px" titleInput>
             <div className="title">
               {changeTitle ? (
                 <input
@@ -289,8 +289,8 @@ class UserData extends Component {
                   onChange={this.handleForm}
                 />
               ) : (
-                currentTitle
-              )}
+                  currentTitle
+                )}
               <PrimaryButton onClick={this.handleTitle} titleButton>
                 zmień tytuł
               </PrimaryButton>
@@ -352,17 +352,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-              <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                <input
-                  type="file"
-                  data-actiontype="add"
-                  onChange={this.handleImage}
-                  id="imageInput"
-                  style={{ display: 'none' }}
-                />
-                dodaj zdjęcie
+                <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                  <input
+                    type="file"
+                    data-actiontype="add"
+                    onChange={this.handleImage}
+                    id="imageInput"
+                    style={{ display: 'none' }}
+                  />
+                  dodaj zdjęcie
               </ImageOptionLabel>
-            )}
+              )}
           </StyledInputSection>
           <StyledInputSection>
             <Input

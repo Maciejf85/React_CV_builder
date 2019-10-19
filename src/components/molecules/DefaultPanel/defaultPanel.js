@@ -62,26 +62,25 @@ const defaultPanel = props => {
               <StripBody key={date} id={id} title={title} date={date} />
             ))
           ) : (
-            <div className="empty">
-              <OptionButton
-                onClick={props.newCv}
-                primary={name === 'Moje CV'}
-                disabled={name === 'Moje listy motywacyjne'}
-              >
-                {`dodaj ${caption}`}
-              </OptionButton>
-            </div>
-          )}
+              <div className="empty">
+                <OptionButton
+                  onClick={props.newCv}
+                  primary={name === 'Moje CV'}
+                  disabled={name === 'Moje listy motywacyjne'}
+                >
+                  {`${caption}`}
+                </OptionButton>
+              </div>
+            )}
         </section>
       </StyledWrapper>
       {content.length ? (
         <PrimaryButton
           dafault
-          with="80px"
           onClick={props.newCv}
           disabled={name === 'Moje listy motywacyjne'}
         >
-          {`dodaj ${caption}`}
+          {`${caption}`}
         </PrimaryButton>
       ) : null}
     </>
