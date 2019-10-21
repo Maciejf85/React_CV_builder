@@ -119,12 +119,13 @@ export const getData = (request = 'read') => dispatch => {
 
 // HANDLE ADD/REMOVE CV
 
-export const updateCVList = (type, token, cvId = null, redir) => dispatch => {
+export const updateCVList = (type, token, cvId = null, redir, cvTitle = null) => dispatch => {
   return axios
     .post(`${path.cors}handleCV.php`, {
       type,
       token,
       cvId,
+      cvTitle
     })
     .then(({ data }) => {
       const { cvList, currentCv } = data;

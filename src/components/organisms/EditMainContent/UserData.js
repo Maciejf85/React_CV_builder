@@ -40,7 +40,7 @@ const Data = styled.div`
 class UserData extends Component {
   state = {
     statusActive: false,
-    currentTitle: 'nowe CV',
+    currentTitle: '',
     currentName: '',
     currentSurname: '',
     currentEmail: '',
@@ -69,7 +69,7 @@ class UserData extends Component {
       profession,
     } = this.props.personalData;
     const { currentItem } = this.props.currentCv;
-    const { title, id } = currentItem;
+    const { title } = currentItem;
 
     this.setState({
       currentName: name,
@@ -163,7 +163,7 @@ class UserData extends Component {
             statusActive: false,
           });
         }
-      }, 3500);
+      }, 2500);
     }
   };
 
@@ -298,7 +298,7 @@ class UserData extends Component {
                 )}
               <div>
                 <PrimaryButton onClick={this.handleTitle} titleButton>
-                  zmień tytuł
+                  {changeTitle ? 'zapisz' : 'zmień tytuł'}
                 </PrimaryButton>
                 {changeTitle && (
                   <PrimaryButton onClick={this.handleTitle} titleButton>

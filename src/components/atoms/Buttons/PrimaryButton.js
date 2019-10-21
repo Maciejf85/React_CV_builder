@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const PrimaryButton = styled.button`
+
   min-width: 80px;
   height: 25px;
   background: ${({ theme, titleButton }) =>
@@ -21,12 +22,12 @@ const PrimaryButton = styled.button`
   }
 
   &:disabled {
-    background: ${({ theme }) => theme.colors.inputGrey};
-    border-color: ${({ theme }) => theme.colors.inputGrey};
-    
+  background: ${({ theme }) => theme.colors.darkGrey};
+  cursor:default ;
   }
 
-  ${({ primary }) =>
+${
+  ({ primary }) =>
     primary &&
     css`
       background: ${({ theme }) => theme.colors.primaryBlue};
@@ -38,7 +39,8 @@ const PrimaryButton = styled.button`
       }
     `}
 
-  ${({ secondary }) =>
+${
+  ({ secondary }) =>
     secondary &&
     css`
       background: ${({ theme }) => theme.colors.successColor};
@@ -49,10 +51,15 @@ const PrimaryButton = styled.button`
         border-color: ${({ theme }) => theme.colors.successColorHover};
       }
     `}
+    
 
-  ${({ dafault }) =>
+${
+  ({ dafault }) =>
     dafault &&
     css`
+        display:flex; 
+    justify-content:center;
+    align-items:center;
       margin: 0 20px;
       float: right;
       clear: both;

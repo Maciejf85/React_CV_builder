@@ -63,16 +63,16 @@ const defaultPanel = props => {
               <StripBody key={date} id={id} title={title} date={date} />
             ))
           ) : (
-            <div className="empty">
-              <OptionButton
-                onClick={props.newCv}
-                primary={name === 'Moje CV'}
-                disabled={name === 'Moje listy motywacyjne'}
-              >
-                {`${caption}`}
-              </OptionButton>
-            </div>
-          )}
+              <div className="empty">
+                <OptionButton
+                  onClick={props.newCv}
+                  primary={name === 'Moje CV'}
+                  disabled={name === 'Moje listy motywacyjne'}
+                >
+                  {`${caption}`}
+                </OptionButton>
+              </div>
+            )}
         </section>
       </StyledWrapper>
       {content.length ? (
@@ -81,7 +81,7 @@ const defaultPanel = props => {
             <FontAwesomeIcon
               icon={faSyncAlt}
               spin
-              style={{ margin: '0 5px', color: 'hsl(220,8%,44%)' }}
+              style={{ margin: '0 5px', color: 'hsl(99,78%,60%)' }}
             />
           )}
           {`${caption}`}
