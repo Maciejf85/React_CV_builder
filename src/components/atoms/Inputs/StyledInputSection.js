@@ -10,25 +10,25 @@ const StyledInputSection = styled.div`
   width: ${({ width }) => width || '100%'};
   min-height: ${({ height }) => height || '135px;'};
   padding: 15px;
-  border-radius: ${({ title }) => title ? "7px 7px 0 0 " : "7px"};
+  border-radius: ${({ titleInput }) => (titleInput ? '7px 7px 0 0 ' : '7px')};
   background: white;
   margin-bottom: 15px;
   overflow: hidden;
 
-  .title{
-    position:absolute;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    padding:0 10px;
-    color:white;
-    font-weight:${({ theme }) => theme.font.bold};
-    background:${({ theme }) => theme.colors.buttonActive};
-    font-size:${({ theme }) => theme.fontSize.ml};
+  .title {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    color: white;
+    font-weight: ${({ theme }) => theme.font.bold};
+    background: ${({ theme }) => theme.colors.buttonActive};
+    font-size: ${({ theme }) => theme.fontSize.ml};
   }
 
   img {
@@ -56,7 +56,7 @@ const StyledInputSection = styled.div`
     opacity: 1;
     visibility: visible;
     transition: visibility 0.6s, opacity 0.6s;
-    background: rgba(0, 0, 0, 0.75);
+    background: ${({ white }) => white ? 'rgba(100, 100, 100, 0.35)' : 'rgba(0, 0, 0, 0.75)'};
   }
 `;
 

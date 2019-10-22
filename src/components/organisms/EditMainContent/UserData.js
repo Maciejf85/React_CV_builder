@@ -11,6 +11,7 @@ import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import Modal from 'components/organisms/Modal';
+import withModal from 'components/hoc/withModal'
 import ImageResizer from 'components/organisms/ImageResizer';
 import PropTypes from 'prop-types';
 import path from '../../../path';
@@ -40,7 +41,7 @@ const Data = styled.div`
 class UserData extends Component {
   state = {
     statusActive: false,
-    currentTitle: 'nowe CV',
+    currentTitle: '',
     currentName: '',
     currentSurname: '',
     currentEmail: '',
@@ -50,8 +51,7 @@ class UserData extends Component {
     currentLinkedin: '',
     currentProfession: '',
     currentImageSrc: undefined,
-    isModal: false,
-    isModalVisible: false,
+    changeTitle: false,
   };
 
   componentDidMount() {
@@ -131,9 +131,15 @@ class UserData extends Component {
           currentGithub,
           currentLinkedin,
           currentProfession,
+          currentTitle,
         } = this.state;
+
+        const { id } = this.props.currentCv.currentItem
+
         axios
           .post(`${path.cors}updatePersonalData.php`, {
+            title: currentTitle,
+            cvId: id,
             name: currentName,
             surname: currentSurname,
             email: currentEmail,
@@ -157,7 +163,7 @@ class UserData extends Component {
             statusActive: false,
           });
         }
-      }, 3500);
+      }, 2500);
     }
   };
 
@@ -178,7 +184,7 @@ class UserData extends Component {
             this.setState({
               currentImageSrc: reader.result,
             });
-            this.handleModal();
+            this.props.handleModal();
           };
         } else {
           alert('Akceptowalne rozszerzenia plików : jpg , jpeg, png');
@@ -210,26 +216,13 @@ class UserData extends Component {
     store.dispatch(updatePersonalFromState(this.state));
   };
 
-  // HANDLE MODAL
 
-  handleModal = () => {
-    const { isModal } = this.state;
-    let modalDisplay;
-    let modalClass;
 
-    if (!isModal) {
-      modalDisplay = 0;
-      modalClass = 550;
-    } else {
-      modalDisplay = 750;
-      modalClass = 0;
-    }
-
-    setTimeout(
-      () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible })),
-      modalDisplay,
-    );
-    setTimeout(() => this.setState(prevState => ({ isModal: !prevState.isModal })), modalClass);
+  // CHANGE TITLE
+  handleTitle = () => {
+    this.setState(prevstate => ({
+      changeTitle: !prevstate.changeTitle,
+    }));
   };
 
   render() {
@@ -244,6 +237,7 @@ class UserData extends Component {
       profession,
     } = this.props.personalData;
     const { image } = this.props.image;
+    const { modal, modalVisible, handleModal } = this.props;
 
     const {
       currentTitle,
@@ -257,33 +251,49 @@ class UserData extends Component {
       currentProfession,
       statusActive,
       currentImageSrc,
-      isModal,
-      isModalVisible,
+      changeTitle,
     } = this.state;
     return (
       <>
         <Modal
-          className={isModal ? 'active' : ''}
-          style={isModalVisible ? { display: 'block' } : { display: 'none' }}
+          className={modal ? 'active' : ''}
+          style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <ImageResizer click={this.handleModal} imageSrc={currentImageSrc} />
+          <ImageResizer click={handleModal} imageSrc={currentImageSrc} />
         </Modal>
 
         <StyledWrapper>
-          <StyledInputSection height="40px" title>
-            <div className='title'>
-              {currentTitle}
-              <PrimaryButton title>zmień tytuł</PrimaryButton>
+          <StyledInputSection height="55px" titleInput>
+            <div className="title">
+              {changeTitle ? (
+                <input
+                  type="text"
+                  id="currentTitle"
+                  value={currentTitle}
+                  onChange={this.handleForm}
+                />
+              ) : (
+                  currentTitle
+                )}
+              <div>
+                <PrimaryButton onClick={this.handleTitle} titleButton>
+                  {changeTitle ? 'zapisz' : 'zmień tytuł'}
+                </PrimaryButton>
+                {changeTitle && (
+                  <PrimaryButton onClick={this.handleTitle} titleButton>
+                    anuluj
+                  </PrimaryButton>
+                )}
+              </div>
             </div>
           </StyledInputSection>
-
 
           <StyledInputSection width="73%">
             <Input
               type="text"
               id="currentName"
               placeholder="imię"
-              value={this.state.currentName}
+              value={currentName}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
               isSmall
@@ -292,7 +302,7 @@ class UserData extends Component {
               type="text"
               id="currentSurname"
               placeholder="nazwisko"
-              value={this.state.currentSurname}
+              value={currentSurname}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
               isSmall
@@ -301,7 +311,7 @@ class UserData extends Component {
               type="text"
               id="currentProfession"
               placeholder="zawód"
-              value={this.state.currentProfession}
+              value={currentProfession}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
             />
@@ -434,4 +444,4 @@ const mapStateToProps = state => ({
   image: state.image,
   currentCv: state.currentCv,
 });
-export default connect(mapStateToProps)(UserData);
+export default withModal(connect(mapStateToProps)(UserData));

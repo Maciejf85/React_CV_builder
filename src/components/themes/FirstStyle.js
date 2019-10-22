@@ -58,7 +58,7 @@ class MyDocument extends Component {
   };
 
   componentDidMount() {
-    setTimeout(this.props.downloadButton, 300);
+    setTimeout(this.props.downloadButton, 1000);
   }
 
   render() {

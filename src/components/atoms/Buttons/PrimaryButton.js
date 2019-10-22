@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components';
 const PrimaryButton = styled.button`
   min-width: 80px;
   height: 25px;
-  background: ${({ theme, title }) => title ? "transparent" : theme.colors.secondaryGrey};
-  border: 1px solid ${({ theme, title }) => title ? "white" : theme.colors.darkGrey};
+  background: ${({ theme, titleButton }) =>
+    titleButton ? 'transparent' : theme.colors.secondaryGrey};
+  border: 1px solid ${({ theme, titleButton }) => (titleButton ? 'white' : theme.colors.darkGrey)};
   color: white;
   padding: 0 10px;
   margin: 5px;
@@ -20,11 +21,12 @@ const PrimaryButton = styled.button`
   }
 
   &:disabled {
-    background: ${({ theme }) => theme.colors.secondaryGrey};
-    border-color: ${({ theme }) => theme.colors.secondaryGrey};
+  background: ${({ theme }) => theme.colors.darkGrey};
+  cursor:default ;
   }
 
-  ${({ primary }) =>
+${
+  ({ primary }) =>
     primary &&
     css`
       background: ${({ theme }) => theme.colors.primaryBlue};
@@ -36,7 +38,8 @@ const PrimaryButton = styled.button`
       }
     `}
 
-  ${({ secondary }) =>
+${
+  ({ secondary }) =>
     secondary &&
     css`
       background: ${({ theme }) => theme.colors.successColor};
@@ -47,13 +50,19 @@ const PrimaryButton = styled.button`
         border-color: ${({ theme }) => theme.colors.successColorHover};
       }
     `}
+    
 
-  ${({ dafault }) =>
+${
+  ({ dafault }) =>
     dafault &&
     css`
-      margin: 0 15px;
+        display:flex; 
+    justify-content:center;
+    align-items:center;
+      margin: 0 20px;
       float: right;
       clear: both;
+      font-size: 1.15rem;
     `}
 `;
 

@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StripBody from 'components/molecules/DefaultPanel/StripBody';
 import StripTitle from 'components/molecules/DefaultPanel/StripTitle';
-// import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import OptionButton from 'components/atoms/Buttons/ImageOptionButton';
+import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 
 const StyledWrapper = styled.div`
   position: relative;
   min-width: 300px;
+  margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.colors.lightGrey};
 
@@ -48,41 +51,43 @@ const StyledWrapper = styled.div`
 `;
 
 const defaultPanel = props => {
-  const { name, content, caption } = props;
+  const { name, content, caption, disabled } = props;
   return (
-    <StyledWrapper>
-      <header>{name}</header>
-      <section>
-        {!content.length || <StripTitle />}
-        {content.length
-          ? (
-
+    <>
+      <StyledWrapper>
+        <header>{name}</header>
+        <section>
+          {!content.length || <StripTitle />}
+          {content.length ? (
             content.map(({ id, title, date }) => (
               <StripBody key={date} id={id} title={title} date={date} />
             ))
-          )
-          : (
-            <div className="empty">
-              <OptionButton
-                onClick={props.newCv}
-                primary={name === 'Moje CV'}
-                disabled={name === 'Moje listy motywacyjne'}
-              >
-                {`dodaj ${caption}`}
-              </OptionButton>
-            </div>
+          ) : (
+              <div className="empty">
+                <OptionButton
+                  onClick={props.newCv}
+                  primary={name === 'Moje CV'}
+                  disabled={name === 'Moje listy motywacyjne'}
+                >
+                  {`${caption}`}
+                </OptionButton>
+              </div>
+            )}
+        </section>
+      </StyledWrapper>
+      {content.length ? (
+        <PrimaryButton dafault onClick={props.newCv} disabled={disabled}>
+          {disabled && (
+            <FontAwesomeIcon
+              icon={faSyncAlt}
+              spin
+              style={{ margin: '0 5px', color: 'hsl(99,78%,60%)' }}
+            />
           )}
-        {content.length ? <OptionButton with="100px"
-          onClick={props.newCv}
-          primary={name === 'Moje CV'}
-          disabled={name === 'Moje listy motywacyjne'}
-        >
-          {`dodaj ${caption}`}
-        </OptionButton>
-          : null}
-      </section>
-
-    </StyledWrapper>
+          {`${caption}`}
+        </PrimaryButton>
+      ) : null}
+    </>
   );
 };
 

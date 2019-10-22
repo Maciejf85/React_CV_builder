@@ -16,6 +16,7 @@ const StyleWrapper = styled.div`
   border-radius: 4px;
   font-size: ${({ theme }) => theme.fontSize.ms};
   color: ${({ theme }) => theme.colors.secondaryGrey};
+
   div {
     align-self: center;
     text-align: center;

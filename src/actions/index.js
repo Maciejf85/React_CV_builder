@@ -29,7 +29,7 @@ export const getCvData = (type, id, token, redir) => dispatch => {
     .then(({ data }) => {
       return (
         dispatch({ type: 'SAVE_CURRENT_CV', payload: data }),
-        setTimeout(() => redir.push('/edit'), 10)
+        setTimeout(() => redir.push(path.edit), 10)
       );
     })
     .catch(error => {
@@ -119,12 +119,13 @@ export const getData = (request = 'read') => dispatch => {
 
 // HANDLE ADD/REMOVE CV
 
-export const updateCVList = (type, token, cvId) => dispatch => {
+export const updateCVList = (type, token, cvId = null, redir, cvTitle = null) => dispatch => {
   return axios
     .post(`${path.cors}handleCV.php`, {
       type,
       token,
       cvId,
+      cvTitle
     })
     .then(({ data }) => {
       const { cvList, currentCv } = data;
@@ -133,7 +134,8 @@ export const updateCVList = (type, token, cvId) => dispatch => {
 
       return (
         dispatch({ type: 'SAVE_CV_LIST', payload: list }),
-        dispatch({ type: 'SAVE_CURRENT_CV', payload: currentItem })
+        dispatch({ type: 'SAVE_CURRENT_CV', payload: currentItem }),
+        type === 'add' ? redir.push(path.edit) : null
       );
     })
     .catch(error => {

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ReactTooltip from 'react-tooltip';
 import { getCvData, updateCVList } from 'actions';
+import ConfirmButton from 'components/atoms/Buttons/ConfirmButton'
 import { withRouter } from 'react-router-dom';
 import store from 'store';
 
@@ -13,23 +14,46 @@ const StyledWrapper = styled.ul`
   color: ${({ theme }) => theme.colors.buttonActive};
 
   li {
-    font-size: 15px;
-    padding: 0 5px;
-    margin: 0 5px;
+    align-self:center;
+    font-size: 16px;
+    padding: 0 10px;
 
-    &:hover {
-      color: ${({ theme }) => theme.colors.primaryBlue};
-      cursor: pointer;
     }
     .customeTheme {
       color: white;
-      font-size: ${({ theme }) => theme.fontSize.s};
-      padding: 3px 20px;
+      font-size: ${({ theme }) => theme.fontSize.ms};
+      padding: 10px 20px;
     }
+    .button{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:5px;
+      width:30px;
+      height:30px;
+      font-size:15px;
+      background:transparent;
+      color: ${({ theme }) => theme.colors.mainGrey};
+      border:none;
+      outline:none;
+      &:hover {
+      color: ${({ theme }) => theme.colors.primaryBlue};
+      cursor: pointer;
+    }
+     p{
+       margin:0;
+       padding:0;
+      color: ${({ theme }) => theme.colors.buttonActive};
+      cursor:default;
+    } 
   }
 `;
 
 class OptionPanel extends Component {
+  state = {
+    isAgree: false
+  }
+
   handleClick = e => {
     const { id } = e.currentTarget;
     const { name } = e.currentTarget.dataset;
@@ -38,40 +62,66 @@ class OptionPanel extends Component {
       const redir = this.props.history;
       store.dispatch(getCvData('get', id, userId, redir));
     } else if (name === 'delete') {
+      this.setState(prevState => ({
+        isAgree: !prevState.isAgree
+      }))
+    } else if (name === 'remove') {
       store.dispatch(updateCVList('remove', userId, id));
+
     }
+
   };
+
+  handleButtons = () => {
+    this.setState({
+      isAgree: false
+    })
+  }
 
   render() {
     const { id } = this.props;
+    const { isAgree } = this.state
 
     return (
       <StyledWrapper>
-        <li>
-          {/* <Link to="/edit"> */}
-          <span data-tip="edytuj" data-for="edit">
-            <FontAwesomeIcon icon={faEdit} id={id} data-name="edit" onClick={this.handleClick} />
-          </span>
-          <ReactTooltip id="edit" place="top" effect="solid" className="customeTheme" />
-          {/* </Link> */}
-        </li>
-        <li>
-          <span data-tip="pobierz PDF" data-for="download">
-            <FontAwesomeIcon
-              icon={faDownload}
-              id={id}
-              data-name="download"
-              onClick={this.handleClick}
-            />
-          </span>
-          <ReactTooltip id="download" effect="solid" className="customeTheme" />
-        </li>
-        <li>
-          <span data-tip="usuń CV" data-for="delete">
-            <FontAwesomeIcon icon={faTimes} id={id} data-name="delete" onClick={this.handleClick} />
-          </span>
-          <ReactTooltip id="delete" effect="solid" className="customeTheme" />
-        </li>
+        {!isAgree
+          ? (
+            <>
+              <li data-tip="edytuj" data-for="edit">
+                <button className='button' type='button' id={id} data-name="edit" onClick={this.handleClick}>
+                  <ReactTooltip id="edit" place="top" effect="solid" className="customeTheme" />
+                  <FontAwesomeIcon icon={faEdit} />
+                </button>
+              </li>
+              <li data-tip="pobierz PDF" data-for="download">
+                <button className='button' type='button' id={id}
+                  data-name="download"
+                  onClick={this.handleClick} >
+                  <ReactTooltip id="download" effect="solid" className="customeTheme" />
+                  <FontAwesomeIcon icon={faDownload} />
+                </button>
+              </li>
+              <li data-tip="usuń CV" data-for="delete">
+                <button className='button' type='button' data-name="delete" onClick={this.handleClick}>
+                  <FontAwesomeIcon icon={faTimes} data-name="delete" />
+                  <ReactTooltip id="delete" effect="solid" className="customeTheme" />
+                </button>
+              </li>
+            </>
+          )
+          :
+          <>
+            <li>
+              <p>Czy usunąć ?</p>
+            </li>
+            <li>
+              <ConfirmButton data-name='remove' id={id} onClick={this.handleClick}>usuń</ConfirmButton>
+            </li>
+            <li>
+              <ConfirmButton cancel onClick={this.handleButtons} >anuluj</ConfirmButton>
+            </li>
+          </>
+        }
       </StyledWrapper>
     );
   }
