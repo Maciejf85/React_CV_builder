@@ -11,6 +11,7 @@ import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import Modal from 'components/organisms/Modal';
+import withModal from 'components/hoc/withModal'
 import ImageResizer from 'components/organisms/ImageResizer';
 import PropTypes from 'prop-types';
 import path from '../../../path';
@@ -51,8 +52,6 @@ class UserData extends Component {
     currentProfession: '',
     currentImageSrc: undefined,
     changeTitle: false,
-    isModal: false,
-    isModalVisible: false,
   };
 
   componentDidMount() {
@@ -134,6 +133,7 @@ class UserData extends Component {
           currentProfession,
           currentTitle,
         } = this.state;
+
         const { id } = this.props.currentCv.currentItem
 
         axios
@@ -184,7 +184,7 @@ class UserData extends Component {
             this.setState({
               currentImageSrc: reader.result,
             });
-            this.handleModal();
+            this.props.handleModal();
           };
         } else {
           alert('Akceptowalne rozszerzenia plików : jpg , jpeg, png');
@@ -216,27 +216,7 @@ class UserData extends Component {
     store.dispatch(updatePersonalFromState(this.state));
   };
 
-  // HANDLE MODAL
 
-  handleModal = () => {
-    const { isModal } = this.state;
-    let modalDisplay;
-    let modalClass;
-
-    if (!isModal) {
-      modalDisplay = 0;
-      modalClass = 550;
-    } else {
-      modalDisplay = 750;
-      modalClass = 0;
-    }
-
-    setTimeout(
-      () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible })),
-      modalDisplay,
-    );
-    setTimeout(() => this.setState(prevState => ({ isModal: !prevState.isModal })), modalClass);
-  };
 
   // CHANGE TITLE
   handleTitle = () => {
@@ -257,6 +237,7 @@ class UserData extends Component {
       profession,
     } = this.props.personalData;
     const { image } = this.props.image;
+    const { modal, modalVisible, handleModal } = this.props;
 
     const {
       currentTitle,
@@ -271,16 +252,14 @@ class UserData extends Component {
       statusActive,
       currentImageSrc,
       changeTitle,
-      isModal,
-      isModalVisible,
     } = this.state;
     return (
       <>
         <Modal
-          className={isModal ? 'active' : ''}
-          style={isModalVisible ? { display: 'block' } : { display: 'none' }}
+          className={modal ? 'active' : ''}
+          style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <ImageResizer click={this.handleModal} imageSrc={currentImageSrc} />
+          <ImageResizer click={handleModal} imageSrc={currentImageSrc} />
         </Modal>
 
         <StyledWrapper>
@@ -465,4 +444,4 @@ const mapStateToProps = state => ({
   image: state.image,
   currentCv: state.currentCv,
 });
-export default connect(mapStateToProps)(UserData);
+export default withModal(connect(mapStateToProps)(UserData));

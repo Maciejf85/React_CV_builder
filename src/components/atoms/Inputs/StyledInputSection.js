@@ -56,7 +56,7 @@ const StyledInputSection = styled.div`
     opacity: 1;
     visibility: visible;
     transition: visibility 0.6s, opacity 0.6s;
-    background: rgba(0, 0, 0, 0.75);
+    background: ${({ white }) => white ? 'rgba(100, 100, 100, 0.35)' : 'rgba(0, 0, 0, 0.75)'};
   }
 `;
 

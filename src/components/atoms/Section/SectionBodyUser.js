@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
+import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
+import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
+import Modal from 'components/organisms/Modal'
+import withModal from 'components/hoc/withModal';
+import store from 'store';
+import { updateImage } from 'actions';
+import axios from 'axios';
+import ImageResizer from 'components/organisms/ImageResizer';
 import { reverseDate } from 'functions/';
+import path from '../../../path';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -53,83 +62,156 @@ const StyledWrapper = styled.div`
       font-weight: ${({ theme }) => theme.font.normal};
     }
   }
-  input {
-    display: inline-block;
-    width: 100%;
-    padding: 5px;
+  .image{
+    background:#ccc;
   }
-  img,
-  .emptyImage {
-    position: absolute;
-    top: 30px;
-    right: 27px;
-    width: 100px;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.colors.lightGrey};
+  .imageContent{
+    position:absolute;
+    top:0;
+    right:0;
   }
-  .emptyImage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 120px;
-    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
-    color: ${({ theme }) => theme.colors.buttonActive};
-    user-select: none;
-  }
+
 `;
-const SectionBody = props => {
-  const {
-    name,
-    surname,
-    email,
-    adress,
-    birthday,
-    github,
-    linkedin,
-    created,
-    profession,
-  } = props.personalData;
-  const { image } = props.image;
-  return (
-    <StyledWrapper>
-      <div className="header">
-        <h1>{profession}</h1>
-        <span>{`( utworzone ${reverseDate(created)} )`}</span>
-      </div>
-      <ul>
-        <li>
-          <span>imię:</span> {name}
-        </li>
-        <li>
-          <span>nazwisko:</span> {surname}
-        </li>
-        <li>
-          <span>email:</span> {email}
-        </li>
-        <li>
-          <span>adres:</span> {adress}
-        </li>
-        <li>
-          <span>data urodzenia:</span> {reverseDate(birthday)}
-        </li>
-        <li>
-          <span>github:</span>
-          <a href={github} target="_blank" rel="noopener noreferrer">
-            {github}
-          </a>
-        </li>
-        <li>
-          <span>linkedin:</span>
-          <a href={linkedin} target="_blank" rel="noopener noreferrer">
-            {linkedin}
-          </a>
-        </li>
-      </ul>
-      {image ? <img src={image} alt="user" /> : <div className="emptyImage">Twoje zdjęcie</div>}
-    </StyledWrapper>
-  );
-};
+class SectionBody extends Component {
+
+  state = {
+    currentImageSrc: undefined,
+  }
+
+  // HANDLE IMAGE FILE
+
+  handleImage = e => {
+    const { actiontype } = e.target.dataset;
+
+    if (actiontype === 'add') {
+      if (e.target.files[0]) {
+        const file = e.target.files[0];
+        const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
+        // imageBase64Data
+        const reader = new FileReader();
+        if (accepted.includes(file.type)) {
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            this.setState({
+              currentImageSrc: reader.result,
+            });
+            console.log('reader.result', reader.result)
+            this.props.handleModal();
+          };
+        } else {
+          alert('Akceptowalne rozszerzenia plików : jpg , jpeg, png');
+        }
+      }
+      e.target.value = null;
+    } else if (actiontype === 'remove') {
+      store.dispatch(updateImage(null));
+      axios.post(`${path.cors}removeImage.php`);
+    }
+  };
+
+  render() {
+    const {
+      name,
+      surname,
+      email,
+      adress,
+      birthday,
+      github,
+      linkedin,
+      created,
+      profession,
+    } = this.props.personalData;
+    const { image } = this.props.image;
+    const { modal, modalVisible, handleModal } = this.props;
+    const { currentImageSrc } = this.state;
+
+    return (
+      <>
+        <Modal
+          className={modal ? 'active' : ''}
+          style={modalVisible ? { display: 'block' } : { display: 'none' }}
+        >
+          <ImageResizer click={handleModal} imageSrc={currentImageSrc} />
+        </Modal>
+        <StyledWrapper>
+          <div className="header">
+            <h1>{profession}</h1>
+            <span>{`( utworzone ${reverseDate(created)} )`}</span>
+          </div>
+          <ul>
+            <li>
+              <span>imię:</span> {name}
+            </li>
+            <li>
+              <span>nazwisko:</span> {surname}
+            </li>
+            <li>
+              <span>email:</span> {email}
+            </li>
+            <li>
+              <span>adres:</span> {adress}
+            </li>
+            <li>
+              <span>data urodzenia:</span> {reverseDate(birthday)}
+            </li>
+            <li>
+              <span>github:</span>
+              <a href={github} target="_blank" rel="noopener noreferrer">
+                {github}
+              </a>
+            </li>
+            <li>
+              <span>linkedin:</span>
+              <a href={linkedin} target="_blank" rel="noopener noreferrer">
+                {linkedin}
+              </a>
+            </li>
+          </ul>
+
+          <StyledInputSection width="25%" white className='imageContent'>
+            {image ? (
+              <>
+                <img src={image} alt="user" />
+                <div className="image">
+                  <div>
+                    <ImageOptionLabel htmlFor="imageInput">
+                      <input
+                        type="file"
+                        data-actiontype="add"
+                        onChange={this.handleImage}
+                        id="imageInput"
+                        style={{ display: 'none' }}
+                      />
+                      zmień zdjęcie
+                    </ImageOptionLabel>
+                    <ImageOptionButton
+                      type="button"
+                      data-actiontype="remove"
+                      onClick={this.handleImage}
+                    >
+                      usuń zdjęcie
+                    </ImageOptionButton>
+                  </div>
+                </div>
+              </>
+            ) : (
+                <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                  <input
+                    type="file"
+                    data-actiontype="add"
+                    onChange={this.handleImage}
+                    id="imageInput"
+                    style={{ display: 'none' }}
+                  />
+                  dodaj zdjęcie
+              </ImageOptionLabel>
+              )}
+          </StyledInputSection>
+        </StyledWrapper>
+      </>
+    );
+  };
+}
 
 SectionBody.propTypes = {
   personalData: PropTypes.shape({
@@ -166,4 +248,4 @@ SectionBody.defaultProps = {
 
 const mapStateToProps = state => ({ personalData: state.personalData, image: state.image });
 
-export default connect(mapStateToProps)(SectionBody);
+export default withModal(connect(mapStateToProps)(SectionBody));

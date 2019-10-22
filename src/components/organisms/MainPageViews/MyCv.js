@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import MainModal from 'components/molecules/DefaultPanel/MainPageModal'
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import Modal from 'components/organisms/Modal'
+import withModal from 'components/hoc/withModal'
 import store from 'store';
 import { connect } from 'react-redux';
 
@@ -20,32 +21,10 @@ position:relative;
 class CvList extends Component {
   state = {
     requestActive: false,
-    isModal: false,
-    isModalVisible: false,
     cvTitle: 'nowe CV'
   };
 
 
-
-  handleModal = () => {
-    const { isModal } = this.state;
-    let modalDisplay;
-    let modalClass;
-
-    if (!isModal) {
-      modalDisplay = 0;
-      modalClass = 150;
-    } else {
-      modalDisplay = 350;
-      modalClass = 0;
-    }
-
-    setTimeout(
-      () => this.setState(prevState => ({ isModalVisible: !prevState.isModalVisible })),
-      modalDisplay,
-    );
-    setTimeout(() => this.setState(prevState => ({ isModal: !prevState.isModal })), modalClass);
-  };
 
   handleNewCv = () => {
     this.setState({ requestActive: true });
@@ -53,7 +32,7 @@ class CvList extends Component {
     const userId = sessionStorage.getItem('userID');
     const redir = this.props.history;
     store.dispatch(updateCVList('add', userId, null, redir, cvTitle));
-    this.handleModal();
+    this.props.handleModal();
   };
 
 
@@ -63,41 +42,37 @@ class CvList extends Component {
     })
   }
 
-  handleCancelModal = () => {
-    this.handleModal();
-  }
-
   render() {
-    const { cvList, name, caption } = this.props;
-    const { requestActive, isModal, isModalVisible, cvTitle } = this.state;
+    const { cvList, name, caption, modal, modalVisible, handleModal } = this.props;
+    const { requestActive, cvTitle } = this.state;
     const list = cvList.map(item => item);
 
 
     return (
       <StyleWrapper>
         <Modal
-          className={isModal ? 'active' : ''}
-          style={isModalVisible ? { display: 'block' } : { display: 'none' }}
+          className={modal ? 'active' : ''}
+          style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <MainModal>
+          <MainModal >
             <header>Tytuł CV</header>
             <section>
-              <input type='text' name='cvTitle' value={cvTitle} onChange={this.handleTitle} autoFocus />
+              <input type='text' name='cvTitle' value={cvTitle} onChange={this.handleTitle} />
             </section>
             <footer>
-              <PrimaryButton type='button' primary onClick={this.handleNewCv} >zapisz</PrimaryButton>
-              <PrimaryButton type='button' name='cancel' onClick={this.handleCancelModal}>anuluj</PrimaryButton></footer>
+              <PrimaryButton type='button' primary onClick={this.handleNewCv}>zapisz</PrimaryButton>
+              <PrimaryButton type='button' name='cancel' onClick={handleModal}>anuluj</PrimaryButton></footer>
 
           </MainModal>
-        </Modal>
+        </Modal >
         <Panel
           name={name}
           content={list}
           caption={caption}
-          newCv={this.handleModal}
+          newCv={handleModal}
           disabled={requestActive}
         />
-      </StyleWrapper>
+      </StyleWrapper >
     );
   }
 }
@@ -107,4 +82,4 @@ const mapStateToProps = state => ({
   name: state.path.name,
   caption: state.path.caption,
 });
-export default withRouter(connect(mapStateToProps)(CvList));
+export default withModal(withRouter(connect(mapStateToProps)(CvList)));

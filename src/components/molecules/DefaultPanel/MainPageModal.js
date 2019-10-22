@@ -13,6 +13,7 @@ border-radius:10px;
 overflow:hidden;
 background:white;
 font-style:italic;
+box-shadow:0 0 15px ${({ theme }) => theme.colors.darkGrey};
 
 header{
     /* border:1px solid red; */

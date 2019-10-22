@@ -103,6 +103,7 @@ class ImageResizer extends Component {
   handleCropComplete = crop => {
     const canvasRef = this.imagePreviewOnCanvas.current;
     const { imageSrc } = this.props;
+    console.log('imageSrc', imageSrc)
     image64toCanvasRef(canvasRef, imageSrc, crop);
   };
 
@@ -158,7 +159,6 @@ class ImageResizer extends Component {
         console.log('error :', error);
         sidePanel({ content: 'błąd sieci', error: true });
       })
-      .finally();
 
     store.dispatch(updateImage(imageData));
     this.props.click();

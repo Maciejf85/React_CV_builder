@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 const PrimaryButton = styled.button`
-
   min-width: 80px;
   height: 25px;
   background: ${({ theme, titleButton }) =>

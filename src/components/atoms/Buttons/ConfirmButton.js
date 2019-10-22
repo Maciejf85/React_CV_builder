@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const ConfirmButton = styled.button`
-  width: 55px;
+  width: 70px;
   height: 25px;
   background: ${({ theme, cancel }) =>
         cancel ? theme.colors.darkGrey : theme.colors.alertColor};
@@ -14,6 +14,8 @@ const ConfirmButton = styled.button`
 
   :hover{
       cursor: pointer;
+      background: ${({ theme, cancel }) =>
+        cancel ? theme.colors.mediumGrey : theme.colors.alertColorHover};
   }
 `
 

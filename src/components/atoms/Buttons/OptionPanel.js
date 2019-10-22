@@ -13,29 +13,28 @@ const StyledWrapper = styled.ul`
   justify-content: center;
   color: ${({ theme }) => theme.colors.buttonActive};
 
-
-
   li {
+    align-self:center;
     font-size: 16px;
     padding: 0 10px;
-
 
     }
     .customeTheme {
       color: white;
-      font-size: ${({ theme }) => theme.fontSize.s};
-      padding: 3px 20px;
+      font-size: ${({ theme }) => theme.fontSize.ms};
+      padding: 10px 20px;
     }
-    button{
+    .button{
       display:flex;
       justify-content:center;
       align-items:center;
       padding:5px;
-      width:25px;
-      height:25px;
+      width:30px;
+      height:30px;
+      font-size:15px;
       background:transparent;
+      color: ${({ theme }) => theme.colors.mainGrey};
       border:none;
-      border:1px solid black;
       outline:none;
       &:hover {
       color: ${({ theme }) => theme.colors.primaryBlue};
@@ -88,30 +87,24 @@ class OptionPanel extends Component {
         {!isAgree
           ? (
             <>
-
               <li data-tip="edytuj" data-for="edit">
-                <button type='button' id={id} data-name="edit" onClick={this.handleClick}>
-                  <FontAwesomeIcon icon={faEdit}  >
-                    <ReactTooltip id="edit" place="top" effect="solid" className="customeTheme" />
-                  </FontAwesomeIcon>
+                <button className='button' type='button' id={id} data-name="edit" onClick={this.handleClick}>
+                  <ReactTooltip id="edit" place="top" effect="solid" className="customeTheme" />
+                  <FontAwesomeIcon icon={faEdit} />
                 </button>
               </li>
               <li data-tip="pobierz PDF" data-for="download">
-                <button type='button' id={id}
+                <button className='button' type='button' id={id}
                   data-name="download"
                   onClick={this.handleClick} >
-                  <FontAwesomeIcon
-                    icon={faDownload}
-                  >
-                    <ReactTooltip id="download" effect="solid" className="customeTheme" />
-                  </FontAwesomeIcon>
+                  <ReactTooltip id="download" effect="solid" className="customeTheme" />
+                  <FontAwesomeIcon icon={faDownload} />
                 </button>
               </li>
               <li data-tip="usuń CV" data-for="delete">
-                <button type='button' data-name="delete" onClick={this.handleClick}>
-                  <FontAwesomeIcon icon={faTimes} data-name="delete" >
-                    <ReactTooltip id="delete" effect="solid" className="customeTheme" />
-                  </FontAwesomeIcon>
+                <button className='button' type='button' data-name="delete" onClick={this.handleClick}>
+                  <FontAwesomeIcon icon={faTimes} data-name="delete" />
+                  <ReactTooltip id="delete" effect="solid" className="customeTheme" />
                 </button>
               </li>
             </>
