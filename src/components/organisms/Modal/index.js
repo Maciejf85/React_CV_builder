@@ -6,7 +6,7 @@ const Modal = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
+  background: ${({ white }) => white ? 'rgba(255, 255, 255 ,0.7)' : 'rgba(0, 0, 0, 0.8)'};
   z-index: 9999;
   visibility: hidden;
   opacity: 0;

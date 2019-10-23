@@ -50,8 +50,7 @@ class CvList extends Component {
 
     return (
       <StyleWrapper>
-        <Modal
-          className={modal ? 'active' : ''}
+        <Modal className={modal ? 'active' : ''}
           style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
           <MainModal >

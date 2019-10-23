@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faDownload, faTimes, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import ReactTooltip from 'react-tooltip';
 import { getCvData, updateCVList } from 'actions';
 import ConfirmButton from 'components/atoms/Buttons/ConfirmButton'
@@ -51,7 +51,8 @@ const StyledWrapper = styled.ul`
 
 class OptionPanel extends Component {
   state = {
-    isAgree: false
+    isAgree: false,
+    isRemove: false
   }
 
   handleClick = e => {
@@ -66,6 +67,9 @@ class OptionPanel extends Component {
         isAgree: !prevState.isAgree
       }))
     } else if (name === 'remove') {
+      this.setState({
+        isRemove: true
+      })
       store.dispatch(updateCVList('remove', userId, id));
 
     }
@@ -80,7 +84,7 @@ class OptionPanel extends Component {
 
   render() {
     const { id } = this.props;
-    const { isAgree } = this.state
+    const { isAgree, isRemove } = this.state
 
     return (
       <StyledWrapper>
@@ -115,7 +119,9 @@ class OptionPanel extends Component {
               <p>Czy usunąć ?</p>
             </li>
             <li>
-              <ConfirmButton data-name='remove' id={id} onClick={this.handleClick}>usuń</ConfirmButton>
+              <ConfirmButton data-name='remove' id={id} onClick={this.handleClick}>
+                {isRemove && <FontAwesomeIcon icon={faSyncAlt} spin style={{ margin: '0 5px' }} />}
+                usuń</ConfirmButton>
             </li>
             <li>
               <ConfirmButton cancel onClick={this.handleButtons} >anuluj</ConfirmButton>
