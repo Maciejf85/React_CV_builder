@@ -56,9 +56,8 @@ export const getMainData = (type = 'main') => dispatch => {
         dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),
         dispatch({ type: 'SET_PERSONAL_DATA', payload: personalData }),
         dispatch({ type: 'SAVE_CV_LIST', payload: list }),
-        // .get(`${path.cors}/users/${personalData.token}/images/pic1.jpg`, {\
         axios
-          .get(`${path.cors}getImage.php`, {
+          .get(`${path.cors}getImage.php?token=${personalData.token}`, {
             responseType: 'blob',
           })
           .then(request => {

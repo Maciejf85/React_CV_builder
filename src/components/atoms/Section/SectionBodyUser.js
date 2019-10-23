@@ -94,7 +94,6 @@ class SectionBody extends Component {
             this.setState({
               currentImageSrc: reader.result,
             });
-            console.log('reader.result', reader.result)
             this.props.handleModal();
           };
         } else {
@@ -104,7 +103,10 @@ class SectionBody extends Component {
       e.target.value = null;
     } else if (actiontype === 'remove') {
       store.dispatch(updateImage(null));
-      axios.post(`${path.cors}removeImage.php`);
+      axios.post(`${path.cors}removeImage.php`, {
+        token: sessionStorage.getItem('userID')
+      })
+        .then(request => console.log(request));
     }
   };
 

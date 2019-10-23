@@ -145,14 +145,16 @@ class ImageResizer extends Component {
 
     const data = new FormData();
     data.append('image', finalFile);
+    data.append('token', sessionStorage.getItem('userID'));
     axios
       .post(`${path.cors}handleImage.php`, data, {
         headers: {
           'content-type': 'multipart/form-data',
         },
       })
-      .then(() => {
-        sidePanel({ content: 'zdjęcie zapisane', error: false });
+      .then((request) => {
+        console.log('request', request)
+        sidePanel({ content: request.data, error: false });
       })
       .catch(error => {
         console.log('error :', error);
