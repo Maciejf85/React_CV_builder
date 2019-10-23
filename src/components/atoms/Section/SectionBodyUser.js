@@ -62,13 +62,12 @@ const StyledWrapper = styled.div`
       font-weight: ${({ theme }) => theme.font.normal};
     }
   }
-  .image{
-    background:#ccc;
-  }
   .imageContent{
     position:absolute;
-    top:0;
-    right:0;
+    top:30px;
+    right:30px;
+    width:174px;
+    border: 1px solid ${({ theme }) => theme.colors.lightGrey}
   }
 
 `;

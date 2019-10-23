@@ -103,7 +103,6 @@ class ImageResizer extends Component {
   handleCropComplete = crop => {
     const canvasRef = this.imagePreviewOnCanvas.current;
     const { imageSrc } = this.props;
-    console.log('imageSrc', imageSrc)
     image64toCanvasRef(canvasRef, imageSrc, crop);
   };
 

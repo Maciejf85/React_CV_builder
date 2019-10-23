@@ -4,13 +4,14 @@ const ImageOptionButton = styled.label`
   display: inline-block;
   width: 150px;
   height: 30px;
+  line-height:18px;
   border: 2px solid white;
   color:white;
   padding: 4px 20px;
   margin: 5px;
   transition: 0.2s;
   font-family: 'Montserrat', sans-serif;
-  font-size: ${({ theme }) => theme.fontSize.m};
+  font-size: ${({ theme }) => theme.fontSize.ms};
   border-radius: 5px;
   text-align:center;
   outline: none;

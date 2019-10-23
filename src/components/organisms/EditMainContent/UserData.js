@@ -375,7 +375,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentAdress"
-              placeholder="miasto, Kraj"
+              placeholder="miasto, kraj"
               value={this.state.currentAdress}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}

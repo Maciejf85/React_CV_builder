@@ -1,6 +1,7 @@
 const initialState = {
-  name: 'Moje konto',
-  currentView: 'account',
+  name: 'Moje CV',
+  currentView: 'cv',
+  caption: 'nowe CV',
 };
 
 const path = (state = initialState, { type }) => {
