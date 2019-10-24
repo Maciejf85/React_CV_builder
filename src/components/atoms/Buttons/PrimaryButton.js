@@ -4,8 +4,8 @@ const PrimaryButton = styled.button`
 display:inline-flex;
 justify-content:center;
 align-items:center;
-  min-width: 100px;
-  height: 30px;
+  min-width: 120px;
+  height: 28px;
   background: ${({ theme, titleButton }) =>
     titleButton ? 'transparent' : theme.colors.secondaryGrey};
   border: 1px solid ${({ theme, titleButton }) => (titleButton ? 'white' : theme.colors.darkGrey)};
