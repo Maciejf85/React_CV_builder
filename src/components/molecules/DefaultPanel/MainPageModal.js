@@ -11,7 +11,7 @@ width:450px;
 height:240px;
 background:white;
 font-style:italic;
-border-radius:7px;
+border-radius:10px;
 overflow:hidden;
 
 header{
@@ -20,7 +20,7 @@ header{
     font-size:${({ theme }) => theme.fontSize.xl};
     font-weight:${({ theme }) => theme.font.bold};
     color:white;
-    background:${({ theme }) => theme.colors.secondaryBlue};
+    background:${({ theme }) => theme.colors.lightBlue};
     padding:0 20px;
 }
 section{

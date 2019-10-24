@@ -21,13 +21,13 @@ const StyledWrapper = styled.div`
 
   header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 50px;
-    padding: 0 10px;
-    font-weight: ${({ theme }) => theme.font.bold};
-    background: ${({ theme }) => theme.colors.lightGrey};
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  font-size: ${({ theme }) => theme.fontSize.ms};
+  font-weight: ${({ theme }) => theme.font.bold};
+  background: ${({ theme }) => theme.colors.lightGrey};
   }
   section {
     width: 100%;
@@ -70,10 +70,6 @@ class Panel extends Component {
     });
   };
 
-  // handleGetSelection = () => {
-  //   const selection = window.getSelection();
-  //   console.log(selection.toString());
-  // };
 
   updateConfidential = () => {
     const { localConf } = this.state;
@@ -110,21 +106,7 @@ class Panel extends Component {
         <StyledWrapper>
           <header>
             <p>Klauza poufności</p>
-            <div>
-              {editValue && (
-                <PrimaryButton
-                  type="button"
-                  primary
-                  disabled={disabled}
-                  onClick={this.updateConfidential}
-                >
-                  zapisz
-                </PrimaryButton>
-              )}
-              <PrimaryButton type="button" onClick={this.handleEditMode}>
-                {editValue ? 'anuluj' : 'edytuj'}
-              </PrimaryButton>
-            </div>
+
           </header>
           <section>
             {editValue ? (
@@ -136,8 +118,21 @@ class Panel extends Component {
               )}
           </section>
         </StyledWrapper>
+        {editValue && (
+          <PrimaryButton
+            type="button"
+            primary
+            disabled={disabled}
+            onClick={this.updateConfidential}
+          >
+            zapisz
+                </PrimaryButton>
+        )}
+        <PrimaryButton type="button" onClick={this.handleEditMode}>
+          {editValue ? 'anuluj' : 'edytuj'}
+        </PrimaryButton>
 
-        <PrimaryButton type="button" dafault onClick={() => getData('default')}>
+        <PrimaryButton type="button" onClick={() => getData('default')}>
           przywróć domyślne
         </PrimaryButton>
       </>
