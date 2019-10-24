@@ -11,7 +11,7 @@ class Education extends Component {
     const { education } = this.props;
     return (
       <>
-        {education ? (
+        {education &&
           education.map(item => {
             const { id, name, startYear, startMonth, endYear, endMonth } = item;
             return (
@@ -25,9 +25,15 @@ class Education extends Component {
               </StyledInputSection>
             );
           })
-        ) : (
-          <div>brak danych</div>
-        )}
+        }
+        <StyledInputSection>
+          <div>id</div>
+          <div>name</div>
+          <div>startYear</div>
+          <div>startMonth</div>
+          <div>endYear</div>
+          <div>endMonth</div>
+        </StyledInputSection>
       </>
     );
   }
