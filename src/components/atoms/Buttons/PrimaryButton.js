@@ -1,13 +1,15 @@
 import styled, { css } from 'styled-components';
 
 const PrimaryButton = styled.button`
-  min-width: 80px;
-  height: 25px;
+display:inline-flex;
+justify-content:center;
+align-items:center;
+  min-width: 100px;
+  height: 30px;
   background: ${({ theme, titleButton }) =>
     titleButton ? 'transparent' : theme.colors.secondaryGrey};
   border: 1px solid ${({ theme, titleButton }) => (titleButton ? 'white' : theme.colors.darkGrey)};
   color: white;
-  padding: 0 10px;
   margin: 5px;
   transition: 0.2s;
   font-family: 'Montserrat', sans-serif;

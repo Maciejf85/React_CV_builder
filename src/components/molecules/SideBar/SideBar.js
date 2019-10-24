@@ -5,7 +5,7 @@ import { mainViews } from 'data';
 
 const StyledWrapper = styled.ul`
   min-width: 250px;
-  margin-right: 15px;
+  margin: 15px;
   /* border: 1px solid black; */
 `;
 

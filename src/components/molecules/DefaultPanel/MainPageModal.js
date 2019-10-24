@@ -11,7 +11,7 @@ width:450px;
 height:240px;
 background:white;
 font-style:italic;
-border-radius:7px;
+border-radius:10px;
 overflow:hidden;
 
 header{
