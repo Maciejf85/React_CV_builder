@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Panel from 'components/molecules/DefaultPanel/defaultPanel';
+import PropTypes from 'prop-types';
 import { updateCVList } from 'actions';
 import { withRouter } from 'react-router-dom';
-import MainModal from 'components/molecules/DefaultPanel/MainPageModal'
+import MainModal from 'components/molecules/DefaultPanel/MainPageModal';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
-import Modal from 'components/organisms/Modal'
-import withModal from 'components/hoc/withModal'
+import Modal from 'components/organisms/Modal';
+import withModal from 'components/hoc/withModal';
 import store from 'store';
+import Loader from 'components/atoms/Loader';
 import { connect } from 'react-redux';
 
 const StyleWrapper = styled.div`
-position:relative;
+  position: relative;
   width: 100%;
   height: calc(100% -15px);
   /* border: 1px solid red; */
@@ -21,49 +23,62 @@ position:relative;
 class CvList extends Component {
   state = {
     requestActive: false,
-    cvTitle: 'nowe CV'
+    cvTitle: 'nowe CV',
   };
-
-
 
   handleNewCv = () => {
     this.setState({ requestActive: true });
     const { cvTitle } = this.state;
     const userId = sessionStorage.getItem('userID');
     const redir = this.props.history;
-    store.dispatch(updateCVList('add', userId, null, redir, cvTitle));
-    this.props.handleModal();
-  };
+    setTimeout(
+      () => {
+        return (
+          store.dispatch(updateCVList('add', userId, null, redir, cvTitle)),
+          this.props.handleModal()
+        );
+      },
 
+      3000,
+    );
+  };
 
   handleTitle = e => {
     this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   render() {
     const { cvList, name, caption, modal, modalVisible, handleModal } = this.props;
     const { requestActive, cvTitle } = this.state;
     const list = cvList.map(item => item);
 
-
     return (
       <StyleWrapper>
-        <Modal className={modal ? 'active' : ''}
+        <Modal
+          className={modal ? 'active' : ''}
           style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <MainModal >
-            <header>Tytuł CV</header>
-            <section>
-              <input type='text' name='cvTitle' value={cvTitle} onChange={this.handleTitle} />
-            </section>
-            <footer>
-              <PrimaryButton type='button' primary onClick={this.handleNewCv}>zapisz</PrimaryButton>
-              <PrimaryButton type='button' name='cancel' onClick={handleModal}>anuluj</PrimaryButton></footer>
-
-          </MainModal>
-        </Modal >
+          {!requestActive ? (
+            <MainModal>
+              <header>Tytuł CV</header>
+              <section>
+                <input type="text" name="cvTitle" value={cvTitle} onChange={this.handleTitle} />
+              </section>
+              <footer>
+                <PrimaryButton type="button" primary onClick={this.handleNewCv}>
+                  zapisz
+                </PrimaryButton>
+                <PrimaryButton type="button" name="cancel" onClick={handleModal}>
+                  anuluj
+                </PrimaryButton>
+              </footer>
+            </MainModal>
+          ) : (
+            <Loader />
+          )}
+        </Modal>
         <Panel
           name={name}
           content={list}
@@ -71,10 +86,27 @@ class CvList extends Component {
           newCv={handleModal}
           disabled={requestActive}
         />
-      </StyleWrapper >
+      </StyleWrapper>
     );
   }
 }
+
+CvList.propTypes = {
+  cvList: PropTypes.array,
+  name: PropTypes.string,
+  caption: PropTypes.string,
+  modal: PropTypes.bool,
+  modalVisible: PropTypes.bool,
+  handleModal: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+};
+CvList.defaultProps = {
+  name: '',
+  cvList: [],
+  caption: '',
+  modal: false,
+  modalVisible: false,
+};
 
 const mapStateToProps = state => ({
   cvList: state.myCv,

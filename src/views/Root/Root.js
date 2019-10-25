@@ -6,11 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import GlobalStyle from 'theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme/mainTheme';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 import path from '../../path';
-
-library.add(fas);
 
 const Root = () => {
   return (
