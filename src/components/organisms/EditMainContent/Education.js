@@ -12,13 +12,13 @@ class Education extends Component {
   }
 
   render() {
-    const { education } = this.props;
+    const { education, cvId } = this.props;
     return (
       <>
         {education &&
           education.map((item, idx) => {
             const { id } = item;
-            return <EducationPanel key={id} index={idx} item={item} />;
+            return <EducationPanel key={id} index={idx} item={item} cvId={cvId} />;
           })}
         {/* <EducationInput>
           <Input>id</Input>
@@ -29,5 +29,6 @@ class Education extends Component {
 }
 const mapStateToProps = state => ({
   education: state.currentCv.education,
+  cvId: state.currentCv.currentItem.id,
 });
 export default connect(mapStateToProps)(Education);

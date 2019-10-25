@@ -3,22 +3,26 @@ import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
 import Select from 'components/atoms/Inputs/Select';
 import { Textarea } from 'components/atoms/Inputs';
+import { updatecurrentCVFromState, setNewCurrentCVData } from 'actions';
+import store from 'store';
 import PropTypes from 'prop-types';
 
 class EducationPanel extends Component {
   state = {
+    id: '',
     name: '',
-    startYear: '',
-    startMonth: '',
-    endYear: '',
-    endMonth: '',
+    startYear: 0,
+    startMonth: 0,
+    endYear: 0,
+    endMonth: 0,
     description: '',
   };
 
   componentDidMount() {
-    const { name, startYear, startMonth, endYear, endMonth, description } = this.props.item;
+    const { id, name, startYear, startMonth, endYear, endMonth, description } = this.props.item;
 
     this.setState({
+      id,
       name,
       startMonth,
       startYear,
@@ -29,9 +33,19 @@ class EducationPanel extends Component {
   }
 
   handleForm = e => {
+    const value = parseInt(e.target.value, 10) || e.target.value;
     this.setState({
-      [e.target.id]: e.target.value,
+      [e.target.id]: value,
     });
+  };
+
+  updateStore = () => {
+    const { id } = this.props.item;
+    const { cvId } = this.props;
+    console.log('cvId', cvId);
+    const token = sessionStorage.getItem('userID');
+    store.dispatch(updatecurrentCVFromState('education', id, this.state));
+    // store.dispatch(setNewCurrentCVData('update', token, id));
   };
 
   render() {
@@ -42,6 +56,9 @@ class EducationPanel extends Component {
     const endY = new Date().getFullYear();
     return (
       <StyledInputSection id={id}>
+        <button onClick={this.updateStore} type="button">
+          Update Store
+        </button>
         <p>{`Szkoła #${index + 1}`}</p>
         <Input
           isSmall
@@ -105,3 +122,5 @@ class EducationPanel extends Component {
 // };
 
 export default EducationPanel;
+
+// @TODO: wyniesienie update store i update pliku do wyższych komponentów
