@@ -20,7 +20,7 @@ const EditSidebar = () => {
     <StyledWrapper>
       <ul>
         {editViews.map(item => (
-          <EditNavList key={item.link} name={item.name} link={item.link} icons={item.icon} />
+          <EditNavList key={item.link} name={item.name} link={item.link} />
         ))}
       </ul>
     </StyledWrapper>

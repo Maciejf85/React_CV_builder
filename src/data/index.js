@@ -1,5 +1,5 @@
 export const editViews = [
-  { name: 'Dane osobowe', link: 'personal', icon: 'user' },
+  { name: 'Dane osobowe', link: 'personal', icon: 'faUserAlt' },
   { name: 'Edukacja', link: 'education', icon: 'graduation-cap' },
   { name: 'Języki obce', link: 'languages', icon: 'flag' },
   { name: 'Umiejętności', link: 'skills', icon: 'coffee' },

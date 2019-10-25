@@ -26,5 +26,3 @@ const Root = () => {
 };
 
 export default Root;
-
-//  TODO: import poszczególnych ikon zamiast całej biblioteki fontAwsome;
