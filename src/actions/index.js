@@ -39,7 +39,7 @@ export const getCvData = (type, id, token, redir) => dispatch => {
 
 // GET ALL INFORMATIONS OF CURRENT CV
 
-export const setNewCurrentCVData = (type, token, id, data) => {
+export const setNewCurrentCVData = (type, token, id, data) => dispatch => {
   return axios
     .post(`${path.cors}handleCurrentCv.php`, {
       type,
@@ -189,7 +189,6 @@ export const updatePersonalFromState = payload => {
 
 //
 export const updatecurrentCVFromState = (itemType, id, newValue) => {
-  console.log('newValue', newValue);
   return {
     type: 'UPDATE_CURRENT_CV_ITEM',
     payload: {

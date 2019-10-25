@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EducationPanel from 'components/molecules/SectionInputs/EducationPanel';
+import store from 'store';
+import { setNewCurrentCVData } from 'actions';
 
 class Education extends Component {
   componentDidMount() {
@@ -8,11 +10,14 @@ class Education extends Component {
   }
 
   componentDidUpdate() {
-    console.log(' Update - Education Component');
+    const { cvId, currentCv } = this.props;
+    const token = sessionStorage.getItem('userID');
+    store.dispatch(setNewCurrentCVData('update', token, cvId, currentCv));
   }
 
   render() {
-    const { education, cvId } = this.props;
+    const { cvId, currentCv } = this.props;
+    const { education } = currentCv;
     return (
       <>
         {education &&
@@ -28,7 +33,7 @@ class Education extends Component {
   }
 }
 const mapStateToProps = state => ({
-  education: state.currentCv.education,
+  currentCv: state.currentCv,
   cvId: state.currentCv.currentItem.id,
 });
 export default connect(mapStateToProps)(Education);
