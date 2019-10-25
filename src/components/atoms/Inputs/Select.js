@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const StyledInput = styled.input`
+const StyledInput = styled.select`
   height: 45px;
+  width: 130px;
   border-radius: 7px;
   padding: 5px 15px;
-  margin: 5px 15px;
+  margin: 5px 10px;
   outline: none;
   border: none;
   background: ${({ theme }) => theme.colors.lightGrey};
@@ -17,7 +18,7 @@ const StyledInput = styled.input`
   }
 `;
 const StyledLabel = styled.label`
-  width: 100%;
+  min-height: ${({ theme }) => theme.fontSize.s};
   font-size: ${({ theme }) => theme.fontSize.s};
   font-weight: ${({ theme }) => theme.font.bold};
   margin-left: 10px;
@@ -26,36 +27,31 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  width: ${({ isSmall }) => (isSmall ? '50%' : '100%')};
 `;
 
-const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall }) => {
+const Select = ({ id, title, value, onChange, onBlur, start, end }) => {
+  const count = end - start;
+  const dates = Array.from(Array(count), (x, index) => index + start + 1);
   return (
-    <StyledWrapper isSmall={isSmall}>
-      <StyledLabel htmlFor={id}>{placeholder}</StyledLabel>
-      <StyledInput
-        type={type}
-        id={id}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-      />
+    <StyledWrapper>
+      <StyledLabel htmlFor={id}>{title}</StyledLabel>
+      <StyledInput id={id} value={value} onChange={onChange} onBlur={onBlur}>
+        {dates.map(item => (
+          <option key={item}>{item}</option>
+        ))}
+      </StyledInput>
     </StyledWrapper>
   );
 };
-Input.propType = {
-  type: PropTypes.string,
-  id: PropTypes.string,
+Select.propType = {
+  id: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
 };
-Input.defaultProps = {
-  type: 'text',
-  id: '',
+Select.defaultPropTypes = {
   placeholder: '',
 };
 
-export default Input;
+export default Select;

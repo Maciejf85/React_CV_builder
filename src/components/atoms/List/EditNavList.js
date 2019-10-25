@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { currentEditView } from 'actions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import store from 'store';
 import { connect } from 'react-redux';
 
@@ -12,7 +11,7 @@ const StyledWrapper = styled.li`
   margin-top: 5px;
   background: ${({ active, theme }) => (active ? theme.colors.primaryBlue : theme.colors.darkGrey)};
   display: grid;
-  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-columns: 6fr 1fr;
   justify-items: self-start;
   align-items: center;
   padding-left: 25px;
@@ -36,13 +35,10 @@ class EditNavList extends Component {
   };
 
   render() {
-    const { name, icons, link, currentView } = this.props;
+    const { name, link, currentView } = this.props;
     const isActive = link === currentView;
     return (
       <StyledWrapper active={isActive} data-id={link} onClick={this.handlePathChange}>
-        <div>
-          <FontAwesomeIcon icon={icons} />
-        </div>
         <div>{name}</div>
         <div>opt</div>
       </StyledWrapper>

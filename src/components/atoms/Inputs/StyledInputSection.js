@@ -30,6 +30,12 @@ const StyledInputSection = styled.div`
     background: ${({ theme }) => theme.colors.buttonActive};
     font-size: ${({ theme }) => theme.fontSize.ml};
   }
+  p {
+    width: 100%;
+    font-size: ${({ theme }) => theme.fontSize.l};
+    color: ${({ theme }) => theme.colors.secondaryGrey};
+    margin-bottom: 40px;
+  }
 
   img {
     max-height: 160px;
@@ -56,7 +62,7 @@ const StyledInputSection = styled.div`
     opacity: 1;
     visibility: visible;
     transition: visibility 0.6s, opacity 0.6s;
-    background: ${({ white }) => white ? 'rgba(100, 100, 100, 0.35)' : 'rgba(0, 0, 0, 0.75)'};
+    background: ${({ white }) => (white ? 'rgba(100, 100, 100, 0.35)' : 'rgba(0, 0, 0, 0.75)')};
   }
 `;
 

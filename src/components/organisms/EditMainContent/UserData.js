@@ -11,7 +11,7 @@ import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import Modal from 'components/organisms/Modal';
-import withModal from 'components/hoc/withModal'
+import withModal from 'components/hoc/withModal';
 import ImageResizer from 'components/organisms/ImageResizer';
 import PropTypes from 'prop-types';
 import path from '../../../path';
@@ -134,7 +134,7 @@ class UserData extends Component {
           currentTitle,
         } = this.state;
 
-        const { id } = this.props.currentCv.currentItem
+        const { id } = this.props.currentCv.currentItem;
 
         axios
           .post(`${path.cors}updatePersonalData.php`, {
@@ -200,29 +200,37 @@ class UserData extends Component {
   // HANDLE FORM
 
   handleForm = e => {
-    this.setState({
-      [e.target.id]: e.target.value,
-      statusActive: true,
-    });
+    if (e.target.id !== 'currentTitle') {
+      this.setState({
+        [e.target.id]: e.target.value,
+        statusActive: true,
+      });
 
-    if (!this.state.statusActive) {
-      this.handleTimer();
+      if (!this.state.statusActive) {
+        this.handleTimer();
+      }
+    } else {
+      this.setState({
+        [e.target.id]: e.target.value,
+      });
     }
   };
 
-  // UPDATE STORE FORM DATA
+  // UPDATE STORE PERSONAL DATA
 
   handleStoreUpdate = () => {
     store.dispatch(updatePersonalFromState(this.state));
   };
 
-
-
   // CHANGE TITLE
+
   handleTitle = () => {
     this.setState(prevstate => ({
       changeTitle: !prevstate.changeTitle,
     }));
+
+    // SEND WHOLE DATA TO SERVER
+    return this.state.changeTitle ? this.handleTimer() : null;
   };
 
   render() {
@@ -273,8 +281,8 @@ class UserData extends Component {
                   onChange={this.handleForm}
                 />
               ) : (
-                  currentTitle
-                )}
+                currentTitle
+              )}
               <div>
                 <PrimaryButton onClick={this.handleTitle} titleButton>
                   {changeTitle ? 'zapisz' : 'zmień tytuł'}
@@ -343,17 +351,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-                <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                  <input
-                    type="file"
-                    data-actiontype="add"
-                    onChange={this.handleImage}
-                    id="imageInput"
-                    style={{ display: 'none' }}
-                  />
-                  dodaj zdjęcie
+              <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                <input
+                  type="file"
+                  data-actiontype="add"
+                  onChange={this.handleImage}
+                  id="imageInput"
+                  style={{ display: 'none' }}
+                />
+                dodaj zdjęcie
               </ImageOptionLabel>
-              )}
+            )}
           </StyledInputSection>
           <StyledInputSection>
             <Input

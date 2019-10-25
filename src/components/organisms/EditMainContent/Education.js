@@ -1,44 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
+import EducationPanel from 'components/molecules/SectionInputs/EducationPanel';
 
 class Education extends Component {
   componentDidMount() {
-    console.log('education did mount');
+    console.log(' Mount - Education Component');
+  }
+
+  componentDidUpdate() {
+    console.log(' Update - Education Component');
   }
 
   render() {
-    const { education } = this.props;
+    const { education, cvId } = this.props;
     return (
       <>
         {education &&
-          education.map(item => {
-            const { id, name, startYear, startMonth, endYear, endMonth } = item;
-            return (
-              <StyledInputSection key={id}>
-                <div>{id}</div>
-                <div>{name}</div>
-                <div>{startYear}</div>
-                <div>{startMonth}</div>
-                <div>{endYear}</div>
-                <div>{endMonth}</div>
-              </StyledInputSection>
-            );
-          })
-        }
-        <StyledInputSection>
-          <div>id</div>
-          <div>name</div>
-          <div>startYear</div>
-          <div>startMonth</div>
-          <div>endYear</div>
-          <div>endMonth</div>
-        </StyledInputSection>
+          education.map((item, idx) => {
+            const { id } = item;
+            return <EducationPanel key={id} index={idx} item={item} cvId={cvId} />;
+          })}
+        {/* <EducationInput>
+          <Input>id</Input>
+        </EducationInput> */}
       </>
     );
   }
 }
 const mapStateToProps = state => ({
   education: state.currentCv.education,
+  cvId: state.currentCv.currentItem.id,
 });
 export default connect(mapStateToProps)(Education);

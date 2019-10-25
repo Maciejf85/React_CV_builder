@@ -17,7 +17,7 @@ export const currentEditView = (type = 'personal') => {
   };
 };
 
-// //  GET ALL INFORMATIONS OF CURRENT CV
+// GET ALL INFORMATIONS OF CURRENT CV
 
 export const getCvData = (type, id, token, redir) => dispatch => {
   return axios
@@ -31,6 +31,24 @@ export const getCvData = (type, id, token, redir) => dispatch => {
         dispatch({ type: 'SAVE_CURRENT_CV', payload: data }),
         setTimeout(() => redir.push(path.edit), 10)
       );
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+// GET ALL INFORMATIONS OF CURRENT CV
+
+export const setNewCurrentCVData = (type, token, id, data) => {
+  return axios
+    .post(`${path.cors}handleCurrentCv.php`, {
+      type,
+      id,
+      token,
+      data,
+    })
+    .then(request => {
+      console.log('data', request);
     })
     .catch(error => {
       console.log(error);
@@ -124,7 +142,7 @@ export const updateCVList = (type, token, cvId = null, redir, cvTitle = null) =>
       type,
       token,
       cvId,
-      cvTitle
+      cvTitle,
     })
     .then(({ data }) => {
       const { cvList, currentCv } = data;
@@ -166,5 +184,18 @@ export const updatePersonalFromState = payload => {
   return {
     type: 'UPDATE_PERSONAL_DATA',
     payload,
+  };
+};
+
+//
+export const updatecurrentCVFromState = (itemType, id, newValue) => {
+  console.log('newValue', newValue);
+  return {
+    type: 'UPDATE_CURRENT_CV_ITEM',
+    payload: {
+      itemType,
+      id,
+      newValue,
+    },
   };
 };
