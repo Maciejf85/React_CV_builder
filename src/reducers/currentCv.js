@@ -9,7 +9,6 @@ const currentCv = (state = initialState, { type, payload }) => {
       return payload;
     }
     case 'UPDATE_CURRENT_CV_ITEM': {
-      console.log('payload', payload);
       return {
         ...state,
         [payload.itemType]: [
@@ -17,6 +16,14 @@ const currentCv = (state = initialState, { type, payload }) => {
             return item.id === payload.id ? payload.newValue : item;
           }),
         ],
+      };
+    }
+    case 'ADD_NEW_ITEM': {
+      console.log('payload.itemType', payload.itemType);
+      console.log('payload.item', payload.item);
+      return {
+        ...state,
+        [payload.itemType]: [...state[payload.itemType], payload.item],
       };
     }
 

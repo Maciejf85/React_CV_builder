@@ -3,7 +3,7 @@ import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
 import Select from 'components/atoms/Inputs/Select';
 import { Textarea } from 'components/atoms/Inputs';
-import { updatecurrentCVFromState, setNewCurrentCVData } from 'actions';
+import { updatecurrentCVFromState } from 'actions';
 import store from 'store';
 import PropTypes from 'prop-types';
 
@@ -41,11 +41,7 @@ class EducationPanel extends Component {
 
   updateStore = () => {
     const { id } = this.props.item;
-    const { cvId } = this.props;
-    console.log('cvId', cvId);
-    const token = sessionStorage.getItem('userID');
     store.dispatch(updatecurrentCVFromState('education', id, this.state));
-    // store.dispatch(setNewCurrentCVData('update', token, id));
   };
 
   render() {
