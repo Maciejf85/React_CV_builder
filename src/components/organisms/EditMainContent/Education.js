@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EducationPanel from 'components/molecules/SectionInputs/EducationPanel';
 import store from 'store';
-import { setNewCurrentCVData } from 'actions';
+import { setNewCurrentCVData, addNewItemToCurrentCv } from 'actions';
 
 class Education extends Component {
   componentDidMount() {
@@ -25,9 +25,23 @@ class Education extends Component {
             const { id } = item;
             return <EducationPanel key={id} index={idx} item={item} cvId={cvId} />;
           })}
-        {/* <EducationInput>
-          <Input>id</Input>
-        </EducationInput> */}
+        <button
+          type="button"
+          onClick={() =>
+            store.dispatch(
+              addNewItemToCurrentCv('education', {
+                name: '',
+                startYear: 0,
+                startMonth: 0,
+                endYear: 0,
+                endMonth: 0,
+                description: '',
+              }),
+            )
+          }
+        >
+          Dodaj nową szkołę
+        </button>
       </>
     );
   }
