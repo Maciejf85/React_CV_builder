@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
+import 'react-image-crop/dist/ReactCrop-custome.css';
 import {
   image64toCanvasRef,
   extractImageFileExtensionFromBase64,
@@ -152,14 +152,14 @@ class ImageResizer extends Component {
           'content-type': 'multipart/form-data',
         },
       })
-      .then((request) => {
-        console.log('request', request)
+      .then(request => {
+        console.log('request', request);
         sidePanel({ content: request.data, error: false });
       })
       .catch(error => {
         console.log('error :', error);
         sidePanel({ content: 'błąd sieci', error: true });
-      })
+      });
 
     store.dispatch(updateImage(imageData));
     this.props.click();
