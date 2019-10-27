@@ -43,9 +43,9 @@ class CvList extends Component {
     );
   };
 
-  handleTitle = e => {
+  handleCvTitle = e => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.id]: e.target.value,
     });
   };
 
@@ -64,7 +64,7 @@ class CvList extends Component {
             <MainModal>
               <header>Tytuł CV</header>
               <section>
-                <input type="text" name="cvTitle" value={cvTitle} onChange={this.handleTitle} />
+                <input type="text" id="cvTitle" value={cvTitle} onChange={this.handleCvTitle} autoFocus />
               </section>
               <footer>
                 <PrimaryButton type="button" primary onClick={this.handleNewCv}>
@@ -76,8 +76,8 @@ class CvList extends Component {
               </footer>
             </MainModal>
           ) : (
-            <Loader />
-          )}
+              <Loader />
+            )}
         </Modal>
         <Panel
           name={name}

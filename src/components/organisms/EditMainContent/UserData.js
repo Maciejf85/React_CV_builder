@@ -31,6 +31,7 @@ class UserData extends Component {
   state = {
     statusActive: false,
     currentTitle: '',
+    currentTempTitle: '',
     currentName: '',
     currentSurname: '',
     currentEmail: '',
@@ -108,7 +109,7 @@ class UserData extends Component {
     this.mounted = false;
   }
 
-  handleTimer = () => {
+  handleTimer = (time = 2500) => {
     if (this.mounted) {
       setTimeout(() => {
         const {
@@ -140,19 +141,19 @@ class UserData extends Component {
             token: sessionStorage.getItem('userID'),
           })
           .then(result => {
-            console.log('result', result.data);
-            sidePanel({ content: 'dane zapisane', error: false });
+            sidePanel(result.data);
           })
           .catch(error => {
             console.log('error :', error);
-            sidePanel({ content: 'błąd zapisu', error: true });
+            sidePanel({ content: 'błąd internetu', error: true });
           });
+
         if (this.mounted) {
           this.setState({
             statusActive: false,
           });
         }
-      }, 2500);
+      }, time);
     }
   };
 
@@ -213,13 +214,23 @@ class UserData extends Component {
 
   // CHANGE TITLE
 
-  handleTitle = () => {
-    this.setState(prevstate => ({
-      changeTitle: !prevstate.changeTitle,
-    }));
+  handleTitle = (e) => {
+    const { id } = e.target
+    const { currentTitle, changeTitle, currentTempTitle } = this.state;
+    // change title is active set temp title 
+    if (!changeTitle) { this.setState({ currentTempTitle: currentTitle }) }
 
-    // SEND WHOLE DATA TO SERVER
-    return this.state.changeTitle ? this.handleTimer() : null;
+    if (id === 'save') {
+      this.setState(prevstate => ({
+        changeTitle: !prevstate.changeTitle,
+      }));
+
+      // SEND WHOLE DATA TO SERVER
+      return this.state.changeTitle ? this.handleTimer(0) : null;
+    }
+    return this.setState({
+      changeTitle: false, currentTitle: currentTempTitle
+    })
   };
 
   render() {
@@ -257,16 +268,17 @@ class UserData extends Component {
                   id="currentTitle"
                   value={currentTitle}
                   onChange={this.handleForm}
+                  autoFocus
                 />
               ) : (
-                currentTitle
-              )}
+                  currentTitle
+                )}
               <div>
-                <PrimaryButton onClick={this.handleTitle} titleButton>
+                <PrimaryButton id='save' onClick={this.handleTitle} titleButton>
                   {changeTitle ? 'zapisz' : 'zmień tytuł'}
                 </PrimaryButton>
                 {changeTitle && (
-                  <PrimaryButton onClick={this.handleTitle} titleButton>
+                  <PrimaryButton id='cancel' onClick={this.handleTitle} titleButton>
                     anuluj
                   </PrimaryButton>
                 )}
@@ -329,17 +341,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-              <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                <input
-                  type="file"
-                  data-actiontype="add"
-                  onChange={this.handleImage}
-                  id="imageInput"
-                  style={{ display: 'none' }}
-                />
-                dodaj zdjęcie
+                <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                  <input
+                    type="file"
+                    data-actiontype="add"
+                    onChange={this.handleImage}
+                    id="imageInput"
+                    style={{ display: 'none' }}
+                  />
+                  dodaj zdjęcie
               </ImageOptionLabel>
-            )}
+              )}
           </StyledInputSection>
           <StyledInputSection>
             <Input

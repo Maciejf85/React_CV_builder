@@ -1,31 +1,64 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
   "rules": {
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js"]
+        "extensions": [
+          ".js"
+        ]
       }
     ],
-    "react/destructuring-assignment": [0, "never", { "ignoreClassFields": true }],
-    "react/prop-types": [1, { "ignoreClassFields": 0 }],
+    "jsx-a11y/no-autofocus": [
+      0,
+      {
+        "ignoreNonDOM": true
+      }
+    ],
+    "react/destructuring-assignment": [
+      0,
+      "never",
+      {
+        "ignoreClassFields": true
+      }
+    ],
+    "react/prop-types": [
+      1,
+      {
+        "ignoreClassFields": 0
+      }
+    ],
     // off console log warning
     "no-console": "off",
-    "react/jsx-no-target-blank": [2, { "enforceDynamicLinks": 0 }],
+    "react/jsx-no-target-blank": [
+      2,
+      {
+        "enforceDynamicLinks": 0
+      }
+    ],
     "react/forbid-prop-types": [
       0,
-      { "forbid": "object", "checkContextTypes": 1, "checkChildContextTypes": 1 }
+      {
+        "forbid": "object",
+        "checkContextTypes": 1,
+        "checkChildContextTypes": 1
+      }
     ]
   },
   // Fix eslint unresolved import
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["src"]
+        "paths": [
+          "src"
+        ]
       }
     }
   },
-
   "env": {
     "browser": true,
     "node": true
@@ -41,6 +74,6 @@
       "jsx": true,
       "modules": true,
       "experimentalObjectRestSpread": true
-    }
+    },
   }
 }

@@ -4,7 +4,6 @@ import store from 'store';
 import axios from 'axios';
 import { changeSidePanelState } from 'actions';
 import path from '../path';
-import sideBar from 'components/molecules/SideBar/SideBar';
 
 export const formatDate = date => {
   const months = [
@@ -102,7 +101,7 @@ export const sidePanel = result => {
 
 // SET NEW CURRENT CV
 
-export const setNewCurrentCVData = (type, token, id, data) => dispatch => {
+export const setNewCurrentCVData = (type, token, id, data) => () => {
   return axios
     .post(`${path.cors}handleCurrentCv.php`, {
       type,
