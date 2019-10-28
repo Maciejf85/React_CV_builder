@@ -1,7 +1,9 @@
 /* eslint-disable no-plusplus */
 //  Change UNIX to date
 import store from 'store';
+import axios from 'axios';
 import { changeSidePanelState } from 'actions';
+import path from '../path';
 
 export const formatDate = date => {
   const months = [
@@ -94,6 +96,23 @@ export const base64StringtoFile = (base64String, filename) => {
 export const sidePanel = result => {
   const { content, error } = result;
   store.dispatch(changeSidePanelState({ content, error }));
-  setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), 2500);
+  setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), 2000);
 };
 
+// SET NEW CURRENT CV
+
+export const setNewCurrentCVData = (type, token, id, data) => () => {
+  return axios
+    .post(`${path.cors}handleCurrentCv.php`, {
+      type,
+      id,
+      token,
+      data,
+    })
+    .then(result => {
+      sidePanel(result.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};

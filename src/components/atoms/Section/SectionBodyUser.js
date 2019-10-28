@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
-import Modal from 'components/organisms/Modal'
+import Modal from 'components/organisms/Modal';
 import withModal from 'components/hoc/withModal';
 import store from 'store';
 import { updateImage } from 'actions';
@@ -62,20 +62,18 @@ const StyledWrapper = styled.div`
       font-weight: ${({ theme }) => theme.font.normal};
     }
   }
-  .imageContent{
-    position:absolute;
-    top:30px;
-    right:30px;
-    width:174px;
-    border: 1px solid ${({ theme }) => theme.colors.lightGrey}
+  .imageContent {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 174px;
+    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
   }
-
 `;
 class SectionBody extends Component {
-
   state = {
     currentImageSrc: undefined,
-  }
+  };
 
   // HANDLE IMAGE FILE
 
@@ -103,9 +101,10 @@ class SectionBody extends Component {
       e.target.value = null;
     } else if (actiontype === 'remove') {
       store.dispatch(updateImage(null));
-      axios.post(`${path.cors}removeImage.php`, {
-        token: sessionStorage.getItem('userID')
-      })
+      axios
+        .post(`${path.cors}removeImage.php`, {
+          token: sessionStorage.getItem('userID'),
+        })
         .then(request => console.log(request));
     }
   };
@@ -169,7 +168,7 @@ class SectionBody extends Component {
             </li>
           </ul>
 
-          <StyledInputSection width="25%" white className='imageContent'>
+          <StyledInputSection width="25%" white className="imageContent">
             {image ? (
               <>
                 <img src={image} alt="user" />
@@ -196,22 +195,22 @@ class SectionBody extends Component {
                 </div>
               </>
             ) : (
-                <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                  <input
-                    type="file"
-                    data-actiontype="add"
-                    onChange={this.handleImage}
-                    id="imageInput"
-                    style={{ display: 'none' }}
-                  />
-                  dodaj zdjęcie
+              <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                <input
+                  type="file"
+                  data-actiontype="add"
+                  onChange={this.handleImage}
+                  id="imageInput"
+                  style={{ display: 'none' }}
+                />
+                dodaj zdjęcie
               </ImageOptionLabel>
-              )}
+            )}
           </StyledInputSection>
         </StyledWrapper>
       </>
     );
-  };
+  }
 }
 
 SectionBody.propTypes = {

@@ -37,24 +37,6 @@ export const getCvData = (type, id, token, redir) => dispatch => {
     });
 };
 
-// SET NEW CURRENT CV
-
-export const setNewCurrentCVData = (type, token, id, data) => dispatch => {
-  return axios
-    .post(`${path.cors}handleCurrentCv.php`, {
-      type,
-      id,
-      token,
-      data,
-    })
-    .then(request => {
-      console.log('data', request);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
 //  GET USER CONFIDENTIAL PERSONAL DATA AND LIST OF CV's
 
 export const getMainData = (type = 'main') => dispatch => {
@@ -205,8 +187,6 @@ export const addNewItemToCurrentCv = (itemType, newValue) => {
     `_${Math.random()
       .toString(36)
       .substr(2, 9)}`;
-  console.log('getId', getId());
-  console.log('itemType , newValue', itemType, newValue);
 
   return {
     type: 'ADD_NEW_ITEM',
@@ -216,6 +196,16 @@ export const addNewItemToCurrentCv = (itemType, newValue) => {
         id: getId(),
         ...newValue,
       },
+    },
+  };
+};
+
+export const removeItemfromCurrentCv = (itemType, id) => {
+  return {
+    type: 'REMOVE_ITEM',
+    payload: {
+      itemType,
+      id,
     },
   };
 };

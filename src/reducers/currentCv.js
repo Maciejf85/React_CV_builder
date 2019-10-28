@@ -19,11 +19,16 @@ const currentCv = (state = initialState, { type, payload }) => {
       };
     }
     case 'ADD_NEW_ITEM': {
-      console.log('payload.itemType', payload.itemType);
-      console.log('payload.item', payload.item);
       return {
         ...state,
         [payload.itemType]: [...state[payload.itemType], payload.item],
+      };
+    }
+
+    case 'REMOVE_ITEM': {
+      return {
+        ...state,
+        [payload.itemType]: [...state[payload.itemType].filter(item => item.id !== payload.id)],
       };
     }
 

@@ -3,9 +3,9 @@ import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
 import Select from 'components/atoms/Inputs/Select';
 import { Textarea } from 'components/atoms/Inputs';
-import { updatecurrentCVFromState } from 'actions';
+import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
 import store from 'store';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 class EducationPanel extends Component {
   state = {
@@ -16,9 +16,11 @@ class EducationPanel extends Component {
     endYear: 0,
     endMonth: 0,
     description: '',
+    statusActive: false,
   };
 
   componentDidMount() {
+    this.mounted = true;
     const { id, name, startYear, startMonth, endYear, endMonth, description } = this.props.item;
 
     this.setState({
@@ -32,16 +34,38 @@ class EducationPanel extends Component {
     });
   }
 
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   handleForm = e => {
     const value = parseInt(e.target.value, 10) || e.target.value;
     this.setState({
       [e.target.id]: value,
+      statusActive: true,
     });
+    if (!this.state.statusActive) {
+      this.handleTimer();
+    }
   };
 
   updateStore = () => {
     const { id } = this.props.item;
     store.dispatch(updatecurrentCVFromState('education', id, this.state));
+  };
+
+  handleTimer = () => {
+    if (this.mounted) {
+      setTimeout(() => {
+        this.updateStore();
+
+        if (this.mounted) {
+          this.setState({
+            statusActive: false,
+          });
+        }
+      }, 3000);
+    }
   };
 
   render() {
@@ -52,10 +76,15 @@ class EducationPanel extends Component {
     const endY = new Date().getFullYear();
     return (
       <StyledInputSection id={id}>
-        <button onClick={this.updateStore} type="button">
-          Update Store
-        </button>
-        <p>{`Szkoła #${index + 1}`}</p>
+        <p>
+          {`Szkoła #${index + 1}`}
+          <button
+            type="button"
+            onClick={() => store.dispatch(removeItemfromCurrentCv('education', id))}
+          >
+            usuń
+          </button>
+        </p>
         <Input
           isSmall
           placeholder="nazwa szkoły"
