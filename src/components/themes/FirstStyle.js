@@ -17,8 +17,7 @@ const Heading = styled.Text`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const Image = styled.Image`
-  /* width: 100%; */
-  height: 210pt;
+  width: calc(100% - 50pt) ;
 `;
 
 const MainContainer = styled.Page`

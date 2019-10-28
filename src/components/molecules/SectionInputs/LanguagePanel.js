@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
-import Select from 'components/atoms/Inputs/Select';
 import { Textarea } from 'components/atoms/Inputs';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
 import store from 'store';
@@ -70,47 +69,27 @@ class EducationPanel extends Component {
 
   render() {
     const { id } = this.props.item;
-    const { index, current } = this.props;
-    const { name, startYear, startMonth, endYear, endMonth, description } = this.state;
-    const startY = new Date().getFullYear() - 65;
-    const endY = new Date().getFullYear();
+    const { index } = this.props;
+    const { name, description } = this.state;
     return (
       <StyledInputSection id={id}>
         <p>
           {`Szkoła #${index + 1}`}
           <button
             type="button"
-            onClick={() => store.dispatch(removeItemfromCurrentCv(current, id))}
+            onClick={() => store.dispatch(removeItemfromCurrentCv('education', id))}
           >
             usuń
           </button>
         </p>
         <Input
           isSmall
-          placeholder="nazwa szkoły"
+          placeholder="język"
           id="name"
           value={name}
           onChange={this.handleForm}
         />
 
-        <Select
-          title="data rozpoczęcia"
-          id="startYear"
-          value={startYear}
-          onChange={this.handleForm}
-          start={startY}
-          end={endY}
-        />
-        <Select id="startMonth" value={startMonth} onChange={this.handleForm} start={0} end={12} />
-        <Select
-          title="data zakończenia"
-          id="endYear"
-          value={endYear}
-          onChange={this.handleForm}
-          start={startY}
-          end={endY}
-        />
-        <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
 
         <Textarea
           edit

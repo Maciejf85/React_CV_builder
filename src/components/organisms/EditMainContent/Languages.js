@@ -6,15 +6,20 @@ import { addNewItemToCurrentCv } from 'actions';
 import { setNewCurrentCVData } from 'functions';
 
 class Languages extends Component {
+
   componentDidUpdate() {
     const { cvId, currentCv } = this.props;
     const token = sessionStorage.getItem('userID');
     store.dispatch(setNewCurrentCVData('update', token, cvId, currentCv));
+    console.log('component did update');
+    console.log('token, cvId, currentCv', token, cvId, currentCv)
   }
 
   render() {
-    const { cvId, currentCv } = this.props;
+    const { cvId, currentCv, current } = this.props;
     const { languages } = currentCv;
+    const { currentView } = current
+
     return (
       <>
         {languages &&
@@ -26,12 +31,8 @@ class Languages extends Component {
           type="button"
           onClick={() =>
             store.dispatch(
-              addNewItemToCurrentCv('languages', {
+              addNewItemToCurrentCv(currentView, {
                 name: '',
-                startYear: 2000,
-                startMonth: 1,
-                endYear: 2000,
-                endMonth: 1,
                 description: '',
               }),
             )
@@ -47,6 +48,8 @@ class Languages extends Component {
 const mapStateToProps = state => ({
   currentCv: state.currentCv,
   cvId: state.currentCv.currentItem.id,
+  current: state.editComponentView
+
 });
 
 export default connect(mapStateToProps)(Languages);
