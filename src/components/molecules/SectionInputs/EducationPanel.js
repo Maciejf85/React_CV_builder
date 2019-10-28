@@ -51,7 +51,8 @@ class EducationPanel extends Component {
 
   updateStore = () => {
     const { id } = this.props.item;
-    store.dispatch(updatecurrentCVFromState('education', id, this.state));
+    const { current } = this.props;
+    store.dispatch(updatecurrentCVFromState(current, id, this.state));
   };
 
   handleTimer = () => {

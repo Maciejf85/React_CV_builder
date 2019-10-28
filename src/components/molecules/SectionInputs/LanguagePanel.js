@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
-import { Textarea } from 'components/atoms/Inputs';
+import DescriptionInput from 'components/atoms/Inputs/descriptionInput';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
 import store from 'store';
+import styled from 'styled-components';
+
 // import PropTypes from 'prop-types';
+
+const StyledWrapper = styled.div`
+  width: 100%;
+  display: flex;
+`;
 
 class EducationPanel extends Component {
   state = {
@@ -20,15 +27,11 @@ class EducationPanel extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    const { id, name, startYear, startMonth, endYear, endMonth, description } = this.props.item;
+    const { id, name, description } = this.props.item;
 
     this.setState({
       id,
       name,
-      startMonth,
-      startYear,
-      endYear,
-      endMonth,
       description,
     });
   }
@@ -50,7 +53,8 @@ class EducationPanel extends Component {
 
   updateStore = () => {
     const { id } = this.props.item;
-    store.dispatch(updatecurrentCVFromState('education', id, this.state));
+    const { current } = this.props;
+    store.dispatch(updatecurrentCVFromState(current, id, this.state));
   };
 
   handleTimer = () => {
@@ -69,35 +73,30 @@ class EducationPanel extends Component {
 
   render() {
     const { id } = this.props.item;
-    const { index } = this.props;
+    const { index, current } = this.props;
     const { name, description } = this.state;
+
     return (
       <StyledInputSection id={id}>
         <p>
-          {`Szkoła #${index + 1}`}
+          {`Język #${index + 1}`}
           <button
             type="button"
-            onClick={() => store.dispatch(removeItemfromCurrentCv('education', id))}
+            onClick={() => store.dispatch(removeItemfromCurrentCv(current, id))}
           >
             usuń
           </button>
         </p>
-        <Input
-          isSmall
-          placeholder="język"
-          id="name"
-          value={name}
-          onChange={this.handleForm}
-        />
+        <StyledWrapper>
+          <Input isSmall placeholder="język" id="name" value={name} onChange={this.handleForm} />
 
-
-        <Textarea
-          edit
-          placeholder="opis"
-          id="description"
-          value={description}
-          onChange={this.handleForm}
-        />
+          <DescriptionInput
+            placeholder="opis"
+            id="description"
+            value={description}
+            onChange={this.handleForm}
+          />
+        </StyledWrapper>
       </StyledInputSection>
     );
   }
