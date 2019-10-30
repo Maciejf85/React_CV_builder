@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
+import InputHeader from 'components/atoms/Inputs/InputHeader';
 import DescriptionInput from 'components/atoms/Inputs/descriptionInput';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
 import store from 'store';
@@ -79,7 +80,6 @@ class EducationPanel extends Component {
     return (
       <StyledInputSection id={id}>
         <p>
-          {`Język #${index + 1}`}
           <button
             type="button"
             onClick={() => store.dispatch(removeItemfromCurrentCv(current, id))}
@@ -87,6 +87,7 @@ class EducationPanel extends Component {
             usuń
           </button>
         </p>
+        <InputHeader index={`${index + 1}`} current={current} id={id} />
         <StyledWrapper>
           <Input isSmall placeholder="język" id="name" value={name} onChange={this.handleForm} />
 
