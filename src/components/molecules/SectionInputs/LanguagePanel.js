@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
-import Select from 'components/atoms/Inputs/Select';
-import { Textarea } from 'components/atoms/Inputs';
+import InputHeader from 'components/atoms/Inputs/InputHeader';
+import DescriptionInput from 'components/atoms/Inputs/descriptionInput';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
 import store from 'store';
+import styled from 'styled-components';
+
 // import PropTypes from 'prop-types';
+
+const StyledWrapper = styled.div`
+  width: 100%;
+  display: flex;
+`;
 
 class EducationPanel extends Component {
   state = {
@@ -21,15 +28,11 @@ class EducationPanel extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    const { id, name, startYear, startMonth, endYear, endMonth, description } = this.props.item;
+    const { id, name, description } = this.props.item;
 
     this.setState({
       id,
       name,
-      startMonth,
-      startYear,
-      endYear,
-      endMonth,
       description,
     });
   }
@@ -72,13 +75,11 @@ class EducationPanel extends Component {
   render() {
     const { id } = this.props.item;
     const { index, current } = this.props;
-    const { name, startYear, startMonth, endYear, endMonth, description } = this.state;
-    const startY = new Date().getFullYear() - 65;
-    const endY = new Date().getFullYear();
+    const { name, description } = this.state;
+
     return (
       <StyledInputSection id={id}>
         <p>
-          {`Szkoła #${index + 1}`}
           <button
             type="button"
             onClick={() => store.dispatch(removeItemfromCurrentCv(current, id))}
@@ -86,40 +87,17 @@ class EducationPanel extends Component {
             usuń
           </button>
         </p>
-        <Input
-          isSmall
-          placeholder="nazwa szkoły"
-          id="name"
-          value={name}
-          onChange={this.handleForm}
-        />
+        <InputHeader index={`${index + 1}`} current={current} id={id} />
+        <StyledWrapper>
+          <Input isSmall placeholder="język" id="name" value={name} onChange={this.handleForm} />
 
-        <Select
-          title="data rozpoczęcia"
-          id="startYear"
-          value={startYear}
-          onChange={this.handleForm}
-          start={startY}
-          end={endY}
-        />
-        <Select id="startMonth" value={startMonth} onChange={this.handleForm} start={0} end={12} />
-        <Select
-          title="data zakończenia"
-          id="endYear"
-          value={endYear}
-          onChange={this.handleForm}
-          start={startY}
-          end={endY}
-        />
-        <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
-
-        <Textarea
-          edit
-          placeholder="opis"
-          id="description"
-          value={description}
-          onChange={this.handleForm}
-        />
+          <DescriptionInput
+            placeholder="opis"
+            id="description"
+            value={description}
+            onChange={this.handleForm}
+          />
+        </StyledWrapper>
       </StyledInputSection>
     );
   }

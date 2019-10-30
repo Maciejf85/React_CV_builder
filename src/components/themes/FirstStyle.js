@@ -17,8 +17,7 @@ const Heading = styled.Text`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const Image = styled.Image`
-  /* width: 100%; */
-  height: 210pt;
+  width: calc(100% - 50pt);
 `;
 
 const MainContainer = styled.Page`
@@ -34,7 +33,7 @@ const LeftColumn = styled.View`
 const RightColumn = styled.View`
   width: 446pt;
   height: 100%;
-  /* font-family: 'Montserrat'; */
+  font-family: 'Montserrat';
   padding: 10px;
 `;
 
@@ -63,13 +62,10 @@ class MyDocument extends Component {
 
   render() {
     const { email, name, surname } = this.state;
-    const CurrentCv = store.getState();
-    const { currentItem } = CurrentCv;
-    const { PersonalData } = store.getState();
-    const { image } = store.getState();
-    console.log('image', image);
-    console.log('PersonalData', PersonalData);
-    console.log('currentItem', currentItem);
+    const state = store.getState();
+    const { currentCv } = state;
+    const { education, languages } = currentCv;
+    console.log('education', education);
 
     return (
       <Document title="Moje CV" author="Maciej Fiałkowski">
@@ -77,17 +73,24 @@ class MyDocument extends Component {
           <LeftColumn>
             <Heading>{name}</Heading>
             <Heading bold>{surname}</Heading>
-            <Image src={image.image} />
+            <Image src={state.image.image} />
             <Heading>{email}</Heading>
           </LeftColumn>
           <RightColumn>
-            {/* {cvData.education.map(item => (
-          <TextSection key={item.id}>
-          <Section>{` ID: ${item.id}`}</Section>
-          <Section>{` Name: ${item.name}`}</Section>
-          <Section>{` CONTENT: ${item.description}`}</Section>
-          </TextSection>
-        ))} */}
+            {education.map(item => (
+              <TextSection key={item.id}>
+                <Section>{` ID: ${item.id}`}</Section>
+                <Section>{` Name: ${item.name}`}</Section>
+                <Section>{` CONTENT: ${item.description}`}</Section>
+              </TextSection>
+            ))}
+            {languages.map(item => (
+              <TextSection key={item.id}>
+                <Section>{` ID: ${item.id}`}</Section>
+                <Section>{` Name: ${item.name}`}</Section>
+                <Section>{` CONTENT: ${item.description}`}</Section>
+              </TextSection>
+            ))}
           </RightColumn>
         </MainContainer>
       </Document>

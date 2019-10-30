@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EducationPanel from 'components/molecules/SectionInputs/EducationPanel';
+import LanguagePanel from 'components/molecules/SectionInputs/LanguagePanel';
 import store from 'store';
 import { connect } from 'react-redux';
 import { addNewItemToCurrentCv } from 'actions';
@@ -13,25 +13,25 @@ class Languages extends Component {
   }
 
   render() {
-    const { cvId, currentCv } = this.props;
+    const { cvId, currentCv, current } = this.props;
     const { languages } = currentCv;
+    const { currentView } = current;
+
     return (
       <>
         {languages &&
           languages.map((item, idx) => {
             const { id } = item;
-            return <EducationPanel key={id} index={idx} item={item} cvId={cvId} />;
+            return (
+              <LanguagePanel key={id} index={idx} item={item} cvId={cvId} current={currentView} />
+            );
           })}
         <button
           type="button"
           onClick={() =>
             store.dispatch(
-              addNewItemToCurrentCv('languages', {
+              addNewItemToCurrentCv(currentView, {
                 name: '',
-                startYear: 2000,
-                startMonth: 1,
-                endYear: 2000,
-                endMonth: 1,
                 description: '',
               }),
             )
@@ -47,6 +47,7 @@ class Languages extends Component {
 const mapStateToProps = state => ({
   currentCv: state.currentCv,
   cvId: state.currentCv.currentItem.id,
+  current: state.editComponentView,
 });
 
 export default connect(mapStateToProps)(Languages);

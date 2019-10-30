@@ -116,3 +116,24 @@ export const setNewCurrentCVData = (type, token, id, data) => () => {
       console.log(error);
     });
 };
+
+export const getPanelName = name => {
+  switch (name) {
+    case 'education': {
+      return 'Szkoła';
+    }
+    case 'languages': {
+      return 'Język';
+    }
+    case 'skills': {
+      return 'Doświadczenie';
+    }
+    case 'interest': {
+      return 'Zainteresowania';
+    }
+
+    default: {
+      return '';
+    }
+  }
+};

@@ -30,8 +30,9 @@ const StyledWrapper = styled.li`
 
 class EditNavList extends Component {
   handlePathChange = e => {
+    const { currentView } = this.props;
     const newPath = e.currentTarget.dataset.id;
-    store.dispatch(currentEditView(newPath));
+    if (currentView !== newPath) store.dispatch(currentEditView(newPath));
   };
 
   render() {

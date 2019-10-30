@@ -17,20 +17,21 @@ class Education extends Component {
   }
 
   render() {
-    const { cvId, currentCv } = this.props;
+    const { cvId, currentCv, current } = this.props;
     const { education } = currentCv;
+    const { currentView } = current
     return (
       <>
         {education &&
           education.map((item, idx) => {
             const { id } = item;
-            return <EducationPanel key={id} index={idx} item={item} cvId={cvId} />;
+            return <EducationPanel key={id} index={idx} item={item} cvId={cvId} current={currentView} />;
           })}
         <button
           type="button"
           onClick={() =>
             store.dispatch(
-              addNewItemToCurrentCv('education', {
+              addNewItemToCurrentCv(currentView, {
                 name: '',
                 startYear: 2000,
                 startMonth: 1,
@@ -50,5 +51,6 @@ class Education extends Component {
 const mapStateToProps = state => ({
   currentCv: state.currentCv,
   cvId: state.currentCv.currentItem.id,
+  current: state.editComponentView
 });
 export default connect(mapStateToProps)(Education);
