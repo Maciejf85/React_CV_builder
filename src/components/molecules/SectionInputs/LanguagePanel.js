@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
-import DescriptionInput from 'components/atoms/Inputs/descriptionInput';
-import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
+import { updatecurrentCVFromState, addNewItemToCurrentCv, removeItemfromCurrentCv } from 'actions';
 import store from 'store';
 import styled from 'styled-components';
 
@@ -14,14 +13,10 @@ const StyledWrapper = styled.div`
   display: flex;
 `;
 
-class EducationPanel extends Component {
+export default class LanguagePanel extends Component {
   state = {
     id: '',
     name: '',
-    startYear: 0,
-    startMonth: 0,
-    endYear: 0,
-    endMonth: 0,
     description: '',
     statusActive: false,
   };
@@ -72,6 +67,23 @@ class EducationPanel extends Component {
     }
   };
 
+  handleNewItem = () => {
+    const { current } = this.props;
+
+    store.dispatch(
+      addNewItemToCurrentCv(current, {
+        name: '',
+        description: '',
+      }),
+    );
+  };
+
+  handleRemoveItem = () => {
+    const { id } = this.props.item;
+    const { current } = this.props;
+    store.dispatch(removeItemfromCurrentCv(current, id));
+  };
+
   render() {
     const { id } = this.props.item;
     const { index, current } = this.props;
@@ -79,19 +91,16 @@ class EducationPanel extends Component {
 
     return (
       <StyledInputSection id={id}>
-        <p>
-          <button
-            type="button"
-            onClick={() => store.dispatch(removeItemfromCurrentCv(current, id))}
-          >
-            usuń
-          </button>
-        </p>
-        <InputHeader index={`${index + 1}`} current={current} id={id} />
+        <InputHeader
+          index={`${index + 1}`}
+          current={current}
+          newItem={this.handleNewItem}
+          removeItem={this.handleRemoveItem}
+        />
         <StyledWrapper>
           <Input isSmall placeholder="język" id="name" value={name} onChange={this.handleForm} />
-
-          <DescriptionInput
+          <Input
+            isSmall
             placeholder="opis"
             id="description"
             value={description}
@@ -124,7 +133,5 @@ class EducationPanel extends Component {
 //   endMonth: 'Stranger',
 //   description: 'Stranger',
 // };
-
-export default EducationPanel;
 
 // @TODO: wyniesienie update store i update pliku do wyższych komponentów
