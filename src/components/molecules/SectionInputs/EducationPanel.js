@@ -3,7 +3,9 @@ import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
 import Select from 'components/atoms/Inputs/Select';
 import { Textarea } from 'components/atoms/Inputs';
-import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
+import InputHeader from 'components/atoms/Inputs/InputHeader';
+import { updatecurrentCVFromState, addNewItemToCurrentCv, removeItemfromCurrentCv } from 'actions';
+
 import store from 'store';
 // import PropTypes from 'prop-types';
 
@@ -69,6 +71,27 @@ class EducationPanel extends Component {
     }
   };
 
+  handleNewItem = () => {
+    const { current } = this.props;
+
+    store.dispatch(
+      addNewItemToCurrentCv(current, {
+        name: '',
+        startYear: 2000,
+        startMonth: 1,
+        endYear: 2000,
+        endMonth: 1,
+        description: '',
+      }),
+    );
+  };
+
+  handleRemoveItem = () => {
+    const { id } = this.props.item;
+    const { current } = this.props;
+    store.dispatch(removeItemfromCurrentCv(current, id));
+  };
+
   render() {
     const { id } = this.props.item;
     const { index, current } = this.props;
@@ -77,15 +100,12 @@ class EducationPanel extends Component {
     const endY = new Date().getFullYear();
     return (
       <StyledInputSection id={id}>
-        <p>
-          {`Szkoła #${index + 1}`}
-          <button
-            type="button"
-            onClick={() => store.dispatch(removeItemfromCurrentCv(current, id))}
-          >
-            usuń
-          </button>
-        </p>
+        <InputHeader
+          index={`${index + 1}`}
+          current={current}
+          newItem={this.handleNewItem}
+          removeItem={this.handleRemoveItem}
+        />
         <Input
           isSmall
           placeholder="nazwa szkoły"

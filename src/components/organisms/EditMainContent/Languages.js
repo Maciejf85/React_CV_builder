@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import LanguagePanel from 'components/molecules/SectionInputs/LanguagePanel';
 import store from 'store';
 import { connect } from 'react-redux';
-import { addNewItemToCurrentCv } from 'actions';
 import { setNewCurrentCVData } from 'functions';
 
 class Languages extends Component {
@@ -26,19 +25,6 @@ class Languages extends Component {
               <LanguagePanel key={id} index={idx} item={item} cvId={cvId} current={currentView} />
             );
           })}
-        <button
-          type="button"
-          onClick={() =>
-            store.dispatch(
-              addNewItemToCurrentCv(currentView, {
-                name: '',
-                description: '',
-              }),
-            )
-          }
-        >
-          Dodaj nową szkołę
-        </button>
       </>
     );
   }
