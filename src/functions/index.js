@@ -146,6 +146,6 @@ export const getNewItemName = currentView => {
     { skills: 'nową umiejętność' },
   ];
 
-  const index = array.find(item => Object.keys(item) == currentView);
-  return index[currentView] || 'nowy element';
+  const index = array.find(item => String(Object.keys(item)) === currentView);
+  return index ? index[currentView] : 'nowy element';
 };
