@@ -52,22 +52,22 @@ const StyledWrapper = styled.ul`
     }
 `;
 
-const NavButtons = props => {
+const NavButtons = () => {
   return (
     <StyledWrapper>
       <li>
         <NavLink activeClassName="active" exact to={path.main}>
-          Main
+          Strona główna
         </NavLink>
       </li>
-      {/* <li>
+      <li>
         <NavLink activeClassName="active" to={path.edit}>
-          Editor
+          Edytor
         </NavLink>
-      </li> */}
+      </li>
       <li>
         <NavLink activeClassName="active" to={path.preview}>
-          Preview
+          Podgląd
         </NavLink>
       </li>
     </StyledWrapper>

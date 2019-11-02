@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import LanguagePanel from 'components/molecules/SectionInputs/LanguagePanel';
+import { connect } from 'react-redux';
+import ExperiencePanel from 'components/molecules/SectionInputs/ExperiencePanel';
 import NewItemButton from 'components/atoms/Buttons/newItemButton';
 import store from 'store';
-import { connect } from 'react-redux';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
 
-class Languages extends Component {
+class Experience extends Component {
+  componentDidMount() {
+    console.log(' Mount - Education Component');
+  }
+
   componentDidUpdate() {
     const { cvId, currentCv } = this.props;
     const token = sessionStorage.getItem('userID');
@@ -20,6 +24,11 @@ class Languages extends Component {
     store.dispatch(
       addNewItemToCurrentCv(currentView, {
         name: '',
+        employer: '',
+        startYear: 2000,
+        startMonth: 1,
+        endYear: 2000,
+        endMonth: 1,
         description: '',
       }),
     );
@@ -27,16 +36,15 @@ class Languages extends Component {
 
   render() {
     const { cvId, currentCv, current } = this.props;
-    const { languages } = currentCv;
+    const { experience } = currentCv;
     const { currentView } = current;
-    console.log('currentView', currentView);
     return (
       <>
-        {languages.length ? (
-          languages.map((item, idx) => {
+        {experience.length ? (
+          experience.map((item, idx) => {
             const { id } = item;
             return (
-              <LanguagePanel
+              <ExperiencePanel
                 key={id}
                 index={idx}
                 item={item}
@@ -53,11 +61,9 @@ class Languages extends Component {
     );
   }
 }
-
 const mapStateToProps = state => ({
   currentCv: state.currentCv,
   cvId: state.currentCv.currentItem.id,
   current: state.editComponentView,
 });
-
-export default connect(mapStateToProps)(Languages);
+export default connect(mapStateToProps)(Experience);

@@ -10,11 +10,11 @@ const StyledInputSection = styled.div`
   width: ${({ width }) => width || '100%'};
   min-height: ${({ height }) => height || '135px;'};
   padding: 15px;
-  border-radius: ${({ titleInput }) => (titleInput ? '7px 7px 0 0 ' : '7px')};
+  border-radius: 7px;
   background: white;
   margin-bottom: 15px;
   overflow: hidden;
-
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
   .title {
     position: absolute;
     display: flex;

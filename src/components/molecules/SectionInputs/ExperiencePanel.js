@@ -5,14 +5,22 @@ import Select from 'components/atoms/Inputs/Select';
 import { Textarea } from 'components/atoms/Inputs';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
+import styled from 'styled-components';
 
 import store from 'store';
 // import PropTypes from 'prop-types';
 
-class EducationPanel extends Component {
+const InputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+class ExperiencePanel extends Component {
   state = {
     id: '',
     name: '',
+    employer: '',
     startYear: 0,
     startMonth: 0,
     endYear: 0,
@@ -23,11 +31,21 @@ class EducationPanel extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    const { id, name, startYear, startMonth, endYear, endMonth, description } = this.props.item;
+    const {
+      id,
+      name,
+      employer,
+      startYear,
+      startMonth,
+      endYear,
+      endMonth,
+      description,
+    } = this.props.item;
 
     this.setState({
       id,
       name,
+      employer,
       startMonth,
       startYear,
       endYear,
@@ -80,7 +98,7 @@ class EducationPanel extends Component {
   render() {
     const { id } = this.props.item;
     const { index, current, newItem } = this.props;
-    const { name, startYear, startMonth, endYear, endMonth, description } = this.state;
+    const { name, employer, startYear, startMonth, endYear, endMonth, description } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
     return (
@@ -91,36 +109,50 @@ class EducationPanel extends Component {
           newItem={newItem}
           removeItem={this.handleRemoveItem}
         />
-        <Input
-          isSmall
-          placeholder="nazwa szkoły"
-          id="name"
-          value={name}
-          onChange={this.handleForm}
-        />
+        <InputWrapper>
+          <Input
+            isSmall
+            placeholder="nazwa pracodawcy"
+            id="name"
+            value={name}
+            onChange={this.handleForm}
+          />
+          <Input
+            isSmall
+            placeholder="nazwa stanowiska"
+            id="employer"
+            value={employer}
+            onChange={this.handleForm}
+          />
 
-        <Select
-          title="data rozpoczęcia"
-          id="startYear"
-          value={startYear}
-          onChange={this.handleForm}
-          start={startY}
-          end={endY}
-        />
-        <Select id="startMonth" value={startMonth} onChange={this.handleForm} start={0} end={12} />
-        <Select
-          title="data zakończenia"
-          id="endYear"
-          value={endYear}
-          onChange={this.handleForm}
-          start={startY}
-          end={endY}
-        />
-        <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
-
+          <Select
+            title="data rozpoczęcia"
+            id="startYear"
+            value={startYear}
+            onChange={this.handleForm}
+            start={startY}
+            end={endY}
+          />
+          <Select
+            id="startMonth"
+            value={startMonth}
+            onChange={this.handleForm}
+            start={0}
+            end={12}
+          />
+          <Select
+            title="data zakończenia"
+            id="endYear"
+            value={endYear}
+            onChange={this.handleForm}
+            start={startY}
+            end={endY}
+          />
+          <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
+        </InputWrapper>
         <Textarea
           edit
-          placeholder="opis"
+          placeholder="opis stanowiska"
           id="description"
           value={description}
           onChange={this.handleForm}
@@ -152,6 +184,6 @@ class EducationPanel extends Component {
 //   description: 'Stranger',
 // };
 
-export default EducationPanel;
+export default ExperiencePanel;
 
 // @TODO: wyniesienie update store i update pliku do wyższych komponentów

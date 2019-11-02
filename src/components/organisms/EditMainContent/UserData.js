@@ -214,11 +214,13 @@ class UserData extends Component {
 
   // CHANGE TITLE
 
-  handleTitle = (e) => {
-    const { id } = e.target
+  handleTitle = e => {
+    const { id } = e.target;
     const { currentTitle, changeTitle, currentTempTitle } = this.state;
-    // change title is active set temp title 
-    if (!changeTitle) { this.setState({ currentTempTitle: currentTitle }) }
+    // change title is active set temp title
+    if (!changeTitle) {
+      this.setState({ currentTempTitle: currentTitle });
+    }
 
     if (id === 'save') {
       this.setState(prevstate => ({
@@ -229,8 +231,9 @@ class UserData extends Component {
       return this.state.changeTitle ? this.handleTimer(0) : null;
     }
     return this.setState({
-      changeTitle: false, currentTitle: currentTempTitle
-    })
+      changeTitle: false,
+      currentTitle: currentTempTitle,
+    });
   };
 
   render() {
@@ -271,14 +274,14 @@ class UserData extends Component {
                   autoFocus
                 />
               ) : (
-                  currentTitle
-                )}
+                currentTitle
+              )}
               <div>
-                <PrimaryButton id='save' onClick={this.handleTitle} titleButton>
+                <PrimaryButton id="save" onClick={this.handleTitle} titleButton>
                   {changeTitle ? 'zapisz' : 'zmień tytuł'}
                 </PrimaryButton>
                 {changeTitle && (
-                  <PrimaryButton id='cancel' onClick={this.handleTitle} titleButton>
+                  <PrimaryButton id="cancel" onClick={this.handleTitle} titleButton>
                     anuluj
                   </PrimaryButton>
                 )}
@@ -341,17 +344,17 @@ class UserData extends Component {
                 </div>
               </>
             ) : (
-                <ImageOptionLabel htmlFor="imageInput" active={!image}>
-                  <input
-                    type="file"
-                    data-actiontype="add"
-                    onChange={this.handleImage}
-                    id="imageInput"
-                    style={{ display: 'none' }}
-                  />
-                  dodaj zdjęcie
+              <ImageOptionLabel htmlFor="imageInput" active={!image}>
+                <input
+                  type="file"
+                  data-actiontype="add"
+                  onChange={this.handleImage}
+                  id="imageInput"
+                  style={{ display: 'none' }}
+                />
+                dodaj zdjęcie
               </ImageOptionLabel>
-              )}
+            )}
           </StyledInputSection>
           <StyledInputSection>
             <Input

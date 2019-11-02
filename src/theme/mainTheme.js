@@ -3,6 +3,7 @@ const theme = {
     thin: '300',
     normal: '400',
     bold: '600',
+    xbold: '800',
   },
   fontSize: {
     xs: '0.8rem',
@@ -24,6 +25,7 @@ const theme = {
     mainGrey: 'hsl(206,7%,21%)',
     inputGrey: 'hsl(210,3%,80%)',
     buttonActive: 'hsl(220,8%,44%)',
+    buttonCaption: 'hsl(220,8%,40%)',
     primaryBlue: 'hsl(204, 100%, 50%)',
     secondaryBlue: 'hsl(204, 100%, 40%)',
     lightBlue: 'hsl(204, 100%, 58%)',

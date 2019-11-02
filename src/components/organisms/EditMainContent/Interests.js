@@ -1,19 +1,62 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import InterestsPanel from 'components/molecules/SectionInputs/InterestsPanel';
+import NewItemButton from 'components/atoms/Buttons/newItemButton';
+import store from 'store';
+import { connect } from 'react-redux';
+import { setNewCurrentCVData } from 'functions';
+import { addNewItemToCurrentCv } from 'actions';
 
-const StyledWrapper = styled.div`
-  width: 100%;
-  background: #000;
-  color: white;
-`;
+class Interest extends Component {
+  componentDidUpdate() {
+    const { cvId, currentCv } = this.props;
+    const token = sessionStorage.getItem('userID');
+    store.dispatch(setNewCurrentCVData('update', token, cvId, currentCv));
+  }
 
-export default class Interests extends Component {
-  state = {
-    name: 'Interests',
+  handleNewItem = () => {
+    const { current } = this.props;
+    const { currentView } = current;
+
+    store.dispatch(
+      addNewItemToCurrentCv(currentView, {
+        name: '',
+        description: '',
+      }),
+    );
   };
 
   render() {
-    const { name } = this.state;
-    return <StyledWrapper>{name}</StyledWrapper>;
+    const { cvId, currentCv, current } = this.props;
+    const { interests } = currentCv;
+    const { currentView } = current;
+    return (
+      <>
+        {interests.length ? (
+          interests.map((item, idx) => {
+            const { id } = item;
+            return (
+              <InterestsPanel
+                key={id}
+                index={idx}
+                item={item}
+                cvId={cvId}
+                current={currentView}
+                newItem={this.handleNewItem}
+              />
+            );
+          })
+        ) : (
+          <NewItemButton view={currentView} handleClick={this.handleNewItem} />
+        )}
+      </>
+    );
   }
 }
+
+const mapStateToProps = state => ({
+  currentCv: state.currentCv,
+  cvId: state.currentCv.currentItem.id,
+  current: state.editComponentView,
+});
+
+export default connect(mapStateToProps)(Interest);

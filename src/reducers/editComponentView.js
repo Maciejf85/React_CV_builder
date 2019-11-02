@@ -12,6 +12,10 @@ const path = (state = initialState, { type }) => {
       return {
         currentView: 'education',
       };
+    case 'experience':
+      return {
+        currentView: 'experience',
+      };
     case 'languages':
       return {
         currentView: 'languages',
@@ -20,9 +24,9 @@ const path = (state = initialState, { type }) => {
       return {
         currentView: 'skills',
       };
-    case 'interest':
+    case 'interests':
       return {
-        currentView: 'interest',
+        currentView: 'interests',
       };
     case 'confidential':
       return {

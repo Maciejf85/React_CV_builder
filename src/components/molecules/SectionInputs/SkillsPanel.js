@@ -1,38 +1,32 @@
 import React, { Component } from 'react';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
-import Select from 'components/atoms/Inputs/Select';
-import { Textarea } from 'components/atoms/Inputs';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
-
 import store from 'store';
+import styled from 'styled-components';
+
 // import PropTypes from 'prop-types';
 
-class EducationPanel extends Component {
+const StyledWrapper = styled.div`
+  width: 100%;
+  display: flex;
+`;
+
+export default class Skills extends Component {
   state = {
     id: '',
     name: '',
-    startYear: 0,
-    startMonth: 0,
-    endYear: 0,
-    endMonth: 0,
-    description: '',
     statusActive: false,
   };
 
   componentDidMount() {
     this.mounted = true;
-    const { id, name, startYear, startMonth, endYear, endMonth, description } = this.props.item;
+    const { id, name } = this.props.item;
 
     this.setState({
       id,
       name,
-      startMonth,
-      startYear,
-      endYear,
-      endMonth,
-      description,
     });
   }
 
@@ -80,9 +74,8 @@ class EducationPanel extends Component {
   render() {
     const { id } = this.props.item;
     const { index, current, newItem } = this.props;
-    const { name, startYear, startMonth, endYear, endMonth, description } = this.state;
-    const startY = new Date().getFullYear() - 65;
-    const endY = new Date().getFullYear();
+    const { name } = this.state;
+
     return (
       <StyledInputSection id={id}>
         <InputHeader
@@ -91,40 +84,15 @@ class EducationPanel extends Component {
           newItem={newItem}
           removeItem={this.handleRemoveItem}
         />
-        <Input
-          isSmall
-          placeholder="nazwa szkoły"
-          id="name"
-          value={name}
-          onChange={this.handleForm}
-        />
-
-        <Select
-          title="data rozpoczęcia"
-          id="startYear"
-          value={startYear}
-          onChange={this.handleForm}
-          start={startY}
-          end={endY}
-        />
-        <Select id="startMonth" value={startMonth} onChange={this.handleForm} start={0} end={12} />
-        <Select
-          title="data zakończenia"
-          id="endYear"
-          value={endYear}
-          onChange={this.handleForm}
-          start={startY}
-          end={endY}
-        />
-        <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
-
-        <Textarea
-          edit
-          placeholder="opis"
-          id="description"
-          value={description}
-          onChange={this.handleForm}
-        />
+        <StyledWrapper>
+          <Input
+            isSmall
+            placeholder="umiejętność"
+            id="name"
+            value={name}
+            onChange={this.handleForm}
+          />
+        </StyledWrapper>
       </StyledInputSection>
     );
   }
@@ -151,7 +119,5 @@ class EducationPanel extends Component {
 //   endMonth: 'Stranger',
 //   description: 'Stranger',
 // };
-
-export default EducationPanel;
 
 // @TODO: wyniesienie update store i update pliku do wyższych komponentów

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EducationPanel from 'components/molecules/SectionInputs/EducationPanel';
+import NewItemButton from 'components/atoms/Buttons/newItemButton';
 import store from 'store';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
@@ -16,19 +17,45 @@ class Education extends Component {
     store.dispatch(setNewCurrentCVData('update', token, cvId, currentCv));
   }
 
+  handleNewItem = () => {
+    const { current } = this.props;
+    const { currentView } = current;
+
+    store.dispatch(
+      addNewItemToCurrentCv(currentView, {
+        name: '',
+        startYear: 2000,
+        startMonth: 1,
+        endYear: 2000,
+        endMonth: 1,
+        description: '',
+      }),
+    );
+  };
+
   render() {
     const { cvId, currentCv, current } = this.props;
     const { education } = currentCv;
     const { currentView } = current;
     return (
       <>
-        {education &&
+        {education.length ? (
           education.map((item, idx) => {
             const { id } = item;
             return (
-              <EducationPanel key={id} index={idx} item={item} cvId={cvId} current={currentView} />
+              <EducationPanel
+                key={id}
+                index={idx}
+                item={item}
+                cvId={cvId}
+                current={currentView}
+                newItem={this.handleNewItem}
+              />
             );
-          })}
+          })
+        ) : (
+          <NewItemButton view={currentView} handleClick={this.handleNewItem} />
+        )}
       </>
     );
   }

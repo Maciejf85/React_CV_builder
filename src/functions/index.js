@@ -126,14 +126,29 @@ export const getPanelName = name => {
       return 'Język';
     }
     case 'skills': {
-      return 'Doświadczenie';
+      return 'Umiejętność';
     }
-    case 'interest': {
+    case 'interests': {
       return 'Zainteresowania';
+    }
+    case 'experience': {
+      return 'Doświadczenie';
     }
 
     default: {
       return '';
     }
   }
+};
+
+export const getNewItemName = currentView => {
+  const array = [
+    { education: 'nową szkołę' },
+    { interest: 'nową umiejętność' },
+    { languages: 'nowy język' },
+    { skills: 'nową umiejętność' },
+  ];
+
+  const index = array.find(item => String(Object.keys(item)) === currentView);
+  return index ? index[currentView] : 'nowy element';
 };
