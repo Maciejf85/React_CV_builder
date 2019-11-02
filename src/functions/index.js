@@ -126,10 +126,13 @@ export const getPanelName = name => {
       return 'Język';
     }
     case 'skills': {
-      return 'Doświadczenie';
+      return 'Umiejętność';
     }
-    case 'interest': {
+    case 'interests': {
       return 'Zainteresowania';
+    }
+    case 'experience': {
+      return 'Doświadczenie';
     }
 
     default: {

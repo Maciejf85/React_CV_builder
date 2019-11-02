@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import InterestsPanel from 'components/molecules/SectionInputs/InterestsPanel';
+import { connect } from 'react-redux';
+import ExperiencePanel from 'components/molecules/SectionInputs/ExperiencePanel';
 import NewItemButton from 'components/atoms/Buttons/newItemButton';
 import store from 'store';
-import { connect } from 'react-redux';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
 
-class Interest extends Component {
+class Experience extends Component {
+  componentDidMount() {
+    console.log(' Mount - Education Component');
+  }
+
   componentDidUpdate() {
     const { cvId, currentCv } = this.props;
     const token = sessionStorage.getItem('userID');
@@ -20,6 +24,11 @@ class Interest extends Component {
     store.dispatch(
       addNewItemToCurrentCv(currentView, {
         name: '',
+        employer: '',
+        startYear: 2000,
+        startMonth: 1,
+        endYear: 2000,
+        endMonth: 1,
         description: '',
       }),
     );
@@ -27,15 +36,15 @@ class Interest extends Component {
 
   render() {
     const { cvId, currentCv, current } = this.props;
-    const { interests } = currentCv;
+    const { experience } = currentCv;
     const { currentView } = current;
     return (
       <>
-        {interests.length ? (
-          interests.map((item, idx) => {
+        {experience.length ? (
+          experience.map((item, idx) => {
             const { id } = item;
             return (
-              <InterestsPanel
+              <ExperiencePanel
                 key={id}
                 index={idx}
                 item={item}
@@ -52,11 +61,9 @@ class Interest extends Component {
     );
   }
 }
-
 const mapStateToProps = state => ({
   currentCv: state.currentCv,
   cvId: state.currentCv.currentItem.id,
   current: state.editComponentView,
 });
-
-export default connect(mapStateToProps)(Interest);
+export default connect(mapStateToProps)(Experience);

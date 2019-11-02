@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Confidential from 'components/organisms/EditMainContent/Confidential';
 import Education from 'components/organisms/EditMainContent/Education';
+import Experience from 'components/organisms/EditMainContent/Experience';
 import Interests from 'components/organisms/EditMainContent/Interests';
 import Skills from 'components/organisms/EditMainContent/Skills';
 import UserData from 'components/organisms/EditMainContent/UserData';
@@ -27,9 +28,10 @@ class EditMainContent extends Component {
       <StyledWrapper>
         {currentView === 'personal' && <UserData />}
         {currentView === 'education' && <Education />}
+        {currentView === 'experience' && <Experience />}
         {currentView === 'languages' && <Languages />}
         {currentView === 'skills' && <Skills />}
-        {currentView === 'interest' && <Interests />}
+        {currentView === 'interests' && <Interests />}
         {currentView === 'confidential' && <Confidential />}
       </StyledWrapper>
     );

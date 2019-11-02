@@ -1,9 +1,10 @@
 export const editViews = [
   { name: 'Dane osobowe', link: 'personal', icon: 'faUserAlt' },
   { name: 'Edukacja', link: 'education', icon: 'graduation-cap' },
+  { name: 'Doświadczenie', link: 'experience', icon: 'graduation-cap' },
   { name: 'Języki obce', link: 'languages', icon: 'flag' },
   { name: 'Umiejętności', link: 'skills', icon: 'coffee' },
-  { name: 'Zainteresowania', link: 'interest', icon: 'graduation-cap' },
+  { name: 'Zainteresowania', link: 'interests', icon: 'graduation-cap' },
   { name: 'Klauzula poufności', link: 'confidential', icon: 'apple-alt' },
 ];
 

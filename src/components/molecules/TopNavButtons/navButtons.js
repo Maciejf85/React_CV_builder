@@ -52,7 +52,7 @@ const StyledWrapper = styled.ul`
     }
 `;
 
-const NavButtons = props => {
+const NavButtons = () => {
   return (
     <StyledWrapper>
       <li>
