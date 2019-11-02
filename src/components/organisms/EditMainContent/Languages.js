@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import LanguagePanel from 'components/molecules/SectionInputs/LanguagePanel';
+import NewItemButton from 'components/atoms/Buttons/newItemButton';
 import store from 'store';
 import { connect } from 'react-redux';
 import { setNewCurrentCVData } from 'functions';
+import { addNewItemToCurrentCv } from 'actions';
 
 class Languages extends Component {
   componentDidUpdate() {
@@ -11,20 +13,42 @@ class Languages extends Component {
     store.dispatch(setNewCurrentCVData('update', token, cvId, currentCv));
   }
 
+  handleNewItem = () => {
+    const { current } = this.props;
+    const { currentView } = current;
+
+    store.dispatch(
+      addNewItemToCurrentCv(currentView, {
+        name: '',
+        description: '',
+      }),
+    );
+  };
+
   render() {
     const { cvId, currentCv, current } = this.props;
     const { languages } = currentCv;
     const { currentView } = current;
-
+    console.log('currentView', currentView);
     return (
       <>
-        {languages &&
+        {languages.length ? (
           languages.map((item, idx) => {
             const { id } = item;
             return (
-              <LanguagePanel key={id} index={idx} item={item} cvId={cvId} current={currentView} />
+              <LanguagePanel
+                key={id}
+                index={idx}
+                item={item}
+                cvId={cvId}
+                current={currentView}
+                newItem={this.handleNewItem}
+              />
             );
-          })}
+          })
+        ) : (
+          <NewItemButton view={currentView} handleClick={this.handleNewItem} />
+        )}
       </>
     );
   }

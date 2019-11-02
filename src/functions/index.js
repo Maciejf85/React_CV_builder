@@ -137,3 +137,15 @@ export const getPanelName = name => {
     }
   }
 };
+
+export const getNewItemName = currentView => {
+  const array = [
+    { education: 'nową szkołę' },
+    { interest: 'nową umiejętność' },
+    { languages: 'nowy język' },
+    { skills: 'nową umiejętność' },
+  ];
+
+  const index = array.find(item => Object.keys(item) == currentView);
+  return index[currentView] || 'nowy element';
+};

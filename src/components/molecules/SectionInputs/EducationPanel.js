@@ -4,7 +4,7 @@ import Input from 'components/atoms/Inputs/Input';
 import Select from 'components/atoms/Inputs/Select';
 import { Textarea } from 'components/atoms/Inputs';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
-import { updatecurrentCVFromState, addNewItemToCurrentCv, removeItemfromCurrentCv } from 'actions';
+import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
 
 import store from 'store';
 // import PropTypes from 'prop-types';
@@ -71,21 +71,6 @@ class EducationPanel extends Component {
     }
   };
 
-  handleNewItem = () => {
-    const { current } = this.props;
-
-    store.dispatch(
-      addNewItemToCurrentCv(current, {
-        name: '',
-        startYear: 2000,
-        startMonth: 1,
-        endYear: 2000,
-        endMonth: 1,
-        description: '',
-      }),
-    );
-  };
-
   handleRemoveItem = () => {
     const { id } = this.props.item;
     const { current } = this.props;
@@ -94,7 +79,7 @@ class EducationPanel extends Component {
 
   render() {
     const { id } = this.props.item;
-    const { index, current } = this.props;
+    const { index, current, newItem } = this.props;
     const { name, startYear, startMonth, endYear, endMonth, description } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
@@ -103,7 +88,7 @@ class EducationPanel extends Component {
         <InputHeader
           index={`${index + 1}`}
           current={current}
-          newItem={this.handleNewItem}
+          newItem={newItem}
           removeItem={this.handleRemoveItem}
         />
         <Input

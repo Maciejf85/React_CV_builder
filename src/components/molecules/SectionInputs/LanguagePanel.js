@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
-import { updatecurrentCVFromState, addNewItemToCurrentCv, removeItemfromCurrentCv } from 'actions';
+import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
 import store from 'store';
 import styled from 'styled-components';
 
@@ -67,17 +67,6 @@ export default class LanguagePanel extends Component {
     }
   };
 
-  handleNewItem = () => {
-    const { current } = this.props;
-
-    store.dispatch(
-      addNewItemToCurrentCv(current, {
-        name: '',
-        description: '',
-      }),
-    );
-  };
-
   handleRemoveItem = () => {
     const { id } = this.props.item;
     const { current } = this.props;
@@ -86,7 +75,7 @@ export default class LanguagePanel extends Component {
 
   render() {
     const { id } = this.props.item;
-    const { index, current } = this.props;
+    const { index, current, newItem } = this.props;
     const { name, description } = this.state;
 
     return (
@@ -94,7 +83,7 @@ export default class LanguagePanel extends Component {
         <InputHeader
           index={`${index + 1}`}
           current={current}
-          newItem={this.handleNewItem}
+          newItem={newItem}
           removeItem={this.handleRemoveItem}
         />
         <StyledWrapper>
