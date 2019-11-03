@@ -101,7 +101,7 @@ export const sidePanel = result => {
   if (!inProgress) {
     store.dispatch(changeSidePanelState({ content, error }));
     setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), 2000);
-    setTimeout(() => store.dispatch({ type: 'UNLOCK_SIDE_PANEL' }), 6000);
+    setTimeout(() => store.dispatch({ type: 'UNLOCK_SIDE_PANEL' }), 4500);
   }
 };
 
