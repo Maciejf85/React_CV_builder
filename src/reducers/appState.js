@@ -1,5 +1,6 @@
 const initialState = {
   isVisible: false,
+  inProgress: false,
   error: false,
 };
 
@@ -9,7 +10,15 @@ const SidePanel = (state = initialState, { type, payload }) => {
       return {
         isVisible: !state.isVisible,
         content: payload.content,
-        error: payload.error
+        error: payload.error,
+        inProgress: true,
+      };
+    case 'UNLOCK_SIDE_PANEL':
+      return {
+        isVisible: false,
+        content: '',
+        error: false,
+        inProgress: false,
       };
     default:
       return state;

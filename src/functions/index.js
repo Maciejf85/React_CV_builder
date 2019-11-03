@@ -4,6 +4,7 @@ import store from 'store';
 import axios from 'axios';
 import { changeSidePanelState } from 'actions';
 import path from '../path';
+import { useSelector } from 'react-redux';
 
 export const formatDate = date => {
   const months = [
@@ -94,9 +95,14 @@ export const base64StringtoFile = (base64String, filename) => {
 
 //  handle sidePanel
 export const sidePanel = result => {
+  const { appState } = store.getState();
+  const { inProgress } = appState;
   const { content, error } = result;
-  store.dispatch(changeSidePanelState({ content, error }));
-  setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), 2000);
+  if (!inProgress) {
+    store.dispatch(changeSidePanelState({ content, error }));
+    setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), 2000);
+    setTimeout(() => store.dispatch({ type: 'UNLOCK_SIDE_PANEL' }), 6000);
+  }
 };
 
 // SET NEW CURRENT CV
