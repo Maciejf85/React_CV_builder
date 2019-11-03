@@ -50,7 +50,9 @@ export default class LanguagePanel extends Component {
   updateStore = () => {
     const { id } = this.props.item;
     const { current } = this.props;
-    store.dispatch(updatecurrentCVFromState(current, id, this.state));
+    const newState = Object.assign({}, this.state);
+    delete newState.statusActive;
+    store.dispatch(updatecurrentCVFromState(current, id, newState));
   };
 
   handleTimer = () => {

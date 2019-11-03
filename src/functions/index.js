@@ -147,6 +147,7 @@ export const getNewItemName = currentView => {
     { interest: 'nową umiejętność' },
     { languages: 'nowy język' },
     { skills: 'nową umiejętność' },
+    { skills: 'doświadczenie zawodowe' },
   ];
 
   const index = array.find(item => String(Object.keys(item)) === currentView);
