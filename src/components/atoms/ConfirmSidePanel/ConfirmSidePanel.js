@@ -18,7 +18,6 @@ const StyledWrapper = styled(PosedPanel)`
   display: grid;
   grid-template-columns: 1fr 3fr;
   align-items: center;
-  justify-items: center;
   width: 250px;
   height: 50px;
   background: ${({ error, theme }) =>
@@ -44,10 +43,6 @@ const StyledWrapper = styled(PosedPanel)`
     height: 100%;
     background: ${({ error, theme }) =>
       !error ? theme.colors.successColor : theme.colors.alertColor};
-  }
-
-  p {
-    margin-right: 60px;
   }
 `;
 

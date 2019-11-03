@@ -48,7 +48,9 @@ export default class Skills extends Component {
   updateStore = () => {
     const { id } = this.props.item;
     const { current } = this.props;
-    store.dispatch(updatecurrentCVFromState(current, id, this.state));
+    const newState = Object.assign({}, this.state);
+    delete newState.statusActive;
+    store.dispatch(updatecurrentCVFromState(current, id, newState));
   };
 
   handleTimer = () => {
@@ -85,13 +87,7 @@ export default class Skills extends Component {
           removeItem={this.handleRemoveItem}
         />
         <StyledWrapper>
-          <Input
-            isSmall
-            placeholder="umiejętność"
-            id="name"
-            value={name}
-            onChange={this.handleForm}
-          />
+          <Input placeholder="umiejętność" id="name" value={name} onChange={this.handleForm} />
         </StyledWrapper>
       </StyledInputSection>
     );
