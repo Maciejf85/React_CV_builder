@@ -4,7 +4,6 @@ import store from 'store';
 import axios from 'axios';
 import { changeSidePanelState } from 'actions';
 import path from '../path';
-import { useSelector } from 'react-redux';
 
 export const formatDate = date => {
   const months = [
