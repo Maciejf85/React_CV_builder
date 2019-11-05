@@ -2,7 +2,8 @@ const basePath = '/';
 // const basePath = '/cv-builder/';
 
 const path = {
-  main: basePath,
+  login: basePath,
+  main: `${basePath}main`,
   edit: `${basePath}edit`,
   preview: `${basePath}preview`,
   // cors: 'https://maciejf.pl/cv-builder/',
