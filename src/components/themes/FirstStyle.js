@@ -11,13 +11,15 @@ Font.register({
 });
 
 const Heading = styled.Text`
-  font-size: 13pt;
+  font-size: 11pt;
   margin-left: 5pt;
+  margin-bottom: 5pt;
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const Image = styled.Image`
-  width: calc(100% - 50pt);
+  width: 130pt;
+  margin: 10pt auto;
 `;
 
 const MainContainer = styled.Page`
@@ -43,52 +45,63 @@ const Section = styled.Text`
   font-size: 10pt;
   padding: 5px 0;
 `;
+const Link = styled.Link`
+  font-size: 11pt;
+  margin-left: 5pt;
+  margin-bottom: 5pt;
+  font-family: 'Montserrat';
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+`;
 const TextSection = styled.View`
-  margin: 20px 0;
+  margin-bottom: 10px;
   padding: 10px 0;
 `;
-const path = 'https://cors-anywhere.herokuapp.com/http://www.maciejf.pl/cv-builder/';
+// const path = 'https://cors-anywhere.herokuapp.com/https://maciejf.pl/cv-builder/';
 // Create Document Component
 class MyDocument extends Component {
-  state = {
-    name: 'Maciej',
-    surname: 'Fiałkowski',
-    email: 'Fialek85@gmail.com',
-  };
-
   componentDidMount() {
     setTimeout(this.props.downloadButton, 1000);
   }
 
   render() {
-    const { email, name, surname } = this.state;
     const state = store.getState();
-    const { currentCv } = state;
-    const { education, languages } = currentCv;
-    console.log('education', education);
+    const { currentCv, personalData } = state;
+    const { name, surname, email, adress, github, linkedin, profession } = personalData;
+    const { education, languages, experience, currentItem } = currentCv;
 
     return (
-      <Document title="Moje CV" author="Maciej Fiałkowski">
+      <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4" wrap>
           <LeftColumn>
-            <Heading>{name}</Heading>
+            <Heading bold>{name}</Heading>
             <Heading bold>{surname}</Heading>
             <Image src={state.image.image} />
             <Heading>{email}</Heading>
+            <Heading>{adress}</Heading>
+            <Link href={github} target="_blank">
+              {github}
+            </Link>
+            <Link href={linkedin}>{linkedin}</Link>
           </LeftColumn>
           <RightColumn>
+            <Heading bold>{profession}</Heading>
+
             {education.map(item => (
               <TextSection key={item.id}>
-                <Section>{` ID: ${item.id}`}</Section>
-                <Section>{` Name: ${item.name}`}</Section>
-                <Section>{` CONTENT: ${item.description}`}</Section>
+                <Section>{` Name: ${item.name} ${item.startYear} ${item.endYear}`}</Section>
+                <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
             {languages.map(item => (
               <TextSection key={item.id}>
-                <Section>{` ID: ${item.id}`}</Section>
                 <Section>{` Name: ${item.name}`}</Section>
-                <Section>{` CONTENT: ${item.description}`}</Section>
+                <Section>{`  ${item.description}`}</Section>
+              </TextSection>
+            ))}
+            {experience.map(item => (
+              <TextSection key={item.id}>
+                <Section>{` Name: ${item.name}`}</Section>
+                <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
           </RightColumn>
