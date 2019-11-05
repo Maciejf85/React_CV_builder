@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import posed from 'react-pose';
 import Proptypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import { useSelector } from 'react-redux';
 
 const PosedPanel = posed.div({
@@ -42,16 +40,43 @@ const StyledWrapper = styled(PosedPanel)`
     width: 50px;
     height: 100%;
     background: ${({ error, theme }) =>
-      !error ? theme.colors.successColor : theme.colors.alertColor};
+    !error ? theme.colors.successColor : theme.colors.alertColor};
+  }
+  #circle{
+    stroke-dashoffset:1000;
+    stroke-dasharray:1000;
+    animation-name: active;
+    animation-duration:6s;
+    animation-fill-mode:forwards;
+  }
+  #Union_1{
+    stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: active 5s ease-in forwards;
+  animation-delay:0.3s;
+  }
+
+  @keyframes active {
+   to {
+     stroke-dashoffset:0;
+   } 
   }
 `;
 
 const ConfirmSidePanel = ({ pose }) => {
-  const { content, error } = useSelector(state => state.appState);
+  const { content, error, inProgress } = useSelector(state => state.appState);
   return (
     <StyledWrapper pose={pose} error={error}>
       <div className="leftSide">
-        <FontAwesomeIcon icon={!error ? faCheckCircle : faTimesCircle} className="icon" />
+        {inProgress && <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48 ">
+          <g id="Group_1" data-name="Group 1" transform="translate(0 0)">
+            <g id="circle" data-name="Ellipse 1" transform="translate(2 2)" stroke="white" strokeWidth="4">
+              <circle cx="23" cy="23" r="18" fill="none" />
+            </g>
+            <polyline id="Union_1" data-name="Union 1" points="0,0 9,8 9,8 20,-8" transform="translate(15 26)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3.5" />
+          </g>
+        </svg>}
+
       </div>
       <div>
         <p>{content}</p>

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
-import path from '../path'
+import path from '../path';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -38,5 +38,8 @@ class Edit extends Component {
   }
 }
 
-const MapStateToProps = state => ({ appState: state.appState, isSet: state.currentCv.currentItem });
+const MapStateToProps = state => ({
+  appState: state.appState,
+  isSet: state.currentCv.currentItem,
+});
 export default connect(MapStateToProps)(Edit);

@@ -153,7 +153,6 @@ class ImageResizer extends Component {
         },
       })
       .then(request => {
-        console.log('request', request);
         sidePanel({ content: request.data, error: false });
       })
       .catch(error => {

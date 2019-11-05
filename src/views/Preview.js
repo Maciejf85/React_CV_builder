@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import NavBar from 'components/organisms/Navigation/NavBar';
 import { PDFDownloadLink, StyleSheet, PDFViewer, Font } from '@react-pdf/renderer';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import styled from 'styled-components';
 import FirstStyle from 'components/themes/FirstStyle';
 
 import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
+import path from '../path';
 
 Font.register({
   family: 'Montserrat',
@@ -53,15 +56,20 @@ class Preview extends Component {
   };
 
   handleButton = () => {
-    console.log('this.state.isReady', this.state.isReady);
     this.setState({
       isReady: true,
     });
   };
 
   render() {
-    const name = 'Maciej';
+    const { currentCv, personalData } = this.props;
+    const { name } = personalData;
+    const { currentItem } = currentCv;
+
     const { isReady } = this.state;
+    if (!Object.entries(currentCv).length) {
+      return <Redirect to={path.main} />;
+    }
 
     return (
       <>
@@ -71,13 +79,10 @@ class Preview extends Component {
             <FirstStyle downloadButton={this.handleButton} />
           </PDFViewer>
         </StyledWrapper>
-        <button type="button" onClick={this.handleButton}>
-          downloadButton{' '}
-        </button>
 
         {isReady ? (
           <StyledWrapper>
-            <PDFDownloadLink document={<FirstStyle />} fileName="myCV.pdf">
+            <PDFDownloadLink document={<FirstStyle />} fileName={`${currentItem.title}.pdf`}>
               {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
             </PDFDownloadLink>
           </StyledWrapper>
@@ -87,4 +92,5 @@ class Preview extends Component {
   }
 }
 
-export default Preview;
+const mapStateToProps = state => ({ currentCv: state.currentCv, personalData: state.personalData });
+export default connect(mapStateToProps)(Preview);
