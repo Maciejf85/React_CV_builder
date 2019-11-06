@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import LoginInput from 'components/atoms/Inputs/loginInput';
 import Submit from 'components/atoms/Inputs/submit';
+import ReCAPTCHA from 'react-google-recaptcha';
+import styled from 'styled-components';
+
+const LoginWrapper = styled.div`
+  min-width: 310px;
+  padding: 20px 15px;
+  border: 1px solid rgb(216, 222, 226);
+  border-radius: 7px;
+  background: white;
+  margin: 10px 0;
+`;
 
 class SignUp extends Component {
   state = {
@@ -8,6 +19,7 @@ class SignUp extends Component {
     password: '',
     name: '',
     surname: '',
+    isVerified: false,
   };
 
   handleForm = e => {
@@ -19,6 +31,10 @@ class SignUp extends Component {
 
   handleSubmit = () => {
     console.log('submit');
+  };
+
+  handleRecaptcha = value => {
+    console.log('value', value);
   };
 
   render() {
@@ -53,6 +69,10 @@ class SignUp extends Component {
           value={surname}
           onChange={this.handleForm}
           type="password"
+        />
+        <ReCAPTCHA
+          sitekey="6LfEU8EUAAAAAL6ZBeahfQlVcovox9eYimxxUqDG"
+          onChange={this.handleRecaptcha}
         />
         <Submit id="submit" type="button" onClick={this.handleSubmit}>
           Zarejestruj

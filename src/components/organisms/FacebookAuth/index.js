@@ -30,6 +30,9 @@ export default class Facebook extends Component {
 
   responseFacebook = response => {
     console.log('response', response);
+    this.setState({
+      userID: response.id,
+    });
   };
 
   componentClicked = () => console.log('clicked');
@@ -38,6 +41,7 @@ export default class Facebook extends Component {
     let fbContent;
     const { isLogedIn } = this.state;
     const { isRegister } = this.props;
+    console.log('this.state.userID', this.state.userID);
 
     if (isLogedIn) {
       fbContent = null;
@@ -45,7 +49,7 @@ export default class Facebook extends Component {
       fbContent = (
         <FacebookLogin
           appId="599616254114500"
-          autoLoad
+          autoLoad={!isRegister}
           fields="name,email,picture"
           onClick={this.componentClicked}
           callback={this.responseFacebook}

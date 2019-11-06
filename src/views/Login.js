@@ -50,6 +50,10 @@ class Login extends Component {
     store.dispatch(getMainData());
   }
 
+  onChange = value => {
+    console.log('Captcha value:', value);
+  };
+
   render() {
     const { isRegister } = this.state;
     return (
