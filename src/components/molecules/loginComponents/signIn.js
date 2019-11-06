@@ -12,11 +12,11 @@ class SignIn extends Component {
     this.setState({
       [e.target.id]: e.target.value,
     });
-    console.log('e.target.id', e.target.id);
   };
 
   handleSubmit = () => {
-    console.log('submit');
+    const { login, password } = this.state;
+    this.props.handleSubmit(login, password);
   };
 
   render() {

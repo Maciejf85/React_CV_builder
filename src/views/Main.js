@@ -20,8 +20,8 @@ class Main extends Component {
   }
 
   render() {
-    const { isVisible, error } = this.props;
-    if (this.props.isSet === undefined) {
+    const { isVisible, token, error } = this.props;
+    if (token === '') {
       return <Redirect to={path.login} />;
     }
     return (
@@ -37,9 +37,13 @@ class Main extends Component {
   }
 }
 
-Main.propTypes = {
-  isVisible: Proptypes.bool.isRequired,
-  error: Proptypes.bool.isRequired,
-};
-const MapStateToProps = state => state.appState;
+// Main.propTypes = {
+//   isVisible: Proptypes.bool.isRequired,
+//   error: Proptypes.bool.isRequired,
+// };
+const MapStateToProps = state => ({
+  isVisible: state.appState.isVisible,
+  error: state.appState.error,
+  token: state.personalData.token,
+});
 export default connect(MapStateToProps)(Main);

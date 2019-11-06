@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Footer from 'components/organisms/Footer/Footer';
-// import store from 'store';
+import store from 'store';
 import image from 'assets/login.png';
 import SignIn from 'components/molecules/loginComponents/signIn';
 import SignUp from 'components/molecules/loginComponents/signUp';
 import Facebook from 'components/organisms/FacebookAuth';
-
-// import { getMainData } from 'actions';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { getMainData } from 'actions';
+import path from '../path';
 
 const StyledWrapper = styled.div`
   /* margin: 0 20px; */
@@ -58,9 +60,14 @@ class Login extends Component {
     isRegister: false,
   };
 
-  componentDidMount() {
-    // store.dispatch(getMainData());
+  componentDidUpdate() {
+    console.log('login did update');
   }
+
+  handleSubmit = response => {
+    const { email, id } = response;
+    store.dispatch(getMainData('facebook', email, id));
+  };
 
   onChange = value => {
     console.log('Captcha value:', value);
@@ -68,13 +75,23 @@ class Login extends Component {
 
   render() {
     const { isRegister } = this.state;
+    const { token } = this.props;
+    if (token !== '') {
+      return <Redirect to={path.main} />;
+    }
     return (
       <>
         <StyledWrapper>
           <MainWrapper>
             <img src={image} alt="user" />
             <p>{isRegister ? 'Zarejestruj w ' : 'Zaloguj do '} CV-builder</p>
-            <LoginWrapper>{!isRegister ? <SignIn /> : <SignUp />}</LoginWrapper>
+            <LoginWrapper>
+              {!isRegister ? (
+                <SignIn handleSubmit={this.handleSubmit} />
+              ) : (
+                <SignUp handleSubmit={this.handleSubmit} />
+              )}
+            </LoginWrapper>
             <LoginWrapper center>
               Nie masz konta ?
               <button
@@ -86,7 +103,7 @@ class Login extends Component {
                 {isRegister ? 'Zaloguj się' : 'Zarejestruj się'}
               </button>
             </LoginWrapper>
-            <Facebook isRegister={isRegister} />
+            <Facebook isRegister={isRegister} handleSubmit={this.handleSubmit} />
 
             {/* <div>
               <button type="button" onClick={() => this.props.history.push('/main')}>
@@ -100,5 +117,5 @@ class Login extends Component {
     );
   }
 }
-
-export default Login;
+const MapStateToProps = state => state.personalData;
+export default connect(MapStateToProps)(Login);

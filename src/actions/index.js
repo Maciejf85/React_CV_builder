@@ -39,10 +39,12 @@ export const getCvData = (type, id, token, redir) => dispatch => {
 
 //  GET USER CONFIDENTIAL PERSONAL DATA AND LIST OF CV's
 
-export const getMainData = (type = 'main') => dispatch => {
+export const getMainData = (type = 'main', login, password) => dispatch => {
   return axios
     .post(`${path.cors}getData.php`, {
       type,
+      login,
+      password,
     })
     .then(({ data }) => {
       const { personalData, cvList, confidential } = data;
