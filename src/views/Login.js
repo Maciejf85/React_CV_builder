@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Footer from 'components/organisms/Footer/Footer';
-import store from 'store';
+// import store from 'store';
 import image from 'assets/login.png';
 import SignIn from 'components/molecules/loginComponents/signIn';
 import SignUp from 'components/molecules/loginComponents/signUp';
 import Facebook from 'components/organisms/FacebookAuth';
 
-import { getMainData } from 'actions';
+// import { getMainData } from 'actions';
 
 const StyledWrapper = styled.div`
   /* margin: 0 20px; */
@@ -34,11 +34,23 @@ const MainWrapper = styled.div`
 
 const LoginWrapper = styled.div`
   min-width: 310px;
-  padding: 20px 15px;
+  padding: ${({ center }) => (center ? '10px 15px' : '20px 15px')};
   border: 1px solid rgb(216, 222, 226);
   border-radius: 7px;
   background: white;
   margin: 10px 0;
+  font-size: ${({ theme }) => theme.fontSize.ms};
+  text-align: ${({ center }) => center && 'center'};
+
+  .clearButton {
+    font-size: ${({ theme }) => theme.fontSize.ms};
+    border: none;
+    background: transparent;
+    color: ${({ theme }) => theme.colors.primaryBlue};
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 class Login extends Component {
@@ -47,7 +59,7 @@ class Login extends Component {
   };
 
   componentDidMount() {
-    store.dispatch(getMainData());
+    // store.dispatch(getMainData());
   }
 
   onChange = value => {
@@ -63,19 +75,24 @@ class Login extends Component {
             <img src={image} alt="user" />
             <p>{isRegister ? 'Zarejestruj w ' : 'Zaloguj do '} CV-builder</p>
             <LoginWrapper>{!isRegister ? <SignIn /> : <SignUp />}</LoginWrapper>
+            <LoginWrapper center>
+              Nie masz konta ?
+              <button
+                type="button"
+                className="clearButton"
+                // eslint-disable-next-line react/no-access-state-in-setstate
+                onClick={() => this.setState({ isRegister: !this.state.isRegister })}
+              >
+                {isRegister ? 'Zaloguj się' : 'Zarejestruj się'}
+              </button>
+            </LoginWrapper>
             <Facebook isRegister={isRegister} />
 
-            <div>
+            {/* <div>
               <button type="button" onClick={() => this.props.history.push('/main')}>
                 go to main
               </button>
-              <button
-                type="button"
-                onClick={() => this.setState({ isRegister: !this.state.isRegister })}
-              >
-                {!isRegister ? 'Zaloguj się' : 'Zarejestruj się'}
-              </button>
-            </div>
+            </div> */}
           </MainWrapper>
           <Footer />
         </StyledWrapper>

@@ -7,7 +7,7 @@ const StyledInput = styled.input`
   width: 270px;
   border-radius: 7px;
   padding: 20px;
-  margin: 10px;
+  margin: 10px 10px 0;
   outline: none;
   border: none;
   background: ${({ theme }) => theme.colors.lightGrey};
@@ -18,19 +18,29 @@ const StyledInput = styled.input`
   } */
 `;
 const StyledLabel = styled.label`
-  width: 100%;
+  width: 270px;
   font-size: ${({ theme }) => theme.fontSize.ms};
-  font-weight: ${({ theme }) => theme.font.bold};
-  margin-left: 10px;
+  font-weight: ${({ theme }) => theme.font.normal};
+  color: ${({ theme }) => theme.colors.buttonActive};
+  /* margin-left: 10px; */
 `;
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
   width: ${({ isSmall }) => (isSmall ? '50%' : '100%')};
+
+  span {
+    align-self: flex-start;
+    margin: 5px 10px;
+    color: ${({ theme }) => theme.colors.alertColor};
+    font-size: ${({ theme }) => theme.fontSize.s};
+  }
 `;
 
-const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall }) => {
+const Input = ({ type, id, placeholder, value, onChange, isSmall, error }) => {
   return (
     <StyledWrapper isSmall={isSmall}>
       <StyledLabel htmlFor={id}>{placeholder}</StyledLabel>
@@ -41,6 +51,7 @@ const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall }) => {
         value={value}
         onChange={onChange}
       />
+      <span>{error}</span>
     </StyledWrapper>
   );
 };
@@ -50,11 +61,13 @@ Input.propType = {
   placeholder: PropTypes.string,
   value: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  error: PropTypes.string,
 };
 Input.defaultProps = {
   type: 'text',
   id: '',
   placeholder: '',
+  error: '',
 };
 
 export default Input;

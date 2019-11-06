@@ -33,7 +33,7 @@ class SignIn extends Component {
 
         <LoginInput
           id="password"
-          placeholder="password"
+          placeholder="hasło"
           value={password}
           onChange={this.handleForm}
           type="password"
