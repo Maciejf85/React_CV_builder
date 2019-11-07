@@ -22,7 +22,7 @@ class Edit extends Component {
   render() {
     const { isVisible, error } = this.props.appState;
     if (this.props.isSet === undefined) {
-      return <Redirect to={path.main} />;
+      return <Redirect to={path.login} />;
     }
 
     return (

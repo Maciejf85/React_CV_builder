@@ -39,39 +39,43 @@ export const getCvData = (type, id, token, redir) => dispatch => {
 
 //  GET USER CONFIDENTIAL PERSONAL DATA AND LIST OF CV's
 
-export const getMainData = (type = 'main') => dispatch => {
+export const getMainData = (type = 'main', email, id) => dispatch => {
   return axios
     .post(`${path.cors}getData.php`, {
       type,
+      email,
+      id,
     })
     .then(({ data }) => {
-      const { personalData, cvList, confidential } = data;
-
-      const confidentialData = JSON.parse(confidential);
-      const payload = confidentialData.confidential;
-      const list = JSON.parse(cvList);
-      sessionStorage.setItem('userID', personalData.token);
-      if (typeof payload === 'string') payload.trimEnd();
-      return (
-        dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),
-        dispatch({ type: 'SET_PERSONAL_DATA', payload: personalData }),
-        dispatch({ type: 'SAVE_CV_LIST', payload: list }),
-        axios
-          .get(`${path.cors}getImage.php?token=${personalData.token}`, {
-            responseType: 'blob',
-          })
-          .then(request => {
-            const { size } = request.data;
-            if (size > 0) {
-              const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
-              const reader = new FileReader();
-              if (accepted.includes(request.data.type)) {
-                reader.readAsDataURL(request.data);
-                reader.onload = () => dispatch({ type: 'GET_IMAGE', payload: reader.result });
+      console.log('data', data);
+      const { personalData, cvList, confidential, error } = data;
+      if (!error) {
+        const confidentialData = JSON.parse(confidential);
+        const payload = confidentialData.confidential;
+        const list = JSON.parse(cvList);
+        sessionStorage.setItem('userID', personalData.token);
+        if (typeof payload === 'string') payload.trimEnd();
+        return (
+          dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),
+          dispatch({ type: 'SET_PERSONAL_DATA', payload: personalData }),
+          dispatch({ type: 'SAVE_CV_LIST', payload: list }),
+          axios
+            .get(`${path.cors}getImage.php?token=${personalData.token}`, {
+              responseType: 'blob',
+            })
+            .then(request => {
+              const { size } = request.data;
+              if (size > 0) {
+                const accepted = ['image/jpeg', 'image/jpg', 'image/png'];
+                const reader = new FileReader();
+                if (accepted.includes(request.data.type)) {
+                  reader.readAsDataURL(request.data);
+                  reader.onload = () => dispatch({ type: 'GET_IMAGE', payload: reader.result });
+                }
               }
-            }
-          })
-      );
+            })
+        );
+      }
     })
     .catch(error => {
       console.log(error);

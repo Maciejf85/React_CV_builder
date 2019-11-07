@@ -22,17 +22,11 @@ const Button = styled.div`
 export default class Facebook extends Component {
   state = {
     isLogedIn: false,
-    userID: '',
-    name: '',
-    email: '',
-    picture: '',
   };
 
   responseFacebook = response => {
-    console.log('response', response);
-    this.setState({
-      userID: response.id,
-    });
+    const { handleSubmit } = this.props;
+    handleSubmit(response, 'facebook');
   };
 
   componentClicked = () => console.log('clicked');
@@ -41,7 +35,6 @@ export default class Facebook extends Component {
     let fbContent;
     const { isLogedIn } = this.state;
     const { isRegister } = this.props;
-    console.log('this.state.userID', this.state.userID);
 
     if (isLogedIn) {
       fbContent = null;

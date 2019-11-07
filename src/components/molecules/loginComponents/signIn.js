@@ -4,43 +4,50 @@ import Submit from 'components/atoms/Inputs/submit';
 
 class SignIn extends Component {
   state = {
-    login: '',
-    password: '',
+    email: '',
+    id: '',
   };
 
   handleForm = e => {
     this.setState({
       [e.target.id]: e.target.value,
     });
-    console.log('e.target.id', e.target.id);
   };
 
-  handleSubmit = () => {
-    console.log('submit');
+  handleSubmit = e => {
+    e.preventDefault();
+    const { email, id } = this.state;
+    const response = { email, id };
+    this.props.handleSubmit(response, 'regular');
+    this.setState({ email: '', id: '' });
   };
 
   render() {
-    const { login, password } = this.state;
+    const { email, id } = this.state;
     return (
       <>
-        <LoginInput
-          id="login"
-          placeholder="login"
-          value={login}
-          onChange={this.handleForm}
-          type="text"
-        />
+        <form onSubmit={this.handleSubmit}>
+          <LoginInput
+            id="email"
+            placeholder="login"
+            value={email}
+            onChange={this.handleForm}
+            type="text"
+            require
+          />
 
-        <LoginInput
-          id="password"
-          placeholder="password"
-          value={password}
-          onChange={this.handleForm}
-          type="password"
-        />
-        <Submit id="submit" type="button" onClick={this.handleSubmit}>
-          Zaloguj
-        </Submit>
+          <LoginInput
+            id="id"
+            placeholder="hasło"
+            value={id}
+            onChange={this.handleForm}
+            type="password"
+            require
+          />
+          <Submit id="submit" type="submit">
+            Zaloguj
+          </Submit>
+        </form>
       </>
     );
   }
