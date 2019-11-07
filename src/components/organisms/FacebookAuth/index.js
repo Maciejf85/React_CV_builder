@@ -26,7 +26,7 @@ export default class Facebook extends Component {
 
   responseFacebook = response => {
     const { handleSubmit } = this.props;
-    handleSubmit(response);
+    handleSubmit(response, 'facebook');
   };
 
   componentClicked = () => console.log('clicked');

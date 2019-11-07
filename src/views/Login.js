@@ -64,9 +64,8 @@ class Login extends Component {
     console.log('login did update');
   }
 
-  handleSubmit = response => {
-    const { email, id } = response;
-    store.dispatch(getMainData('facebook', email, id));
+  handleSubmit = ({ email, id }, type) => {
+    store.dispatch(getMainData(type, email, id));
   };
 
   onChange = value => {
@@ -117,5 +116,5 @@ class Login extends Component {
     );
   }
 }
-const MapStateToProps = state => state.personalData;
+const MapStateToProps = ({ personalData }) => personalData;
 export default connect(MapStateToProps)(Login);
