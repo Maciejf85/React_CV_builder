@@ -4,8 +4,8 @@ import Submit from 'components/atoms/Inputs/submit';
 
 class SignIn extends Component {
   state = {
-    email: '',
-    id: '',
+    email: 'Fialek85@gmail.com',
+    id: '123',
   };
 
   handleForm = e => {
