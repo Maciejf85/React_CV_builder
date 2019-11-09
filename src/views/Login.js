@@ -48,6 +48,8 @@ const LoginWrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSize.ms};
     border: none;
     background: transparent;
+    font-style: italic;
+    outline: none;
     color: ${({ theme }) => theme.colors.primaryBlue};
     &:hover {
       cursor: pointer;
@@ -82,7 +84,7 @@ class Login extends Component {
       <>
         <StyledWrapper>
           <MainWrapper>
-            <img src={image} alt="user" />
+            {!isRegister && <img src={image} alt="user" />}
             <p>{isRegister ? 'Zarejestruj w ' : 'Zaloguj do '} CV-builder</p>
             <LoginWrapper>
               {!isRegister ? (
@@ -92,7 +94,7 @@ class Login extends Component {
               )}
             </LoginWrapper>
             <LoginWrapper center>
-              Nie masz konta ?
+              {!isRegister ? 'Nie masz konta ?' : 'Masz konto ?'}
               <button
                 type="button"
                 className="clearButton"

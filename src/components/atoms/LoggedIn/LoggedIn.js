@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import posed from 'react-pose';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { logOut } from 'actions';
+import store from 'store';
 import { connect } from 'react-redux';
 
 const StyledWrapper = styled.div`
@@ -33,14 +35,15 @@ const StyledWrapper = styled.div`
 const PosedMenu = posed.div({
   hidden: {
     opacity: 0,
-    y: '0',
     zIndex: -2,
+    y: 0,
+    height: 0,
     transition: {
-      opacity: { ease: 'easeIn', duration: 300 },
-      default: { ease: 'linear', duration: 700 },
+      opacity: { ease: 'easeIn', duration: 200 },
+      default: { ease: 'easeIn', duration: 700 },
     },
   },
-  visible: { opacity: 1, y: '100%', zIndex: 2 },
+  visible: { opacity: 1, y: '100%', zIndex: 2, height: '100%' },
 });
 
 const DropBox = styled(PosedMenu)`
@@ -59,7 +62,13 @@ const DropBox = styled(PosedMenu)`
   &:hover {
     color: ${({ theme }) => theme.colors.secondaryBlue};
     background: ${({ theme }) => theme.colors.mediumGrey};
-    cursor: pointer;
+    font-weight: ${({ theme }) => theme.font.bold};
+  }
+
+  &.active {
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -81,9 +90,17 @@ class LoggedIn extends Component {
     return (
       <StyledWrapper>
         <p>{email}</p>
-        <FontAwesomeIcon icon={faAngleDown} className="iconStyle" onClick={this.handleDropdown} />
-        {/* {isVisible && <DropBox pose={isVisible ? 'visible' : 'hidden'}>wyloguj</DropBox>} */}
-        <DropBox pose={isVisible ? 'visible' : 'hidden'}>wyloguj</DropBox>
+        <div>
+          <FontAwesomeIcon icon={faAngleDown} className="iconStyle" onClick={this.handleDropdown} />
+          {/* {isVisible && <DropBox pose={isVisible ? 'visible' : 'hidden'}>wyloguj</DropBox>} */}
+          <DropBox
+            className={isVisible ? 'active' : ''}
+            pose={isVisible ? 'visible' : 'hidden'}
+            onClick={() => store.dispatch(logOut())}
+          >
+            Wyloguj
+          </DropBox>
+        </div>
       </StyledWrapper>
     );
   }

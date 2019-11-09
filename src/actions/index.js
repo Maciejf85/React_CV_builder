@@ -47,7 +47,6 @@ export const getMainData = (type = 'main', email, id) => dispatch => {
       id,
     })
     .then(({ data }) => {
-      console.log('data', data);
       const { personalData, cvList, confidential, error } = data;
       if (!error) {
         const confidentialData = JSON.parse(confidential);
@@ -211,5 +210,12 @@ export const removeItemfromCurrentCv = (itemType, id) => {
       itemType,
       id,
     },
+  };
+};
+
+export const logOut = () => {
+  return {
+    type: 'CLEAR_STORE',
+    payload: null,
   };
 };

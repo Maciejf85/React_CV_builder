@@ -19,4 +19,12 @@ const rootReducer = combineReducers({
   image,
 });
 
-export default rootReducer;
+const clearReducer = (state, action) => {
+  if (action.type === 'CLEAR_STORE') {
+    // eslint-disable-next-line no-param-reassign
+    state = undefined;
+  }
+  return rootReducer(state, action);
+};
+
+export default clearReducer;
