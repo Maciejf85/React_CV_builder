@@ -6,6 +6,7 @@ import myCv from 'reducers/myCv';
 import editComponentView from 'reducers/editComponentView';
 import currentCv from 'reducers/currentCv';
 import image from 'reducers/image';
+import serverResponse from 'reducers/serverResponse';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   editComponentView,
   currentCv,
   image,
+  serverResponse,
 });
 
 const clearReducer = (state, action) => {

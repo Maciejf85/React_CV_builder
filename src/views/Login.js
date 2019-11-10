@@ -66,8 +66,15 @@ class Login extends Component {
     console.log('login did update');
   }
 
-  handleSubmit = ({ email, id }, type) => {
+  handleLogin = ({ email, id }, type) => {
     store.dispatch(getMainData(type, email, id));
+  };
+
+  handleRegister = ({ name, email, id }, type) => {
+    const arrName = name.split(' ');
+    const userName = arrName[0];
+    const userSurname = arrName[1];
+    console.log('userName,userSurname,email,id,type', userName, userSurname, email, id, type);
   };
 
   onChange = value => {
@@ -88,9 +95,9 @@ class Login extends Component {
             <p>{isRegister ? 'Zarejestruj w ' : 'Zaloguj do '} CV-builder</p>
             <LoginWrapper>
               {!isRegister ? (
-                <SignIn handleSubmit={this.handleSubmit} />
+                <SignIn login={this.handleLogin} />
               ) : (
-                <SignUp handleSubmit={this.handleSubmit} />
+                <SignUp register={this.handleRegister} />
               )}
             </LoginWrapper>
             <LoginWrapper center>
@@ -104,7 +111,11 @@ class Login extends Component {
                 {isRegister ? 'Zaloguj się' : 'Zarejestruj się'}
               </button>
             </LoginWrapper>
-            <Facebook isRegister={isRegister} handleSubmit={this.handleSubmit} />
+            <Facebook
+              isRegister={isRegister}
+              login={this.handleLogin}
+              register={this.handleRegister}
+            />
 
             {/* <div>
               <button type="button" onClick={() => this.props.history.push('/main')}>

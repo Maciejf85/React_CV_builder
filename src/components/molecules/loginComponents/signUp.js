@@ -16,12 +16,12 @@ class SignUp extends Component {
     this.setState({
       [e.target.id]: e.target.value,
     });
-    console.log('e.target.id', e.target.id);
   };
 
   handleSubmit = () => {
     const { isVerified } = this.state;
     if (isVerified) console.log('succesfuly send');
+    else console.log('confirm u r no robot');
   };
 
   handleRecaptcha = value => {

@@ -17,6 +17,15 @@ export const currentEditView = (type = 'personal') => {
   };
 };
 
+// CHANGE_SIDEPANEL_STATE
+
+export const changeSidePanelState = payload => {
+  return {
+    type: 'CHANGE_SIDEPANEL_STATE',
+    payload,
+  };
+};
+
 // GET ALL INFORMATIONS OF CURRENT CV
 
 export const getCvData = (type, id, token, redir) => dispatch => {
@@ -47,7 +56,8 @@ export const getMainData = (type = 'main', email, id) => dispatch => {
       id,
     })
     .then(({ data }) => {
-      const { personalData, cvList, confidential, error } = data;
+      const { personalData, cvList, confidential, error, content } = data;
+      console.log('data', data);
       if (!error) {
         const confidentialData = JSON.parse(confidential);
         const payload = confidentialData.confidential;
@@ -75,6 +85,7 @@ export const getMainData = (type = 'main', email, id) => dispatch => {
             })
         );
       }
+      return dispatch({ type: 'REQUEST_FAIL', payload: { error: data.error } });
     })
     .catch(error => {
       console.log(error);
@@ -150,15 +161,6 @@ export const updateCVList = (type, token, cvId = null, redir, cvTitle = null) =>
 export const newConfidentialText = payload => {
   return {
     type: 'UPDATE_CONFIDENTIAL',
-    payload,
-  };
-};
-
-// CHANGE_SIDEPANEL_STATE
-
-export const changeSidePanelState = payload => {
-  return {
-    type: 'CHANGE_SIDEPANEL_STATE',
     payload,
   };
 };

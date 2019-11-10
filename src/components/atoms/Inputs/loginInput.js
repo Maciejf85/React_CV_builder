@@ -41,6 +41,7 @@ const StyledWrapper = styled.div`
 `;
 
 const Input = ({ type, id, placeholder, value, onChange, isSmall, error }) => {
+  console.log(' login this.props', error);
   return (
     <StyledWrapper isSmall={isSmall}>
       <StyledLabel htmlFor={id}>{placeholder}</StyledLabel>
