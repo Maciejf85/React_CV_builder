@@ -48,21 +48,32 @@ export const getCvData = (type, id, token, redir) => dispatch => {
 
 //  GET USER CONFIDENTIAL PERSONAL DATA AND LIST OF CV's
 
-export const getMainData = (type = 'main', email, id) => dispatch => {
+export const getMainData = (
+  type = 'main',
+  email,
+  id,
+  autolog = false,
+  token = null,
+) => dispatch => {
   return axios
     .post(`${path.cors}getData.php`, {
       type,
       email,
       id,
+      token,
     })
     .then(({ data }) => {
-      const { personalData, cvList, confidential, error, content } = data;
-      console.log('data', data);
+      const { personalData, cvList, confidential, error } = data;
+      // console.log('data', data);
       if (!error) {
         const confidentialData = JSON.parse(confidential);
         const payload = confidentialData.confidential;
         const list = JSON.parse(cvList);
+
+        // eslint-disable-next-line no-unused-expressions
+        autolog && localStorage.setItem('userID', personalData.token);
         sessionStorage.setItem('userID', personalData.token);
+
         if (typeof payload === 'string') payload.trimEnd();
         return (
           dispatch({ type: 'UPDATE_CONFIDENTIAL', payload }),

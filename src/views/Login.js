@@ -62,12 +62,21 @@ class Login extends Component {
     isRegister: false,
   };
 
-  componentDidUpdate() {
-    console.log('login did update');
+  componentDidMount() {
+    const token =
+      localStorage.getItem('userID') !== null
+        ? localStorage.getItem('userID')
+        : sessionStorage.getItem('userID');
+
+    const type = 'autologin';
+    const email = null;
+    const id = null;
+    const autolog = localStorage.getItem('userID') !== null;
+    if (token !== null) store.dispatch(getMainData(type, email, id, autolog, token));
   }
 
-  handleLogin = ({ email, id }, type) => {
-    store.dispatch(getMainData(type, email, id));
+  handleLogin = ({ email, id }, type, autolog) => {
+    store.dispatch(getMainData(type, email, id, autolog));
   };
 
   handleRegister = ({ name, email, id }, type) => {
