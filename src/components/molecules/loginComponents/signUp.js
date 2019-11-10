@@ -19,7 +19,7 @@ class SignUp extends Component {
   };
 
   handleSubmit = () => {
-    const { isVerified } = this.state;
+    const { isVerified, login, password, name, surname } = this.state;
     if (isVerified) console.log('succesfuly send');
     else console.log('confirm u r no robot');
   };
