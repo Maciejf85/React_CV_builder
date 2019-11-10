@@ -9,6 +9,7 @@ import Facebook from 'components/organisms/FacebookAuth';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { getMainData } from 'actions';
+import axios from 'axios';
 import path from '../path';
 
 const StyledWrapper = styled.div`
@@ -84,6 +85,17 @@ class Login extends Component {
     const userName = arrName[0];
     const userSurname = arrName[1];
     console.log('userName,userSurname,email,id,type', userName, userSurname, email, id, type);
+    axios.post(`${path.cors}register.php`, {
+      email,
+      id,
+      name: userName,
+      surname: userSurname,
+      type
+    })
+      .then(({ data }) => {
+        console.log('data', data)
+      })
+
   };
 
   onChange = value => {
@@ -106,8 +118,8 @@ class Login extends Component {
               {!isRegister ? (
                 <SignIn login={this.handleLogin} />
               ) : (
-                <SignUp register={this.handleRegister} />
-              )}
+                  <SignUp register={this.handleRegister} />
+                )}
             </LoginWrapper>
             <LoginWrapper center>
               {!isRegister ? 'Nie masz konta ?' : 'Masz konto ?'}
