@@ -25,8 +25,10 @@ export default class Facebook extends Component {
   };
 
   responseFacebook = response => {
-    const { handleSubmit } = this.props;
-    handleSubmit(response, 'facebook');
+    const { login, register, isRegister } = this.props;
+
+    // eslint-disable-next-line no-unused-expressions
+    !isRegister ? login(response, 'facebook') : register(response, 'facebook');
   };
 
   componentClicked = () => console.log('clicked');

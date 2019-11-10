@@ -6,6 +6,7 @@ import myCv from 'reducers/myCv';
 import editComponentView from 'reducers/editComponentView';
 import currentCv from 'reducers/currentCv';
 import image from 'reducers/image';
+import serverResponse from 'reducers/serverResponse';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
@@ -17,6 +18,15 @@ const rootReducer = combineReducers({
   editComponentView,
   currentCv,
   image,
+  serverResponse,
 });
 
-export default rootReducer;
+const clearReducer = (state, action) => {
+  if (action.type === 'CLEAR_STORE') {
+    // eslint-disable-next-line no-param-reassign
+    state = undefined;
+  }
+  return rootReducer(state, action);
+};
+
+export default clearReducer;

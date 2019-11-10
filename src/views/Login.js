@@ -9,6 +9,7 @@ import Facebook from 'components/organisms/FacebookAuth';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { getMainData } from 'actions';
+import axios from 'axios';
 import path from '../path';
 
 const StyledWrapper = styled.div`
@@ -48,6 +49,8 @@ const LoginWrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSize.ms};
     border: none;
     background: transparent;
+    font-style: italic;
+    outline: none;
     color: ${({ theme }) => theme.colors.primaryBlue};
     &:hover {
       cursor: pointer;
@@ -64,8 +67,26 @@ class Login extends Component {
     console.log('login did update');
   }
 
-  handleSubmit = ({ email, id }, type) => {
+  handleLogin = ({ email, id }, type) => {
     store.dispatch(getMainData(type, email, id));
+  };
+
+  handleRegister = ({ name, email, id }, type) => {
+    const arrName = name.split(' ');
+    const userName = arrName[0];
+    const userSurname = arrName[1];
+    console.log('userName,userSurname,email,id,type', userName, userSurname, email, id, type);
+    axios.post(`${path.cors}register.php`, {
+      email,
+      id,
+      name: userName,
+      surname: userSurname,
+      type
+    })
+      .then(({ data }) => {
+        console.log('data', data)
+      })
+
   };
 
   onChange = value => {
@@ -82,17 +103,17 @@ class Login extends Component {
       <>
         <StyledWrapper>
           <MainWrapper>
-            <img src={image} alt="user" />
+            {!isRegister && <img src={image} alt="user" />}
             <p>{isRegister ? 'Zarejestruj w ' : 'Zaloguj do '} CV-builder</p>
             <LoginWrapper>
               {!isRegister ? (
-                <SignIn handleSubmit={this.handleSubmit} />
+                <SignIn login={this.handleLogin} />
               ) : (
-                <SignUp handleSubmit={this.handleSubmit} />
-              )}
+                  <SignUp register={this.handleRegister} />
+                )}
             </LoginWrapper>
             <LoginWrapper center>
-              Nie masz konta ?
+              {!isRegister ? 'Nie masz konta ?' : 'Masz konto ?'}
               <button
                 type="button"
                 className="clearButton"
@@ -102,7 +123,11 @@ class Login extends Component {
                 {isRegister ? 'Zaloguj się' : 'Zarejestruj się'}
               </button>
             </LoginWrapper>
-            <Facebook isRegister={isRegister} handleSubmit={this.handleSubmit} />
+            <Facebook
+              isRegister={isRegister}
+              login={this.handleLogin}
+              register={this.handleRegister}
+            />
 
             {/* <div>
               <button type="button" onClick={() => this.props.history.push('/main')}>

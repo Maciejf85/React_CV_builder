@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import LoginInput from 'components/atoms/Inputs/loginInput';
 import Submit from 'components/atoms/Inputs/submit';
+import { connect } from 'react-redux';
 
 class SignIn extends Component {
   state = {
-    email: '',
-    id: '',
+    email: 'Fialek85@gmail.com',
+    id: '123',
   };
 
   handleForm = e => {
@@ -18,12 +19,13 @@ class SignIn extends Component {
     e.preventDefault();
     const { email, id } = this.state;
     const response = { email, id };
-    this.props.handleSubmit(response, 'regular');
+    this.props.login(response, 'regular');
     this.setState({ email: '', id: '' });
   };
 
   render() {
     const { email, id } = this.state;
+    const { error } = this.props;
     return (
       <>
         <form onSubmit={this.handleSubmit}>
@@ -33,6 +35,7 @@ class SignIn extends Component {
             value={email}
             onChange={this.handleForm}
             type="text"
+            error={error}
             require
           />
 
@@ -42,6 +45,7 @@ class SignIn extends Component {
             value={id}
             onChange={this.handleForm}
             type="password"
+            error={error}
             require
           />
           <Submit id="submit" type="submit">
@@ -53,4 +57,5 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+const mapStateToProps = ({ serverResponse }) => serverResponse;
+export default connect(mapStateToProps)(SignIn);

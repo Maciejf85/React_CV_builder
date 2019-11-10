@@ -31,15 +31,8 @@ class CvList extends Component {
     const { cvTitle } = this.state;
     const userId = sessionStorage.getItem('userID');
     const redir = this.props.history;
-    setTimeout(
-      () => {
-        return (
-          store.dispatch(updateCVList('add', userId, null, redir, cvTitle)),
-          this.props.handleModal()
-        );
-      },
-
-      3000,
+    return (
+      store.dispatch(updateCVList('add', userId, null, redir, cvTitle)), this.props.handleModal()
     );
   };
 
@@ -64,7 +57,13 @@ class CvList extends Component {
             <MainModal>
               <header>Tytuł CV</header>
               <section>
-                <input type="text" id="cvTitle" value={cvTitle} onChange={this.handleCvTitle} autoFocus />
+                <input
+                  type="text"
+                  id="cvTitle"
+                  value={cvTitle}
+                  onChange={this.handleCvTitle}
+                  autoFocus
+                />
               </section>
               <footer>
                 <PrimaryButton type="button" primary onClick={this.handleNewCv}>
@@ -76,8 +75,8 @@ class CvList extends Component {
               </footer>
             </MainModal>
           ) : (
-              <Loader />
-            )}
+            <Loader />
+          )}
         </Modal>
         <Panel
           name={name}
