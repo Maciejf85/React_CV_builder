@@ -11,11 +11,13 @@ const StyledInput = styled.input`
   outline: none;
   border: none;
   background: ${({ theme }) => theme.colors.lightGrey};
-  /* border-top: 2px solid ${({ theme }) => theme.colors.inputGrey};
+    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+  /* /* border-top: 2px solid ${({ theme }) => theme.colors.inputGrey}; */
 
   &:focus {
-    border-top: 2px solid ${({ theme }) => theme.colors.lightBlue};
-  } */
+    border: 1px solid ${({ theme }) => theme.colors.lightBlue};
+  } 
+
 `;
 const StyledLabel = styled.label`
   width: 270px;
