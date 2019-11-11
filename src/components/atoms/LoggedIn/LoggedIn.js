@@ -84,6 +84,12 @@ class LoggedIn extends Component {
     }));
   };
 
+  handleLogout = () => {
+    localStorage.removeItem('userID');
+    sessionStorage.removeItem('userID');
+    store.dispatch(logOut());
+  };
+
   render() {
     const { isVisible } = this.state;
     const { email } = this.props;
@@ -96,7 +102,7 @@ class LoggedIn extends Component {
           <DropBox
             className={isVisible ? 'active' : ''}
             pose={isVisible ? 'visible' : 'hidden'}
-            onClick={() => store.dispatch(logOut())}
+            onClick={this.handleLogout}
           >
             Wyloguj
           </DropBox>

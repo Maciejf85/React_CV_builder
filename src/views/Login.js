@@ -63,34 +63,49 @@ class Login extends Component {
     isRegister: false,
   };
 
-  componentDidUpdate() {
-    console.log('login did update');
+  componentDidMount() {
+    const token =
+      localStorage.getItem('userID') !== null
+        ? localStorage.getItem('userID')
+        : sessionStorage.getItem('userID');
+
+    const type = 'autologin';
+    const email = null;
+    const id = null;
+    const autolog = localStorage.getItem('userID') !== null;
+    if (token !== null) store.dispatch(getMainData(type, email, id, autolog, token));
   }
 
-  handleLogin = ({ email, id }, type) => {
-    store.dispatch(getMainData(type, email, id));
+  handleLogin = ({ email, id }, type, autolog) => {
+    store.dispatch(getMainData(type, email, id, autolog));
   };
 
   handleRegister = ({ name, email, id }, type) => {
-    const arrName = name.split(' ');
-    const userName = arrName[0];
-    const userSurname = arrName[1];
-    console.log('userName,userSurname,email,id,type', userName, userSurname, email, id, type);
-    axios.post(`${path.cors}register.php`, {
-      email,
-      id,
-      name: userName,
-      surname: userSurname,
-      type
-    })
-      .then(({ data }) => {
-        console.log('data', data)
-      })
-
+    if (name && email && id && type) {
+      const arrName = name.split(' ');
+      const userName = arrName.shift();
+      const userSurname = arrName.join(' ');
+      axios
+        .post(`${path.cors}register.php`, {
+          email,
+          id,
+          name: userName,
+          surname: userSurname,
+          type,
+        })
+        .then(({ data }) => {
+          console.log('data', data);
+          if (data.error) store.dispatch({ type: 'REQUEST_FAIL', payload: { error: data.error } });
+          if (data.success) {
+            store.dispatch({ type: 'REQUEST_SUCCESS', payload: { success: data.success } });
+            this.handlePageChange();
+          }
+        });
+    }
   };
 
-  onChange = value => {
-    console.log('Captcha value:', value);
+  handlePageChange = () => {
+    this.setState(prevState => ({ isRegister: !prevState.isRegister }));
   };
 
   render() {
@@ -109,17 +124,12 @@ class Login extends Component {
               {!isRegister ? (
                 <SignIn login={this.handleLogin} />
               ) : (
-                  <SignUp register={this.handleRegister} />
-                )}
+                <SignUp register={this.handleRegister} />
+              )}
             </LoginWrapper>
             <LoginWrapper center>
               {!isRegister ? 'Nie masz konta ?' : 'Masz konto ?'}
-              <button
-                type="button"
-                className="clearButton"
-                // eslint-disable-next-line react/no-access-state-in-setstate
-                onClick={() => this.setState({ isRegister: !this.state.isRegister })}
-              >
+              <button type="button" className="clearButton" onClick={this.handlePageChange}>
                 {isRegister ? 'Zaloguj się' : 'Zarejestruj się'}
               </button>
             </LoginWrapper>
@@ -128,12 +138,6 @@ class Login extends Component {
               login={this.handleLogin}
               register={this.handleRegister}
             />
-
-            {/* <div>
-              <button type="button" onClick={() => this.props.history.push('/main')}>
-                go to main
-              </button>
-            </div> */}
           </MainWrapper>
           <Footer />
         </StyledWrapper>

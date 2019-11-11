@@ -4,62 +4,44 @@ import PropTypes from 'prop-types';
 
 const StyledInput = styled.input`
   height: 20px;
-  width: 270px;
   border-radius: 7px;
-  padding: 20px;
-  margin: 10px 10px 0;
+  padding: 10px;
   outline: none;
   border: none;
-  font-weight:${({ theme }) => theme.font.bold};
   background: ${({ theme }) => theme.colors.lightGrey};
-  color: ${({ theme }) => theme.colors.buttonActive};
-    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
-  /* /* border-top: 2px solid ${({ theme }) => theme.colors.inputGrey}; */
-
-  &:focus {
-    border: 1px solid ${({ theme }) => theme.colors.lightBlue};
-  } 
-
+  margin-left: 10px;
 `;
 const StyledLabel = styled.label`
-  width: 270px;
   font-size: ${({ theme }) => theme.fontSize.ms};
   font-weight: ${({ theme }) => theme.font.normal};
   color: ${({ theme }) => theme.colors.buttonActive};
-  /* margin-left: 10px; */
-`;
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  justify-content: center;
-  align-items: center;
-  width: ${({ isSmall }) => (isSmall ? '50%' : '100%')};
-
-  span {
-    align-self: flex-start;
-    margin: 5px 10px;
-    color: ${({ theme }) => theme.colors.alertColor};
-    font-size: ${({ theme }) => theme.fontSize.s};
+  &:hover {
+    cursor: pointer;
   }
 `;
+const StyledWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: ${({ isSmall }) => (isSmall ? '50%' : '100%')};
+`;
 
-const Input = ({ type, id, placeholder, value, onChange, isSmall, error }) => {
+const Checkbox = ({ type, id, placeholder, value, onChange, isSmall }) => {
   return (
     <StyledWrapper isSmall={isSmall}>
-      <StyledLabel htmlFor={id}>{placeholder}</StyledLabel>
       <StyledInput
         type={type}
         id={id}
         placeholder={placeholder}
-        value={value}
         onChange={onChange}
+        checked={value}
       />
-      <span>{error}</span>
+      <StyledLabel htmlFor={id}>{placeholder}</StyledLabel>
     </StyledWrapper>
   );
 };
-Input.propType = {
+Checkbox.propType = {
   type: PropTypes.string,
   id: PropTypes.string,
   placeholder: PropTypes.string,
@@ -67,11 +49,11 @@ Input.propType = {
   onChange: PropTypes.func.isRequired,
   error: PropTypes.string,
 };
-Input.defaultProps = {
+Checkbox.defaultProps = {
   type: 'text',
   id: '',
   placeholder: '',
   error: '',
 };
 
-export default Input;
+export default Checkbox;
