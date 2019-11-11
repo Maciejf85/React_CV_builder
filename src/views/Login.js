@@ -84,7 +84,6 @@ class Login extends Component {
     const arrName = name.split(' ');
     const userName = arrName.shift();
     const userSurname = arrName.join(' ');
-    console.log('arrName, userName, userSurname', arrName, userName, userSurname)
     console.log('userName,userSurname,email,id,type', userName, userSurname, email, id, type);
     axios
       .post(`${path.cors}register.php`, {
@@ -93,6 +92,7 @@ class Login extends Component {
         name: userName,
         surname: userSurname,
         type,
+        timeout: 2500,
       })
       .then(({ data }) => {
         console.log('data', data)
