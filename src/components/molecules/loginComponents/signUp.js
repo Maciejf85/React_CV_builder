@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LoginInput from 'components/atoms/Inputs/loginInput';
 import Submit from 'components/atoms/Inputs/submit';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { connect } from 'react-redux';
 
 class SignUp extends Component {
   state = {
@@ -10,6 +11,7 @@ class SignUp extends Component {
     name: '',
     surname: '',
     isVerified: false,
+    recaptchaError: false,
   };
 
   handleForm = e => {
@@ -21,7 +23,7 @@ class SignUp extends Component {
   handleSubmit = () => {
     const { isVerified, login, password, name, surname } = this.state;
     if (isVerified) console.log('succesfuly send');
-    else console.log('confirm u r no robot');
+    else this.setState({ recaptchaError: true });
   };
 
   handleRecaptcha = value => {
@@ -30,7 +32,9 @@ class SignUp extends Component {
   };
 
   render() {
-    const { login, password, name, surname } = this.state;
+    const { login, password, name, surname, recaptchaError } = this.state;
+    const { error } = this.props;
+    console.log('error', error);
     return (
       <>
         <LoginInput
@@ -39,6 +43,7 @@ class SignUp extends Component {
           value={login}
           onChange={this.handleForm}
           type="text"
+          error={error}
         />
 
         <LoginInput
@@ -66,6 +71,9 @@ class SignUp extends Component {
           sitekey="6LfEU8EUAAAAAL6ZBeahfQlVcovox9eYimxxUqDG"
           onChange={this.handleRecaptcha}
         />
+        {recaptchaError && (
+          <div style={{ color: 'red', fontStyle: 'italic' }}>kliknij ReCAPTCHA</div>
+        )}
         <Submit id="submit" type="button" onClick={this.handleSubmit}>
           Zarejestruj
         </Submit>
@@ -74,4 +82,5 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+const mapStateToProps = ({ serverResponse }) => serverResponse;
+export default connect(mapStateToProps)(SignUp);

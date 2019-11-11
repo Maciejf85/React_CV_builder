@@ -10,7 +10,9 @@ const StyledInput = styled.input`
   margin: 10px 10px 0;
   outline: none;
   border: none;
+  font-weight:${({ theme }) => theme.font.bold};
   background: ${({ theme }) => theme.colors.lightGrey};
+  color: ${({ theme }) => theme.colors.buttonActive};
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
   /* /* border-top: 2px solid ${({ theme }) => theme.colors.inputGrey}; */
 
