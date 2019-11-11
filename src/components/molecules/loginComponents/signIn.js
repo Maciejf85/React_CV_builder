@@ -29,7 +29,7 @@ class SignIn extends Component {
 
   render() {
     const { email, id, autoLogin } = this.state;
-    const { error } = this.props;
+    const { error, success } = this.props;
     return (
       <>
         <form onSubmit={this.handleSubmit}>
@@ -62,6 +62,7 @@ class SignIn extends Component {
           <Submit id="submit" type="submit">
             Zaloguj
           </Submit>
+          {success && <div>{success}</div>}
         </form>
       </>
     );

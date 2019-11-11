@@ -22,20 +22,17 @@ class SignUp extends Component {
 
   handleSubmit = () => {
     const { isVerified, login, password, name, surname } = this.state;
-    const { register } = this.props
+    const { register } = this.props;
     if (isVerified) {
-
-      const fullName = `${name} ${surname}`
+      const fullName = `${name} ${surname}`;
       const response = {
         name: fullName,
         email: login,
-        id: password
-      }
+        id: password,
+      };
       const type = 'regular';
       register(response, type);
-    }
-    else this.setState({ recaptchaError: true });
-
+    } else this.setState({ recaptchaError: true });
   };
 
   handleRecaptcha = () => {
@@ -44,8 +41,7 @@ class SignUp extends Component {
 
   render() {
     const { login, password, name, surname, recaptchaError } = this.state;
-    const { error } = this.props;
-    console.log('error', error);
+    const { error, success } = this.props;
     return (
       <>
         <LoginInput
@@ -88,6 +84,7 @@ class SignUp extends Component {
         <Submit id="submit" type="button" onClick={this.handleSubmit}>
           Zarejestruj
         </Submit>
+        {success && <div>{success}</div>}
       </>
     );
   }

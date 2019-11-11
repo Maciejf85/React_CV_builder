@@ -60,7 +60,7 @@ const LoginWrapper = styled.div`
 
 class Login extends Component {
   state = {
-    isRegister: true,
+    isRegister: false,
   };
 
   componentDidMount() {
@@ -85,7 +85,6 @@ class Login extends Component {
       const arrName = name.split(' ');
       const userName = arrName.shift();
       const userSurname = arrName.join(' ');
-      console.log('userName,userSurname,email,id,type', userName, userSurname, email, id, type);
       axios
         .post(`${path.cors}register.php`, {
           email,
@@ -95,14 +94,18 @@ class Login extends Component {
           type,
         })
         .then(({ data }) => {
-          console.log('data', data)
+          console.log('data', data);
           if (data.error) store.dispatch({ type: 'REQUEST_FAIL', payload: { error: data.error } });
+          if (data.success) {
+            store.dispatch({ type: 'REQUEST_SUCCESS', payload: { success: data.success } });
+            this.handlePageChange();
+          }
         });
     }
   };
 
-  onChange = value => {
-    console.log('Captcha value:', value);
+  handlePageChange = () => {
+    this.setState(prevState => ({ isRegister: !prevState.isRegister }));
   };
 
   render() {
@@ -121,17 +124,12 @@ class Login extends Component {
               {!isRegister ? (
                 <SignIn login={this.handleLogin} />
               ) : (
-                  <SignUp register={this.handleRegister} />
-                )}
+                <SignUp register={this.handleRegister} />
+              )}
             </LoginWrapper>
             <LoginWrapper center>
               {!isRegister ? 'Nie masz konta ?' : 'Masz konto ?'}
-              <button
-                type="button"
-                className="clearButton"
-                // eslint-disable-next-line react/no-access-state-in-setstate
-                onClick={() => this.setState({ isRegister: !this.state.isRegister })}
-              >
+              <button type="button" className="clearButton" onClick={this.handlePageChange}>
                 {isRegister ? 'Zaloguj się' : 'Zarejestruj się'}
               </button>
             </LoginWrapper>
@@ -140,12 +138,6 @@ class Login extends Component {
               login={this.handleLogin}
               register={this.handleRegister}
             />
-
-            {/* <div>
-              <button type="button" onClick={() => this.props.history.push('/main')}>
-                go to main
-              </button>
-            </div> */}
           </MainWrapper>
           <Footer />
         </StyledWrapper>

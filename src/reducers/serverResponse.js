@@ -7,7 +7,7 @@ const personalData = (state = initialState, { type, payload }) => {
   switch (type) {
     case REQUEST_SUCCESS:
       return {
-        error: payload.error,
+        success: payload.success,
       };
     case REQUEST_FAIL:
       return {
