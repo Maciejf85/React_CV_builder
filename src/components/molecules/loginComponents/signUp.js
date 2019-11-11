@@ -22,12 +22,23 @@ class SignUp extends Component {
 
   handleSubmit = () => {
     const { isVerified, login, password, name, surname } = this.state;
-    if (isVerified) console.log('succesfuly send');
+    const { register } = this.props
+    if (isVerified) {
+
+      const fullName = `${name} ${surname}`
+      const response = {
+        name: fullName,
+        email: login,
+        id: password
+      }
+      const type = 'regular';
+      register(response, type);
+    }
     else this.setState({ recaptchaError: true });
+
   };
 
-  handleRecaptcha = value => {
-    console.log('value', value);
+  handleRecaptcha = () => {
     this.setState({ isVerified: true });
   };
 

@@ -81,23 +81,24 @@ class Login extends Component {
   };
 
   handleRegister = ({ name, email, id }, type) => {
-    const arrName = name.split(' ');
-    const userName = arrName.shift();
-    const userSurname = arrName.join(' ');
-    console.log('userName,userSurname,email,id,type', userName, userSurname, email, id, type);
-    axios
-      .post(`${path.cors}register.php`, {
-        email,
-        id,
-        name: userName,
-        surname: userSurname,
-        type,
-        timeout: 2500,
-      })
-      .then(({ data }) => {
-        console.log('data', data)
-        if (data.error) store.dispatch({ type: 'REQUEST_FAIL', payload: { error: data.error } });
-      });
+    if (name && email && id && type) {
+      const arrName = name.split(' ');
+      const userName = arrName.shift();
+      const userSurname = arrName.join(' ');
+      console.log('userName,userSurname,email,id,type', userName, userSurname, email, id, type);
+      axios
+        .post(`${path.cors}register.php`, {
+          email,
+          id,
+          name: userName,
+          surname: userSurname,
+          type,
+        })
+        .then(({ data }) => {
+          console.log('data', data)
+          if (data.error) store.dispatch({ type: 'REQUEST_FAIL', payload: { error: data.error } });
+        });
+    }
   };
 
   onChange = value => {
