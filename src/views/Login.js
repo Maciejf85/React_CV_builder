@@ -82,8 +82,9 @@ class Login extends Component {
 
   handleRegister = ({ name, email, id }, type) => {
     const arrName = name.split(' ');
-    const userName = arrName[0];
-    const userSurname = arrName[1];
+    const userName = arrName.shift();
+    const userSurname = arrName.join(' ');
+    console.log('arrName, userName, userSurname', arrName, userName, userSurname)
     console.log('userName,userSurname,email,id,type', userName, userSurname, email, id, type);
     axios
       .post(`${path.cors}register.php`, {
@@ -94,6 +95,7 @@ class Login extends Component {
         type,
       })
       .then(({ data }) => {
+        console.log('data', data)
         if (data.error) store.dispatch({ type: 'REQUEST_FAIL', payload: { error: data.error } });
       });
   };
@@ -118,8 +120,8 @@ class Login extends Component {
               {!isRegister ? (
                 <SignIn login={this.handleLogin} />
               ) : (
-                <SignUp register={this.handleRegister} />
-              )}
+                  <SignUp register={this.handleRegister} />
+                )}
             </LoginWrapper>
             <LoginWrapper center>
               {!isRegister ? 'Nie masz konta ?' : 'Masz konto ?'}
