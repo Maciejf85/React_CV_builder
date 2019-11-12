@@ -61,6 +61,7 @@ const LoginWrapper = styled.div`
 class Login extends Component {
   state = {
     isRegister: true,
+    isRegistered: false,
   };
 
   componentDidMount() {
@@ -76,7 +77,6 @@ class Login extends Component {
     if (token !== null) store.dispatch(getMainData(type, email, id, autolog, token));
   }
 
-
   clearNotification = () => store.dispatch(serverResponse({ error: undefined }));
 
   handleLogin = ({ email, id }, type, autolog) => {
@@ -84,10 +84,8 @@ class Login extends Component {
     store.dispatch(getMainData(type, email, id, autolog));
   };
 
-
-
   handleRegister = ({ name, email, id }, type) => {
-    this.clearNotification()
+    this.clearNotification();
     if (name && email && id && type) {
       const arrName = name.split(' ');
       const userName = arrName.shift();
@@ -105,19 +103,18 @@ class Login extends Component {
           if (data.error) store.dispatch(serverResponse(data));
           if (data.success) {
             store.dispatch(serverResponse(data));
+            this.setState({ isRegistered: true });
           }
         });
     }
   };
 
   handlePageChange = () => {
-    this.setState(prevState => ({ isRegister: !prevState.isRegister }));
+    this.setState(prevState => ({ isRegister: !prevState.isRegister, isRegistered: false }));
   };
 
-
-
   render() {
-    const { isRegister } = this.state;
+    const { isRegister, isRegistered } = this.state;
     const { token } = this.props;
     if (token !== '') {
       return <Redirect to={path.main} />;
@@ -132,8 +129,8 @@ class Login extends Component {
               {!isRegister ? (
                 <SignIn login={this.handleLogin} />
               ) : (
-                  <SignUp register={this.handleRegister} />
-                )}
+                <SignUp register={this.handleRegister} />
+              )}
             </LoginWrapper>
             <LoginWrapper center>
               {!isRegister ? 'Nie masz konta ?' : 'Masz konto ?'}
@@ -141,11 +138,13 @@ class Login extends Component {
                 {isRegister ? 'Zaloguj się' : 'Zarejestruj się'}
               </button>
             </LoginWrapper>
-            <Facebook
-              isRegister={isRegister}
-              login={this.handleLogin}
-              register={this.handleRegister}
-            />
+            {isRegistered || (
+              <Facebook
+                isRegister={isRegister}
+                login={this.handleLogin}
+                register={this.handleRegister}
+              />
+            )}
           </MainWrapper>
           <Footer />
         </StyledWrapper>

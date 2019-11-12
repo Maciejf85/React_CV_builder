@@ -43,7 +43,9 @@ class SignUp extends Component {
   render() {
     const { login, password, name, surname, recaptchaError } = this.state;
     const { error, success } = this.props;
-    return (
+    return success ? (
+      <Notification>{success}</Notification>
+    ) : (
       <>
         <LoginInput
           id="login"
@@ -83,13 +85,9 @@ class SignUp extends Component {
           <div style={{ color: 'red', fontStyle: 'italic' }}>kliknij ReCAPTCHA</div>
         )}
 
-        {success ? (
-          <Notification>{success}</Notification>
-        ) : (
-          <Submit id="submit" type="button" onClick={this.handleSubmit}>
-            Zarejestruj
-          </Submit>
-        )}
+        <Submit id="submit" type="button" onClick={this.handleSubmit}>
+          Zarejestruj
+        </Submit>
       </>
     );
   }
