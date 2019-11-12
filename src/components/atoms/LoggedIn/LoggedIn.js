@@ -16,6 +16,7 @@ const StyledWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.darkGrey};
   background: ${({ theme }) => theme.colors.mainGrey};
   padding: 10px;
+  min-width: 250px;
   color: white;
   z-index: 1;
   .iconStyle {
@@ -92,10 +93,11 @@ class LoggedIn extends Component {
 
   render() {
     const { isVisible } = this.state;
-    const { email } = this.props;
+    const { email, name, surname } = this.props;
+    console.log('this.props', this.props);
     return (
       <StyledWrapper>
-        <p>{email}</p>
+        {email ? <p>{email}</p> : <p>{`${name} ${surname}`}</p>}
         <div>
           <FontAwesomeIcon icon={faAngleDown} className="iconStyle" onClick={this.handleDropdown} />
           {/* {isVisible && <DropBox pose={isVisible ? 'visible' : 'hidden'}>wyloguj</DropBox>} */}
