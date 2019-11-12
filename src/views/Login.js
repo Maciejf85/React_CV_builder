@@ -8,7 +8,7 @@ import SignUp from 'components/molecules/loginComponents/signUp';
 import Facebook from 'components/organisms/FacebookAuth';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { getMainData } from 'actions';
+import { getMainData, serverResponse } from 'actions';
 import axios from 'axios';
 import path from '../path';
 
@@ -60,7 +60,7 @@ const LoginWrapper = styled.div`
 
 class Login extends Component {
   state = {
-    isRegister: false,
+    isRegister: true,
   };
 
   componentDidMount() {
@@ -76,11 +76,18 @@ class Login extends Component {
     if (token !== null) store.dispatch(getMainData(type, email, id, autolog, token));
   }
 
+
+  clearNotification = () => store.dispatch(serverResponse({ error: undefined }));
+
   handleLogin = ({ email, id }, type, autolog) => {
+    this.clearNotification();
     store.dispatch(getMainData(type, email, id, autolog));
   };
 
+
+
   handleRegister = ({ name, email, id }, type) => {
+    this.clearNotification()
     if (name && email && id && type) {
       const arrName = name.split(' ');
       const userName = arrName.shift();
@@ -95,10 +102,9 @@ class Login extends Component {
         })
         .then(({ data }) => {
           console.log('data', data);
-          if (data.error) store.dispatch({ type: 'REQUEST_FAIL', payload: { error: data.error } });
+          if (data.error) store.dispatch(serverResponse(data));
           if (data.success) {
-            store.dispatch({ type: 'REQUEST_SUCCESS', payload: { success: data.success } });
-            this.handlePageChange();
+            store.dispatch(serverResponse(data));
           }
         });
     }
@@ -107,6 +113,8 @@ class Login extends Component {
   handlePageChange = () => {
     this.setState(prevState => ({ isRegister: !prevState.isRegister }));
   };
+
+
 
   render() {
     const { isRegister } = this.state;
@@ -124,8 +132,8 @@ class Login extends Component {
               {!isRegister ? (
                 <SignIn login={this.handleLogin} />
               ) : (
-                <SignUp register={this.handleRegister} />
-              )}
+                  <SignUp register={this.handleRegister} />
+                )}
             </LoginWrapper>
             <LoginWrapper center>
               {!isRegister ? 'Nie masz konta ?' : 'Masz konto ?'}

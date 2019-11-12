@@ -232,3 +232,10 @@ export const logOut = () => {
     payload: null,
   };
 };
+
+export const serverResponse = (data) => {
+  const { error, success } = data
+  if (error !== undefined) return { type: 'REQUEST_FAIL', payload: { error } }
+  if (success !== undefined) return { type: 'REQUEST_SUCCESS', payload: { success } }
+  return { type: 'CLEAR_REQUEST' }
+}

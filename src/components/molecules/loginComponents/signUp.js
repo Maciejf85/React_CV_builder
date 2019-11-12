@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import LoginInput from 'components/atoms/Inputs/loginInput';
 import Submit from 'components/atoms/Inputs/submit';
 import ReCAPTCHA from 'react-google-recaptcha';
+import Notification from 'components/atoms/LoginNotification';
 import { connect } from 'react-redux';
 
 class SignUp extends Component {
   state = {
-    login: '',
-    password: '',
-    name: '',
-    surname: '',
+    login: 'mki@interia.pl',
+    password: '1',
+    name: '11',
+    surname: '22',
     isVerified: false,
     recaptchaError: false,
   };
@@ -23,7 +24,7 @@ class SignUp extends Component {
   handleSubmit = () => {
     const { isVerified, login, password, name, surname } = this.state;
     const { register } = this.props;
-    if (isVerified) {
+    if (!isVerified) {
       const fullName = `${name} ${surname}`;
       const response = {
         name: fullName,
@@ -81,10 +82,14 @@ class SignUp extends Component {
         {recaptchaError && (
           <div style={{ color: 'red', fontStyle: 'italic' }}>kliknij ReCAPTCHA</div>
         )}
-        <Submit id="submit" type="button" onClick={this.handleSubmit}>
-          Zarejestruj
-        </Submit>
-        {success && <div>{success}</div>}
+
+        {success ? (
+          <Notification>{success}</Notification>
+        ) : (
+          <Submit id="submit" type="button" onClick={this.handleSubmit}>
+            Zarejestruj
+          </Submit>
+        )}
       </>
     );
   }
