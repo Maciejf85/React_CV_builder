@@ -11,9 +11,9 @@ class SignUp extends Component {
     password: '',
     name: '',
     surname: '',
-    nameValid: 'długość znaków min. 3',
+    nameValid: '',
     surnameValid: '',
-    loginValid: 'nieprawidłowy format',
+    loginValid: '',
     passwordValid: '',
 
     isVerified: false,
@@ -106,7 +106,7 @@ class SignUp extends Component {
           <div style={{ color: 'red', fontStyle: 'italic' }}>kliknij ReCAPTCHA</div>
         )}
 
-        <Submit id="submit" type="button" onClick={this.handleSubmit}>
+        <Submit id="submit" type="button" onClick={this.handleValidation}>
           Zarejestruj
         </Submit>
       </>

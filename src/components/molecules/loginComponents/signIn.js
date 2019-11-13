@@ -39,6 +39,7 @@ class SignIn extends Component {
             value={email}
             onChange={this.handleForm}
             type="text"
+            validation
             error={error}
             require
           />
@@ -50,6 +51,7 @@ class SignIn extends Component {
             onChange={this.handleForm}
             type="password"
             error={error}
+            validation
             require
           />
           <Checkbox

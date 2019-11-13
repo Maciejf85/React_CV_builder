@@ -60,7 +60,7 @@ const LoginWrapper = styled.div`
 
 class Login extends Component {
   state = {
-    isRegister: false,
+    isRegister: true,
     isRegistered: false,
   };
 

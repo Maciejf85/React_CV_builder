@@ -10,21 +10,16 @@ const StyledInput = styled.input`
   margin: 10px 10px 0;
   outline: none;
   border: none;
-  font-weight:${({ theme }) => theme.font.bold};
+  font-weight: ${({ theme }) => theme.font.bold};
   background: ${({ theme }) => theme.colors.lightGrey};
   color: ${({ theme }) => theme.colors.buttonActive};
-    border: 1px solid ${({ theme, error, validation }) => {
-      if (error || validation) {
-        return theme.colors.alertColor;
-      }
-      return theme.colors.lightGrey;
-    }};
-  /* /* border-top: 2px solid ${({ theme }) => theme.colors.inputGrey}; */
+  border: 1px solid
+    ${({ theme, error, validation }) =>
+      validation.length || error ? theme.colors.alertColor : theme.colors.inputGrey};
 
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.lightBlue};
-  } 
-
+  }
 `;
 const StyledLabel = styled.label`
   width: 270px;
@@ -59,6 +54,8 @@ const Input = ({ type, id, placeholder, value, onChange, isSmall, error, validat
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        error={error}
+        validation={validation}
       />
       <span>
         {error}
