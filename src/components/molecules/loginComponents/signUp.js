@@ -7,10 +7,10 @@ import { connect } from 'react-redux';
 
 class SignUp extends Component {
   state = {
-    login: 'mki@interia.pl',
-    password: '1',
-    name: '11',
-    surname: '22',
+    login: '',
+    password: '',
+    name: '',
+    surname: '',
     isVerified: false,
     recaptchaError: false,
   };
