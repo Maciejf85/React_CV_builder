@@ -21,12 +21,57 @@ class SignUp extends Component {
   };
 
   handleForm = e => {
-    this.setState({
-      [e.target.id]: e.target.value,
-    });
+    const nameRegex = /^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]+$/;
+    if (e.target.id === 'name' || e.target.id === 'surname') {
+      if (nameRegex.test(e.target.value) || e.target.value.length < 1) {
+        this.setState({
+          [e.target.id]: e.target.value,
+        });
+      }
+    } else {
+      this.setState({
+        [e.target.id]: e.target.value,
+      });
+    }
   };
 
-  handleValidation = () => {};
+  handleClearErrors = () => {
+    this.setState({ loginValid: '', passwordValid: '', nameValid: '', surnameValid: '' });
+  };
+
+  handleValidation = () => {
+    const { login, password, name, surname } = this.state;
+    this.handleClearErrors();
+    let error = false;
+    const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (!emailRegex.test(login)) {
+      error = true;
+      this.setState({
+        loginValid: 'nieprawidłowy format email',
+      });
+    }
+    if (password.length < 5) {
+      error = true;
+      this.setState({
+        passwordValid: 'długość hasła conajmniej 5 znaków',
+      });
+    }
+    if (name.length < 2) {
+      error = true;
+      this.setState({
+        nameValid: 'długość imienia conajmniej 2 znaki',
+      });
+    }
+    if (surname.length < 2) {
+      error = true;
+      this.setState({
+        surnameValid: 'długość nazwiska conajmniej 2 znaki',
+      });
+    }
+    console.log('error', error);
+    if (!error) this.handleSubmit();
+  };
 
   handleSubmit = () => {
     const { isVerified, login, password, name, surname } = this.state;
