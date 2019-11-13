@@ -11,6 +11,11 @@ class SignUp extends Component {
     password: '',
     name: '',
     surname: '',
+    nameValid: 'długość znaków min. 3',
+    surnameValid: '',
+    loginValid: 'nieprawidłowy format',
+    passwordValid: '',
+
     isVerified: false,
     recaptchaError: false,
   };
@@ -20,6 +25,8 @@ class SignUp extends Component {
       [e.target.id]: e.target.value,
     });
   };
+
+  handleValidation = () => {};
 
   handleSubmit = () => {
     const { isVerified, login, password, name, surname } = this.state;
@@ -41,7 +48,17 @@ class SignUp extends Component {
   };
 
   render() {
-    const { login, password, name, surname, recaptchaError } = this.state;
+    const {
+      login,
+      password,
+      name,
+      surname,
+      recaptchaError,
+      loginValid,
+      passwordValid,
+      nameValid,
+      surnameValid,
+    } = this.state;
     const { error, success } = this.props;
     return success ? (
       <Notification>{success}</Notification>
@@ -54,6 +71,7 @@ class SignUp extends Component {
           onChange={this.handleForm}
           type="text"
           error={error}
+          validation={loginValid}
         />
 
         <LoginInput
@@ -62,6 +80,7 @@ class SignUp extends Component {
           value={password}
           onChange={this.handleForm}
           type="password"
+          validation={passwordValid}
         />
         <LoginInput
           id="name"
@@ -69,6 +88,7 @@ class SignUp extends Component {
           value={name}
           onChange={this.handleForm}
           type="text"
+          validation={nameValid}
         />
         <LoginInput
           id="surname"
@@ -76,6 +96,7 @@ class SignUp extends Component {
           value={surname}
           onChange={this.handleForm}
           type="text"
+          validation={surnameValid}
         />
         <ReCAPTCHA
           sitekey="6LfEU8EUAAAAAL6ZBeahfQlVcovox9eYimxxUqDG"

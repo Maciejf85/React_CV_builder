@@ -13,7 +13,12 @@ const StyledInput = styled.input`
   font-weight:${({ theme }) => theme.font.bold};
   background: ${({ theme }) => theme.colors.lightGrey};
   color: ${({ theme }) => theme.colors.buttonActive};
-    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+    border: 1px solid ${({ theme, error, validation }) => {
+      if (error || validation) {
+        return theme.colors.alertColor;
+      }
+      return theme.colors.lightGrey;
+    }};
   /* /* border-top: 2px solid ${({ theme }) => theme.colors.inputGrey}; */
 
   &:focus {
@@ -44,7 +49,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Input = ({ type, id, placeholder, value, onChange, isSmall, error }) => {
+const Input = ({ type, id, placeholder, value, onChange, isSmall, error, validation }) => {
   return (
     <StyledWrapper isSmall={isSmall}>
       <StyledLabel htmlFor={id}>{placeholder}</StyledLabel>
@@ -55,7 +60,10 @@ const Input = ({ type, id, placeholder, value, onChange, isSmall, error }) => {
         value={value}
         onChange={onChange}
       />
-      <span>{error}</span>
+      <span>
+        {error}
+        {validation}
+      </span>
     </StyledWrapper>
   );
 };
