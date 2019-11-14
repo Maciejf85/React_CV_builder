@@ -3,6 +3,9 @@ import LoginInput from 'components/atoms/Inputs/loginInput';
 import Submit from 'components/atoms/Inputs/submit';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Notification from 'components/atoms/LoginNotification';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import store from 'store';
 import { connect } from 'react-redux';
 
 class SignUp extends Component {
@@ -19,6 +22,10 @@ class SignUp extends Component {
     isVerified: false,
     recaptchaError: false,
   };
+
+  componentWillUnmount() {
+    store.dispatch({ type: 'CLEAR_REQUEST' });
+  }
 
   handleForm = e => {
     const nameRegex = /^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]+$/;
@@ -104,14 +111,14 @@ class SignUp extends Component {
       nameValid,
       surnameValid,
     } = this.state;
-    const { error, success } = this.props;
+    const { error, success, isActive } = this.props;
     return success ? (
       <Notification>{success}</Notification>
     ) : (
       <>
         <LoginInput
           id="login"
-          placeholder="email"
+          placeholder="e-mail"
           value={login}
           onChange={this.handleForm}
           type="text"
@@ -151,9 +158,15 @@ class SignUp extends Component {
           <div style={{ color: 'red', fontStyle: 'italic' }}>kliknij ReCAPTCHA</div>
         )}
 
-        <Submit id="submit" type="button" onClick={this.handleValidation}>
-          Zarejestruj
-        </Submit>
+        {isActive ? (
+          <Notification>
+            <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '35px' }} />
+          </Notification>
+        ) : (
+          <Submit id="submit" type="button" onClick={this.handleValidation}>
+            Zarejestruj
+          </Submit>
+        )}
       </>
     );
   }

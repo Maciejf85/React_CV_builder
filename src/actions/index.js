@@ -233,9 +233,10 @@ export const logOut = () => {
   };
 };
 
-export const serverResponse = (data) => {
-  const { error, success } = data
-  if (error !== undefined) return { type: 'REQUEST_FAIL', payload: { error } }
-  if (success !== undefined) return { type: 'REQUEST_SUCCESS', payload: { success } }
-  return { type: 'CLEAR_REQUEST' }
-}
+export const serverResponse = data => {
+  const { error, success } = data;
+  if (error !== undefined) return { type: 'REQUEST_FAIL', payload: { error, active: false } };
+  if (success !== undefined)
+    return { type: 'REQUEST_SUCCESS', payload: { success, active: false } };
+  return { type: 'CLEAR_REQUEST' };
+};

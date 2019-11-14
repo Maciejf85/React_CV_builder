@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import posed from 'react-pose';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import posed from 'react-pose';
 import { logOut } from 'actions';
 import store from 'store';
 import { connect } from 'react-redux';

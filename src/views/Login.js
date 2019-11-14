@@ -82,10 +82,12 @@ class Login extends Component {
   handleLogin = ({ email, id }, type, autolog) => {
     this.clearNotification();
     store.dispatch(getMainData(type, email, id, autolog));
+    store.dispatch({ type: 'REQUEST_STARTED' });
   };
 
   handleRegister = ({ name, email, id }, type) => {
     this.clearNotification();
+    store.dispatch({ type: 'REQUEST_STARTED' });
     if (name && email && id && type) {
       const arrName = name.split(' ');
       const userName = arrName.shift();
