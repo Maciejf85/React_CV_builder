@@ -41,6 +41,7 @@ const Checkbox = ({ type, id, placeholder, value, onChange, isSmall }) => {
     </StyledWrapper>
   );
 };
+
 Checkbox.propType = {
   type: PropTypes.string,
   id: PropTypes.string,
@@ -49,6 +50,7 @@ Checkbox.propType = {
   onChange: PropTypes.func.isRequired,
   error: PropTypes.string,
 };
+
 Checkbox.defaultProps = {
   type: 'text',
   id: '',

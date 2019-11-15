@@ -8,7 +8,7 @@ import SignUp from 'components/molecules/loginComponents/signUp';
 import Facebook from 'components/organisms/FacebookAuth';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { getMainData } from 'actions';
+import { getMainData, serverResponse } from 'actions';
 import axios from 'axios';
 import path from '../path';
 
@@ -37,7 +37,7 @@ const MainWrapper = styled.div`
 
 const LoginWrapper = styled.div`
   min-width: 310px;
-  padding: ${({ center }) => (center ? '10px 15px' : '20px 15px')};
+  padding: ${({ center }) => (center ? '10px 15px' : '20px 15px 5px')};
   border: 1px solid rgb(216, 222, 226);
   border-radius: 7px;
   background: white;
@@ -61,6 +61,7 @@ const LoginWrapper = styled.div`
 class Login extends Component {
   state = {
     isRegister: false,
+    isRegistered: false,
   };
 
   componentDidMount() {
@@ -76,11 +77,17 @@ class Login extends Component {
     if (token !== null) store.dispatch(getMainData(type, email, id, autolog, token));
   }
 
+  clearNotification = () => store.dispatch(serverResponse({ error: undefined }));
+
   handleLogin = ({ email, id }, type, autolog) => {
+    this.clearNotification();
     store.dispatch(getMainData(type, email, id, autolog));
+    store.dispatch({ type: 'REQUEST_STARTED' });
   };
 
   handleRegister = ({ name, email, id }, type) => {
+    this.clearNotification();
+    store.dispatch({ type: 'REQUEST_STARTED' });
     if (name && email && id && type) {
       const arrName = name.split(' ');
       const userName = arrName.shift();
@@ -95,21 +102,21 @@ class Login extends Component {
         })
         .then(({ data }) => {
           console.log('data', data);
-          if (data.error) store.dispatch({ type: 'REQUEST_FAIL', payload: { error: data.error } });
+          if (data.error) store.dispatch(serverResponse(data));
           if (data.success) {
-            store.dispatch({ type: 'REQUEST_SUCCESS', payload: { success: data.success } });
-            this.handlePageChange();
+            store.dispatch(serverResponse(data));
+            this.setState({ isRegistered: true });
           }
         });
     }
   };
 
   handlePageChange = () => {
-    this.setState(prevState => ({ isRegister: !prevState.isRegister }));
+    this.setState(prevState => ({ isRegister: !prevState.isRegister, isRegistered: false }));
   };
 
   render() {
-    const { isRegister } = this.state;
+    const { isRegister, isRegistered } = this.state;
     const { token } = this.props;
     if (token !== '') {
       return <Redirect to={path.main} />;
@@ -133,11 +140,13 @@ class Login extends Component {
                 {isRegister ? 'Zaloguj się' : 'Zarejestruj się'}
               </button>
             </LoginWrapper>
-            <Facebook
-              isRegister={isRegister}
-              login={this.handleLogin}
-              register={this.handleRegister}
-            />
+            {isRegistered || (
+              <Facebook
+                isRegister={isRegister}
+                login={this.handleLogin}
+                register={this.handleRegister}
+              />
+            )}
           </MainWrapper>
           <Footer />
         </StyledWrapper>
