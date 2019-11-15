@@ -37,7 +37,7 @@ const MainWrapper = styled.div`
 
 const LoginWrapper = styled.div`
   min-width: 310px;
-  padding: ${({ center }) => (center ? '10px 15px' : '20px 15px')};
+  padding: ${({ center }) => (center ? '10px 15px' : '20px 15px 5px')};
   border: 1px solid rgb(216, 222, 226);
   border-radius: 7px;
   background: white;

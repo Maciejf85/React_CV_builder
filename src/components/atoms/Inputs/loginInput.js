@@ -39,6 +39,7 @@ const StyledWrapper = styled.div`
   span {
     align-self: flex-start;
     margin: 5px 10px;
+    min-height: 14px;
     color: ${({ theme }) => theme.colors.alertColor};
     font-size: ${({ theme }) => theme.fontSize.s};
   }

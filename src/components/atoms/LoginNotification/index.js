@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 
 const Notification = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  height: 20px;
+  color: ${({ theme }) => theme.colors.buttonActive};
+  font-size: ${({ theme }) => theme.fontSize.ml};
+
+  padding: 20px 15px;
+  border-radius: 7px;
   margin: 10px 0;
-  padding: 20px 0;
-  color: ${({ theme }) => theme.colors.primaryBlue};
-  font-size: ${({ theme }) => theme.fontSize.l};
+  text-align: center;
 `;
 
 export default Notification;
