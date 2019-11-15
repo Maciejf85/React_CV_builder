@@ -38,7 +38,7 @@ const StyledWrapper = styled.div`
 
   span {
     align-self: flex-start;
-    margin: 5px 10px;
+    margin: 5px 20px;
     min-height: 14px;
     color: ${({ theme }) => theme.colors.alertColor};
     font-size: ${({ theme }) => theme.fontSize.s};
@@ -58,10 +58,7 @@ const Input = ({ type, id, placeholder, value, onChange, isSmall, error, validat
         error={error}
         validation={validation}
       />
-      <span>
-        {error}
-        {validation}
-      </span>
+      {(error && <span>{error}</span>) || (validation && <span>{validation}</span>)}
     </StyledWrapper>
   );
 };

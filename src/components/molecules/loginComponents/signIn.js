@@ -32,7 +32,6 @@ class SignIn extends Component {
 
   handleClearErrors = () => {
     this.setState({ emailValidation: '', idValidation: '' });
-    // store.dispatch({ type: 'CLEAR_REQUEST' });
     store.dispatch({ type: 'CLEAR_REQUEST' });
   };
 

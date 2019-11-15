@@ -13,10 +13,11 @@ const StyledWrapper = styled.div`
   grid-template-columns: 7fr 3fr;
   justify-items: center;
   align-items: center;
+  grid-gap: 5px;
   border: 1px solid ${({ theme }) => theme.colors.darkGrey};
   background: ${({ theme }) => theme.colors.mainGrey};
   padding: 10px;
-  min-width: 250px;
+  min-width: 100px;
   color: white;
   z-index: 1;
   .iconStyle {
@@ -29,8 +30,12 @@ const StyledWrapper = styled.div`
   }
 
   p {
+    white-space: nowrap;
     font-size: ${({ theme }) => theme.fontSize.ms};
     margin: 0;
+    padding: 0 5px;
+    letter-spacing: 1px;
+    font-weight: ${({ theme }) => theme.font.thin};
   }
 `;
 const PosedMenu = posed.div({
@@ -44,6 +49,7 @@ const PosedMenu = posed.div({
       default: { ease: 'easeIn', duration: 700 },
     },
   },
+
   visible: { opacity: 1, y: '100%', zIndex: 2, height: '100%' },
 });
 
@@ -57,6 +63,7 @@ const DropBox = styled(PosedMenu)`
   background: ${({ theme }) => theme.colors.mainGrey};
   font-size: ${({ theme }) => theme.fontSize.ms};
   border-top: none;
+  pointer-events: none;
   padding: 10px;
   color: white;
 
@@ -67,6 +74,7 @@ const DropBox = styled(PosedMenu)`
   }
 
   &.active {
+    pointer-events: auto;
     &:hover {
       cursor: pointer;
     }
@@ -94,7 +102,6 @@ class LoggedIn extends Component {
   render() {
     const { isVisible } = this.state;
     const { email, name, surname } = this.props;
-    console.log('this.props', this.props);
     return (
       <StyledWrapper>
         {email ? <p>{email}</p> : <p>{`${name} ${surname}`}</p>}

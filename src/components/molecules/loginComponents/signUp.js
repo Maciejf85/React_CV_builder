@@ -43,11 +43,19 @@ class SignUp extends Component {
   };
 
   handleClearErrors = () => {
-    this.setState({ loginValid: '', passwordValid: '', nameValid: '', surnameValid: '' });
+    store.dispatch({ type: 'CLEAR_REQUEST' });
+
+    this.setState({
+      loginValid: '',
+      passwordValid: '',
+      nameValid: '',
+      surnameValid: '',
+      recaptchaError: false,
+    });
   };
 
   handleValidation = () => {
-    const { login, password, name, surname } = this.state;
+    const { login, password, name, surname, isVerified } = this.state;
     this.handleClearErrors();
     let error = false;
     const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -76,27 +84,28 @@ class SignUp extends Component {
         surnameValid: 'długość nazwiska conajmniej 2 znaki',
       });
     }
-    console.log('error', error);
+    if (isVerified === false) {
+      error = true;
+      this.setState({ recaptchaError: true });
+    }
     if (!error) this.handleSubmit();
   };
 
   handleSubmit = () => {
-    const { isVerified, login, password, name, surname } = this.state;
+    const { login, password, name, surname } = this.state;
     const { register } = this.props;
-    if (!isVerified) {
-      const fullName = `${name} ${surname}`;
-      const response = {
-        name: fullName,
-        email: login,
-        id: password,
-      };
-      const type = 'regular';
-      register(response, type);
-    } else this.setState({ recaptchaError: true });
+    const fullName = `${name} ${surname}`;
+    const response = {
+      name: fullName,
+      email: login,
+      id: password,
+    };
+    const type = 'regular';
+    register(response, type);
   };
 
   handleRecaptcha = () => {
-    this.setState({ isVerified: true });
+    this.setState({ isVerified: true, recaptchaError: false });
   };
 
   render() {

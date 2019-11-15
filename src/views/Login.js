@@ -101,7 +101,6 @@ class Login extends Component {
           type,
         })
         .then(({ data }) => {
-          console.log('data', data);
           if (data.error) store.dispatch(serverResponse(data));
           if (data.success) {
             store.dispatch(serverResponse(data));
