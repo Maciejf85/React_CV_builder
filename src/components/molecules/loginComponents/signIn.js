@@ -11,8 +11,8 @@ import { connect } from 'react-redux';
 
 class SignIn extends Component {
   state = {
-    email: 'Fialek85@gmail.com',
-    id: '123',
+    email: '',
+    id: '',
     idValidation: '',
     emailValidation: '',
     autoLogin: false,
