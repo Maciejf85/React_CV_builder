@@ -10,10 +10,10 @@ import { connect } from 'react-redux';
 
 class SignUp extends Component {
   state = {
-    login: '',
-    password: '',
-    name: '',
-    surname: '',
+    login: `${Math.random().toFixed(2) * 100}@wp.pl`,
+    password: '123456',
+    name: 'Maciej',
+    surname: 'Fiałkowski',
     nameValid: '',
     surnameValid: '',
     loginValid: '',
@@ -84,10 +84,12 @@ class SignUp extends Component {
         surnameValid: 'długość nazwiska conajmniej 2 znaki',
       });
     }
+    /*
     if (isVerified === false) {
       error = true;
       this.setState({ recaptchaError: true });
-    }
+     }
+  */
     if (!error) this.handleSubmit();
   };
 
