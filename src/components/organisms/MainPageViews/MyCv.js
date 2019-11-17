@@ -9,7 +9,6 @@ import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import Modal from 'components/organisms/Modal';
 import withModal from 'components/hoc/withModal';
 import store from 'store';
-import Loader from 'components/atoms/Loader';
 import { connect } from 'react-redux';
 
 const StyleWrapper = styled.div`
@@ -53,30 +52,26 @@ class CvList extends Component {
           className={modal ? 'active' : ''}
           style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          {!requestActive ? (
-            <MainModal>
-              <header>Tytuł CV</header>
-              <section>
-                <input
-                  type="text"
-                  id="cvTitle"
-                  value={cvTitle}
-                  onChange={this.handleCvTitle}
-                  autoFocus
-                />
-              </section>
-              <footer>
-                <PrimaryButton type="button" primary onClick={this.handleNewCv}>
-                  zapisz
-                </PrimaryButton>
-                <PrimaryButton type="button" name="cancel" onClick={handleModal}>
-                  anuluj
-                </PrimaryButton>
-              </footer>
-            </MainModal>
-          ) : (
-            <Loader />
-          )}
+          <MainModal>
+            <header>Tytuł CV</header>
+            <section>
+              <input
+                type="text"
+                id="cvTitle"
+                value={cvTitle}
+                onChange={this.handleCvTitle}
+                autoFocus
+              />
+            </section>
+            <footer>
+              <PrimaryButton type="button" primary onClick={this.handleNewCv}>
+                zapisz
+              </PrimaryButton>
+              <PrimaryButton type="button" name="cancel" onClick={handleModal}>
+                anuluj
+              </PrimaryButton>
+            </footer>
+          </MainModal>
         </Modal>
         <Panel
           name={name}

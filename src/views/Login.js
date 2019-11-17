@@ -101,17 +101,11 @@ class Login extends Component {
           type,
         })
         .then(({ data }) => {
-          console.log('data', data);
           if (data.error) store.dispatch(serverResponse(data));
           if (data.success) {
             store.dispatch(serverResponse(data));
             this.setState({ isRegistered: true });
-            console.log('server Response');
           }
-        })
-        .then(() => {
-          // setTimeout(() => this.setState({ isRegister: false }), 2500);
-          console.log('2nd Promise');
         });
     }
   };
@@ -136,7 +130,7 @@ class Login extends Component {
               {!isRegister ? (
                 <SignIn login={this.handleLogin} />
               ) : (
-                <SignUp register={this.handleRegister} />
+                <SignUp register={this.handleRegister} login={this.handleLogin} />
               )}
             </LoginWrapper>
             <LoginWrapper center>

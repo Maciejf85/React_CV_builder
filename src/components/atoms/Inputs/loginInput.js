@@ -42,10 +42,13 @@ const StyledWrapper = styled.div`
     min-height: 14px;
     color: ${({ theme }) => theme.colors.alertColor};
     font-size: ${({ theme }) => theme.fontSize.s};
+    &.tip {
+      color: ${({ theme }) => theme.colors.buttonActive};
+    }
   }
 `;
 
-const Input = ({ type, id, placeholder, value, onChange, isSmall, error, validation }) => {
+const Input = ({ type, id, placeholder, value, onChange, isSmall, error, validation, tip }) => {
   return (
     <StyledWrapper isSmall={isSmall}>
       <StyledLabel htmlFor={id}>{placeholder}</StyledLabel>
@@ -57,8 +60,10 @@ const Input = ({ type, id, placeholder, value, onChange, isSmall, error, validat
         onChange={onChange}
         error={error}
         validation={validation}
+        tip={tip}
       />
-      {(error && <span>{error}</span>) || (validation && <span>{validation}</span>)}
+      {(error && <span>{error}</span>) ||
+        ((validation && <span>{validation}</span>) || (tip && <span className="tip">{tip}</span>))}
     </StyledWrapper>
   );
 };

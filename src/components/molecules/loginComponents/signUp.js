@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 class SignUp extends Component {
   state = {
-    login: `${Math.random().toFixed(2) * 100}@wp.pl`,
+    login: `${Math.random().toFixed(2) * 10000000}@wp.pl`,
     password: '123456',
     name: 'Maciej',
     surname: 'Fiałkowski',
@@ -18,6 +18,7 @@ class SignUp extends Component {
     surnameValid: '',
     loginValid: '',
     passwordValid: '',
+    autoLogin: false,
 
     isVerified: false,
     recaptchaError: false,
@@ -69,27 +70,27 @@ class SignUp extends Component {
     if (password.length < 5) {
       error = true;
       this.setState({
-        passwordValid: 'długość hasła conajmniej 5 znaków',
+        passwordValid: 'długość hasła co najmniej 5 znaków',
       });
     }
     if (name.length < 2) {
       error = true;
       this.setState({
-        nameValid: 'długość imienia conajmniej 2 znaki',
+        nameValid: 'długość imienia co najmniej 2 znaki',
       });
     }
     if (surname.length < 2) {
       error = true;
       this.setState({
-        surnameValid: 'długość nazwiska conajmniej 2 znaki',
+        surnameValid: 'długość nazwiska co najmniej 2 znaki',
       });
     }
-    /*
-    if (isVerified === false) {
+
+    if (!isVerified === false) {
       error = true;
       this.setState({ recaptchaError: true });
-     }
-  */
+    }
+
     if (!error) this.handleSubmit();
   };
 
@@ -104,6 +105,14 @@ class SignUp extends Component {
     };
     const type = 'regular';
     register(response, type);
+  };
+
+  handleLogin = e => {
+    e.preventDefault();
+    this.setState({ autoLogin: true });
+    const { login: email, password: id } = this.state;
+    const response = { email, id };
+    this.props.login(response, 'regular', 'false');
   };
 
   handleRecaptcha = () => {
@@ -121,10 +130,23 @@ class SignUp extends Component {
       passwordValid,
       nameValid,
       surnameValid,
+      autoLogin,
     } = this.state;
     const { error, success, isActive } = this.props;
-    return success ? (
-      <Notification>{success}</Notification>
+    return success || autoLogin ? (
+      <>
+        <Notification>
+          {autoLogin ? (
+            <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '35px' }} />
+          ) : (
+            <span>{success}</span>
+          )}
+        </Notification>
+
+        <Submit id="login" type="button" onClick={this.handleLogin}>
+          Zaloguj
+        </Submit>
+      </>
     ) : (
       <>
         <LoginInput
@@ -144,6 +166,7 @@ class SignUp extends Component {
           onChange={this.handleForm}
           type="password"
           validation={passwordValid}
+          tip="co najmniej 5 znaków"
         />
         <LoginInput
           id="name"
@@ -164,6 +187,7 @@ class SignUp extends Component {
         <ReCAPTCHA
           sitekey="6LfEU8EUAAAAAL6ZBeahfQlVcovox9eYimxxUqDG"
           onChange={this.handleRecaptcha}
+          style={{ marginTop: '25px' }}
         />
         {recaptchaError && (
           <div style={{ color: 'red', fontStyle: 'italic' }}>kliknij ReCAPTCHA</div>
