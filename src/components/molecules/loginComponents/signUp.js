@@ -70,19 +70,19 @@ class SignUp extends Component {
     if (password.length < 5) {
       error = true;
       this.setState({
-        passwordValid: 'długość hasła co najmniej 5 znaków',
+        passwordValid: 'co najmniej 5 znaków',
       });
     }
     if (name.length < 2) {
       error = true;
       this.setState({
-        nameValid: 'długość imienia co najmniej 2 znaki',
+        nameValid: 'co najmniej 2 znaki',
       });
     }
     if (surname.length < 2) {
       error = true;
       this.setState({
-        surnameValid: 'długość nazwiska co najmniej 2 znaki',
+        surnameValid: 'co najmniej 2 znaki',
       });
     }
 
