@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import { connect } from 'react-redux';
 import { Textarea } from 'components/atoms/Inputs';
-import { newConfidentialText, changeSidePanelState, getData as getDataConf } from 'actions';
+import { newConfidentialText, changeSidePanelState } from 'actions';
 import store from 'store';
 import axios from 'axios';
 import path from '../../../path';
@@ -21,13 +21,13 @@ const StyledWrapper = styled.div`
 
   header {
     display: flex;
-  align-items: center;
-  width: 100%;
-  height: 30px;
-  padding: 0 10px;
-  font-size: ${({ theme }) => theme.fontSize.ms};
-  font-weight: ${({ theme }) => theme.font.bold};
-  background: ${({ theme }) => theme.colors.lightGrey};
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    padding: 0 10px;
+    font-size: ${({ theme }) => theme.fontSize.ms};
+    font-weight: ${({ theme }) => theme.font.bold};
+    background: ${({ theme }) => theme.colors.lightGrey};
   }
   section {
     width: 100%;
@@ -50,7 +50,7 @@ class Panel extends Component {
     editValue: false,
     localConf: '',
     disabled: false,
-    token:sessionStorage.getItem('userID')
+    token: sessionStorage.getItem('userID'),
   };
 
   handleEditMode = () => {
@@ -71,20 +71,20 @@ class Panel extends Component {
     });
   };
 
-
-  updateConfidential = () => {
+  updateConfidential = e => {
     const { localConf, token } = this.state;
+    const { id } = e.target;
     this.saveButtonState();
     axios
       .post(`${path.cors}data.php`, {
-        type: 'save',
-        data: localConf,
-        token
+        type: id,
+        data: id === 'save' ? localConf : '',
+        token,
       })
       .then(({ data }) => {
-        const confidential = data;
+        const { confidential } = data;
         return (
-          store.dispatch(newConfidentialText(confidential.confidential)),
+          store.dispatch(newConfidentialText(confidential)),
           store.dispatch(changeSidePanelState({ content: 'Klauzula zapisana', error: false }))
         );
       })
@@ -93,22 +93,23 @@ class Panel extends Component {
         store.dispatch(changeSidePanelState({ content: 'błąd serwera', error: true }));
       })
       .finally(() => {
-        this.handleEditMode();
+        if (id === 'save') {
+          this.handleEditMode();
+        }
         this.saveButtonState();
         setTimeout(() => store.dispatch(changeSidePanelState({ content: '', error: false })), 2000);
       });
   };
 
   render() {
-    const { editValue, localConf, disabled, token } = this.state;
-    const { confidential, getData } = this.props;
+    const { editValue, localConf, disabled } = this.state;
+    const { confidential } = this.props;
 
     return (
       <>
         <StyledWrapper>
           <header>
             <p>Klauza poufności</p>
-
           </header>
           <section>
             {editValue ? (
@@ -116,25 +117,26 @@ class Panel extends Component {
                 <Textarea value={localConf} onChange={this.handleTextarea} />
               </form>
             ) : (
-                <p>{confidential}</p>
-              )}
+              <p>{confidential}</p>
+            )}
           </section>
         </StyledWrapper>
         {editValue && (
           <PrimaryButton
             type="button"
+            id="save"
             primary
             disabled={disabled}
             onClick={this.updateConfidential}
           >
             zapisz
-                </PrimaryButton>
+          </PrimaryButton>
         )}
-        <PrimaryButton type="button" onClick={this.handleEditMode}>
+        <PrimaryButton default type="button" onClick={this.handleEditMode}>
           {editValue ? 'anuluj' : 'edytuj'}
         </PrimaryButton>
 
-        <PrimaryButton type="button" onClick={() => getData('default',token)}>
+        <PrimaryButton default type="button" id="default" onClick={this.updateConfidential}>
           przywróć domyślne
         </PrimaryButton>
       </>
@@ -143,18 +145,12 @@ class Panel extends Component {
 }
 Panel.propTypes = {
   confidential: PropTypes.string,
-  getData: PropTypes.func.isRequired,
 };
 
 Panel.defaultProps = {
   confidential: '',
 };
 
-const mapStateToProps = state => state.confidential;
-const mapDispatchToProps = dispatch => ({
-  getData: info => dispatch(getDataConf(info)),
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Panel);
+const mapStateToProps = ({ confidential }) => confidential;
+
+export default connect(mapStateToProps)(Panel);

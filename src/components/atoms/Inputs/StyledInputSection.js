@@ -15,6 +15,14 @@ const StyledInputSection = styled.div`
   margin-bottom: 15px;
   overflow: hidden;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+
+  .inputContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+  }
+
   .title {
     position: absolute;
     display: flex;

@@ -11,7 +11,7 @@ const StyledInput = styled.input`
   border: none;
   background: ${({ theme }) => theme.colors.lightGrey};
   border-top: 2px solid
-    ${({ theme, error }) => (error ? theme.colors.alertColor : theme.colors.lightGrey)};
+    ${({ theme, error }) => (error ? theme.colors.alertColor : theme.colors.inputGrey)};
 
   &:focus {
     border-top: 2px solid
@@ -22,7 +22,7 @@ const StyledLabel = styled.label`
   width: 100%;
   font-size: ${({ theme }) => theme.fontSize.s};
   font-weight: ${({ theme }) => theme.font.bold};
-  margin-left: 10px;
+  margin-left: 15px;
 `;
 const StyledWrapper = styled.div`
   display: flex;

@@ -8,7 +8,7 @@ const theme = {
   fontSize: {
     xs: '0.8rem',
     s: '1.1rem',
-    ms: '1.3rem',
+    ms: '1.25rem',
     m: '1.35rem',
     ml: '1.45rem',
     l: '1.8rem',

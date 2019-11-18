@@ -93,32 +93,40 @@ class EducationPanel extends Component {
           newItem={newItem}
           removeItem={this.handleRemoveItem}
         />
-        <Input
-          isSmall
-          placeholder="nazwa szkoły"
-          id="name"
-          value={name}
-          onChange={this.handleForm}
-        />
+        <div className="inputContainer">
+          <Input
+            isSmall
+            placeholder="nazwa szkoły"
+            id="name"
+            value={name}
+            onChange={this.handleForm}
+          />
 
-        <Select
-          title="data rozpoczęcia"
-          id="startYear"
-          value={startYear}
-          onChange={this.handleForm}
-          start={startY}
-          end={endY}
-        />
-        <Select id="startMonth" value={startMonth} onChange={this.handleForm} start={0} end={12} />
-        <Select
-          title="data zakończenia"
-          id="endYear"
-          value={endYear}
-          onChange={this.handleForm}
-          start={startY}
-          end={endY}
-        />
-        <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
+          <Select
+            title="data rozpoczęcia"
+            id="startYear"
+            value={startYear}
+            onChange={this.handleForm}
+            start={startY}
+            end={endY}
+          />
+          <Select
+            id="startMonth"
+            value={startMonth}
+            onChange={this.handleForm}
+            start={0}
+            end={12}
+          />
+          <Select
+            title="data zakończenia"
+            id="endYear"
+            value={endYear}
+            onChange={this.handleForm}
+            start={startY}
+            end={endY}
+          />
+          <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
+        </div>
 
         <Textarea
           edit

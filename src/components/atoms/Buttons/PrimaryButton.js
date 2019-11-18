@@ -15,6 +15,7 @@ align-items:center;
   font-family: 'Montserrat', sans-serif;
   border-radius: 5px;
   outline: none;
+  font-size:${({ theme }) => theme.fontSize.s};
 
   &:hover {
     background: ${({ theme }) => theme.colors.primaryGrey};
@@ -27,45 +28,42 @@ align-items:center;
   cursor:default ;
   }
 
-${
-  ({ primary }) =>
-    primary &&
-    css`
-      background: ${({ theme }) => theme.colors.primaryBlue};
-      border-color: ${({ theme }) => theme.colors.primaryBlue};
+${({ primary }) =>
+  primary &&
+  css`
+    background: ${({ theme }) => theme.colors.primaryBlue};
+    border-color: ${({ theme }) => theme.colors.primaryBlue};
 
-      &:hover {
-        background: ${({ theme }) => theme.colors.lightBlue};
-        border-color: ${({ theme }) => theme.colors.lightBlue};
-      }
-    `}
+    &:hover {
+      background: ${({ theme }) => theme.colors.lightBlue};
+      border-color: ${({ theme }) => theme.colors.lightBlue};
+    }
+  `}
 
-${
-  ({ secondary }) =>
-    secondary &&
-    css`
-      background: ${({ theme }) => theme.colors.successColor};
-      border-color: ${({ theme }) => theme.colors.successColor};
+${({ secondary }) =>
+  secondary &&
+  css`
+    background: ${({ theme }) => theme.colors.successColor};
+    border-color: ${({ theme }) => theme.colors.successColor};
 
-      &:hover {
-        background: ${({ theme }) => theme.colors.successColorHover};
-        border-color: ${({ theme }) => theme.colors.successColorHover};
-      }
-    `}
+    &:hover {
+      background: ${({ theme }) => theme.colors.successColorHover};
+      border-color: ${({ theme }) => theme.colors.successColorHover};
+    }
+  `}
     
 
-${
-  ({ dafault }) =>
-    dafault &&
-    css`
-        display:flex; 
-    justify-content:center;
-    align-items:center;
-      margin: 0 20px;
-      float: right;
-      clear: both;
-      font-size: 1.15rem;
-    `}
+${({ dafault }) =>
+  dafault &&
+  css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+    float: right;
+    clear: both;
+    font-size: 1.15rem;
+  `}
 `;
 
 export default PrimaryButton;
