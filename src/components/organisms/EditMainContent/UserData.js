@@ -36,6 +36,7 @@ class UserData extends Component {
     currentSurname: '',
     currentEmail: '',
     currentBirthday: '',
+    birthdayValid: false,
     currentAdress: '',
     currentGithub: '',
     currentLinkedin: '',
@@ -206,6 +207,19 @@ class UserData extends Component {
     }
   };
 
+  handleValidation = e => {
+    const { value } = e.target;
+    const reg = /[0-9]{4}-[0-9]{2}-[0-9]{2}/g;
+    const test = reg.test(value);
+
+    // eslint-disable-next-line no-unused-expressions
+    test ? this.setState({ birthdayValid: false }) : this.setState({ birthdayValid: true });
+
+    if (value.length <= 10) {
+      this.handleForm(e);
+    }
+  };
+
   // UPDATE STORE PERSONAL DATA
 
   handleStoreUpdate = () => {
@@ -252,6 +266,7 @@ class UserData extends Component {
       currentProfession,
       currentImageSrc,
       changeTitle,
+      birthdayValid,
     } = this.state;
     return (
       <>
@@ -370,8 +385,10 @@ class UserData extends Component {
               id="currentBirthday"
               placeholder="data ur."
               value={currentBirthday}
-              onChange={this.handleForm}
+              onChange={this.handleValidation}
               onBlur={this.handleStoreUpdate}
+              error={birthdayValid}
+              tip="format daty xxxx-xx-xx"
             />
             <Input
               type="text"

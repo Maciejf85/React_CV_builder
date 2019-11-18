@@ -5,7 +5,6 @@ import Submit from 'components/atoms/Inputs/submit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Notification from 'components/atoms/LoginNotification';
-
 import store from 'store';
 import { connect } from 'react-redux';
 

@@ -115,6 +115,13 @@ class LoggedIn extends Component {
           >
             Wyloguj
           </DropBox>
+          <DropBox
+            className={isVisible ? 'active' : ''}
+            pose={isVisible ? 'visible' : 'hidden'}
+            onClick={this.handleLogout}
+          >
+            Wyloguj
+          </DropBox>
         </div>
       </StyledWrapper>
     );
