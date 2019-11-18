@@ -50,6 +50,7 @@ class Panel extends Component {
     editValue: false,
     localConf: '',
     disabled: false,
+    token:sessionStorage.getItem('userID')
   };
 
   handleEditMode = () => {
@@ -72,12 +73,13 @@ class Panel extends Component {
 
 
   updateConfidential = () => {
-    const { localConf } = this.state;
+    const { localConf, token } = this.state;
     this.saveButtonState();
     axios
       .post(`${path.cors}data.php`, {
         type: 'save',
         data: localConf,
+        token
       })
       .then(({ data }) => {
         const confidential = data;
@@ -98,7 +100,7 @@ class Panel extends Component {
   };
 
   render() {
-    const { editValue, localConf, disabled } = this.state;
+    const { editValue, localConf, disabled, token } = this.state;
     const { confidential, getData } = this.props;
 
     return (
@@ -132,7 +134,7 @@ class Panel extends Component {
           {editValue ? 'anuluj' : 'edytuj'}
         </PrimaryButton>
 
-        <PrimaryButton type="button" onClick={() => getData('default')}>
+        <PrimaryButton type="button" onClick={() => getData('default',token)}>
           przywróć domyślne
         </PrimaryButton>
       </>
