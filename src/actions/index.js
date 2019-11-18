@@ -98,8 +98,8 @@ export const getMainData = (
       }
       return dispatch({ type: 'REQUEST_FAIL', payload: { error: data.error } });
     })
-    .catch(error => {
-      console.log(error);
+    .catch(() => {
+      return dispatch({ type: 'REQUEST_FAIL', payload: { error: 'Brak internetu' } });
     });
 };
 

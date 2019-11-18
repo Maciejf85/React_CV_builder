@@ -10,10 +10,12 @@ const StyledInput = styled.input`
   outline: none;
   border: none;
   background: ${({ theme }) => theme.colors.lightGrey};
-  border-top: 2px solid ${({ theme }) => theme.colors.inputGrey};
+  border-top: 2px solid
+    ${({ theme, error }) => (error ? theme.colors.alertColor : theme.colors.lightGrey)};
 
   &:focus {
-    border-top: 2px solid ${({ theme }) => theme.colors.lightBlue};
+    border-top: 2px solid
+      ${({ theme, error }) => (error ? theme.colors.alertColor : theme.colors.lightBlue)};
   }
 `;
 const StyledLabel = styled.label`
@@ -27,9 +29,16 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   margin-bottom: 10px;
   width: ${({ isSmall }) => (isSmall ? '50%' : '100%')};
+  span {
+    /* align-self: flex-start; */
+    margin: 0 15px;
+    min-height: 14px;
+    color: ${({ theme }) => theme.colors.buttonActive};
+    font-size: ${({ theme }) => theme.fontSize.s};
+  }
 `;
 
-const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall }) => {
+const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall, error, tip }) => {
   return (
     <StyledWrapper isSmall={isSmall}>
       <StyledLabel htmlFor={id}>{placeholder}</StyledLabel>
@@ -40,7 +49,10 @@ const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall }) => {
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        error={error}
+        tip={tip}
       />
+      {tip && <span>{tip}</span>}
     </StyledWrapper>
   );
 };

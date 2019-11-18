@@ -77,16 +77,16 @@ class Login extends Component {
     if (token !== null) store.dispatch(getMainData(type, email, id, autolog, token));
   }
 
-  clearNotification = () => store.dispatch(serverResponse({ error: undefined }));
+  handleClearNotification = () => store.dispatch(serverResponse({ error: undefined }));
 
   handleLogin = ({ email, id }, type, autolog) => {
-    this.clearNotification();
+    this.handleClearNotification();
     store.dispatch(getMainData(type, email, id, autolog));
     store.dispatch({ type: 'REQUEST_STARTED' });
   };
 
   handleRegister = ({ name, email, id }, type) => {
-    this.clearNotification();
+    this.handleClearNotification();
     store.dispatch({ type: 'REQUEST_STARTED' });
     if (name && email && id && type) {
       const arrName = name.split(' ');
@@ -101,7 +101,6 @@ class Login extends Component {
           type,
         })
         .then(({ data }) => {
-          console.log('data', data);
           if (data.error) store.dispatch(serverResponse(data));
           if (data.success) {
             store.dispatch(serverResponse(data));
@@ -131,7 +130,7 @@ class Login extends Component {
               {!isRegister ? (
                 <SignIn login={this.handleLogin} />
               ) : (
-                <SignUp register={this.handleRegister} />
+                <SignUp register={this.handleRegister} login={this.handleLogin} />
               )}
             </LoginWrapper>
             <LoginWrapper center>

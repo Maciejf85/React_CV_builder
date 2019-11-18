@@ -4,8 +4,8 @@ const StyledButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 35px;
-  width: 260px;
+  height: ${({ small }) => (small ? '25px' : '35px')};
+  width: ${({ small }) => (small ? '150px' : '260px')};
   border-radius: 7px;
   margin: 25px 15px;
   color: white;

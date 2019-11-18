@@ -10,14 +10,15 @@ import { connect } from 'react-redux';
 
 class SignUp extends Component {
   state = {
-    login: '',
-    password: '',
-    name: '',
-    surname: '',
+    login: `${Math.random().toFixed(2) * 10000000}@wp.pl`,
+    password: '123456',
+    name: 'Maciej',
+    surname: 'Fiałkowski',
     nameValid: '',
     surnameValid: '',
     loginValid: '',
     passwordValid: '',
+    autoLogin: false,
 
     isVerified: false,
     recaptchaError: false,
@@ -43,11 +44,19 @@ class SignUp extends Component {
   };
 
   handleClearErrors = () => {
-    this.setState({ loginValid: '', passwordValid: '', nameValid: '', surnameValid: '' });
+    store.dispatch({ type: 'CLEAR_REQUEST' });
+
+    this.setState({
+      loginValid: '',
+      passwordValid: '',
+      nameValid: '',
+      surnameValid: '',
+      recaptchaError: false,
+    });
   };
 
   handleValidation = () => {
-    const { login, password, name, surname } = this.state;
+    const { login, password, name, surname, isVerified } = this.state;
     this.handleClearErrors();
     let error = false;
     const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -61,42 +70,53 @@ class SignUp extends Component {
     if (password.length < 5) {
       error = true;
       this.setState({
-        passwordValid: 'długość hasła conajmniej 5 znaków',
+        passwordValid: 'co najmniej 5 znaków',
       });
     }
     if (name.length < 2) {
       error = true;
       this.setState({
-        nameValid: 'długość imienia conajmniej 2 znaki',
+        nameValid: 'co najmniej 2 znaki',
       });
     }
     if (surname.length < 2) {
       error = true;
       this.setState({
-        surnameValid: 'długość nazwiska conajmniej 2 znaki',
+        surnameValid: 'co najmniej 2 znaki',
       });
     }
-    console.log('error', error);
+
+    if (!isVerified === false) {
+      error = true;
+      this.setState({ recaptchaError: true });
+    }
+
     if (!error) this.handleSubmit();
   };
 
   handleSubmit = () => {
-    const { isVerified, login, password, name, surname } = this.state;
+    const { login, password, name, surname } = this.state;
     const { register } = this.props;
-    if (!isVerified) {
-      const fullName = `${name} ${surname}`;
-      const response = {
-        name: fullName,
-        email: login,
-        id: password,
-      };
-      const type = 'regular';
-      register(response, type);
-    } else this.setState({ recaptchaError: true });
+    const fullName = `${name} ${surname}`;
+    const response = {
+      name: fullName,
+      email: login,
+      id: password,
+    };
+    const type = 'regular';
+    register(response, type);
+  };
+
+  handleLogin = e => {
+    e.preventDefault();
+    this.setState({ autoLogin: true });
+    const { login: email, password: id } = this.state;
+    const response = { email, id };
+    this.props.login(response, 'regular', 'false');
   };
 
   handleRecaptcha = () => {
-    this.setState({ isVerified: true });
+    this.setState({ isVerified: true, recaptchaError: false });
   };
 
   render() {
@@ -110,10 +130,23 @@ class SignUp extends Component {
       passwordValid,
       nameValid,
       surnameValid,
+      autoLogin,
     } = this.state;
     const { error, success, isActive } = this.props;
-    return success ? (
-      <Notification>{success}</Notification>
+    return success || autoLogin ? (
+      <>
+        <Notification>
+          {autoLogin ? (
+            <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '35px' }} />
+          ) : (
+            <span>{success}</span>
+          )}
+        </Notification>
+
+        <Submit id="login" type="button" onClick={this.handleLogin}>
+          Zaloguj
+        </Submit>
+      </>
     ) : (
       <>
         <LoginInput
@@ -133,6 +166,7 @@ class SignUp extends Component {
           onChange={this.handleForm}
           type="password"
           validation={passwordValid}
+          tip="co najmniej 5 znaków"
         />
         <LoginInput
           id="name"
@@ -153,6 +187,7 @@ class SignUp extends Component {
         <ReCAPTCHA
           sitekey="6LfEU8EUAAAAAL6ZBeahfQlVcovox9eYimxxUqDG"
           onChange={this.handleRecaptcha}
+          style={{ marginTop: '25px' }}
         />
         {recaptchaError && (
           <div style={{ color: 'red', fontStyle: 'italic' }}>kliknij ReCAPTCHA</div>
