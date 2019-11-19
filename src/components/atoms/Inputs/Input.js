@@ -12,6 +12,7 @@ const StyledInput = styled.input`
   background: ${({ theme }) => theme.colors.lightGrey};
   border-top: 2px solid
     ${({ theme, error }) => (error ? theme.colors.alertColor : theme.colors.inputGrey)};
+  color: ${({ theme, error }) => (error ? theme.colors.alertColor : theme.colors.primaryGrey)};
 
   &:focus {
     border-top: 2px solid
@@ -33,7 +34,7 @@ const StyledWrapper = styled.div`
     /* align-self: flex-start; */
     margin: 0 15px;
     min-height: 14px;
-    color: ${({ theme }) => theme.colors.buttonActive};
+    color: ${({ theme, error }) => (error ? theme.colors.alertColor : theme.colors.buttonActive)};
     font-size: ${({ theme }) => theme.fontSize.s};
   }
 `;

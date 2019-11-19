@@ -110,7 +110,7 @@ class UserData extends Component {
     this.mounted = false;
   }
 
-  handleTimer = (time = 2500) => {
+  handleTimer = (time = 1000) => {
     if (this.mounted) {
       setTimeout(() => {
         const {
@@ -191,13 +191,14 @@ class UserData extends Component {
   // HANDLE FORM
 
   handleForm = e => {
+    const { statusActive } = this.state;
     if (e.target.id !== 'currentTitle') {
       this.setState({
         [e.target.id]: e.target.value,
         statusActive: true,
       });
 
-      if (!this.state.statusActive) {
+      if (!statusActive) {
         this.handleTimer();
       }
     } else {
@@ -210,7 +211,7 @@ class UserData extends Component {
   handleValidation = e => {
     const { value } = e.target;
     const reg = /[0-9]{4}-[0-9]{2}-[0-9]{2}/g;
-    const test = reg.test(value);
+    const test = value !== '' ? reg.test(value) : true;
 
     // eslint-disable-next-line no-unused-expressions
     test ? this.setState({ birthdayValid: false }) : this.setState({ birthdayValid: true });
@@ -428,12 +429,13 @@ UserData.propTypes = {
 };
 UserData.defaultProps = {
   currentCv: PropTypes.shape({
-    title: 'nowe CV',
+    title: 'CV #',
   }),
 };
-const mapStateToProps = state => ({
-  personalData: state.personalData,
-  image: state.image,
-  currentCv: state.currentCv,
+
+const mapStateToProps = ({ personalData, image, currentCv }) => ({
+  personalData,
+  image,
+  currentCv,
 });
 export default withModal(connect(mapStateToProps)(UserData));

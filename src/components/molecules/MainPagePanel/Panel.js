@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
 import { connect } from 'react-redux';
 import { Textarea } from 'components/atoms/Inputs';
-import { newConfidentialText, changeSidePanelState } from 'actions';
+import { newConfidentialText } from 'actions';
+import { sidePanel } from 'functions';
 import store from 'store';
 import axios from 'axios';
 import path from '../../../path';
@@ -83,21 +84,23 @@ class Panel extends Component {
       })
       .then(({ data }) => {
         const { confidential } = data;
-        return (
-          store.dispatch(newConfidentialText(confidential)),
-          store.dispatch(changeSidePanelState({ content: 'Klauzula zapisana', error: false }))
-        );
+        if (confidential) {
+          return (
+            store.dispatch(newConfidentialText(confidential)),
+            sidePanel({ content: 'Klauzula zapisana', error: false })
+          );
+        }
+        return null;
       })
       .catch(error => {
         console.log('error :', error);
-        store.dispatch(changeSidePanelState({ content: 'błąd serwera', error: true }));
+        sidePanel({ content: 'błąd serwera', error: true });
       })
       .finally(() => {
         if (id === 'save') {
           this.handleEditMode();
         }
         this.saveButtonState();
-        setTimeout(() => store.dispatch(changeSidePanelState({ content: '', error: false })), 2000);
       });
   };
 
@@ -136,9 +139,11 @@ class Panel extends Component {
           {editValue ? 'anuluj' : 'edytuj'}
         </PrimaryButton>
 
-        <PrimaryButton default type="button" id="default" onClick={this.updateConfidential}>
-          przywróć domyślne
-        </PrimaryButton>
+        {!editValue && (
+          <PrimaryButton default type="button" id="default" onClick={this.updateConfidential}>
+            przywróć domyślne
+          </PrimaryButton>
+        )}
       </>
     );
   }

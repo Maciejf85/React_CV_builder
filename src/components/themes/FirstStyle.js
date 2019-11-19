@@ -88,19 +88,19 @@ class MyDocument extends Component {
 
             {education.map(item => (
               <TextSection key={item.id}>
-                <Section>{` Name: ${item.name} ${item.startYear} ${item.endYear}`}</Section>
+                <Section>{` ${item.name} ${item.startYear} - ${item.startMonth} ${item.endYear} - ${item.endMonth} `}</Section>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
             {languages.map(item => (
               <TextSection key={item.id}>
-                <Section>{` Name: ${item.name}`}</Section>
+                <Section>{` ${item.name}`}</Section>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
             {experience.map(item => (
               <TextSection key={item.id}>
-                <Section>{` Name: ${item.name}`}</Section>
+                <Section>{` ${item.name}`}</Section>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
