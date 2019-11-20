@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import path from '../../../path';
 
 const StyledWrapper = styled.ul`
@@ -32,10 +33,10 @@ const StyledWrapper = styled.ul`
     transition: 0.5s;
 
     &:hover {
-      background: ${({ theme }) => theme.colors.buttonActive};
+      background: ${({ theme }) => theme.colors.primaryBlue};
       cursor: pointer;
     }
-
+    }
 
 /* {media query} 
     ${({ theme }) => theme.media.tabet} {
@@ -45,14 +46,27 @@ const StyledWrapper = styled.ul`
     }
     */
   
-  }
+  
   .active{
         font-weight: ${({ theme }) => theme.font.bold};
     background: ${({ theme }) => theme.colors.buttonActive};
     }
+  .disable{
+   opacity:0.3;
+  cursor:default;
+  pointer-events:none;
+  
+      &:hover{
+        cursor:default;      
+           background: inherit;
+      }
+  }
 `;
 
 const NavButtons = () => {
+  const logedIn = useSelector(({ currentCv }) => ({ currentCv }));
+  const objectCount = Object.entries(Object.entries(logedIn)[0][1]).length;
+
   return (
     <StyledWrapper>
       <li>
@@ -61,12 +75,16 @@ const NavButtons = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="active" to={path.edit}>
+        <NavLink activeClassName="active" className={!objectCount ? 'disable' : ''} to={path.edit}>
           Edytor
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="active" to={path.preview}>
+        <NavLink
+          activeClassName="active"
+          className={!objectCount ? 'disable' : ''}
+          to={path.preview}
+        >
           Podgląd
         </NavLink>
       </li>

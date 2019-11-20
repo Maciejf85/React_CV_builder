@@ -73,6 +73,7 @@ const StyledWrapper = styled.div`
 class SectionBody extends Component {
   state = {
     currentImageSrc: undefined,
+    fileSize: 0,
   };
 
   // HANDLE IMAGE FILE
@@ -88,9 +89,11 @@ class SectionBody extends Component {
         const reader = new FileReader();
         if (accepted.includes(file.type)) {
           reader.readAsDataURL(file);
+          console.log('file', file);
           reader.onload = () => {
             this.setState({
               currentImageSrc: reader.result,
+              fileSize: file.size,
             });
             this.props.handleModal();
           };
@@ -123,7 +126,7 @@ class SectionBody extends Component {
     } = this.props.personalData;
     const { image } = this.props.image;
     const { modal, modalVisible, handleModal } = this.props;
-    const { currentImageSrc } = this.state;
+    const { currentImageSrc, fileSize } = this.state;
 
     return (
       <>
@@ -131,7 +134,7 @@ class SectionBody extends Component {
           className={modal ? 'active' : ''}
           style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <ImageResizer click={handleModal} imageSrc={currentImageSrc} />
+          <ImageResizer click={handleModal} imageSrc={currentImageSrc} imageSize={fileSize} />
         </Modal>
         <StyledWrapper>
           <div className="header">

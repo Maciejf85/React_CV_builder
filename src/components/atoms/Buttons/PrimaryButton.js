@@ -15,7 +15,7 @@ align-items:center;
   font-family: 'Montserrat', sans-serif;
   border-radius: 5px;
   outline: none;
-  font-size:${({ theme }) => theme.fontSize.s};
+  font-size:${({ theme }) => theme.fontSize.ms};
 
   &:hover {
     background: ${({ theme }) => theme.colors.primaryGrey};

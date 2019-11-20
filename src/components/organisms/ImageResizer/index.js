@@ -114,6 +114,7 @@ class ImageResizer extends Component {
     const canvasRef = this.imagePreviewOnCanvas.current;
     const { imageSrc } = this.props;
     image64toCanvasRef(canvasRef, imageSrc, crop);
+    console.log('canvasRef', canvasRef);
   };
 
   handleButtons = e => {
@@ -178,6 +179,7 @@ class ImageResizer extends Component {
   handleClearImage = () => {
     const crop = {
       width: 200,
+      height: 300,
       x: 0,
       y: 0,
       aspect: '0.67',
@@ -186,9 +188,17 @@ class ImageResizer extends Component {
     this.handleCropImage(crop);
   };
 
+  handleCancel = () => {
+    const { click } = this.props;
+    this.handleClearImage();
+    click();
+  };
+
   render() {
     const { crop } = this.state;
-    const { imageSrc, click } = this.props;
+    const { imageSrc, imageSize } = this.props;
+    console.log('crop.aspect', crop.aspect);
+
     return (
       <StyledWrapper>
         <header>Kadrowanie zdjęcia</header>
@@ -236,10 +246,16 @@ class ImageResizer extends Component {
           <div className="preview">
             <div className="header">Podgląd</div>
             <canvas ref={this.imagePreviewOnCanvas} />
+            {crop && (
+              <>
+                <div>{`${(imageSize / 1024).toFixed(2)} kB `}</div>
+                <div>{`${Math.round(crop.width)} x ${Math.round(crop.height)} px `}</div>
+              </>
+            )}
           </div>
         </section>
         <div className="bottom">
-          <PrimaryButton type="button" onClick={click} width="90px">
+          <PrimaryButton type="button" onClick={this.handleCancel} width="90px">
             anuluj
           </PrimaryButton>
           <PrimaryButton type="button" primary onClick={this.handleUploadImage}>
