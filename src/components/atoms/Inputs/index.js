@@ -11,5 +11,10 @@ export const Textarea = styled.textarea`
   border-radius: ${({ edit }) => edit && '10px'};
   line-height: 25px;
   resize: none;
+  outline: none;
   white-space: pre-line;
+
+  &:focus {
+    border-top: 2px solid ${({ theme }) => theme.colors.lightBlue};
+  }
 `;

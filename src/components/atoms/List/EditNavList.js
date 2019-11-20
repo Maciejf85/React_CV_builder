@@ -18,6 +18,9 @@ const StyledWrapper = styled.li`
   padding-right: 10px;
   font-size: ${({ theme }) => theme.fontSize.ms};
   transition: 0.3s;
+  border-right: 5px solid
+    ${({ theme, content }) => (content ? theme.colors.lightBlue : theme.colors.darkGrey)};
+  border-right-width: ${({ active }) => (active ? '0px' : '5px')};
   :hover {
     background: ${({ theme }) => theme.colors.secondaryBlue};
     cursor: pointer;
@@ -36,15 +39,24 @@ class EditNavList extends Component {
   };
 
   render() {
-    const { name, link, currentView } = this.props;
+    const { name, link, currentView, currentCv } = this.props;
+    const content = currentCv[link] !== undefined ? currentCv[link].length : null;
+
     const isActive = link === currentView;
     return (
-      <StyledWrapper active={isActive} data-id={link} onClick={this.handlePathChange}>
+      <StyledWrapper
+        active={isActive}
+        data-id={link}
+        onClick={this.handlePathChange}
+        content={content}
+      >
         <div>{name}</div>
-        <div>opt</div>
       </StyledWrapper>
     );
   }
 }
-const mapStateToProps = state => state.editComponentView;
+const mapStateToProps = ({ editComponentView, currentCv }) => ({
+  currentView: editComponentView.currentView,
+  currentCv,
+});
 export default connect(mapStateToProps)(EditNavList);

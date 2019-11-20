@@ -126,10 +126,11 @@ export const updatePersonalData = (type = 'update') => dispatch => {
 
 //  GET CONFIDENTIAL TEXT FROM SERVER
 
-export const getData = (request = 'read') => dispatch => {
+export const getData = (request = 'read', token) => dispatch => {
   return axios
     .post(`${path.cors}data.php`, {
       type: request,
+      token,
     })
     .then(({ data }) => {
       const payload = data;

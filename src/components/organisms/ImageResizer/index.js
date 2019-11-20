@@ -20,8 +20,8 @@ const StyledWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 1024px;
-  height: 600px;
-  background: ${({ theme }) => theme.colors.secondaryGrey};
+  height: 590px;
+  background: ${({ theme }) => theme.colors.imageResizerBackground};
   overflow: hidden;
   border-radius: 7px;
 
@@ -29,7 +29,6 @@ const StyledWrapper = styled.div`
     height: 45px;
     line-height: 45px;
     padding: 0 15px;
-    margin-bottom: 10px;
     background: ${({ theme }) => theme.colors.primaryBlue};
     font-size: ${({ theme }) => theme.fontSize.ml};
     font-weight: ${({ theme }) => theme.font.bold};
@@ -38,21 +37,18 @@ const StyledWrapper = styled.div`
   section {
     display: grid;
     grid-template-columns: 7fr 2fr;
-    grid-gap: 10px;
+    grid-template-rows: 490px;
+    grid-gap: 5px;
     max-height: calc(100% - 55px);
-    /* border: 1px solid red; */
 
     .imageContainer {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      /* border: 1px solid white; */
-      background: ${({ theme }) => theme.colors.inputGrey};
-      margin: 0 10px;
+      background: ${({ theme }) => theme.colors.imageResizerBackground};
       .image {
         text-align: center;
-
         user-select: none;
         img {
           height: 364px;
@@ -62,21 +58,35 @@ const StyledWrapper = styled.div`
     .preview {
       position: relative;
       text-align: center;
-      height: 530px;
-      /* border: 1px solid yellow; */
-      background: ${({ theme }) => theme.colors.inputGrey};
-      margin-right: 10px;
-      div {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-      }
+      height: 100%;
+      border-left: 4px solid ${({ theme }) => theme.colors.imageResizerContent};
+      background: ${({ theme }) => theme.colors.imageResizerBackground};
+
       canvas {
-        width: 190px;
-        border: 1px solid white;
+        width: 170px;
         padding: 3px;
+        border: 1px solid ${({ theme }) => theme.colors.imageResizerContent};
+      }
+
+      .header {
+        height: 25px;
+        margin: 15px 0 0 25px;
+        font-size: ${({ theme }) => theme.fontSize.ms};
+        color: ${({ theme }) => theme.colors.lightGrey};
+        font-weight: ${({ theme }) => theme.font.thin};
+        text-align: left;
+        font-style: italic;
       }
     }
+  }
+  .bottom {
+    display: flex;
+    border-top: 4px solid ${({ theme }) => theme.colors.imageResizerContent};
+    flex-direction: row-reverse;
+    align-items: center;
+    padding: 0 5px;
+    width: 100%;
+    height: 55px;
   }
 `;
 
@@ -178,7 +188,7 @@ class ImageResizer extends Component {
 
   render() {
     const { crop } = this.state;
-    const { imageSrc } = this.props;
+    const { imageSrc, click } = this.props;
     return (
       <StyledWrapper>
         <header>Kadrowanie zdjęcia</header>
@@ -198,6 +208,7 @@ class ImageResizer extends Component {
                   primary={crop.aspect === '1'}
                   data-ratio="1"
                   onClick={this.handleButtons}
+                  width="50px"
                 >
                   1:1
                 </PrimaryButton>
@@ -206,6 +217,7 @@ class ImageResizer extends Component {
                   primary={crop.aspect === '0.67'}
                   data-ratio="0.67"
                   onClick={this.handleButtons}
+                  width="50px"
                 >
                   2:3
                 </PrimaryButton>
@@ -214,6 +226,7 @@ class ImageResizer extends Component {
                   primary={crop.aspect === '0.75'}
                   data-ratio="0.75"
                   onClick={this.handleButtons}
+                  width="50px"
                 >
                   3:4
                 </PrimaryButton>
@@ -221,17 +234,18 @@ class ImageResizer extends Component {
             </div>
           </div>
           <div className="preview">
+            <div className="header">Podgląd</div>
             <canvas ref={this.imagePreviewOnCanvas} />
-            <div>
-              <PrimaryButton type="button" primary onClick={this.handleUploadImage}>
-                zapisz
-              </PrimaryButton>
-              <PrimaryButton type="button" onClick={this.props.click}>
-                anuluj
-              </PrimaryButton>
-            </div>
           </div>
         </section>
+        <div className="bottom">
+          <PrimaryButton type="button" onClick={click} width="90px">
+            anuluj
+          </PrimaryButton>
+          <PrimaryButton type="button" primary onClick={this.handleUploadImage}>
+            zapisz
+          </PrimaryButton>
+        </div>
       </StyledWrapper>
     );
   }
