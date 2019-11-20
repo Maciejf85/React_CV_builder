@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
   view: {
     minWidth: '800px',
     minHeight: '800px',
-    width: '98vw',
-    height: '80vh',
+    width: '100vw',
+    height: '95vh',
     border: 'none',
   },
 });
