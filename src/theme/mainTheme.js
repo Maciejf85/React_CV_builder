@@ -33,6 +33,8 @@ const theme = {
     alertColorHover: 'hsl(0,100%,32%)',
     successColor: 'hsl(99,78%,60%)',
     successColorHover: 'hsl(106,100%,34%)',
+    imageResizerBackground: 'hsl(0,0%,16%)',
+    imageResizerContent: 'hsl(0,0%,10%)',
   },
   media: {
     tablet: '@media (min-width: 728px)',
