@@ -21,7 +21,6 @@ const GlobalStyle = createGlobalStyle`
         font-size:1.6rem;
         font-family: "Montserrat", sans-serif;
         background: hsl(0, 0%, 96%);
-        /* background: #525659; */
         height:100vh;
         overflow-x:hidden;
     }

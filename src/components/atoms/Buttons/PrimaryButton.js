@@ -4,7 +4,7 @@ const PrimaryButton = styled.button`
 display:inline-flex;
 justify-content:center;
 align-items:center;
-  min-width: 120px;
+  min-width: ${({ width }) => width || '120px'};
   height: 28px;
   background: ${({ theme, titleButton }) =>
     titleButton ? 'transparent' : theme.colors.secondaryGrey};
