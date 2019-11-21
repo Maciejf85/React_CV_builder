@@ -18,11 +18,11 @@ const StyledWrapper = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    min-width: 80px;
+    padding: 0 15px;
+    min-width: 100px;
     height: 100%;
-    color: white;
-    border: 1px solid ${({ theme }) => theme.colors.darkGrey};
+    color: ${({ theme }) => theme.colors.buttonActive};
+    border: 1px solid ${({ theme }) => theme.colors.primaryBlue};
     margin: 0 10px;
     border-radius: 5px;
     font-size: ${({ theme }) => theme.fontSize.ms};
@@ -30,10 +30,12 @@ const StyledWrapper = styled.ul`
     font-weight: ${({ theme }) => theme.font.thin};
     outline: none;
     background: inherit;
-    transition: 0.5s;
+    transition: 0.3s;
 
     &:hover {
-      background: ${({ theme }) => theme.colors.primaryBlue};
+      background: ${({ theme }) => theme.colors.primaryGrey};
+      color: ${({ theme }) => theme.colors.primaryBlue};
+        font-weight: ${({ theme }) => theme.font.bold};
       cursor: pointer;
     }
     }
@@ -48,8 +50,9 @@ const StyledWrapper = styled.ul`
   
   
   .active{
-        font-weight: ${({ theme }) => theme.font.bold};
-    background: ${({ theme }) => theme.colors.buttonActive};
+        /* background:rgba(0, 153, 255,0.35); */
+        color:white;
+    background: ${({ theme }) => theme.colors.imageResizerBackground};
     }
   .disable{
    opacity:0.3;
