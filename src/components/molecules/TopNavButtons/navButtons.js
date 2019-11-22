@@ -21,8 +21,8 @@ const StyledWrapper = styled.ul`
     padding: 0 15px;
     min-width: 100px;
     height: 100%;
-    color: ${({ theme }) => theme.colors.buttonActive};
-    border: 1px solid ${({ theme }) => theme.colors.primaryBlue};
+    color: ${({ theme }) => theme.colors.lightGrey};
+    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     margin: 0 10px;
     border-radius: 5px;
     font-size: ${({ theme }) => theme.fontSize.ms};
@@ -35,7 +35,6 @@ const StyledWrapper = styled.ul`
     &:hover {
       background: ${({ theme }) => theme.colors.primaryGrey};
       color: ${({ theme }) => theme.colors.primaryBlue};
-        font-weight: ${({ theme }) => theme.font.bold};
       cursor: pointer;
     }
     }
@@ -50,9 +49,8 @@ const StyledWrapper = styled.ul`
   
   
   .active{
-        /* background:rgba(0, 153, 255,0.35); */
         color:white;
-    background: ${({ theme }) => theme.colors.imageResizerBackground};
+    border: 2px solid ${({ theme }) => theme.colors.primaryBlue};
     }
   .disable{
    opacity:0.3;
