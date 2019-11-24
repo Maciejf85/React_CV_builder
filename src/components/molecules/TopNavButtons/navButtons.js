@@ -12,7 +12,6 @@ const StyledWrapper = styled.ul`
   justify-content: start;
   /* border: 1px solid white; */
   padding: 0;
-
   a {
     display: flex;
     justify-content: center;
@@ -57,9 +56,8 @@ const StyledWrapper = styled.ul`
 `;
 
 const NavButtons = () => {
-  const logedIn = useSelector(({ appState }) => ({ logedIn: appState.logedIn }));
-  console.log('logedIn', logedIn);
-
+  const logedIn = useSelector(({ currentCv }) => currentCv);
+  const containsCv = logedIn ? Object.entries(logedIn).length : undefined;
   return (
     <StyledWrapper>
       <li>
@@ -68,16 +66,12 @@ const NavButtons = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink
-          activeClassName="active"
-          className={logedIn === false ? 'disable' : ''}
-          to={path.edit}
-        >
+        <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.edit}>
           Edytor
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="active" className={!logedIn ? '' : 'disable'} to={path.preview}>
+        <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.preview}>
           Podgląd
         </NavLink>
       </li>

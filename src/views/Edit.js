@@ -38,8 +38,8 @@ class Edit extends Component {
   }
 }
 
-const MapStateToProps = state => ({
-  appState: state.appState,
-  isSet: state.currentCv.currentItem,
+const MapStateToProps = ({ appState, currentCv }) => ({
+  appState,
+  isSet: currentCv.currentItem,
 });
 export default connect(MapStateToProps)(Edit);
