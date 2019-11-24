@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 const StyledWrapper = styled.div`
   display: flex;
-  width: 1024px;
+  width: 1200px;
   min-width: 55vw;
   height: 600px;
   min-height: 50vh;

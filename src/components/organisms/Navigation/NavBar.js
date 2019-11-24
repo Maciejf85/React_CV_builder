@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 const StyledWrapper = styled.nav`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 0 10px;
   width: 100%;
   height: 50px;
@@ -19,7 +19,8 @@ const StyledWrapper = styled.nav`
     font-size: ${({ theme }) => theme.fontSize.xl};
     font-weight: ${({ theme }) => theme.font.bold};
     text-align: center;
-    min-width: 150px;
+    flex-basis: ${({ editor }) => (editor ? '260px' : '150px')};
+    flex-shrink: 0;
     span {
       color: ${({ theme }) => theme.colors.primaryBlue};
     }
@@ -35,15 +36,15 @@ const StyledWrapper = styled.nav`
 `;
 
 const NavBar = ({ location }) => {
-  console.log((location.pathname === '/edit' || false).toString());
+  const editor = location.pathname === '/edit' || false;
   return (
-    <StyledWrapper editor={location.pathname === '/edit' || false}>
+    <StyledWrapper editor={editor}>
       {/* {props.logo && <Logo />} */}
       {/* <Logo /> */}
       <p className="logo">
         <span>CV</span>-builder
       </p>
-      <NavButtons />
+      <NavButtons editor={editor} />
       <LoggedIn />
     </StyledWrapper>
   );

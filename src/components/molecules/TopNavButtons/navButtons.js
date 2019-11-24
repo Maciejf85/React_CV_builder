@@ -9,7 +9,7 @@ const StyledWrapper = styled.ul`
   height: 40px;
   list-style: none;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   /* border: 1px solid white; */
   padding: 0;
   a {
