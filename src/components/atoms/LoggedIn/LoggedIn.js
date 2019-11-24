@@ -9,8 +9,9 @@ import { connect } from 'react-redux';
 
 const StyledWrapper = styled.div`
   position: relative;
+  flex-shrink: 0;
   display: grid;
-  grid-template-columns: 7fr 3fr;
+  grid-template-columns: 7fr 1fr;
   justify-items: center;
   align-items: center;
   grid-gap: 5px;

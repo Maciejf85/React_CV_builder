@@ -90,7 +90,6 @@ class UserData extends Component {
       } = this.props.personalData;
 
       if (prevProps.personalData.name !== name) {
-        console.log('component did update');
         // eslint-disable-next-line react/no-did-update-set-state
         this.setState({
           currentName: name,

@@ -156,10 +156,11 @@ export const updateCVList = (type, token, cvId = null, redir, cvTitle = null) =>
       const { cvList, currentCv } = data;
       const list = cvList ? JSON.parse(cvList) : null;
       const currentItem = currentCv ? JSON.parse(currentCv) : null;
-
+      console.log('login');
       return (
         dispatch({ type: 'SAVE_CV_LIST', payload: list }),
         dispatch({ type: 'SAVE_CURRENT_CV', payload: currentItem }),
+        dispatch({ type: 'LOG_IN' }),
         type === 'add' ? redir.push(path.edit) : null
       );
     })

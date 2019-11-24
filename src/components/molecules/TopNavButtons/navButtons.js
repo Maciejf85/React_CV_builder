@@ -6,23 +6,21 @@ import path from '../../../path';
 
 const StyledWrapper = styled.ul`
   width: 100%;
-  height:40px;
+  height: 40px;
   list-style: none;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   /* border: 1px solid white; */
   padding: 0;
-
-
   a {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    min-width: 80px;
+    padding: 0 15px;
+    min-width: 100px;
     height: 100%;
-    color: white;
-    border: 1px solid ${({ theme }) => theme.colors.darkGrey};
+    color: ${({ theme }) => theme.colors.lightGrey};
+    border: 1px solid ${({ theme }) => theme.colors.buttonCaption};
     margin: 0 10px;
     border-radius: 5px;
     font-size: ${({ theme }) => theme.fontSize.ms};
@@ -30,43 +28,36 @@ const StyledWrapper = styled.ul`
     font-weight: ${({ theme }) => theme.font.thin};
     outline: none;
     background: inherit;
-    transition: 0.5s;
+    transition: 0.3s;
 
-    &:hover {
-      background: ${({ theme }) => theme.colors.primaryBlue};
+    &:hover :not(.active) {
+      background: ${({ theme }) => theme.colors.primaryGrey};
+      color: ${({ theme }) => theme.colors.primaryBlue};
       cursor: pointer;
     }
-    }
+  }
 
-/* {media query} 
-    ${({ theme }) => theme.media.tabet} {
+  .active {
+    color: white;
+    border: none;
+    font-weight: ${({ theme }) => theme.font.bold};
+    background: ${({ theme }) => theme.colors.primaryBlue};
+  }
+  .disable {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
 
-      background:red;
-
+    &:hover {
+      cursor: default;
+      background: inherit;
     }
-    */
-  
-  
-  .active{
-        font-weight: ${({ theme }) => theme.font.bold};
-    background: ${({ theme }) => theme.colors.buttonActive};
-    }
-  .disable{
-   opacity:0.3;
-  cursor:default;
-  pointer-events:none;
-  
-      &:hover{
-        cursor:default;      
-           background: inherit;
-      }
   }
 `;
 
 const NavButtons = () => {
-  const logedIn = useSelector(({ currentCv }) => ({ currentCv }));
-  const objectCount = Object.entries(Object.entries(logedIn)[0][1]).length;
-
+  const logedIn = useSelector(({ currentCv }) => currentCv);
+  const containsCv = logedIn ? Object.entries(logedIn).length : undefined;
   return (
     <StyledWrapper>
       <li>
@@ -75,16 +66,12 @@ const NavButtons = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="active" className={!objectCount ? 'disable' : ''} to={path.edit}>
+        <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.edit}>
           Edytor
         </NavLink>
       </li>
       <li>
-        <NavLink
-          activeClassName="active"
-          className={!objectCount ? 'disable' : ''}
-          to={path.preview}
-        >
+        <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.preview}>
           Podgląd
         </NavLink>
       </li>

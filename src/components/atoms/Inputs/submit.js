@@ -7,7 +7,7 @@ const StyledButton = styled.button`
   height: ${({ small }) => (small ? '25px' : '35px')};
   width: ${({ small }) => (small ? '150px' : '260px')};
   border-radius: 7px;
-  margin: 25px 15px;
+  margin: 25px auto;
   color: white;
   outline: none;
   border: none;
