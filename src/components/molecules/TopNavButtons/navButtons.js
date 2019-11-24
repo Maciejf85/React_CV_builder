@@ -6,13 +6,12 @@ import path from '../../../path';
 
 const StyledWrapper = styled.ul`
   width: 100%;
-  height:40px;
+  height: 40px;
   list-style: none;
   display: flex;
   justify-content: start;
   /* border: 1px solid white; */
   padding: 0;
-
 
   a {
     display: flex;
@@ -22,7 +21,7 @@ const StyledWrapper = styled.ul`
     min-width: 100px;
     height: 100%;
     color: ${({ theme }) => theme.colors.lightGrey};
-    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+    border: 1px solid ${({ theme }) => theme.colors.buttonCaption};
     margin: 0 10px;
     border-radius: 5px;
     font-size: ${({ theme }) => theme.fontSize.ms};
@@ -32,41 +31,35 @@ const StyledWrapper = styled.ul`
     background: inherit;
     transition: 0.3s;
 
-    &:hover {
+    &:hover :not(.active) {
       background: ${({ theme }) => theme.colors.primaryGrey};
       color: ${({ theme }) => theme.colors.primaryBlue};
       cursor: pointer;
     }
-    }
+  }
 
-/* {media query} 
-    ${({ theme }) => theme.media.tabet} {
+  .active {
+    color: white;
+    border: none;
+    font-weight: ${({ theme }) => theme.font.bold};
+    background: ${({ theme }) => theme.colors.primaryBlue};
+  }
+  .disable {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
 
-      background:red;
-
+    &:hover {
+      cursor: default;
+      background: inherit;
     }
-    */
-  
-  
-  .active{
-        color:white;
-    border: 2px solid ${({ theme }) => theme.colors.primaryBlue};
-    }
-  .disable{
-   opacity:0.3;
-  cursor:default;
-  pointer-events:none;
-  
-      &:hover{
-        cursor:default;      
-           background: inherit;
-      }
   }
 `;
 
 const NavButtons = () => {
   const logedIn = useSelector(({ currentCv }) => ({ currentCv }));
   const objectCount = Object.entries(Object.entries(logedIn)[0][1]).length;
+  console.log('objectCount', objectCount);
 
   return (
     <StyledWrapper>
@@ -76,14 +69,18 @@ const NavButtons = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="active" className={!objectCount ? 'disable' : ''} to={path.edit}>
+        <NavLink
+          activeClassName="active"
+          className={objectCount !== undefined ? 'disable' : ''}
+          to={path.edit}
+        >
           Edytor
         </NavLink>
       </li>
       <li>
         <NavLink
           activeClassName="active"
-          className={!objectCount ? 'disable' : ''}
+          className={objectCount !== undefined ? 'disable' : ''}
           to={path.preview}
         >
           Podgląd

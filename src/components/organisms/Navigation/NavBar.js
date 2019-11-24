@@ -37,6 +37,11 @@ const NavBar = () => (
   </StyledWrapper>
 );
 
+/* tablet */
+// @media ${ ({ theme }) => theme.media.tablet } {
+//   width: 150px;
+// }
+
 // NavBar.propTypes = {
 //   logo: PropTypes.bool,
 // };

@@ -114,7 +114,6 @@ class ImageResizer extends Component {
     const canvasRef = this.imagePreviewOnCanvas.current;
     const { imageSrc } = this.props;
     image64toCanvasRef(canvasRef, imageSrc, crop);
-    console.log('canvasRef', canvasRef);
   };
 
   handleButtons = e => {

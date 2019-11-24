@@ -9,9 +9,9 @@ const StyledWrapper = styled.button`
   height: 40px;
   border: none;
   outline: none;
-  border: 2px dashed ${({ theme }) => theme.colors.inputGrey};
+  border: 2px dashed ${({ theme }) => theme.colors.lightBlue};
   color: ${({ theme }) => theme.colors.inputGrey};
-  font-weight: ${({ theme }) => theme.font.xbold};
+  font-weight: ${({ theme }) => theme.font.thin};
   letter-spacing: 3px;
   background: white;
   transition: all 0.3s;
@@ -21,7 +21,8 @@ const StyledWrapper = styled.button`
     cursor: pointer;
   }
   span {
-    margin: 0 10px;
+    color: ${({ theme }) => theme.colors.lightBlue};
+    margin: 0 5px;
   }
 `;
 

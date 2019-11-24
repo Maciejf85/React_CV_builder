@@ -53,7 +53,7 @@ const StyledWrapper = styled.div`
     }
     span {
       line-height: 15px;
-      margin-left: 15px;
+      /* margin-left: 15px; */
       width: 100%;
       font-style: italic;
       text-transform: lowercase;
@@ -139,7 +139,7 @@ class SectionBody extends Component {
         <StyledWrapper>
           <div className="header">
             <h1>{profession}</h1>
-            <span>{`( utworzone ${reverseDate(created)} )`}</span>
+            <span>{` utworzone ${reverseDate(created)} `}</span>
           </div>
           <ul>
             <li>

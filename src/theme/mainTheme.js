@@ -29,6 +29,7 @@ const theme = {
     primaryBlue: 'hsl(204, 100%, 50%)',
     secondaryBlue: 'hsl(204, 100%, 40%)',
     lightBlue: 'hsl(204, 100%, 58%)',
+    darkBlue: 'hsl(204, 100%, 30%)',
     alertColor: 'hsl(0,100%,42%)',
     alertColorHover: 'hsl(0,100%,32%)',
     successColor: 'hsl(99,78%,60%)',
@@ -37,8 +38,8 @@ const theme = {
     imageResizerContent: 'hsl(0,0%,10%)',
   },
   media: {
-    tablet: '@media (min-width: 728px)',
-    desktop: '@media (min-width: 1024px)',
+    tablet: '(max-width: 1199px)',
+    desktop: '(min-width: 1200px)',
   },
 };
 export default theme;
