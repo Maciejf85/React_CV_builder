@@ -57,9 +57,8 @@ const StyledWrapper = styled.ul`
 `;
 
 const NavButtons = () => {
-  const logedIn = useSelector(({ currentCv }) => ({ currentCv }));
-  const objectCount = Object.entries(Object.entries(logedIn)[0][1]).length;
-  console.log('objectCount', objectCount);
+  const logedIn = useSelector(({ appState }) => ({ logedIn: appState.logedIn }));
+  console.log('logedIn', logedIn);
 
   return (
     <StyledWrapper>
@@ -71,18 +70,14 @@ const NavButtons = () => {
       <li>
         <NavLink
           activeClassName="active"
-          className={objectCount !== undefined ? 'disable' : ''}
+          className={logedIn === false ? 'disable' : ''}
           to={path.edit}
         >
           Edytor
         </NavLink>
       </li>
       <li>
-        <NavLink
-          activeClassName="active"
-          className={objectCount !== undefined ? 'disable' : ''}
-          to={path.preview}
-        >
+        <NavLink activeClassName="active" className={!logedIn ? '' : 'disable'} to={path.preview}>
           Podgląd
         </NavLink>
       </li>

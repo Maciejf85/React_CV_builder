@@ -196,7 +196,6 @@ class ImageResizer extends Component {
   render() {
     const { crop } = this.state;
     const { imageSrc, imageSize } = this.props;
-    console.log('crop.aspect', crop.aspect);
 
     return (
       <StyledWrapper>
