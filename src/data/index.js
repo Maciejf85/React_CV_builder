@@ -10,7 +10,7 @@ export const editViews = [
   { name: 'Konferencje', link: 'conferences', icon: 'graduation-cap' },
   { name: 'Licencje', link: 'licenses', icon: 'graduation-cap' },
   { name: 'Zainteresowania', link: 'interests', icon: 'graduation-cap' },
-  { name: 'Klauzula poufności', link: 'confidential', icon: 'apple-alt' },
+  // { name: 'Klauzula poufności', link: 'confidential', icon: 'apple-alt' },
 ];
 
 export const mainViews = [

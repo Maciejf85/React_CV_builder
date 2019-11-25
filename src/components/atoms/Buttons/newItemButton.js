@@ -9,28 +9,36 @@ const StyledWrapper = styled.button`
   height: 40px;
   border: none;
   outline: none;
-  border: 2px dashed ${({ theme }) => theme.colors.lightBlue};
+  border: 2px dashed ${({ theme }) => theme.colors.inputGrey};
   color: ${({ theme }) => theme.colors.inputGrey};
-  font-weight: ${({ theme }) => theme.font.thin};
-  letter-spacing: 3px;
+  font-weight: ${({ theme }) => theme.font.normal};
+  letter-spacing: 2px;
   background: white;
   transition: all 0.3s;
 
-  &:hover {
+  /* &:hover {
     color: ${({ theme }) => theme.colors.buttonCaption};
     cursor: pointer;
-  }
-  span {
-    color: ${({ theme }) => theme.colors.lightBlue};
+  } */
+  div {
+  transition: all 0.3s;
+    color: ${({ theme }) => theme.colors.inputGrey};
     margin: 0 5px;
+    &:hover {
+    color: ${({ theme }) => theme.colors.buttonCaption};
+    font-weight: ${({ theme }) => theme.font.bold};
+    cursor:pointer;
+    }
   }
 `;
 
 const NewItemButton = ({ view, handleClick }) => {
   return (
     <StyledWrapper onClick={handleClick}>
-      <FontAwesomeIcon icon={faPlus} />
-      <span>{` dodaj ${getNewItemName(view)}`}</span>
+      <div>
+        <FontAwesomeIcon icon={faPlus} />
+        <span>{` dodaj ${getNewItemName(view)}`}</span>
+      </div>
     </StyledWrapper>
   );
 };
