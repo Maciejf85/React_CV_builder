@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import OptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import PrimaryButton from 'components/atoms/Buttons/PrimaryButton';
+import ButtonHolder from 'components/atoms/ButtonHolder';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -63,30 +64,32 @@ const defaultPanel = props => {
               <StripBody key={date} id={id} title={title} date={date} />
             ))
           ) : (
-              <div className="empty">
-                <OptionButton
-                  onClick={props.newCv}
-                  primary={name === 'Moje CV'}
-                  disabled={name === 'Moje listy motywacyjne'}
-                >
-                  {`${caption}`}
-                </OptionButton>
-              </div>
-            )}
+            <div className="empty">
+              <OptionButton
+                onClick={props.newCv}
+                primary={name === 'Moje CV'}
+                disabled={name === 'Moje listy motywacyjne'}
+              >
+                {`${caption}`}
+              </OptionButton>
+            </div>
+          )}
         </section>
       </StyledWrapper>
-      {content.length ? (
-        <PrimaryButton dafault onClick={props.newCv} disabled={disabled}>
-          {disabled && (
-            <FontAwesomeIcon
-              icon={faSyncAlt}
-              spin
-              style={{ margin: '0 5px', color: 'hsl(99,78%,60%)' }}
-            />
-          )}
-          {`${caption}`}
-        </PrimaryButton>
-      ) : null}
+      <ButtonHolder>
+        {content.length ? (
+          <PrimaryButton dafault onClick={props.newCv} disabled={disabled}>
+            {disabled && (
+              <FontAwesomeIcon
+                icon={faSyncAlt}
+                spin
+                style={{ margin: '0 5px', color: 'hsl(99,78%,60%)' }}
+              />
+            )}
+            {`${caption}`}
+          </PrimaryButton>
+        ) : null}
+      </ButtonHolder>
     </>
   );
 };
