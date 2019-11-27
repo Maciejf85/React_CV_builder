@@ -189,16 +189,17 @@ class UserData extends Component {
 
   // HANDLE FORM
 
-  handleForm = e => {
+  handleForm = (e, test = true) => {
     const { statusActive } = this.state;
     if (e.target.id !== 'currentTitle') {
       this.setState({
         [e.target.id]: e.target.value,
-        statusActive: true,
       });
-
-      if (!statusActive) {
+      if (!statusActive && test) {
         this.handleTimer();
+        this.setState({
+          statusActive: true,
+        });
       }
     } else {
       this.setState({
@@ -207,7 +208,7 @@ class UserData extends Component {
     }
   };
 
-  handleValidation = e => {
+  handleDateValidation = e => {
     const { value } = e.target;
     const reg = /[0-9]{4}-[0-9]{2}-[0-9]{2}/g;
     const test = value !== '' ? reg.test(value) : true;
@@ -216,7 +217,7 @@ class UserData extends Component {
     test ? this.setState({ birthdayValid: false }) : this.setState({ birthdayValid: true });
 
     if (value.length <= 10) {
-      this.handleForm(e);
+      this.handleForm(e, test);
     }
   };
 
@@ -385,7 +386,7 @@ class UserData extends Component {
               id="currentBirthday"
               placeholder="data ur."
               value={currentBirthday}
-              onChange={this.handleValidation}
+              onChange={this.handleDateValidation}
               onBlur={this.handleStoreUpdate}
               error={birthdayValid}
               tip="format daty xxxx-xx-xx"
