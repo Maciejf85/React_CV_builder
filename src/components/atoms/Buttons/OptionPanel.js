@@ -135,7 +135,7 @@ class OptionPanel extends Component {
               </ConfirmButton>
             </li>
             <li>
-              <ConfirmButton cancel onClick={this.handleButtons}>
+              <ConfirmButton cancel onClick={this.handleButtons} disabled={isRemove && true}>
                 anuluj
               </ConfirmButton>
             </li>
