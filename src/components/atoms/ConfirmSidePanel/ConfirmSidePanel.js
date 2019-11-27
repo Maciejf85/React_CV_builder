@@ -10,7 +10,7 @@ const PosedPanel = posed.div({
 });
 
 const StyledWrapper = styled(PosedPanel)`
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 100px;
   display: grid;
@@ -40,26 +40,26 @@ const StyledWrapper = styled(PosedPanel)`
     width: 50px;
     height: 100%;
     background: ${({ error, theme }) =>
-    !error ? theme.colors.successColor : theme.colors.alertColor};
+      !error ? theme.colors.successColor : theme.colors.alertColor};
   }
-  #circle{
-    stroke-dashoffset:1000;
-    stroke-dasharray:1000;
-    animation-name: active;
-    animation-duration:6s;
-    animation-fill-mode:forwards;
-  }
-  #Union_1{
+  #circle {
+    stroke-dashoffset: 1000;
     stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: active 5s ease-in forwards;
-  animation-delay:0.3s;
+    animation-name: active;
+    animation-duration: 6s;
+    animation-fill-mode: forwards;
+  }
+  #Union_1 {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: active 5s ease-in forwards;
+    animation-delay: 0.3s;
   }
 
   @keyframes active {
-   to {
-     stroke-dashoffset:0;
-   } 
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 `;
 
@@ -68,15 +68,32 @@ const ConfirmSidePanel = ({ pose }) => {
   return (
     <StyledWrapper pose={pose} error={error}>
       <div className="leftSide">
-        {inProgress && <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48 ">
-          <g id="Group_1" data-name="Group 1" transform="translate(0 0)">
-            <g id="circle" data-name="Ellipse 1" transform="translate(2 2)" stroke="white" strokeWidth="4">
-              <circle cx="23" cy="23" r="18" fill="none" />
+        {inProgress && (
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48 ">
+            <g id="Group_1" data-name="Group 1" transform="translate(0 0)">
+              <g
+                id="circle"
+                data-name="Ellipse 1"
+                transform="translate(2 2)"
+                stroke="white"
+                strokeWidth="4"
+              >
+                <circle cx="23" cy="23" r="18" fill="none" />
+              </g>
+              <polyline
+                id="Union_1"
+                data-name="Union 1"
+                points="0,0 9,8 9,8 20,-8"
+                transform="translate(15 26)"
+                fill="none"
+                stroke="white"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="3.5"
+              />
             </g>
-            <polyline id="Union_1" data-name="Union 1" points="0,0 9,8 9,8 20,-8" transform="translate(15 26)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3.5" />
-          </g>
-        </svg>}
-
+          </svg>
+        )}
       </div>
       <div>
         <p>{content}</p>

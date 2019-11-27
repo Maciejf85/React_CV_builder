@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Textarea } from 'components/atoms/Inputs';
 import { newConfidentialText } from 'actions';
 import { sidePanel } from 'functions';
+import ButtonHolder from 'components/atoms/ButtonHolder';
 import store from 'store';
 import axios from 'axios';
 import path from '../../../path';
@@ -124,26 +125,28 @@ class Panel extends Component {
             )}
           </section>
         </StyledWrapper>
-        {editValue && (
-          <PrimaryButton
-            type="button"
-            id="save"
-            primary
-            disabled={disabled}
-            onClick={this.updateConfidential}
-          >
-            zapisz
+        <ButtonHolder>
+          {editValue && (
+            <PrimaryButton
+              type="button"
+              id="save"
+              primary
+              disabled={disabled}
+              onClick={this.updateConfidential}
+            >
+              zapisz
+            </PrimaryButton>
+          )}
+          <PrimaryButton normal type="button" onClick={this.handleEditMode}>
+            {editValue ? 'anuluj' : 'edytuj'}
           </PrimaryButton>
-        )}
-        <PrimaryButton default type="button" onClick={this.handleEditMode}>
-          {editValue ? 'anuluj' : 'edytuj'}
-        </PrimaryButton>
 
-        {!editValue && (
-          <PrimaryButton default type="button" id="default" onClick={this.updateConfidential}>
-            przywróć domyślne
-          </PrimaryButton>
-        )}
+          {!editValue && (
+            <PrimaryButton normal type="button" id="default" onClick={this.updateConfidential}>
+              przywróć domyślne
+            </PrimaryButton>
+          )}
+        </ButtonHolder>
       </>
     );
   }

@@ -53,15 +53,15 @@ ${({ secondary }) =>
   `}
     
 
-${({ dafault }) =>
-  dafault &&
+${({ normal }) =>
+  normal &&
   css`
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin: 0 20px;
-    float: right;
-    clear: both;
+    margin: none;
+    margin-left: 5px;
+    padding: 0 10px;
     font-size: 1.15rem;
   `}
 `;
