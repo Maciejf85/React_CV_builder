@@ -16,6 +16,7 @@ const StyledWrapper = styled.div`
   padding: 10px 0;
   display: flex;
   align-items: center;
+  margin-top: -50px;
 `;
 const MainWrapper = styled.div`
   margin-top: -50px;
