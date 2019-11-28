@@ -4,6 +4,7 @@ import LoggedIn from 'components/atoms/LoggedIn/LoggedIn';
 import NavButtons from 'components/molecules/TopNavButtons/navButtons';
 import styled, { css } from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import path from '../../../path';
 // import PropTypes from 'prop-types';
 
 const StyledWrapper = styled.nav`
@@ -36,7 +37,7 @@ const StyledWrapper = styled.nav`
 `;
 
 const NavBar = ({ location }) => {
-  const editor = location.pathname === '/edit' || false;
+  const editor = location.pathname === `${path.login}edit` || false;
   return (
     <StyledWrapper editor={editor}>
       {/* {props.logo && <Logo />} */}

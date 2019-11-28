@@ -9,5 +9,6 @@
 | 7. ImageResizer jako hoc
 | 8. RWD
 | 9. Zablokowanie przynisku anuluj podczas usuwania obecnego CV - >>>>>>> GOTOWE <<<<<<<
+| 10. Poprawić komunikaty zwrotne z serwera.
 |--------------------------------------------------
 */
