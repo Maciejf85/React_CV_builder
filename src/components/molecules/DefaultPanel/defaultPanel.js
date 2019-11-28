@@ -78,7 +78,7 @@ const defaultPanel = props => {
       </StyledWrapper>
       <ButtonHolder>
         {content.length ? (
-          <PrimaryButton dafault onClick={props.newCv} disabled={disabled}>
+          <PrimaryButton dafault onClick={props.newCv} disabled={disabled} normal>
             {disabled && (
               <FontAwesomeIcon
                 icon={faSyncAlt}
