@@ -1,7 +1,7 @@
 /**
 |--------------------------------------------------
 | 1. Refaktoryzacja UserData
-| 2. Dodanie komponentów   certyfikaty / kursy / publikacje / licencje
+| 2. Dodanie komponentów   certyfikaty / kursy / publikacje / licencje >>>>>>> GOTOWE <<<<<<<
 | 3. Zablokowanie wysyłanie przy błędnej dacie urodzenia w UserData >>>>>>> GOTOWE <<<<<<<
 | 4. Stworzenie 3 szablonów w strona główna -> szablony 
 | 5. Pobierz PDF w Strona główna -> Moje CV
