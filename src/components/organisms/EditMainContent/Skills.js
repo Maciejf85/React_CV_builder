@@ -53,10 +53,10 @@ class Languages extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  currentCv: state.currentCv,
-  cvId: state.currentCv.currentItem.id,
-  current: state.editComponentView,
+const mapStateToProps = ({ currentCv, editComponentView }) => ({
+  currentCv,
+  cvId: currentCv.currentItem.id,
+  current: editComponentView,
 });
 
 export default connect(mapStateToProps)(Languages);

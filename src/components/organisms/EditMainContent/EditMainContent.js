@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import Confidential from 'components/organisms/EditMainContent/Confidential';
 import Education from 'components/organisms/EditMainContent/Education';
 import Experience from 'components/organisms/EditMainContent/Experience';
 import Interests from 'components/organisms/EditMainContent/Interests';
 import Skills from 'components/organisms/EditMainContent/Skills';
 import UserData from 'components/organisms/EditMainContent/UserData';
 import Languages from 'components/organisms/EditMainContent/Languages';
+import Certificates from 'components/organisms/EditMainContent/Certificates';
+import Courses from 'components/organisms/EditMainContent/Courses';
+import Conferences from 'components/organisms/EditMainContent/Conferences';
+import Publications from 'components/organisms/EditMainContent/Publications';
+import Licenses from 'components/organisms/EditMainContent/Licenses';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -21,8 +25,8 @@ const StyledWrapper = styled.div`
 `;
 
 class EditMainContent extends Component {
-  componentDidMount() {
-    console.log('EditMainContent did mount');
+  componentDidUpdate() {
+    console.log('EditMainPage did update');
   }
 
   render() {
@@ -35,11 +39,15 @@ class EditMainContent extends Component {
         {currentView === 'languages' && <Languages />}
         {currentView === 'skills' && <Skills />}
         {currentView === 'interests' && <Interests />}
-        {currentView === 'confidential' && <Confidential />}
+        {currentView === 'conferences' && <Conferences />}
+        {currentView === 'courses' && <Courses />}
+        {currentView === 'publications' && <Publications />}
+        {currentView === 'licenses' && <Licenses />}
+        {currentView === 'certificates' && <Certificates />}
       </StyledWrapper>
     );
   }
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = ({ editComponentView }) => ({ editComponentView });
 export default connect(mapStateToProps)(EditMainContent);

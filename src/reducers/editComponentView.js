@@ -1,36 +1,64 @@
+const personal = 'personal';
+const education = 'education';
+const experience = 'experience';
+const languages = 'languages';
+const skills = 'skills';
+const certificates = 'certificates';
+const courses = 'courses';
+const publications = 'publications';
+const conferences = 'conferences';
+const licenses = 'licenses';
+const interests = 'interests';
+
 const initialState = {
   currentView: 'personal',
 };
 
 const path = (state = initialState, { type }) => {
   switch (type) {
-    case 'personal':
+    case personal:
       return {
         currentView: 'personal',
       };
-    case 'education':
+    case education:
       return {
         currentView: 'education',
       };
-    case 'experience':
+    case experience:
       return {
         currentView: 'experience',
       };
-    case 'languages':
+    case languages:
       return {
         currentView: 'languages',
       };
-    case 'skills':
+    case skills:
       return {
         currentView: 'skills',
       };
-    case 'interests':
+    case certificates:
+      return {
+        currentView: 'certificates',
+      };
+    case courses:
+      return {
+        currentView: 'courses',
+      };
+    case publications:
+      return {
+        currentView: 'publications',
+      };
+    case conferences:
+      return {
+        currentView: 'conferences',
+      };
+    case licenses:
+      return {
+        currentView: 'licenses',
+      };
+    case interests:
       return {
         currentView: 'interests',
-      };
-    case 'confidential':
-      return {
-        currentView: 'confidential',
       };
 
     default:

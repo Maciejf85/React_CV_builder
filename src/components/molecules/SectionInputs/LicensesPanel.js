@@ -1,34 +1,31 @@
 import React, { Component } from 'react';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
+import Select from 'components/atoms/Inputs/Select';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
-import store from 'store';
-import styled from 'styled-components';
 
+import store from 'store';
 // import PropTypes from 'prop-types';
 
-const StyledWrapper = styled.div`
-  width: 100%;
-  display: flex;
-`;
-
-export default class LanguagePanel extends Component {
+class ConferencesPanel extends Component {
   state = {
     id: '',
-    name: '',
     description: '',
+    endYear: 0,
+    endMonth: 0,
     statusActive: false,
   };
 
   componentDidMount() {
     this.mounted = true;
-    const { id, name, description } = this.props.item;
+    const { id, description, endYear, endMonth } = this.props.item;
 
     this.setState({
       id,
-      name,
       description,
+      endYear,
+      endMonth,
     });
   }
 
@@ -65,7 +62,7 @@ export default class LanguagePanel extends Component {
             statusActive: false,
           });
         }
-      }, 3000);
+      }, 500);
     }
   };
 
@@ -78,8 +75,9 @@ export default class LanguagePanel extends Component {
   render() {
     const { id } = this.props.item;
     const { index, current, newItem } = this.props;
-    const { name, description } = this.state;
-
+    const { description, endYear, endMonth } = this.state;
+    const startY = new Date().getFullYear() - 65;
+    const endY = new Date().getFullYear();
     return (
       <StyledInputSection id={id}>
         <InputHeader
@@ -88,16 +86,24 @@ export default class LanguagePanel extends Component {
           newItem={newItem}
           removeItem={this.handleRemoveItem}
         />
-        <StyledWrapper>
-          <Input placeholder="język" id="name" value={name} onChange={this.handleForm} />
+        <div className="inputContainer">
           <Input
-            isSmall
-            placeholder="opis"
+            placeholder="Konferencje"
             id="description"
             value={description}
             onChange={this.handleForm}
           />
-        </StyledWrapper>
+
+          <Select
+            title="data wydarzenia"
+            id="endYear"
+            value={endYear}
+            onChange={this.handleForm}
+            start={startY}
+            end={endY}
+          />
+          <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
+        </div>
       </StyledInputSection>
     );
   }
@@ -124,5 +130,7 @@ export default class LanguagePanel extends Component {
 //   endMonth: 'Stranger',
 //   description: 'Stranger',
 // };
+
+export default ConferencesPanel;
 
 // @TODO: wyniesienie update store i update pliku do wyższych komponentów
