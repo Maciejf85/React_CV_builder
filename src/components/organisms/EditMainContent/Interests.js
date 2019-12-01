@@ -19,7 +19,7 @@ class Interest extends Component {
 
     store.dispatch(
       addNewItemToCurrentCv(currentView, {
-        name: '',
+        description: '',
       }),
     );
   };
