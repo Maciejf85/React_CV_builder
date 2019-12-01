@@ -164,10 +164,10 @@ export const getPanelName = name => {
 export const getNewItemName = currentView => {
   const array = [
     { education: 'nową szkołę' },
-    { interest: 'nową umiejętność' },
+    { interests: 'nowe zainteresowanie' },
     { languages: 'nowy język' },
     { skills: 'nową umiejętność' },
-    { experience: 'nowe doświadczenie zawodowe' },
+    { experience: 'doświadczenie zawodowe' },
     { certificates: 'nowy certyfikat' },
     { courses: 'nowy kurs' },
     { publications: 'nową publikację' },

@@ -95,7 +95,7 @@ class ConferencesPanel extends Component {
           />
 
           <Select
-            title="data wydarzenia"
+            title="data uzyskania"
             id="endYear"
             value={endYear}
             onChange={this.handleForm}
