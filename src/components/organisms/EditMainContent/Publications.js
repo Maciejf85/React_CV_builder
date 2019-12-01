@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import InterestsPanel from 'components/molecules/SectionInputs/InterestsPanel';
+import PublicationsPanel from 'components/molecules/SectionInputs/PublicationsPanel';
 import NewItemButton from 'components/atoms/Buttons/newItemButton';
 import store from 'store';
 import { connect } from 'react-redux';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
 
-class Interest extends Component {
+class Publications extends Component {
   componentDidUpdate() {
     const { cvId, currentCv } = this.props;
     const token = sessionStorage.getItem('userID');
@@ -19,22 +19,24 @@ class Interest extends Component {
 
     store.dispatch(
       addNewItemToCurrentCv(currentView, {
-        name: '',
+        description: '',
+        endYear: 2000,
+        endMonth: 1,
       }),
     );
   };
 
   render() {
     const { cvId, currentCv, current } = this.props;
-    const { interests } = currentCv;
+    const { publications } = currentCv;
     const { currentView } = current;
     return (
       <>
-        {interests.length ? (
-          interests.map((item, idx) => {
+        {publications.length ? (
+          publications.map((item, idx) => {
             const { id } = item;
             return (
-              <InterestsPanel
+              <PublicationsPanel
                 key={id}
                 index={idx}
                 item={item}
@@ -58,4 +60,4 @@ const mapStateToProps = ({ currentCv, editComponentView }) => ({
   current: editComponentView,
 });
 
-export default connect(mapStateToProps)(Interest);
+export default connect(mapStateToProps)(Publications);

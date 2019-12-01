@@ -139,6 +139,21 @@ export const getPanelName = name => {
     case 'experience': {
       return 'Doświadczenie';
     }
+    case 'certificates': {
+      return 'Certyfikat';
+    }
+    case 'courses': {
+      return 'Kurs';
+    }
+    case 'publications': {
+      return 'Publikację';
+    }
+    case 'conferences': {
+      return 'Konferencję';
+    }
+    case 'licenses': {
+      return 'Licencję';
+    }
 
     default: {
       return '';
@@ -152,7 +167,12 @@ export const getNewItemName = currentView => {
     { interest: 'nową umiejętność' },
     { languages: 'nowy język' },
     { skills: 'nową umiejętność' },
-    { skills: 'doświadczenie zawodowe' },
+    { experience: 'nowe doświadczenie zawodowe' },
+    { certificates: 'nowy certyfikat' },
+    { courses: 'nowy kurs' },
+    { publications: 'nową publikację' },
+    { conferences: 'nową konferencję' },
+    { licenses: 'nową licencję' },
   ];
 
   const index = array.find(item => String(Object.keys(item)) === currentView);
