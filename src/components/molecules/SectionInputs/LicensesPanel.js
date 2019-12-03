@@ -88,7 +88,7 @@ class ConferencesPanel extends Component {
         />
         <div className="inputContainer">
           <Input
-            placeholder="Konferencje"
+            placeholder="Licencja"
             id="description"
             value={description}
             onChange={this.handleForm}
