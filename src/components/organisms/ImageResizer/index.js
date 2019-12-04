@@ -88,6 +88,9 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 55px;
   }
+  .imageInformation {
+    color: white;
+  }
 `;
 
 class ImageResizer extends Component {
@@ -245,10 +248,10 @@ class ImageResizer extends Component {
             <div className="header">Podgląd</div>
             <canvas ref={this.imagePreviewOnCanvas} />
             {crop && (
-              <>
+              <div className="imageInformation">
                 <div>{`${(imageSize / 1024).toFixed(2)} kB `}</div>
                 <div>{`${Math.round(crop.width)} x ${Math.round(crop.height)} px `}</div>
-              </>
+              </div>
             )}
           </div>
         </section>

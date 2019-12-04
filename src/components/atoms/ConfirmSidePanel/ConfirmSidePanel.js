@@ -68,7 +68,7 @@ const ConfirmSidePanel = ({ pose }) => {
   return (
     <StyledWrapper pose={pose} error={error}>
       <div className="leftSide">
-        {inProgress && (
+        {inProgress && !error && (
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48 ">
             <g id="Group_1" data-name="Group 1" transform="translate(0 0)">
               <g
