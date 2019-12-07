@@ -51,7 +51,7 @@ const StyledWrapper = styled.div`
         text-align: center;
         user-select: none;
         img {
-          height: 364px;
+          height: 420px;
         }
       }
     }

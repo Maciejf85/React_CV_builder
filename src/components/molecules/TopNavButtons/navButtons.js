@@ -2,6 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import FirstStyle from 'components/themes/FirstStyle';
+
 import path from '../../../path';
 
 const StyledWrapper = styled.ul`
@@ -73,6 +76,11 @@ const NavButtons = () => {
       <li>
         <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.preview}>
           Podgląd
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.preview}>
+          Pobierz
         </NavLink>
       </li>
     </StyledWrapper>
