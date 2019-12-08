@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import store from 'store';
 import { updatePersonalFromState, updateImage } from 'actions';
-import { sidePanel } from 'functions';
+import { updatePersonalData } from 'functions';
 import Input from 'components/atoms/Inputs/Input';
 import ImageOptionButton from 'components/atoms/Buttons/ImageOptionButton';
 import ImageOptionLabel from 'components/atoms/Buttons/ImageOptionLabel';
@@ -43,6 +43,7 @@ class UserData extends Component {
     currentProfession: '',
     currentImageSrc: undefined,
     changeTitle: false,
+    fileSize: 0,
   };
 
   componentDidMount() {
@@ -112,41 +113,9 @@ class UserData extends Component {
   handleTimer = (time = 1000) => {
     if (this.mounted) {
       setTimeout(() => {
-        const {
-          currentName,
-          currentSurname,
-          currentEmail,
-          currentBirthday,
-          currentAdress,
-          currentGithub,
-          currentLinkedin,
-          currentProfession,
-          currentTitle,
-        } = this.state;
-
+        const token = sessionStorage.getItem('userID');
         const { id } = this.props.currentCv.currentItem;
-
-        axios
-          .post(`${path.cors}updatePersonalData.php`, {
-            title: currentTitle,
-            cvId: id,
-            name: currentName,
-            surname: currentSurname,
-            email: currentEmail,
-            birthday: currentBirthday,
-            adress: currentAdress,
-            github: currentGithub,
-            linkedin: currentLinkedin,
-            profession: currentProfession,
-            token: sessionStorage.getItem('userID'),
-          })
-          .then(result => {
-            sidePanel(result.data);
-          })
-          .catch(error => {
-            console.log('error :', error);
-            sidePanel({ content: 'błąd internetu', error: true });
-          });
+        updatePersonalData(this.state, id, token);
 
         if (this.mounted) {
           this.setState({
@@ -170,9 +139,11 @@ class UserData extends Component {
         const reader = new FileReader();
         if (accepted.includes(file.type)) {
           reader.readAsDataURL(file);
+          console.log('file', file);
           reader.onload = () => {
             this.setState({
               currentImageSrc: reader.result,
+              fileSize: file.size,
             });
             this.props.handleModal();
           };
@@ -183,7 +154,11 @@ class UserData extends Component {
       e.target.value = null;
     } else if (actiontype === 'remove') {
       store.dispatch(updateImage(null));
-      axios.post(`${path.cors}removeImage.php`);
+      axios
+        .post(`${path.cors}removeImage.php`, {
+          token: sessionStorage.getItem('userID'),
+        })
+        .then(request => console.log(request));
     }
   };
 
@@ -268,6 +243,7 @@ class UserData extends Component {
       currentImageSrc,
       changeTitle,
       birthdayValid,
+      fileSize,
     } = this.state;
     return (
       <>
@@ -275,7 +251,7 @@ class UserData extends Component {
           className={modal ? 'active' : ''}
           style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <ImageResizer click={handleModal} imageSrc={currentImageSrc} />
+          <ImageResizer click={handleModal} imageSrc={currentImageSrc} imageSize={fileSize} />
         </Modal>
 
         <StyledWrapper>

@@ -51,7 +51,7 @@ const StyledWrapper = styled.div`
         text-align: center;
         user-select: none;
         img {
-          height: 420px;
+          height: 364px;
         }
       }
     }
@@ -116,7 +116,7 @@ class ImageResizer extends Component {
   handleCropComplete = crop => {
     const canvasRef = this.imagePreviewOnCanvas.current;
     const { imageSrc } = this.props;
-    image64toCanvasRef(canvasRef, imageSrc, crop);
+    image64toCanvasRef(canvasRef, imageSrc, crop, 364);
   };
 
   handleButtons = e => {
@@ -186,8 +186,10 @@ class ImageResizer extends Component {
       y: 0,
       aspect: '0.67',
     };
-
-    this.handleCropImage(crop);
+    setTimeout(() => {
+      this.handleCropImage(crop);
+      this.handleCropComplete(crop);
+    }, 1000);
   };
 
   handleCancel = () => {

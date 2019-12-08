@@ -45,7 +45,7 @@ export const reverseDate = date => {
 
 // Base64 format to canvas
 
-export const image64toCanvasRef = (canvasRef, image64, pixelCrop) => {
+export const image64toCanvasRef = (canvasRef, image64, pixelCrop, height) => {
   const canvas = canvasRef;
   canvas.width = pixelCrop.width;
   canvas.height = pixelCrop.height;
@@ -54,9 +54,9 @@ export const image64toCanvasRef = (canvasRef, image64, pixelCrop) => {
   image.src = image64;
   const countAspect = image.naturalWidth / image.naturalHeight;
 
-  const countWith = (364 * countAspect).toFixed(0);
+  const countWith = (height * countAspect).toFixed(0);
 
-  const scaleY = image.naturalHeight / 364;
+  const scaleY = image.naturalHeight / height;
   const scaleX = image.naturalWidth / countWith;
 
   image.onload = () => {
@@ -177,4 +177,28 @@ export const getNewItemName = currentView => {
 
   const index = array.find(item => String(Object.keys(item)) === currentView);
   return index ? index[currentView] : 'nowy element';
+};
+
+export const updatePersonalData = (state, id, token) => {
+  axios
+    .post(`${path.cors}updatePersonalData.php`, {
+      title: state.currentTitle,
+      cvId: id,
+      name: state.currentName,
+      surname: state.currentSurname,
+      email: state.currentEmail,
+      birthday: state.currentBirthday,
+      adress: state.currentAdress,
+      github: state.currentGithub,
+      linkedin: state.currentLinkedin,
+      profession: state.currentProfession,
+      token,
+    })
+    .then(result => {
+      sidePanel(result.data);
+    })
+    .catch(error => {
+      console.log('error :', error);
+      sidePanel({ content: 'brak internetu', error: true });
+    });
 };
