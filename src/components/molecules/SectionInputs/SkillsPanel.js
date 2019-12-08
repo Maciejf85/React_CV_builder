@@ -35,7 +35,7 @@ export default class Skills extends Component {
   }
 
   handleForm = e => {
-    const value = parseInt(e.target.value, 10) || e.target.value;
+    const { value } = e.target;
     this.setState({
       [e.target.id]: value,
       statusActive: true,

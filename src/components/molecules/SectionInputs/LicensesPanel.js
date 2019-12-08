@@ -34,7 +34,7 @@ class ConferencesPanel extends Component {
   }
 
   handleForm = e => {
-    const value = parseInt(e.target.value, 10) || e.target.value;
+    const { value } = e.target;
     this.setState({
       [e.target.id]: value,
       statusActive: true,
@@ -88,14 +88,14 @@ class ConferencesPanel extends Component {
         />
         <div className="inputContainer">
           <Input
-            placeholder="Konferencje"
+            placeholder="Licencja"
             id="description"
             value={description}
             onChange={this.handleForm}
           />
 
           <Select
-            title="data wydarzenia"
+            title="data uzyskania"
             id="endYear"
             value={endYear}
             onChange={this.handleForm}

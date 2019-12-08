@@ -88,6 +88,9 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 55px;
   }
+  .imageInformation {
+    color: white;
+  }
 `;
 
 class ImageResizer extends Component {
@@ -113,7 +116,7 @@ class ImageResizer extends Component {
   handleCropComplete = crop => {
     const canvasRef = this.imagePreviewOnCanvas.current;
     const { imageSrc } = this.props;
-    image64toCanvasRef(canvasRef, imageSrc, crop);
+    image64toCanvasRef(canvasRef, imageSrc, crop, 364);
   };
 
   handleButtons = e => {
@@ -183,8 +186,10 @@ class ImageResizer extends Component {
       y: 0,
       aspect: '0.67',
     };
-
-    this.handleCropImage(crop);
+    setTimeout(() => {
+      this.handleCropImage(crop);
+      this.handleCropComplete(crop);
+    }, 1000);
   };
 
   handleCancel = () => {
@@ -245,10 +250,10 @@ class ImageResizer extends Component {
             <div className="header">Podgląd</div>
             <canvas ref={this.imagePreviewOnCanvas} />
             {crop && (
-              <>
+              <div className="imageInformation">
                 <div>{`${(imageSize / 1024).toFixed(2)} kB `}</div>
                 <div>{`${Math.round(crop.width)} x ${Math.round(crop.height)} px `}</div>
-              </>
+              </div>
             )}
           </div>
         </section>

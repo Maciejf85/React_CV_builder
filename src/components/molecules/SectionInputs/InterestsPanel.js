@@ -16,17 +16,17 @@ const StyledWrapper = styled.div`
 export default class InterestsPanel extends Component {
   state = {
     id: '',
-    name: '',
+    description: '',
     statusActive: false,
   };
 
   componentDidMount() {
     this.mounted = true;
-    const { id, name } = this.props.item;
+    const { id, description } = this.props.item;
 
     this.setState({
       id,
-      name,
+      description,
     });
   }
 
@@ -35,7 +35,7 @@ export default class InterestsPanel extends Component {
   }
 
   handleForm = e => {
-    const value = parseInt(e.target.value, 10) || e.target.value;
+    const { value } = e.target;
     this.setState({
       [e.target.id]: value,
       statusActive: true,
@@ -76,7 +76,7 @@ export default class InterestsPanel extends Component {
   render() {
     const { id } = this.props.item;
     const { index, current, newItem } = this.props;
-    const { name } = this.state;
+    const { description } = this.state;
 
     return (
       <StyledInputSection id={id}>
@@ -87,7 +87,12 @@ export default class InterestsPanel extends Component {
           removeItem={this.handleRemoveItem}
         />
         <StyledWrapper>
-          <Input placeholder="Zainteresowania" id="name" value={name} onChange={this.handleForm} />
+          <Input
+            placeholder="Zainteresowania"
+            id="description"
+            value={description}
+            onChange={this.handleForm}
+          />
         </StyledWrapper>
       </StyledInputSection>
     );

@@ -75,6 +75,11 @@ const NavButtons = () => {
           Podgląd
         </NavLink>
       </li>
+      {/* <li>
+        <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.preview}>
+          Pobierz
+        </NavLink>
+      </li> */}
     </StyledWrapper>
   );
 };

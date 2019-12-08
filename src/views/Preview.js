@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     minWidth: '800px',
     minHeight: '800px',
     width: '100vw',
-    height: '95vh',
+    height: '93vh',
     border: 'none',
   },
 });
@@ -48,6 +48,7 @@ const StyledWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  background: #525659;
 `;
 
 class Preview extends Component {
@@ -68,7 +69,7 @@ class Preview extends Component {
 
     const { isReady } = this.state;
     if (!Object.entries(currentCv).length) {
-      return <Redirect to={path.main} />;
+      return <Redirect to={path.login} />;
     }
 
     return (

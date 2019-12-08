@@ -18,7 +18,7 @@ const StyledInput = styled.select`
   }
 `;
 const StyledLabel = styled.label`
-  min-height: ${({ theme }) => theme.fontSize.s};
+  min-height: 14px;
   font-size: ${({ theme }) => theme.fontSize.s};
   font-weight: ${({ theme }) => theme.font.bold};
   margin-left: 10px;

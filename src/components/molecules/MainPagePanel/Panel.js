@@ -113,7 +113,7 @@ class Panel extends Component {
       <>
         <StyledWrapper>
           <header>
-            <p>Klauza poufności</p>
+            <p>Klauzula poufności</p>
           </header>
           <section>
             {editValue ? (
