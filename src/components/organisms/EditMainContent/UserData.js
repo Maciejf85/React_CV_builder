@@ -43,7 +43,6 @@ class UserData extends Component {
     currentProfession: '',
     currentImageSrc: undefined,
     changeTitle: false,
-    fileSize: 0,
   };
 
   componentDidMount() {
@@ -143,7 +142,6 @@ class UserData extends Component {
           reader.onload = () => {
             this.setState({
               currentImageSrc: reader.result,
-              fileSize: file.size,
             });
             this.props.handleModal();
           };
@@ -243,7 +241,6 @@ class UserData extends Component {
       currentImageSrc,
       changeTitle,
       birthdayValid,
-      fileSize,
     } = this.state;
     return (
       <>
@@ -251,7 +248,7 @@ class UserData extends Component {
           className={modal ? 'active' : ''}
           style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <ImageResizer click={handleModal} imageSrc={currentImageSrc} imageSize={fileSize} />
+          <ImageResizer click={handleModal} imageSrc={currentImageSrc} />
         </Modal>
 
         <StyledWrapper>
