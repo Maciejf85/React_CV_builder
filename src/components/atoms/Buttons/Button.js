@@ -12,10 +12,10 @@ const Button = styled(PosedButton)`
   height: 27px;
   color: ${({ theme }) => theme.font.primary};
   border: none;
-  margin:0 10px;
+  margin: 0 10px;
   border-radius: 50px;
   font-size: 10px;
-  font-family:"Montserrat";
+  font-family: 'Montserrat';
   font-weight: ${({ theme }) => theme.font.thin};
   text-transform: uppercase;
   outline: none;
@@ -35,14 +35,6 @@ const Button = styled(PosedButton)`
     css`
       font-weight: ${({ theme }) => theme.font.bold};
     `}
-
-/* {media query} 
-    ${({ theme }) => theme.media.tabet} {
-
-      background:red;
-
-    }
-    */
 `;
 
 export default Button;

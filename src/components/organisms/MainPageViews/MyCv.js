@@ -22,7 +22,7 @@ const StyleWrapper = styled.div`
 class CvList extends Component {
   state = {
     requestActive: false,
-    cvTitle: 'nowe CV',
+    cvTitle: 'tytuł CV',
   };
 
   handleNewCv = () => {

@@ -64,6 +64,9 @@ ${({ normal }) =>
     padding: 0 10px;
     font-size: 1.15rem;
   `}
+
+
+  
 `;
 
 export default PrimaryButton;

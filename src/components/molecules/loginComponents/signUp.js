@@ -19,7 +19,6 @@ class SignUp extends Component {
     loginValid: '',
     passwordValid: '',
     autoLogin: false,
-
     isVerified: false,
     recaptchaError: false,
   };

@@ -73,7 +73,6 @@ const StyledWrapper = styled.div`
 class SectionBody extends Component {
   state = {
     currentImageSrc: undefined,
-    fileSize: 0,
   };
 
   // HANDLE IMAGE FILE

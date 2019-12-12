@@ -138,7 +138,6 @@ class UserData extends Component {
         const reader = new FileReader();
         if (accepted.includes(file.type)) {
           reader.readAsDataURL(file);
-          console.log('file', file);
           reader.onload = () => {
             this.setState({
               currentImageSrc: reader.result,
