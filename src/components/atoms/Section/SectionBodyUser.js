@@ -249,6 +249,6 @@ SectionBody.defaultProps = {
   }),
 };
 
-const mapStateToProps = state => ({ personalData: state.personalData, image: state.image });
+const mapStateToProps = ({ personalData, image }) => ({ personalData, image });
 
 export default withModal(connect(mapStateToProps)(SectionBody));

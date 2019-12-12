@@ -7,6 +7,18 @@ const StyledWrapper = styled.ul`
   min-width: 250px;
   margin: 15px;
   /* border: 1px solid black; */
+  @media ${({ theme }) => theme.media.mobileP} {
+    background: red;
+  }
+  @media ${({ theme }) => theme.media.mobileL} {
+    background: yellow;
+  }
+  @media ${({ theme }) => theme.media.tabletP} {
+    background: blue;
+  }
+  @media ${({ theme }) => theme.media.tabletL} {
+    background: orange;
+  }
 `;
 
 const sideBar = () => {
