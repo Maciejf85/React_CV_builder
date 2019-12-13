@@ -7,17 +7,19 @@ const StyledWrapper = styled.ul`
   min-width: 250px;
   margin: 15px;
   /* border: 1px solid black; */
-  @media ${({ theme }) => theme.media.mobileP} {
+  @media ${({ theme }) => theme.media.small} {
     background: red;
+    min-width: auto;
+    max-width: 50px;
   }
-  @media ${({ theme }) => theme.media.mobileL} {
-    background: yellow;
+  @media ${({ theme }) => theme.media.medium} {
+    background: green;
   }
-  @media ${({ theme }) => theme.media.tabletP} {
+  @media ${({ theme }) => theme.media.tablet} {
     background: blue;
   }
-  @media ${({ theme }) => theme.media.tabletL} {
-    background: orange;
+  @media ${({ theme }) => theme.media.desktop} {
+    background: black;
   }
 `;
 
