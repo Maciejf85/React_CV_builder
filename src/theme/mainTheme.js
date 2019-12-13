@@ -38,7 +38,9 @@ const theme = {
     imageResizerContent: 'hsl(0,0%,10%)',
   },
   media: {
-    tablet: '(max-width: 1199px)',
+    small: ' (min-width:320px) and (max-width:575.98px)',
+    medium: '(min-width:576px) and (max-width: 767.98px)',
+    tablet: '(min-width:768px) and (max-width: 1199.98px)',
     desktop: '(min-width: 1200px)',
   },
 };

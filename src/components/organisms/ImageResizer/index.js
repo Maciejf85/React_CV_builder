@@ -89,7 +89,8 @@ const StyledWrapper = styled.div`
     height: 55px;
   }
   .imageInformation {
-    color: white;
+    font-size: ${({ theme }) => theme.fontSize.m};
+    color: ${({ theme }) => theme.colors.buttonActive};
   }
 `;
 
@@ -200,7 +201,7 @@ class ImageResizer extends Component {
 
   render() {
     const { crop } = this.state;
-    const { imageSrc, imageSize } = this.props;
+    const { imageSrc } = this.props;
 
     return (
       <StyledWrapper>
@@ -251,7 +252,6 @@ class ImageResizer extends Component {
             <canvas ref={this.imagePreviewOnCanvas} />
             {crop && (
               <div className="imageInformation">
-                <div>{`${(imageSize / 1024).toFixed(2)} kB `}</div>
                 <div>{`${Math.round(crop.width)} x ${Math.round(crop.height)} px `}</div>
               </div>
             )}

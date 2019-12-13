@@ -11,7 +11,7 @@ import store from 'store';
 import { updateImage } from 'actions';
 import axios from 'axios';
 import ImageResizer from 'components/organisms/ImageResizer';
-import { reverseDate } from 'functions/';
+import { reverseDate, sidePanel } from 'functions/';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
@@ -73,7 +73,6 @@ const StyledWrapper = styled.div`
 class SectionBody extends Component {
   state = {
     currentImageSrc: undefined,
-    fileSize: 0,
   };
 
   // HANDLE IMAGE FILE
@@ -92,7 +91,6 @@ class SectionBody extends Component {
           reader.onload = () => {
             this.setState({
               currentImageSrc: reader.result,
-              fileSize: file.size,
             });
             this.props.handleModal();
           };
@@ -107,7 +105,10 @@ class SectionBody extends Component {
         .post(`${path.cors}removeImage.php`, {
           token: sessionStorage.getItem('userID'),
         })
-        .then(request => console.log(request));
+        .then(() => sidePanel({ content: 'zdjęcie usunięte', error: false }))
+        .catch(() => {
+          sidePanel({ content: 'błąd', error: true });
+        });
     }
   };
 
@@ -248,6 +249,6 @@ SectionBody.defaultProps = {
   }),
 };
 
-const mapStateToProps = state => ({ personalData: state.personalData, image: state.image });
+const mapStateToProps = ({ personalData, image }) => ({ personalData, image });
 
 export default withModal(connect(mapStateToProps)(SectionBody));
