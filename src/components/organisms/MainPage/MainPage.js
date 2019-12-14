@@ -15,6 +15,17 @@ const StyledWrapper = styled.div`
   min-height: 50vh;
   padding: 10px;
   margin: 0 auto;
+
+  @media ${({ theme }) => theme.media.small} {
+    background: red;
+    min-width: auto;
+    height: auto;
+    width: 100vw;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    flex-direction: row;
+  }
 `;
 
 const MainPage = () => {
