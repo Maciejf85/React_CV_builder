@@ -30,11 +30,17 @@ const StyledWrapper = styled.div`
   }
   span {
     display: inline-block;
-    width: calc(100vw / 3);
+    width: 140px;
     font-weight: ${({ theme }) => theme.font.bold};
     text-transform: uppercase;
     font-size: ${({ theme }) => theme.fontSize.s};
     color: black;
+    @media ${({ theme }) => theme.media.small} {
+      width: calc(100vw / 3);
+    }
+    @media ${({ theme }) => theme.media.medium} {
+      width: calc(100vw / 3);
+    }
   }
   li {
     font-size: ${({ theme }) => theme.fontSize.ms};
