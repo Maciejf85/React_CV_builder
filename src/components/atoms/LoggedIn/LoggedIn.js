@@ -18,7 +18,7 @@ const StyledWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.darkGrey};
   background: ${({ theme }) => theme.colors.mainGrey};
   padding: 10px;
-  min-width: 100px;
+  min-width: 50px;
   color: white;
   z-index: 1;
   .iconStyle {
@@ -37,6 +37,14 @@ const StyledWrapper = styled.div`
     padding: 0 5px;
     letter-spacing: 1px;
     font-weight: ${({ theme }) => theme.font.thin};
+    @media ${({ theme }) => theme.media.small} {
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+  }
+  @media ${({ theme }) => theme.media.small} {
+    width: 150px;
+    grid-gap: 3px;
   }
 `;
 const PosedMenu = posed.div({

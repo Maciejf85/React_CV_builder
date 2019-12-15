@@ -37,6 +37,9 @@ const StyledWrapper = styled.nav`
       left: 0;
       z-index: 1000;
     `}
+    @media ${({ theme }) => theme.media.small} {
+      padding:0 5px;
+    }
 `;
 
 const NavBar = ({ location }) => {

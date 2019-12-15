@@ -24,6 +24,15 @@ const StyledWrapper = styled.div`
   background: ${({ theme }) => theme.colors.imageResizerBackground};
   overflow: hidden;
   border-radius: 7px;
+  @media ${({ theme }) => theme.media.small} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: none;
+    overflow: auto;
+  }
 
   header {
     height: 45px;
@@ -40,6 +49,10 @@ const StyledWrapper = styled.div`
     grid-template-rows: 490px;
     grid-gap: 5px;
     max-height: calc(100% - 55px);
+    @media ${({ theme }) => theme.media.small} {
+      display: block;
+      width: 100%;
+    }
 
     .imageContainer {
       display: flex;
@@ -77,6 +90,9 @@ const StyledWrapper = styled.div`
         text-align: left;
         font-style: italic;
       }
+      @media ${({ theme }) => theme.media.small} {
+        display: none;
+      }
     }
   }
   .bottom {
@@ -87,6 +103,9 @@ const StyledWrapper = styled.div`
     padding: 0 5px;
     width: 100%;
     height: 55px;
+    @media ${({ theme }) => theme.media.small} {
+      justify-content: center;
+    }
   }
   .imageInformation {
     font-size: ${({ theme }) => theme.fontSize.m};
