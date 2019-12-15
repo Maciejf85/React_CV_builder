@@ -6,20 +6,21 @@ import { mainViews } from 'data';
 const StyledWrapper = styled.ul`
   min-width: 250px;
   margin: 15px;
+  display: flex;
+  flex-direction: column;
   /* border: 1px solid black; */
   @media ${({ theme }) => theme.media.small} {
     background: red;
     min-width: auto;
-    max-width: 50px;
+    width: 100%;
+    margin: 0;
+    flex-direction: row;
   }
   @media ${({ theme }) => theme.media.medium} {
     background: green;
   }
   @media ${({ theme }) => theme.media.tablet} {
     background: blue;
-  }
-  @media ${({ theme }) => theme.media.desktop} {
-    background: black;
   }
 `;
 

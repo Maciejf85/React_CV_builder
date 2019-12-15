@@ -15,7 +15,8 @@ import { reverseDate, sidePanel } from 'functions/';
 import path from '../../../path';
 
 const StyledWrapper = styled.div`
-  position: relative;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   min-height: 100%;
   /* border: 1px solid black; */
@@ -34,11 +35,20 @@ const StyledWrapper = styled.div`
     text-transform: uppercase;
     font-size: ${({ theme }) => theme.fontSize.s};
     color: black;
+    @media ${({ theme }) => theme.media.small} {
+      width: calc(100vw / 3);
+    }
+    @media ${({ theme }) => theme.media.medium} {
+      width: calc(100vw / 3);
+    }
   }
   li {
     font-size: ${({ theme }) => theme.fontSize.ms};
     letter-spacing: 1px;
     color: ${({ theme }) => theme.colors.secondaryGrey};
+    @media ${({ theme }) => theme.media.small} {
+      padding: 0 10px;
+    }
   }
   a {
     text-decoration: underline;
@@ -61,13 +71,25 @@ const StyledWrapper = styled.div`
       color: ${({ theme }) => theme.colors.darkGrey};
       font-weight: ${({ theme }) => theme.font.normal};
     }
+    @media ${({ theme }) => theme.media.small} {
+      padding: 0 10px;
+    }
   }
   .imageContent {
-    position: absolute;
-    top: 30px;
-    right: 30px;
     width: 174px;
+    height: 200px;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+    /* flex-grow: 2; */
+  }
+  .firstContainer {
+    /* flex-grow: 7; */
+  }
+  @media ${({ theme }) => theme.media.small} {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    min-height: auto;
   }
 `;
 class SectionBody extends Component {
@@ -137,39 +159,41 @@ class SectionBody extends Component {
           <ImageResizer click={handleModal} imageSrc={currentImageSrc} imageSize={fileSize} />
         </Modal>
         <StyledWrapper>
-          <div className="header">
-            <h1>{profession}</h1>
-            <span>{` utworzone ${reverseDate(created)} `}</span>
+          <div className="firstContainer">
+            <div className="header">
+              <h1>{profession}</h1>
+              <span>{` utworzone ${reverseDate(created)} `}</span>
+            </div>
+            <ul>
+              <li>
+                <span>imię:</span> {name}
+              </li>
+              <li>
+                <span>nazwisko:</span> {surname}
+              </li>
+              <li>
+                <span>email:</span> {email}
+              </li>
+              <li>
+                <span>adres:</span> {adress}
+              </li>
+              <li>
+                <span>data urodzenia:</span> {reverseDate(birthday)}
+              </li>
+              <li>
+                <span>github:</span>
+                <a href={github} target="_blank" rel="noopener noreferrer">
+                  {github}
+                </a>
+              </li>
+              <li>
+                <span>linkedin:</span>
+                <a href={linkedin} target="_blank" rel="noopener noreferrer">
+                  {linkedin}
+                </a>
+              </li>
+            </ul>
           </div>
-          <ul>
-            <li>
-              <span>imię:</span> {name}
-            </li>
-            <li>
-              <span>nazwisko:</span> {surname}
-            </li>
-            <li>
-              <span>email:</span> {email}
-            </li>
-            <li>
-              <span>adres:</span> {adress}
-            </li>
-            <li>
-              <span>data urodzenia:</span> {reverseDate(birthday)}
-            </li>
-            <li>
-              <span>github:</span>
-              <a href={github} target="_blank" rel="noopener noreferrer">
-                {github}
-              </a>
-            </li>
-            <li>
-              <span>linkedin:</span>
-              <a href={linkedin} target="_blank" rel="noopener noreferrer">
-                {linkedin}
-              </a>
-            </li>
-          </ul>
 
           <StyledInputSection width="25%" white className="imageContent">
             {image ? (

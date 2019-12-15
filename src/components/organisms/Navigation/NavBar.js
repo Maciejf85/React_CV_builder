@@ -10,7 +10,7 @@ import path from '../../../path';
 const StyledWrapper = styled.nav`
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  /* justify-content: space-around; */
   padding: 0 10px;
   width: 100%;
   height: 50px;
@@ -25,6 +25,9 @@ const StyledWrapper = styled.nav`
     span {
       color: ${({ theme }) => theme.colors.primaryBlue};
     }
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
+    }
   }
   ${({ editor }) =>
     editor &&
@@ -34,6 +37,9 @@ const StyledWrapper = styled.nav`
       left: 0;
       z-index: 1000;
     `}
+    @media ${({ theme }) => theme.media.small} {
+      padding:0 5px;
+    }
 `;
 
 const NavBar = ({ location }) => {

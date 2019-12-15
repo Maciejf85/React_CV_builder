@@ -19,6 +19,12 @@ const StyledWrapper = styled.footer`
     font-weight: ${({ theme }) => theme.font.bold};
     letter-spacing: 1px;
   }
+  @media ${({ theme }) => theme.media.small} {
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+  }
 `;
 
 const Footer = () => (

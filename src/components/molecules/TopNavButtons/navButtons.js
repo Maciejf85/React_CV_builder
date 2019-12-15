@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faEdit, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import path from '../../../path';
 
 const StyledWrapper = styled.ul`
@@ -29,11 +31,23 @@ const StyledWrapper = styled.ul`
     outline: none;
     background: inherit;
     transition: 0.3s;
+    @media ${({ theme }) => theme.media.small} {
+      font-size: ${({ theme }) => theme.fontSize.s};
+      padding: 0;
+      min-width: auto;
+      width: 40px;
+    }
 
     &:hover :not(.active) {
       background: ${({ theme }) => theme.colors.primaryGrey};
       color: ${({ theme }) => theme.colors.primaryBlue};
       cursor: pointer;
+    }
+  }
+  span {
+    color: white;
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
     }
   }
 
@@ -53,6 +67,13 @@ const StyledWrapper = styled.ul`
       background: inherit;
     }
   }
+  .icon {
+    display: none;
+    @media ${({ theme }) => theme.media.small} {
+      font-size: 1.5rem;
+      display: block;
+    }
+  }
 `;
 
 const NavButtons = () => {
@@ -62,17 +83,26 @@ const NavButtons = () => {
     <StyledWrapper>
       <li>
         <NavLink activeClassName="active" exact to={path.main}>
-          Strona główna
+          <span>Strona główna</span>
+          <div className="icon">
+            <FontAwesomeIcon icon={faHome} />
+          </div>
         </NavLink>
       </li>
       <li>
         <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.edit}>
-          Edytor
+          <span>Edytor</span>
+          <div className="icon">
+            <FontAwesomeIcon icon={faEdit} />
+          </div>
         </NavLink>
       </li>
       <li>
         <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.preview}>
-          Podgląd
+          <span>Podgląd</span>
+          <div className="icon">
+            <FontAwesomeIcon icon={faFilePdf} />
+          </div>
         </NavLink>
       </li>
       {/* <li>

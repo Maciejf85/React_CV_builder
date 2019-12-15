@@ -14,6 +14,9 @@ const StyleWrapper = styled.div`
   font-size: ${({ theme }) => theme.fontSize.ms};
   font-weight: ${({ theme }) => theme.font.bold};
   color: ${({ theme }) => theme.colors.mainGrey};
+  @media ${({ theme }) => theme.media.small} {
+    display: none;
+  }
 `;
 const StripTitle = () => {
   return (

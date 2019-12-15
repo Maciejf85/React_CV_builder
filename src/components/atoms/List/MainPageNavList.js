@@ -32,6 +32,14 @@ const StyledWrapper = styled(PosedLi)`
     cursor: pointer;
     background: ${({ theme }) => theme.colors.primaryBlue};
   }
+  @media ${({ theme }) => theme.media.small} {
+    flex-wrap: wrap;
+    margin: 0;
+    font-size: 1rem;
+    height: 50px;
+    flex: 1 1 70px;
+    border: none;
+  }
 `;
 class MainPageListItem extends Component {
   handlePathChange = e => {
