@@ -25,6 +25,9 @@ const StyledWrapper = styled.nav`
     span {
       color: ${({ theme }) => theme.colors.primaryBlue};
     }
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
+    }
   }
   ${({ editor }) =>
     editor &&

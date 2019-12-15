@@ -76,13 +76,14 @@ const StyledWrapper = styled.div`
     }
   }
   .imageContent {
+    background: #ccc;
     width: 174px;
     height: 200px;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
-    flex-grow: 2;
+    /* flex-grow: 2; */
   }
   .firstContainer {
-    flex-grow: 7;
+    /* flex-grow: 7; */
   }
   @media ${({ theme }) => theme.media.small} {
     flex-direction: column-reverse;
