@@ -17,6 +17,9 @@ const StyleWrapper = styled.div`
   height: calc(100% -15px);
   /* border: 1px solid red; */
   margin: 15px;
+  @media ${({ theme }) => theme.media.small} {
+    margin: 15px 0;
+  }
 `;
 
 class CvList extends Component {

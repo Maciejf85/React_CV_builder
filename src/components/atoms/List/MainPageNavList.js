@@ -37,7 +37,7 @@ const StyledWrapper = styled(PosedLi)`
     margin: 0;
     font-size: 1rem;
     height: 50px;
-    width: 20%;
+    flex: 1 1 70px;
     border: none;
   }
 `;

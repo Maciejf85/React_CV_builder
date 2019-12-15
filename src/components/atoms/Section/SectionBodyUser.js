@@ -76,7 +76,6 @@ const StyledWrapper = styled.div`
     }
   }
   .imageContent {
-    background: #ccc;
     width: 174px;
     height: 200px;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};

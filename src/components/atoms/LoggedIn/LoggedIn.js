@@ -23,7 +23,6 @@ const StyledWrapper = styled.div`
   z-index: 1;
   .iconStyle {
     color: ${({ theme }) => theme.colors.lightBlue};
-
     &:hover {
       cursor: pointer;
       color: ${({ theme }) => theme.colors.secondaryBlue};
@@ -38,12 +37,12 @@ const StyledWrapper = styled.div`
     letter-spacing: 1px;
     font-weight: ${({ theme }) => theme.font.thin};
     @media ${({ theme }) => theme.media.small} {
-      font-size: 1rem;
+      font-size: 1.15rem;
       letter-spacing: 0;
     }
   }
   @media ${({ theme }) => theme.media.small} {
-    width: 150px;
+    width: 160px;
     grid-gap: 3px;
   }
 `;

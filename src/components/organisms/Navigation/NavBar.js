@@ -10,7 +10,7 @@ import path from '../../../path';
 const StyledWrapper = styled.nav`
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  /* justify-content: space-around; */
   padding: 0 10px;
   width: 100%;
   height: 50px;

@@ -17,9 +17,21 @@ const StyleWrapper = styled.div`
   font-size: ${({ theme }) => theme.fontSize.ms};
   color: ${({ theme }) => theme.colors.secondaryGrey};
 
+  @media ${({ theme }) => theme.media.small} {
+    div:first-of-type {
+      font-size: ${({ theme }) => theme.fontSize.ml};
+      font-weight: ${({ theme }) => theme.font.bold};
+    }
+  }
+
   div {
     align-self: center;
     text-align: center;
+  }
+  @media ${({ theme }) => theme.media.small} {
+    display: inline-flex;
+    flex-direction: column;
+    flex: 1 1 50%;
   }
 `;
 
