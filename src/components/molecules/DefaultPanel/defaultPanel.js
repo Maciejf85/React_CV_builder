@@ -49,6 +49,9 @@ const StyledWrapper = styled.div`
       color: ${({ theme }) => theme.colors.secondaryGrey};
     }
   }
+  @media ${({ theme }) => theme.media.small} {
+    border-radius: 0;
+  }
 `;
 
 const defaultPanel = props => {

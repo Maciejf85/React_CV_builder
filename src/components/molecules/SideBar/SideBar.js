@@ -28,7 +28,7 @@ const sideBar = () => {
   return (
     <StyledWrapper>
       {mainViews.map(item => (
-        <NavListItem key={item.name} name={item.name} link={item.link} />
+        <NavListItem key={item.name} name={item.name} link={item.link} icon={item.icon} />
       ))}
     </StyledWrapper>
   );

@@ -18,7 +18,6 @@ const StyledWrapper = styled.div`
   background: white;
   border: 1px solid ${({ theme }) => theme.colors.lightGrey};
   border-radius: 5px;
-  border-bottom-color: hsl(210, 3%, 85%);
   overflow: hidden;
 
   header {
@@ -44,6 +43,10 @@ const StyledWrapper = styled.div`
       user-select: none;
       white-space: pre-line;
     }
+  }
+  @media ${({ theme }) => theme.media.small} {
+    border-radius: 0;
+    width: 100%;
   }
 `;
 

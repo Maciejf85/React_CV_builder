@@ -50,6 +50,9 @@ const StyledWrapper = styled.div`
     grid-gap: 5px;
     max-height: calc(100% - 55px);
     @media ${({ theme }) => theme.media.small} {
+      margin-top: 50px;
+      min-height: 410px;
+      height: calc(100% - 250px);
       display: block;
       width: 100%;
     }

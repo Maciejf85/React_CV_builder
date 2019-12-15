@@ -1,3 +1,11 @@
+import {
+  faUserAlt,
+  faEnvelope,
+  faFileAlt,
+  faFileContract,
+  faThLarge,
+} from '@fortawesome/free-solid-svg-icons';
+
 export const editViews = [
   { name: 'Dane osobowe', link: 'personal', icon: 'faUserAlt' },
   { name: 'Edukacja', link: 'education', icon: 'graduation-cap' },
@@ -14,9 +22,9 @@ export const editViews = [
 ];
 
 export const mainViews = [
-  { name: 'Moje konto', link: 'account' },
-  { name: 'Moje CV', link: 'cv' },
-  { name: 'Moje listy motywacyjne', link: 'documents' },
-  { name: 'Klauzula poufności', link: 'confidentiality' },
-  { name: 'Szablony', link: 'templates' },
+  { name: 'Moje konto', link: 'account', icon: [faUserAlt] },
+  { name: 'Moje CV', link: 'cv', icon: [faFileAlt] },
+  { name: 'Moje listy motywacyjne', link: 'documents', icon: [faEnvelope] },
+  { name: 'Klauzula poufności', link: 'confidentiality', icon: [faFileContract] },
+  { name: 'Szablony', link: 'templates', icon: [faThLarge] },
 ];
