@@ -4,9 +4,9 @@ import LoggedIn from 'components/atoms/LoggedIn/LoggedIn';
 import NavButtons from 'components/molecules/TopNavButtons/navButtons';
 import styled, { css } from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import path from '../../../path';
 import store from 'store';
 import { changeLanguage } from 'actions';
+import path from '../../../path';
 // import PropTypes from 'prop-types';
 
 const StyledWrapper = styled.nav`
