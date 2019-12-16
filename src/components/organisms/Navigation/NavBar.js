@@ -4,8 +4,9 @@ import LoggedIn from 'components/atoms/LoggedIn/LoggedIn';
 import NavButtons from 'components/molecules/TopNavButtons/navButtons';
 import styled, { css } from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import store from 'store';
-import { changeLanguage } from 'actions';
+import LanguageButton from 'components/atoms/Buttons/LanguageButton';
+import polishFlag from 'assets/polishFlag.png';
+import britishFlag from 'assets/britishFlag.png';
 import path from '../../../path';
 // import PropTypes from 'prop-types';
 
@@ -58,14 +59,8 @@ const NavBar = ({ location, language }) => {
       </p>
       <NavButtons editor={editor} />
       <div className="lang">{language}</div>
-      <button
-        type="button"
-        onClick={() => {
-          store.dispatch(changeLanguage(language === 'PL' ? 'ENG' : 'PL'));
-        }}
-      >
-        zmień język
-      </button>
+      <LanguageButton language="PL" icon={polishFlag} active={language === 'PL'} />
+      <LanguageButton language="ENG" icon={britishFlag} active={language === 'ENG'} />
       <LoggedIn language={language} />
     </StyledWrapper>
   );
