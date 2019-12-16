@@ -41,7 +41,7 @@ const SidePanel = (state = initialState, { type, payload }) => {
     case CHANGE_LANGUAGE:
       return {
         ...state,
-        language: payload.language,
+        language: payload,
       };
     default:
       return state;

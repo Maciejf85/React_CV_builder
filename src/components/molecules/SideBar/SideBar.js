@@ -24,11 +24,17 @@ const StyledWrapper = styled.ul`
   }
 `;
 
-const sideBar = () => {
+const sideBar = ({ language }) => {
+  console.log('language = sideBAr', language);
   return (
     <StyledWrapper>
       {mainViews.map(item => (
-        <NavListItem key={item.name} name={item.name} link={item.link} icon={item.icon} />
+        <NavListItem
+          key={item.name}
+          name={language === 'PL' ? item.name : item.nameL}
+          link={item.link}
+          icon={item.icon}
+        />
       ))}
     </StyledWrapper>
   );

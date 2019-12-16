@@ -21,15 +21,15 @@ class Main extends Component {
   }
 
   render() {
-    const { isVisible, token, error } = this.props;
+    const { isVisible, token, error, language } = this.props;
     if (token === '') {
       return <Redirect to={path.login} />;
     }
     return (
       <>
         <StyledWrapper>
-          <NavBar />
-          <MainPage />
+          <NavBar language={language} />
+          <MainPage language={language} />
           <Footer />
           <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
         </StyledWrapper>
@@ -46,5 +46,6 @@ const MapStateToProps = state => ({
   isVisible: state.appState.isVisible,
   error: state.appState.error,
   token: state.personalData.token,
+  language: state.appState.language,
 });
 export default connect(MapStateToProps)(Main);

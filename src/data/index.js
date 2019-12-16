@@ -22,9 +22,14 @@ export const editViews = [
 ];
 
 export const mainViews = [
-  { name: 'Moje konto', link: 'account', icon: [faUserAlt] },
-  { name: 'Moje CV', link: 'cv', icon: [faFileAlt] },
-  { name: 'Moje listy motywacyjne', link: 'documents', icon: [faEnvelope] },
-  { name: 'Klauzula poufności', link: 'confidentiality', icon: [faFileContract] },
-  { name: 'Szablony', link: 'templates', icon: [faThLarge] },
+  { name: 'Moje konto', nameL: 'Account', link: 'account', icon: [faUserAlt] },
+  { name: 'Moje CV', nameL: "CV's", link: 'cv', icon: [faFileAlt] },
+  { name: 'Moje listy motywacyjne', nameL: 'Cover Letter', link: 'documents', icon: [faEnvelope] },
+  {
+    name: 'Klauzula poufności',
+    nameL: 'Confidentiality clause',
+    link: 'confidentiality',
+    icon: [faFileContract],
+  },
+  { name: 'Szablony', nameL: 'Template', link: 'templates', icon: [faThLarge] },
 ];

@@ -5,6 +5,8 @@ import NavButtons from 'components/molecules/TopNavButtons/navButtons';
 import styled, { css } from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import path from '../../../path';
+import store from 'store';
+import { changeLanguage } from 'actions';
 // import PropTypes from 'prop-types';
 
 const StyledWrapper = styled.nav`
@@ -15,6 +17,11 @@ const StyledWrapper = styled.nav`
   width: 100%;
   height: 50px;
   background-color: ${({ theme }) => theme.colors.mainGrey};
+  .lang{
+    color:white;
+    margin:0 10px;
+    font-size:1.2rem;
+  }
   p.logo {
     color: white;
     font-size: ${({ theme }) => theme.fontSize.xl};
@@ -42,7 +49,7 @@ const StyledWrapper = styled.nav`
     }
 `;
 
-const NavBar = ({ location }) => {
+const NavBar = ({ location, language }) => {
   const editor = location.pathname === `${path.login}edit` || false;
   return (
     <StyledWrapper editor={editor}>
@@ -50,7 +57,16 @@ const NavBar = ({ location }) => {
         <span>CV</span>-builder
       </p>
       <NavButtons editor={editor} />
-      <LoggedIn />
+      <div className="lang">{language}</div>
+      <button
+        type="button"
+        onClick={() => {
+          store.dispatch(changeLanguage(language === 'PL' ? 'ENG' : 'PL'));
+        }}
+      >
+        zmień język
+      </button>
+      <LoggedIn language={language} />
     </StyledWrapper>
   );
 };

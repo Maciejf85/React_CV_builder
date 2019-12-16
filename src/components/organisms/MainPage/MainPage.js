@@ -28,12 +28,12 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const MainPage = () => {
+const MainPage = ({ language }) => {
   const currentView = useSelector(({ path }) => path.currentView);
   return (
     <>
       <StyledWrapper>
-        <SideBar />
+        <SideBar language={language} />
         {currentView === 'cv' && <MyCv />}
         {currentView === 'documents' && <MyDocuments />}
         {currentView === 'account' && <MyAccount />}
