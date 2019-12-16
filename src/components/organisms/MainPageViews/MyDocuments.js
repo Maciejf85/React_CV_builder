@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 const StyleWrapper = styled.div`
   width: 100%;
   /* border: 1px solid red; */
-  /* margin: 15px; */
+  margin: 15px;
   @media ${({ theme }) => theme.media.small} {
-    /* margin: 15px 0; */
+    margin: 15px 0;
   }
 `;
 

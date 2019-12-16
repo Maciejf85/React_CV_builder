@@ -31,6 +31,7 @@ const StyledWrapper = styled.ul`
     outline: none;
     background: inherit;
     transition: 0.3s;
+
     @media ${({ theme }) => theme.media.small} {
       font-size: ${({ theme }) => theme.fontSize.s};
       padding: 0;
@@ -39,10 +40,11 @@ const StyledWrapper = styled.ul`
     }
 
     &:hover :not(.active) {
-      background: ${({ theme }) => theme.colors.primaryGrey};
-      color: ${({ theme }) => theme.colors.primaryBlue};
+      background: ${({ theme }) => theme.colors.secondaryBlue};
+      /* color: ${({ theme }) => theme.colors.primaryBlue}; */
       cursor: pointer;
     }
+
   }
   span {
     color: white;
