@@ -46,8 +46,6 @@ const NavBar = ({ location }) => {
   const editor = location.pathname === `${path.login}edit` || false;
   return (
     <StyledWrapper editor={editor}>
-      {/* {props.logo && <Logo />} */}
-      {/* <Logo /> */}
       <p className="logo">
         <span>CV</span>-builder
       </p>
