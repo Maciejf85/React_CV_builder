@@ -20,16 +20,16 @@ class Edit extends Component {
   }
 
   render() {
-    const { isVisible, error } = this.props.appState;
+    const { isVisible, error, language } = this.props.appState;
     if (this.props.isSet === undefined) {
       return <Redirect to={path.login} />;
     }
 
     return (
       <>
-        <NavBar />
+        <NavBar language={language} />
         <StyledWrapper>
-          <EditSidebar />
+          <EditSidebar language={language} />
           <EditMainContent />
           <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
         </StyledWrapper>

@@ -25,7 +25,6 @@ const StyledWrapper = styled.ul`
 `;
 
 const sideBar = ({ language }) => {
-  console.log('language = sideBAr', language);
   return (
     <StyledWrapper>
       {mainViews.map(item => (

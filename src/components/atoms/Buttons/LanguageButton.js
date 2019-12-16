@@ -12,7 +12,7 @@ const StyledWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.buttonCaption};
   padding: 5px;
   margin-right: 10px;
-  filter: brightness(60%);
+  filter: brightness(45%);
   transition: all 0.3s;
   &.active {
     transform: scale(1.1);

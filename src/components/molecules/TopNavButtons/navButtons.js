@@ -80,12 +80,13 @@ const StyledWrapper = styled.ul`
 
 const NavButtons = () => {
   const logedIn = useSelector(({ currentCv }) => currentCv);
+  const language = useSelector(({ appState }) => appState.language);
   const containsCv = logedIn ? Object.entries(logedIn).length : undefined;
   return (
     <StyledWrapper>
       <li>
         <NavLink activeClassName="active" exact to={path.main}>
-          <span>Strona główna</span>
+          <span>{language === 'PL' ? 'Strona główna' : 'Main Page'}</span>
           <div className="icon">
             <FontAwesomeIcon icon={faHome} />
           </div>
@@ -93,7 +94,7 @@ const NavButtons = () => {
       </li>
       <li>
         <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.edit}>
-          <span>Edytor</span>
+          <span>{language === 'PL' ? 'Edytor' : 'Editor'}</span>
           <div className="icon">
             <FontAwesomeIcon icon={faEdit} />
           </div>
@@ -101,7 +102,7 @@ const NavButtons = () => {
       </li>
       <li>
         <NavLink activeClassName="active" className={containsCv ? '' : 'disable'} to={path.preview}>
-          <span>Podgląd</span>
+          <span>{language === 'PL' ? 'Podgląd' : 'Preview'}</span>
           <div className="icon">
             <FontAwesomeIcon icon={faFilePdf} />
           </div>

@@ -34,10 +34,10 @@ const MainPage = ({ language }) => {
     <>
       <StyledWrapper>
         <SideBar language={language} />
-        {currentView === 'cv' && <MyCv />}
-        {currentView === 'documents' && <MyDocuments />}
-        {currentView === 'account' && <MyAccount />}
-        {currentView === 'confidentiality' && <Confidential />}
+        {currentView === 'cv' && <MyCv language={language} />}
+        {currentView === 'documents' && <MyDocuments language={language} />}
+        {currentView === 'account' && <MyAccount language={language} />}
+        {currentView === 'confidentiality' && <Confidential language={language} />}
       </StyledWrapper>
     </>
   );

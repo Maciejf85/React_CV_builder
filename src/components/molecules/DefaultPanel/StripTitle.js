@@ -18,12 +18,12 @@ const StyleWrapper = styled.div`
     display: none;
   }
 `;
-const StripTitle = () => {
+const StripTitle = ({ language }) => {
   return (
     <StyleWrapper>
-      <div>tytuł</div>
-      <div>data utworzenia</div>
-      <div>opcje</div>
+      <div>{language === 'PL' ? 'tytuł' : 'title'}</div>
+      <div>{language === 'PL' ? 'data utworzenia' : 'creation date'}</div>
+      <div>{language === 'PL' ? 'opcje' : 'options'}</div>
     </StyleWrapper>
   );
 };

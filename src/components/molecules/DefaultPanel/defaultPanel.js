@@ -55,13 +55,14 @@ const StyledWrapper = styled.div`
 `;
 
 const defaultPanel = props => {
-  const { name, content, caption, disabled } = props;
+  const { name, content, caption, disabled, language } = props;
+  console.log('name', name);
   return (
     <>
       <StyledWrapper>
         <header>{name}</header>
         <section>
-          {!content.length || <StripTitle />}
+          {!content.length || <StripTitle language={language} />}
           {content.length ? (
             content.map(({ id, title, date }) => (
               <StripBody key={date} id={id} title={title} date={date} />
@@ -70,8 +71,8 @@ const defaultPanel = props => {
             <div className="empty">
               <OptionButton
                 onClick={props.newCv}
-                primary={name === 'Moje CV'}
-                disabled={name === 'Moje listy motywacyjne'}
+                primary={name === 'Moje CV' || name === "CV's"}
+                disabled={name === 'Moje listy motywacyjne' || name === 'Cover Letter'}
               >
                 {`${caption}`}
               </OptionButton>

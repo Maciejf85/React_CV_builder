@@ -14,9 +14,10 @@ const StyleWrapper = styled.div`
 
 const MyDocuments = () => {
   const { name, caption } = useSelector(state => state.path);
+  const { language } = useSelector(({ appState }) => appState);
   return (
     <StyleWrapper>
-      <Panel name={name} content={[]} caption={caption} />
+      <Panel name={name} content={[]} caption={caption} language={language} />
     </StyleWrapper>
   );
 };
