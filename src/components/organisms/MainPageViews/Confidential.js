@@ -5,6 +5,9 @@ import Panel from 'components/molecules/MainPagePanel/Panel';
 const StyleWrapper = styled.div`
   width: 100%;
   margin: 15px;
+  @media ${({ theme }) => theme.media.small} {
+    margin: 15px 0;
+  }
 `;
 
 const Confidential = () => {

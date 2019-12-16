@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import store from 'store';
 import { currentView } from 'actions';
 import posed from 'react-pose';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const PosedLi = posed.li({
   active: {
@@ -32,12 +33,28 @@ const StyledWrapper = styled(PosedLi)`
     cursor: pointer;
     background: ${({ theme }) => theme.colors.primaryBlue};
   }
+  span {
+    display: inline;
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
+    }
+  }
+  .icon {
+    display: none;
+
+    @media ${({ theme }) => theme.media.small} {
+      font-size: 2rem;
+      display: block;
+    }
+  }
   @media ${({ theme }) => theme.media.small} {
+    justify-content: center;
     flex-wrap: wrap;
+    padding: 0;
     margin: 0;
     font-size: 1rem;
     height: 50px;
-    flex: 1 1 70px;
+    flex: 1 1 50px;
     border: none;
   }
 `;
@@ -48,8 +65,9 @@ class MainPageListItem extends Component {
   };
 
   render() {
-    const { name, link, path } = this.props;
+    const { name, link, path, icon } = this.props;
     const isActive = link === path.currentView;
+    const iconContent = icon[0];
     return (
       <StyledWrapper
         active={isActive}
@@ -58,7 +76,10 @@ class MainPageListItem extends Component {
         data-id={link}
         onClick={this.handlePathChange}
       >
-        {name}
+        <span>{name}</span>
+        <div className="icon">
+          <FontAwesomeIcon icon={iconContent} />
+        </div>
       </StyledWrapper>
     );
   }

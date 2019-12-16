@@ -242,3 +242,10 @@ export const serverResponse = data => {
     return { type: 'REQUEST_SUCCESS', payload: { success, active: false } };
   return { type: 'CLEAR_REQUEST' };
 };
+
+export const changeLanguage = data => {
+  return {
+    type: 'CHANGE_LANGUAGE',
+    payload: data,
+  };
+};

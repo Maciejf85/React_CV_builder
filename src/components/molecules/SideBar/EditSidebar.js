@@ -20,12 +20,16 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const EditSidebar = () => {
+const EditSidebar = ({ language }) => {
   return (
     <StyledWrapper>
       <ul>
         {editViews.map(item => (
-          <EditNavList key={item.link} name={item.name} link={item.link} />
+          <EditNavList
+            key={item.link}
+            name={language === 'PL' ? item.name : item.nameL}
+            link={item.link}
+          />
         ))}
       </ul>
     </StyledWrapper>

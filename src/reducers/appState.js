@@ -1,5 +1,6 @@
 const CHANGE_SIDEPANEL_STATE = 'CHANGE_SIDEPANEL_STATE';
 const UNLOCK_SIDE_PANEL = 'UNLOCK_SIDE_PANEL';
+const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
 
@@ -8,6 +9,7 @@ const initialState = {
   inProgress: false,
   error: false,
   logedIn: false,
+  language: 'PL',
 };
 
 const SidePanel = (state = initialState, { type, payload }) => {
@@ -35,6 +37,11 @@ const SidePanel = (state = initialState, { type, payload }) => {
       return {
         ...state,
         logedIn: true,
+      };
+    case CHANGE_LANGUAGE:
+      return {
+        ...state,
+        language: payload,
       };
     default:
       return state;

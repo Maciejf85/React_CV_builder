@@ -3,7 +3,6 @@ import NavBar from 'components/organisms/Navigation/NavBar';
 import { PDFDownloadLink, StyleSheet, PDFViewer, Font } from '@react-pdf/renderer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
 import styled from 'styled-components';
 import FirstStyle from 'components/themes/FirstStyle';
 
@@ -63,7 +62,8 @@ class Preview extends Component {
   };
 
   render() {
-    const { currentCv, personalData } = this.props;
+    const { currentCv, personalData, language } = this.props;
+    console.log('lang', language);
     const { name } = personalData;
     const { currentItem } = currentCv;
 
@@ -74,7 +74,7 @@ class Preview extends Component {
 
     return (
       <>
-        <NavBar />
+        <NavBar language={language} />
         <StyledWrapper>
           <PDFViewer style={styles.view} name={name}>
             <FirstStyle downloadButton={this.handleButton} />
@@ -93,5 +93,9 @@ class Preview extends Component {
   }
 }
 
-const mapStateToProps = state => ({ currentCv: state.currentCv, personalData: state.personalData });
+const mapStateToProps = ({ currentCv, personalData, appState }) => ({
+  currentCv,
+  personalData,
+  language: appState.language,
+});
 export default connect(mapStateToProps)(Preview);

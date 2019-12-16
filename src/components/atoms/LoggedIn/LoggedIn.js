@@ -109,7 +109,7 @@ class LoggedIn extends Component {
 
   render() {
     const { isVisible } = this.state;
-    const { email, name, surname } = this.props;
+    const { email, name, surname, language } = this.props;
     return (
       <StyledWrapper>
         {email ? <p>{email}</p> : <p>{`${name} ${surname}`}</p>}
@@ -128,7 +128,7 @@ class LoggedIn extends Component {
             pose={isVisible ? 'visible' : 'hidden'}
             onClick={this.handleLogout}
           >
-            Wyloguj
+            {language === 'PL' ? 'Wyloguj' : 'Logout'}
           </DropBox>
         </div>
       </StyledWrapper>

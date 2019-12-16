@@ -18,7 +18,7 @@ const Heading = styled.Text`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const Image = styled.Image`
-  width: 130pt;
+  width: 100%;
   margin: 10pt auto;
 `;
 

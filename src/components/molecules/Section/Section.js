@@ -13,6 +13,9 @@ const StyledWrapper = styled.section`
   border-radius: 5px;
   border-bottom-color: hsl(210, 3%, 85%);
   overflow: hidden;
+  @media ${({ theme }) => theme.media.small} {
+    border-radius: 0;
+  }
 `;
 const Section = () => {
   return (

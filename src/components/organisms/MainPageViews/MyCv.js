@@ -45,7 +45,7 @@ class CvList extends Component {
   };
 
   render() {
-    const { cvList, name, caption, modal, modalVisible, handleModal } = this.props;
+    const { cvList, name, caption, modal, modalVisible, handleModal, language } = this.props;
     const { requestActive, cvTitle } = this.state;
     const list = cvList.map(item => item);
 
@@ -56,7 +56,7 @@ class CvList extends Component {
           style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
           <MainModal>
-            <header>Tytuł CV</header>
+            <header>{language === 'PL' ? 'Tytuł CV' : 'CV title'}</header>
             <section>
               <input
                 type="text"
@@ -68,10 +68,10 @@ class CvList extends Component {
             </section>
             <footer>
               <PrimaryButton type="button" primary onClick={this.handleNewCv}>
-                zapisz
+                {language === 'PL' ? 'zapisz' : 'save'}
               </PrimaryButton>
               <PrimaryButton type="button" name="cancel" onClick={handleModal}>
-                anuluj
+                {language === 'PL' ? 'anuluj' : 'cancel'}
               </PrimaryButton>
             </footer>
           </MainModal>
@@ -82,6 +82,7 @@ class CvList extends Component {
           caption={caption}
           newCv={handleModal}
           disabled={requestActive}
+          language={language}
         />
       </StyleWrapper>
     );
@@ -109,5 +110,6 @@ const mapStateToProps = state => ({
   cvList: state.myCv,
   name: state.path.name,
   caption: state.path.caption,
+  language: state.appState.language,
 });
 export default withModal(withRouter(connect(mapStateToProps)(CvList)));
