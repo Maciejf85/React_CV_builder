@@ -24,6 +24,9 @@ const StyledWrapper = styled.div`
     filter: brightness(100%);
     transform: scale(1.1);
   }
+  @media (max-width: 460px) {
+    display: none;
+  }
 `;
 
 const LanguageButton = ({ language, icon, active }) => {
