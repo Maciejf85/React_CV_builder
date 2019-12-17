@@ -10,10 +10,10 @@ const StyleWrapper = styled.div`
   }
 `;
 
-const Confidential = () => {
+const Confidential = ({ language }) => {
   return (
     <StyleWrapper>
-      <Panel />
+      <Panel language={language} />
     </StyleWrapper>
   );
 };

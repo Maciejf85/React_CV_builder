@@ -56,7 +56,6 @@ const StyledWrapper = styled.div`
 
 const defaultPanel = props => {
   const { name, content, caption, disabled, language } = props;
-  console.log('name', name);
   return (
     <>
       <StyledWrapper>

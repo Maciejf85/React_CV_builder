@@ -16,18 +16,20 @@ const path = (state = initialState, { type }) => {
     case 'documents':
       return {
         name: 'Moje listy motywacyjne',
-        naneL: 'Cover Letter',
+        nameL: 'Cover Letter',
         currentView: 'documents',
         caption: 'nowy dokument',
       };
     case 'account':
       return {
         name: 'Moje konto',
+        nameL: 'My account',
         currentView: 'account',
       };
     case 'confidentiality':
       return {
         name: 'Klauzula poufności',
+        nameL: 'Confidentiality clause',
         currentView: 'confidentiality',
       };
 

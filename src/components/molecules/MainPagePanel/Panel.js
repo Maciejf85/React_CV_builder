@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -9,7 +10,7 @@ import { sidePanel } from 'functions';
 import ButtonHolder from 'components/atoms/ButtonHolder';
 import store from 'store';
 import axios from 'axios';
-import path from '../../../path';
+import realPath from '../../../path';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -81,7 +82,7 @@ class Panel extends Component {
     const { id } = e.target;
     this.saveButtonState();
     axios
-      .post(`${path.cors}data.php`, {
+      .post(`${realPath.cors}data.php`, {
         type: id,
         data: id === 'save' ? localConf : '',
         token,
@@ -110,13 +111,12 @@ class Panel extends Component {
 
   render() {
     const { editValue, localConf, disabled } = this.state;
-    const { confidential } = this.props;
-
+    const { confidential, language, path, pathL } = this.props;
     return (
       <>
         <StyledWrapper>
           <header>
-            <p>Klauzula poufności</p>
+            <p>{language === 'PL' ? path : pathL}</p>
           </header>
           <section>
             {editValue ? (
@@ -137,16 +137,17 @@ class Panel extends Component {
               disabled={disabled}
               onClick={this.updateConfidential}
             >
-              zapisz
+              {language === 'PL' ? 'zapisz' : 'save'}
             </PrimaryButton>
           )}
+
           <PrimaryButton normal type="button" onClick={this.handleEditMode}>
-            {editValue ? 'anuluj' : 'edytuj'}
+            {language === 'PL' ? (editValue ? 'anuluj' : 'edytuj') : editValue ? 'cancel' : 'edit'}
           </PrimaryButton>
 
           {!editValue && (
             <PrimaryButton normal type="button" id="default" onClick={this.updateConfidential}>
-              przywróć domyślne
+              {language === 'PL' ? 'przywróć domyślne' : 'restore defaults'}
             </PrimaryButton>
           )}
         </ButtonHolder>
@@ -162,6 +163,10 @@ Panel.defaultProps = {
   confidential: '',
 };
 
-const mapStateToProps = ({ confidential }) => confidential;
+const mapStateToProps = ({ confidential, path }) => ({
+  confidential: confidential.confidential,
+  path: path.name,
+  pathL: path.nameL,
+});
 
 export default connect(mapStateToProps)(Panel);

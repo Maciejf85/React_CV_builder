@@ -30,7 +30,7 @@ class Main extends Component {
         <StyledWrapper>
           <NavBar language={language} />
           <MainPage language={language} />
-          <Footer />
+          <Footer language={language} />
           <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
         </StyledWrapper>
       </>
