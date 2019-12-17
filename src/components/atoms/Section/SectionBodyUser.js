@@ -147,8 +147,9 @@ class SectionBody extends Component {
       profession,
     } = this.props.personalData;
     const { image } = this.props.image;
-    const { modal, modalVisible, handleModal } = this.props;
+    const { modal, modalVisible, handleModal, language } = this.props;
     const { currentImageSrc, fileSize } = this.state;
+    const polishLanguage = language === 'PL';
 
     return (
       <>
@@ -162,23 +163,24 @@ class SectionBody extends Component {
           <div className="firstContainer">
             <div className="header">
               <h1>{profession}</h1>
-              <span>{` utworzone ${reverseDate(created)} `}</span>
+              <span>{` ${polishLanguage  ? 'utworzone' : 'created'} ${reverseDate(created)} `}</span>
             </div>
             <ul>
               <li>
-                <span>imię:</span> {name}
+                <span>{polishLanguage ? 'imię' : 'name'}</span> {name}
               </li>
               <li>
-                <span>nazwisko:</span> {surname}
+                <span>{polishLanguage ? 'nazwisko' : 'surname'}:</span> {surname}
               </li>
               <li>
                 <span>email:</span> {email}
               </li>
               <li>
-                <span>adres:</span> {adress}
+                <span>{polishLanguage ? 'adres' : 'address'}:</span> {adress}
               </li>
               <li>
-                <span>data urodzenia:</span> {reverseDate(birthday)}
+                <span>{polishLanguage ? 'data urodzenia' : 'birthday'}</span>
+                {reverseDate(birthday)}
               </li>
               <li>
                 <span>github:</span>
@@ -273,6 +275,10 @@ SectionBody.defaultProps = {
   }),
 };
 
-const mapStateToProps = ({ personalData, image }) => ({ personalData, image });
+const mapStateToProps = ({ personalData, image, appState }) => ({
+  personalData,
+  image,
+  language: appState.language,
+});
 
 export default withModal(connect(mapStateToProps)(SectionBody));

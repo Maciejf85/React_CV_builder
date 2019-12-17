@@ -13,8 +13,9 @@ const StyledWrapper = styled.header`
   background: ${({ theme }) => theme.colors.lightGrey};
 `;
 const SectionHeader = () => {
-  const name = useSelector(state => state.path.name);
-  return <StyledWrapper>{name}</StyledWrapper>;
+  const name = useSelector(({ path }) => ({ nameP: path.name, nameL: path.nameL }));
+  const language = useSelector(({ appState }) => appState.language);
+  return <StyledWrapper>{language === 'PL' ? name.nameP : name.nameL}</StyledWrapper>;
 };
 
 export default SectionHeader;
