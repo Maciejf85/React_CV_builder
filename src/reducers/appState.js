@@ -16,6 +16,7 @@ const SidePanel = (state = initialState, { type, payload }) => {
   switch (type) {
     case CHANGE_SIDEPANEL_STATE:
       return {
+        ...state,
         isVisible: !state.isVisible,
         content: payload.content,
         error: payload.error,
@@ -23,6 +24,7 @@ const SidePanel = (state = initialState, { type, payload }) => {
       };
     case UNLOCK_SIDE_PANEL:
       return {
+        ...state,
         isVisible: false,
         content: '',
         error: false,
