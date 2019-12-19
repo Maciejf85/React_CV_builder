@@ -80,14 +80,15 @@ class OptionPanel extends Component {
   };
 
   render() {
-    const { id } = this.props;
+    const { id, language } = this.props;
     const { isAgree, isRemove } = this.state;
+    const polishLanguage = language === 'PL';
 
     return (
       <StyledWrapper>
         {!isAgree ? (
           <>
-            <li data-tip="edytuj" data-for="edit">
+            <li data-tip={polishLanguage ? 'edytuj' : 'edit'} data-for="edit">
               <button
                 className="button"
                 type="button"
@@ -99,7 +100,7 @@ class OptionPanel extends Component {
                 <FontAwesomeIcon icon={faEdit} />
               </button>
             </li>
-            <li data-tip="pobierz PDF" data-for="download">
+            <li data-tip={polishLanguage ? 'pobierz pdf' : 'download pdf'} data-for="download">
               <button
                 className="button"
                 type="button"
@@ -111,7 +112,7 @@ class OptionPanel extends Component {
                 <FontAwesomeIcon icon={faDownload} />
               </button>
             </li>
-            <li data-tip="usuń CV" data-for="delete">
+            <li data-tip={polishLanguage ? 'usuń CV' : 'delete CV'} data-for="delete">
               <button
                 className="button"
                 type="button"
@@ -126,17 +127,17 @@ class OptionPanel extends Component {
         ) : (
           <>
             <li>
-              <p>Czy usunąć ?</p>
+              <p>{polishLanguage ? 'czy usunąć ?' : 'delete ?'}</p>
             </li>
             <li>
               <ConfirmButton data-name="remove" id={id} onClick={this.handleClick}>
                 {isRemove && <FontAwesomeIcon icon={faSyncAlt} spin style={{ margin: '0 5px' }} />}
-                usuń
+                {polishLanguage ? 'usuń' : 'delete'}
               </ConfirmButton>
             </li>
             <li>
               <ConfirmButton cancel onClick={this.handleButtons} disabled={isRemove && true}>
-                anuluj
+                {polishLanguage ? 'anuluj' : 'cancel'}
               </ConfirmButton>
             </li>
           </>

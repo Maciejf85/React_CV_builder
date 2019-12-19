@@ -30,7 +30,7 @@ class Edit extends Component {
         <NavBar language={language} />
         <StyledWrapper>
           <EditSidebar language={language} />
-          <EditMainContent />
+          <EditMainContent language={language} />
           <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
         </StyledWrapper>
       </>

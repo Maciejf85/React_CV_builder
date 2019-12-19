@@ -74,10 +74,11 @@ class CertificatesPanel extends Component {
 
   render() {
     const { id } = this.props.item;
-    const { index, current, newItem } = this.props;
+    const { index, current, newItem, language } = this.props;
     const { description, endYear, endMonth } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
+    const polishLanguage = language === 'PL';
     return (
       <StyledInputSection id={id}>
         <InputHeader
@@ -88,14 +89,14 @@ class CertificatesPanel extends Component {
         />
         <div className="inputContainer">
           <Input
-            placeholder="Certyfikat"
+            placeholder={polishLanguage ? 'Certyfikat' : 'Certificate'}
             id="description"
             value={description}
             onChange={this.handleForm}
           />
 
           <Select
-            title="data uzyskania"
+            title={polishLanguage ? 'data uzyskania' : 'date'}
             id="endYear"
             value={endYear}
             onChange={this.handleForm}

@@ -30,20 +30,21 @@ class EditMainContent extends Component {
   }
 
   render() {
+    const { language } = this.props;
     const { currentView } = this.props.editComponentView;
     return (
       <StyledWrapper>
-        {currentView === 'personal' && <UserData />}
-        {currentView === 'education' && <Education />}
-        {currentView === 'experience' && <Experience />}
-        {currentView === 'languages' && <Languages />}
-        {currentView === 'skills' && <Skills />}
-        {currentView === 'interests' && <Interests />}
-        {currentView === 'conferences' && <Conferences />}
-        {currentView === 'courses' && <Courses />}
-        {currentView === 'publications' && <Publications />}
-        {currentView === 'licenses' && <Licenses />}
-        {currentView === 'certificates' && <Certificates />}
+        {currentView === 'personal' && <UserData language={language} />}
+        {currentView === 'education' && <Education language={language} />}
+        {currentView === 'experience' && <Experience language={language} />}
+        {currentView === 'languages' && <Languages language={language} />}
+        {currentView === 'skills' && <Skills language={language} />}
+        {currentView === 'interests' && <Interests language={language} />}
+        {currentView === 'conferences' && <Conferences language={language} />}
+        {currentView === 'courses' && <Courses language={language} />}
+        {currentView === 'publications' && <Publications language={language} />}
+        {currentView === 'licenses' && <Licenses language={language} />}
+        {currentView === 'certificates' && <Certificates language={language} />}
       </StyledWrapper>
     );
   }

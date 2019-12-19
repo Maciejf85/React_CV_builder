@@ -1,7 +1,9 @@
 const initialState = {
   name: 'Moje CV',
+  nameL: "CV's",
   currentView: 'cv',
   caption: 'nowe CV',
+  captionL: 'new CV',
 };
 
 const path = (state = initialState, { type }) => {
@@ -12,6 +14,7 @@ const path = (state = initialState, { type }) => {
         nameL: "CV's",
         currentView: 'cv',
         caption: 'nowe CV',
+        captionL: 'new CV',
       };
     case 'documents':
       return {
@@ -19,6 +22,7 @@ const path = (state = initialState, { type }) => {
         nameL: 'Cover Letter',
         currentView: 'documents',
         caption: 'nowy dokument',
+        captionL: 'new document',
       };
     case 'account':
       return {
