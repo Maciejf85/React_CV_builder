@@ -157,13 +157,18 @@ class SectionBody extends Component {
           className={modal ? 'active' : ''}
           style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <ImageResizer click={handleModal} imageSrc={currentImageSrc} imageSize={fileSize} />
+          <ImageResizer
+            click={handleModal}
+            imageSrc={currentImageSrc}
+            imageSize={fileSize}
+            language={language}
+          />
         </Modal>
         <StyledWrapper>
           <div className="firstContainer">
             <div className="header">
               <h1>{profession}</h1>
-              <span>{` ${polishLanguage  ? 'utworzone' : 'created'} ${reverseDate(created)} `}</span>
+              <span>{` ${polishLanguage ? 'utworzone' : 'created'} ${reverseDate(created)} `}</span>
             </div>
             <ul>
               <li>
@@ -211,14 +216,14 @@ class SectionBody extends Component {
                         id="imageInput"
                         style={{ display: 'none' }}
                       />
-                      zmień zdjęcie
+                      {polishLanguage ? 'zmień zdjęcie' : 'change image'}
                     </ImageOptionLabel>
                     <ImageOptionButton
                       type="button"
                       data-actiontype="remove"
                       onClick={this.handleImage}
                     >
-                      usuń zdjęcie
+                      {polishLanguage ? 'usuń zdjęcie' : 'delete image'}
                     </ImageOptionButton>
                   </div>
                 </div>
@@ -232,7 +237,7 @@ class SectionBody extends Component {
                   id="imageInput"
                   style={{ display: 'none' }}
                 />
-                dodaj zdjęcie
+                {polishLanguage ? 'dodaj zdjęcie' : 'add image'}
               </ImageOptionLabel>
             )}
           </StyledInputSection>

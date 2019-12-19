@@ -34,6 +34,8 @@ const withModal = WrappedComponent => {
           modal={isModal}
           modalVisible={isModalVisible}
           handleModal={this.handleModal}
+          // rest props
+          {...this.props}
         />
       );
     }

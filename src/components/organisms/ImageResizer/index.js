@@ -223,11 +223,12 @@ class ImageResizer extends Component {
 
   render() {
     const { crop } = this.state;
-    const { imageSrc } = this.props;
+    const { imageSrc, language } = this.props;
+    const polishLanguage = language === 'PL';
 
     return (
       <StyledWrapper>
-        <header>Kadrowanie zdjęcia</header>
+        <header>{polishLanguage ? 'Kadrowanie zdjęcia' : 'Crop image'}</header>
         <section>
           <div className="imageContainer">
             <div className="image">
@@ -270,7 +271,7 @@ class ImageResizer extends Component {
             </div>
           </div>
           <div className="preview">
-            <div className="header">Podgląd</div>
+            <div className="header">{polishLanguage ? 'Podgląd' : 'Preview'}</div>
             <canvas ref={this.imagePreviewOnCanvas} />
             {crop && (
               <div className="imageInformation">
@@ -281,10 +282,10 @@ class ImageResizer extends Component {
         </section>
         <div className="bottom">
           <PrimaryButton type="button" onClick={this.handleCancel} width="90px">
-            anuluj
+            {polishLanguage ? 'anuluj' : 'cancel'}
           </PrimaryButton>
           <PrimaryButton type="button" primary onClick={this.handleUploadImage}>
-            zapisz
+            {polishLanguage ? 'zapisz' : 'save'}
           </PrimaryButton>
         </div>
       </StyledWrapper>

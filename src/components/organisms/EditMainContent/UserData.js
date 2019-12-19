@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -225,7 +226,8 @@ class UserData extends Component {
 
   render() {
     const { image } = this.props.image;
-    const { modal, modalVisible, handleModal } = this.props;
+    const { modal, modalVisible, handleModal, language } = this.props;
+    const polishLanguage = language === 'PL';
 
     const {
       currentTitle,
@@ -247,7 +249,7 @@ class UserData extends Component {
           className={modal ? 'active' : ''}
           style={modalVisible ? { display: 'block' } : { display: 'none' }}
         >
-          <ImageResizer click={handleModal} imageSrc={currentImageSrc} />
+          <ImageResizer click={handleModal} imageSrc={currentImageSrc} language={language} />
         </Modal>
 
         <StyledWrapper>
@@ -266,11 +268,17 @@ class UserData extends Component {
               )}
               <div>
                 <PrimaryButton id="save" onClick={this.handleTitle} titleButton>
-                  {changeTitle ? 'zapisz' : 'zmień tytuł'}
+                  {polishLanguage
+                    ? changeTitle
+                      ? 'zapisz'
+                      : 'zmień tytuł'
+                    : changeTitle
+                    ? 'save'
+                    : 'change title'}
                 </PrimaryButton>
                 {changeTitle && (
                   <PrimaryButton id="cancel" onClick={this.handleTitle} titleButton>
-                    anuluj
+                    {polishLanguage ? 'anuluj' : 'cancel'}
                   </PrimaryButton>
                 )}
               </div>
@@ -281,7 +289,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentName"
-              placeholder="imię"
+              placeholder={polishLanguage ? 'imię' : 'name'}
               value={currentName}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
@@ -290,7 +298,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentSurname"
-              placeholder="nazwisko"
+              placeholder={polishLanguage ? 'nazwisko' : 'surname'}
               value={currentSurname}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
@@ -299,7 +307,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentProfession"
-              placeholder="zawód"
+              placeholder={polishLanguage ? 'zawód' : 'profession'}
               value={currentProfession}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
@@ -319,14 +327,14 @@ class UserData extends Component {
                         id="imageInput"
                         style={{ display: 'none' }}
                       />
-                      zmień zdjęcie
+                      {polishLanguage ? 'zmień zdjęcie' : 'change image'}
                     </ImageOptionLabel>
                     <ImageOptionButton
                       type="button"
                       data-actiontype="remove"
                       onClick={this.handleImage}
                     >
-                      usuń zdjęcie
+                      {polishLanguage ? 'usuń zdjęcie' : 'delete image'}
                     </ImageOptionButton>
                   </div>
                 </div>
@@ -340,7 +348,7 @@ class UserData extends Component {
                   id="imageInput"
                   style={{ display: 'none' }}
                 />
-                dodaj zdjęcie
+                {polishLanguage ? 'dodaj zdjęcie' : 'add image'}
               </ImageOptionLabel>
             )}
           </StyledInputSection>
@@ -356,7 +364,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentBirthday"
-              placeholder="data ur."
+              placeholder={polishLanguage ? 'data ur' : 'birthday'}
               value={currentBirthday}
               onChange={this.handleDateValidation}
               onBlur={this.handleStoreUpdate}
@@ -366,7 +374,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentAdress"
-              placeholder="miasto, kraj"
+              placeholder={polishLanguage ? 'miasto, Kraj' : 'city, country'}
               value={currentAdress}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
