@@ -36,14 +36,14 @@ const StyleWrapper = styled.div`
 `;
 
 const StripBody = props => {
-  const { title, date, id } = props;
+  const { title, date, id, language } = props;
 
   return (
     <StyleWrapper>
       <div>{title}</div>
       <div>{formatDate(date)}</div>
       <div>
-        <OptionPanel id={id} />
+        <OptionPanel id={id} language={language} />
       </div>
     </StyleWrapper>
   );

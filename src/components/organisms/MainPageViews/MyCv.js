@@ -45,10 +45,19 @@ class CvList extends Component {
   };
 
   render() {
-    const { cvList, name, nameL, caption, modal, modalVisible, handleModal, language } = this.props;
+    const {
+      cvList,
+      name,
+      nameL,
+      caption,
+      captionL,
+      modal,
+      modalVisible,
+      handleModal,
+      language,
+    } = this.props;
     const { requestActive, cvTitle } = this.state;
     const list = cvList.map(item => item);
-    console.log('language, name, nameL', language, name, nameL);
 
     return (
       <StyleWrapper>
@@ -80,7 +89,7 @@ class CvList extends Component {
         <Panel
           name={language === 'PL' ? name : nameL}
           content={list}
-          caption={caption}
+          caption={language === 'PL' ? caption : captionL}
           newCv={handleModal}
           disabled={requestActive}
           language={language}
@@ -112,6 +121,7 @@ const mapStateToProps = state => ({
   name: state.path.name,
   nameL: state.path.nameL,
   caption: state.path.caption,
+  captionL: state.path.captionL,
   language: state.appState.language,
 });
 export default withModal(withRouter(connect(mapStateToProps)(CvList)));

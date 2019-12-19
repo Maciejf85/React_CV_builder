@@ -64,7 +64,7 @@ const defaultPanel = props => {
           {!content.length || <StripTitle language={language} />}
           {content.length ? (
             content.map(({ id, title, date }) => (
-              <StripBody key={date} id={id} title={title} date={date} />
+              <StripBody key={date} id={id} title={title} date={date} language={language} />
             ))
           ) : (
             <div className="empty">
@@ -73,7 +73,7 @@ const defaultPanel = props => {
                 primary={name === 'Moje CV' || name === "CV's"}
                 disabled={name === 'Moje listy motywacyjne' || name === 'Cover Letter'}
               >
-                {`${caption}`}
+                {caption}
               </OptionButton>
             </div>
           )}
@@ -89,7 +89,7 @@ const defaultPanel = props => {
                 style={{ margin: '0 5px', color: 'hsl(99,78%,60%)' }}
               />
             )}
-            {`${caption}`}
+            {caption}
           </PrimaryButton>
         ) : null}
       </ButtonHolder>
