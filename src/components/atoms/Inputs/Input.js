@@ -46,7 +46,7 @@ const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall, error,
       <StyledInput
         type={type}
         id={id}
-        placeholder={placeholder}
+        // placeholder={placeholder}
         value={value}
         onChange={onChange}
         onBlur={onBlur}

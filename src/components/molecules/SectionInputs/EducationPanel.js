@@ -4,8 +4,8 @@ import Input from 'components/atoms/Inputs/Input';
 import Select from 'components/atoms/Inputs/Select';
 import { Textarea } from 'components/atoms/Inputs';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
+import SlideCheckox from 'components/atoms/Inputs/slideCheckbox';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
-
 import store from 'store';
 // import PropTypes from 'prop-types';
 
@@ -18,12 +18,22 @@ class EducationPanel extends Component {
     endYear: 0,
     endMonth: 0,
     description: '',
+    inProgress: false,
     statusActive: false,
   };
 
   componentDidMount() {
     this.mounted = true;
-    const { id, name, startYear, startMonth, endYear, endMonth, description } = this.props.item;
+    const {
+      id,
+      name,
+      startYear,
+      startMonth,
+      endYear,
+      endMonth,
+      description,
+      inProgress,
+    } = this.props.item;
 
     this.setState({
       id,
@@ -33,6 +43,7 @@ class EducationPanel extends Component {
       endYear,
       endMonth,
       description,
+      inProgress,
     });
   }
 
@@ -69,7 +80,7 @@ class EducationPanel extends Component {
             statusActive: false,
           });
         }
-      }, 3000);
+      }, 1500);
     }
   };
 
@@ -79,10 +90,20 @@ class EducationPanel extends Component {
     store.dispatch(removeItemfromCurrentCv(current, id));
   };
 
+  handleCheckbox = () => {
+    this.setState({
+      inProgress: !this.state.inProgress,
+      statusActive: true,
+    });
+    if (!this.state.statusActive) {
+      this.handleTimer();
+    }
+  };
+
   render() {
     const { id } = this.props.item;
-    const { index, current, newItem } = this.props;
-    const { name, startYear, startMonth, endYear, endMonth, description } = this.state;
+    const { index, current, newItem, language } = this.props;
+    const { name, startYear, startMonth, endYear, endMonth, description, inProgress } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
     return (
@@ -94,13 +115,7 @@ class EducationPanel extends Component {
           removeItem={this.handleRemoveItem}
         />
         <div className="inputContainer">
-          <Input
-            isSmall
-            placeholder="nazwa szkoły"
-            id="name"
-            value={name}
-            onChange={this.handleForm}
-          />
+          <Input placeholder="nazwa szkoły" id="name" value={name} onChange={this.handleForm} />
 
           <Select
             title="data rozpoczęcia"
@@ -124,8 +139,23 @@ class EducationPanel extends Component {
             onChange={this.handleForm}
             start={startY}
             end={endY}
+            disabled={inProgress}
           />
-          <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
+          <Select
+            id="endMonth"
+            value={endMonth}
+            onChange={this.handleForm}
+            start={0}
+            end={12}
+            disabled={inProgress}
+          />
+        </div>
+        <div className="checkboxContainer">
+          <SlideCheckox
+            handleCheckbox={this.handleCheckbox}
+            checkboxState={inProgress}
+            language={language}
+          />
         </div>
 
         <Textarea
