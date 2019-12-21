@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyleWrapper = styled.input`
   position: relative;
   width: 48px;
-  height: 22px;
+  height: 16px;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.inputGrey};
   background: #ccc;
@@ -14,8 +14,8 @@ const StyleWrapper = styled.input`
 
   &::before {
     content: '';
-    width: 22px;
-    height: 22px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     position: absolute;
     top: -1px;

@@ -29,6 +29,7 @@ const StyledInputSection = styled.div`
     width: 100%;
     height: 30px;
     padding: 0 10px;
+    margin-bottom: 5px;
   }
 
   .title {
