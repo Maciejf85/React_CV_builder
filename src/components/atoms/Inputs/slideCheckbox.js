@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyleWrapper = styled.input`
   position: relative;
-  width: 48px;
+  width: 38px;
   height: 16px;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.inputGrey};
@@ -26,7 +26,7 @@ const StyleWrapper = styled.input`
     transition: all 0.3s;
   }
   &:checked::before {
-    left: 32px;
+    left: 28px;
     border: 1px solid ${({ theme }) => theme.colors.inputGrey};
     background:white;
 
