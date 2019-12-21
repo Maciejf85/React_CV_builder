@@ -7,7 +7,6 @@ const StyleWrapper = styled.input`
   height: 22px;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.inputGrey};
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   background: #ccc;
   appearance: none;
   margin: 0 10px;
@@ -15,19 +14,19 @@ const StyleWrapper = styled.input`
 
   &::before {
     content: '';
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     position: absolute;
-    top: 1px;
-    left: 0px;
+    top: -1px;
+    left: -1px;
     /* background: ${({ theme }) => theme.colors.buttonCaption}; */
     background:white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: all 0.3s;
   }
   &:checked::before {
-    left: 29px;
+    left: 32px;
     border: 1px solid ${({ theme }) => theme.colors.inputGrey};
     background:white;
 
@@ -37,12 +36,13 @@ const StyleWrapper = styled.input`
   }
   &:checked {
     transition: all 0.3s;
-    background: ${({ theme }) => theme.colors.checked};
+    background: ${({ theme }) => theme.colors.primaryBlue};
   }
 `;
 const Label = styled.label`
   font-size: ${({ theme }) => theme.fontSize.s};
   font-weight: ${({ theme }) => theme.font.bold};
+  color: ${({ theme, checkboxState }) => (checkboxState ? 'black' : theme.colors.inputGrey)};
 `;
 
 const slideCheckbox = ({ handleCheckbox, checkboxState, language }) => {
@@ -50,7 +50,9 @@ const slideCheckbox = ({ handleCheckbox, checkboxState, language }) => {
   return (
     <>
       <StyleWrapper id="c1" type="checkbox" onChange={handleCheckbox} checked={checkboxState} />
-      <Label htmlFor="c1">{polishLanguage ? 'nadal trwa' : 'in progress'}</Label>
+      <Label htmlFor="c1" checkboxState={checkboxState}>
+        {polishLanguage ? 'nadal trwa' : 'in progress'}
+      </Label>
     </>
   );
 };

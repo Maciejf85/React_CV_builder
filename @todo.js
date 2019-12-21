@@ -11,6 +11,7 @@
 | 9. Zablokowanie przynisku anuluj podczas usuwania obecnego CV - >>>>>>> GOTOWE <<<<<<<
 | 10. Poprawić komunikaty zwrotne z serwera. - >>>>>>> GOTOWE <<<<<<<
 | 11. Po wysłaniu danych z formularza znika appState language - >>>>>>> GOTOWE <<<<<<<
+| 12. zmiana ID na data-set we wszystkich zakładkach Edit Component 
 |--------------------------------------------------
 */
 
