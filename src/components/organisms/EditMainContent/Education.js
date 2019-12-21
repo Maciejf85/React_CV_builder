@@ -68,3 +68,6 @@ const mapStateToProps = ({ currentCv, editComponentView }) => ({
   current: editComponentView,
 });
 export default connect(mapStateToProps)(Education);
+
+// data-actionType
+// const { actiontype } = e.target.dataset;

@@ -19,7 +19,7 @@ const StyleWrapper = styled.input`
     border-radius: 50%;
     position: absolute;
     top: -1px;
-    left: -1px;
+    left: -3px;
     /* background: ${({ theme }) => theme.colors.buttonCaption}; */
     background:white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
