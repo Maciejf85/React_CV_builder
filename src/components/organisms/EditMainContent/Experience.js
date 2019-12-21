@@ -30,12 +30,13 @@ class Experience extends Component {
         endYear: 2000,
         endMonth: 1,
         description: '',
+        inProgress: false,
       }),
     );
   };
 
   render() {
-    const { cvId, currentCv, current } = this.props;
+    const { cvId, currentCv, current, language } = this.props;
     const { experience } = currentCv;
     const { currentView } = current;
     return (
@@ -51,6 +52,7 @@ class Experience extends Component {
                 cvId={cvId}
                 current={currentView}
                 newItem={this.handleNewItem}
+                language={language}
               />
             );
           })

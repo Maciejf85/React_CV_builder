@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const StyleWrapper = styled.input`
@@ -7,6 +7,8 @@ const StyleWrapper = styled.input`
   height: 22px;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.inputGrey};
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #ccc;
   appearance: none;
   margin: 0 10px;
   outline: none;
@@ -19,19 +21,23 @@ const StyleWrapper = styled.input`
     position: absolute;
     top: 1px;
     left: 0px;
-    background: ${({ theme }) => theme.colors.buttonActive};
+    /* background: ${({ theme }) => theme.colors.buttonCaption}; */
+    background:white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: all 0.3s;
   }
   &:checked::before {
     left: 29px;
-    background: ${({ theme }) => theme.colors.buttonActive};
+    border: 1px solid ${({ theme }) => theme.colors.inputGrey};
+    background:white;
+
   }
   &:hover {
     cursor: pointer;
   }
   &:checked {
     transition: all 0.3s;
-    background: ${({ theme }) => theme.colors.inputGrey};
+    background: ${({ theme }) => theme.colors.checked};
   }
 `;
 const Label = styled.label`
