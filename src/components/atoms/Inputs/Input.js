@@ -45,8 +45,9 @@ const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall, error,
       <StyledLabel htmlFor={id}>{placeholder}</StyledLabel>
       <StyledInput
         type={type}
-        id={id}
+        // id={id}
         // placeholder={placeholder}
+        data-id={id}
         value={value}
         onChange={onChange}
         onBlur={onBlur}

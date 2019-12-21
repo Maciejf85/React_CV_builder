@@ -369,7 +369,7 @@ class UserData extends Component {
               onChange={this.handleDateValidation}
               onBlur={this.handleStoreUpdate}
               error={birthdayValid}
-              tip="format daty xxxx-xx-xx"
+              tip={(polishLanguage ? 'format daty' : 'date format') + ' xxxx-xx-xx'}
             />
             <Input
               type="text"
