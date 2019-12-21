@@ -54,7 +54,7 @@ class EducationPanel extends Component {
   handleForm = e => {
     const value = parseInt(e.target.value, 10) || e.target.value;
     this.setState({
-      [e.target.id]: value,
+      [e.target.dataset.id]: value,
       statusActive: true,
     });
     if (!this.state.statusActive) {
@@ -161,7 +161,7 @@ class EducationPanel extends Component {
         <Textarea
           edit
           placeholder="opis"
-          id="description"
+          data-id="description"
           value={description}
           onChange={this.handleForm}
         />
@@ -195,3 +195,5 @@ class EducationPanel extends Component {
 export default EducationPanel;
 
 // @TODO: wyniesienie update store i update pliku do wyższych komponentów
+// data-actionType
+// const { actiontype } = e.target.dataset;

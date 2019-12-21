@@ -44,7 +44,13 @@ const Select = ({ id, title, value, onChange, onBlur, start, end, disabled }) =>
       <StyledLabel htmlFor={id} disabled={disabled}>
         {title}
       </StyledLabel>
-      <StyledInput id={id} value={value} onChange={onChange} onBlur={onBlur} disabled={disabled}>
+      <StyledInput
+        data-id={id}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        disabled={disabled}
+      >
         {dates.map(item => (
           <option key={item}>{item}</option>
         ))}

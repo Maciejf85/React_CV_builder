@@ -65,7 +65,7 @@ class ExperiencePanel extends Component {
   handleForm = e => {
     const value = parseInt(e.target.value, 10) || e.target.value;
     this.setState({
-      [e.target.id]: value,
+      [e.target.dataset.id]: value,
       statusActive: true,
     });
     if (!this.state.statusActive) {
