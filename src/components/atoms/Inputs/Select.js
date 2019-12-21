@@ -12,6 +12,12 @@ const StyledInput = styled.select`
   border: none;
   background: ${({ theme }) => theme.colors.lightGrey};
   border-top: 2px solid ${({ theme }) => theme.colors.inputGrey};
+  &:hover:not(:disabled) {
+    cursor: pointer;
+  }
+  &:disabled {
+    color: ${({ theme }) => theme.colors.lightGrey};
+  }
 
   &:focus {
     border-top: 2px solid ${({ theme }) => theme.colors.lightBlue};
@@ -20,7 +26,8 @@ const StyledInput = styled.select`
 const StyledLabel = styled.label`
   min-height: 14px;
   font-size: ${({ theme }) => theme.fontSize.s};
-  font-weight: ${({ theme }) => theme.font.bold};
+  font-weight: ${({ theme, disabled }) => (disabled ? theme.font.normal : theme.font.bold)};
+  color: ${({ theme, disabled }) => (disabled ? theme.colors.inputGrey : 'black')};
   margin-left: 10px;
 `;
 const StyledWrapper = styled.div`
@@ -29,13 +36,21 @@ const StyledWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-const Select = ({ id, title, value, onChange, onBlur, start, end }) => {
+const Select = ({ id, title, value, onChange, onBlur, start, end, disabled }) => {
   const count = end - start;
-  const dates = Array.from(Array(count), (x, index) => index + start + 1);
+  const dates = Array.from(Array(count), (undefind, index) => index + start + 1);
   return (
     <StyledWrapper>
-      <StyledLabel htmlFor={id}>{title}</StyledLabel>
-      <StyledInput id={id} value={value} onChange={onChange} onBlur={onBlur}>
+      <StyledLabel htmlFor={id} disabled={disabled}>
+        {title}
+      </StyledLabel>
+      <StyledInput
+        data-id={id}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        disabled={disabled}
+      >
         {dates.map(item => (
           <option key={item}>{item}</option>
         ))}

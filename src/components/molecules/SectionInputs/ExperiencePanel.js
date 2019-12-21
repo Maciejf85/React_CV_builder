@@ -5,6 +5,7 @@ import Select from 'components/atoms/Inputs/Select';
 import { Textarea } from 'components/atoms/Inputs';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
+import SlideCheckox from 'components/atoms/Inputs/slideCheckbox';
 import styled from 'styled-components';
 
 import store from 'store';
@@ -26,6 +27,7 @@ class ExperiencePanel extends Component {
     endYear: 0,
     endMonth: 0,
     description: '',
+    inProgress: false,
     statusActive: false,
   };
 
@@ -40,6 +42,7 @@ class ExperiencePanel extends Component {
       endYear,
       endMonth,
       description,
+      inProgress,
     } = this.props.item;
 
     this.setState({
@@ -51,6 +54,7 @@ class ExperiencePanel extends Component {
       endYear,
       endMonth,
       description,
+      inProgress,
     });
   }
 
@@ -61,7 +65,7 @@ class ExperiencePanel extends Component {
   handleForm = e => {
     const value = parseInt(e.target.value, 10) || e.target.value;
     this.setState({
-      [e.target.id]: value,
+      [e.target.dataset.id]: value,
       statusActive: true,
     });
     if (!this.state.statusActive) {
@@ -87,7 +91,7 @@ class ExperiencePanel extends Component {
             statusActive: false,
           });
         }
-      }, 3000);
+      }, 1500);
     }
   };
 
@@ -97,10 +101,29 @@ class ExperiencePanel extends Component {
     store.dispatch(removeItemfromCurrentCv(current, id));
   };
 
+  handleCheckbox = () => {
+    this.setState({
+      inProgress: !this.state.inProgress,
+      statusActive: true,
+    });
+    if (!this.state.statusActive) {
+      this.handleTimer();
+    }
+  };
+
   render() {
     const { id } = this.props.item;
-    const { index, current, newItem } = this.props;
-    const { name, employer, startYear, startMonth, endYear, endMonth, description } = this.state;
+    const { index, current, newItem, language } = this.props;
+    const {
+      name,
+      employer,
+      startYear,
+      startMonth,
+      endYear,
+      endMonth,
+      description,
+      inProgress,
+    } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
     return (
@@ -149,9 +172,24 @@ class ExperiencePanel extends Component {
             onChange={this.handleForm}
             start={startY}
             end={endY}
+            disabled={inProgress}
           />
-          <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
+          <Select
+            id="endMonth"
+            value={endMonth}
+            onChange={this.handleForm}
+            start={0}
+            end={12}
+            disabled={inProgress}
+          />
         </InputWrapper>
+        <div className="checkboxContainer">
+          <SlideCheckox
+            handleCheckbox={this.handleCheckbox}
+            checkboxState={inProgress}
+            language={language}
+          />
+        </div>
         <Textarea
           edit
           placeholder="opis stanowiska"

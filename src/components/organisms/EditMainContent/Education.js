@@ -29,12 +29,13 @@ class Education extends Component {
         endYear: 2000,
         endMonth: 1,
         description: '',
+        inProgress: false,
       }),
     );
   };
 
   render() {
-    const { cvId, currentCv, current } = this.props;
+    const { cvId, currentCv, current, language } = this.props;
     const { education } = currentCv;
     const { currentView } = current;
     return (
@@ -50,6 +51,7 @@ class Education extends Component {
                 cvId={cvId}
                 current={currentView}
                 newItem={this.handleNewItem}
+                language={language}
               />
             );
           })

@@ -22,6 +22,14 @@ const StyledInputSection = styled.div`
     align-items: center;
     width: 100%;
   }
+  .checkboxContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    padding: 0 10px;
+  }
 
   .title {
     position: absolute;

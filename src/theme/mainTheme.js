@@ -30,6 +30,7 @@ const theme = {
     secondaryBlue: 'hsl(204, 100%, 40%)',
     lightBlue: 'hsl(204, 100%, 58%)',
     darkBlue: 'hsl(204, 100%, 30%)',
+    checked: 'hsl(204, 100%, 74%)',
     alertColor: 'hsl(0,100%,42%)',
     alertColorHover: 'hsl(0,100%,32%)',
     successColor: 'hsl(99,78%,60%)',

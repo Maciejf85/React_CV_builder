@@ -37,7 +37,7 @@ export default class Skills extends Component {
   handleForm = e => {
     const { value } = e.target;
     this.setState({
-      [e.target.id]: value,
+      [e.target.dataset.id]: value,
       statusActive: true,
     });
     if (!this.state.statusActive) {
