@@ -17,6 +17,9 @@ const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
   /* margin-top: -50px; */
+  @media ${({ theme }) => theme.media.desktop} {
+    margin-top: -50px;
+  }
 `;
 const MainWrapper = styled.div`
   display: flex;
