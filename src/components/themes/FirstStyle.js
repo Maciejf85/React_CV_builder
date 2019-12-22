@@ -7,7 +7,10 @@ import store from 'store';
 
 Font.register({
   family: 'Montserrat',
-  fonts: [{ src: Montserrat, fontWeight: 'normal' }, { src: MontserratBold, fontWeight: 'bold' }],
+  fonts: [
+    { src: Montserrat, fontWeight: 'normal' },
+    { src: MontserratBold, fontWeight: 'bold' },
+  ],
 });
 
 const Heading = styled.Text`
@@ -30,7 +33,7 @@ const LeftColumn = styled.View`
   width: 150pt;
   height: 100%;
   color: white;
-  background-color: #2c313a;
+  background-color: #4d4d4d;
 `;
 const RightColumn = styled.View`
   width: 446pt;

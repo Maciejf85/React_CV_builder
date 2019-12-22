@@ -30,8 +30,8 @@ const StyledWrapper = styled.footer`
 const Footer = ({ language }) => (
   <StyledWrapper>
     <p>
-      {language === 'PL' ? 'Wszystkie prawa zastrzeżone' : 'All rights reserved'} -
-      <span>Maciej Fiałkowski 2019 </span>
+      {language === 'PL' ? 'Wszystkie prawa zastrzeżone' : 'All rights reserved'}
+      <span> Maciej Fiałkowski 2019</span>
     </p>
   </StyledWrapper>
 );
