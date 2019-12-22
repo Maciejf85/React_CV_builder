@@ -7,14 +7,13 @@ import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
 
 class Experience extends Component {
-  componentDidMount() {
-    console.log(' Mount - Education Component');
-  }
-
-  componentDidUpdate() {
-    const { cvId, currentCv } = this.props;
-    const token = sessionStorage.getItem('userID');
-    store.dispatch(setNewCurrentCVData('update', token, cvId, currentCv));
+  componentDidUpdate(prevProps) {
+    const { language } = prevProps;
+    if (language === this.props.language) {
+      const { cvId, currentCv } = this.props;
+      const token = sessionStorage.getItem('userID');
+      store.dispatch(setNewCurrentCVData('update', token, cvId, currentCv));
+    }
   }
 
   handleNewItem = () => {

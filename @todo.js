@@ -12,6 +12,7 @@
 | 10. Poprawić komunikaty zwrotne z serwera. - >>>>>>> GOTOWE <<<<<<<
 | 11. Po wysłaniu danych z formularza znika appState language - >>>>>>> GOTOWE <<<<<<<
 | 12. zmiana ID na data-set we wszystkich zakładkach Edit Component - >>>>>>> GOTOWE <<<<<<<
+| 13. Angielskie nazwy placeholderów w editor
 |--------------------------------------------------
 */
 

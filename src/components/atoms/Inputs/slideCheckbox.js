@@ -51,7 +51,7 @@ const slideCheckbox = ({ handleCheckbox, checkboxState, language }) => {
     <>
       <StyleWrapper id="c1" type="checkbox" onChange={handleCheckbox} checked={checkboxState} />
       <Label htmlFor="c1" checkboxState={checkboxState}>
-        {polishLanguage ? 'nadal trwa' : 'in progress'}
+        {polishLanguage ? 'w trakcie' : 'in progress'}
       </Label>
     </>
   );
