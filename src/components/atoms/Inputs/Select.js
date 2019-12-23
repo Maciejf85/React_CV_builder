@@ -7,7 +7,7 @@ const StyledInput = styled.select`
   width: 130px;
   border-radius: 7px;
   padding: 5px 15px;
-  margin: 5px 10px;
+  margin: 5px;
   outline: none;
   border: none;
   background: ${({ theme }) => theme.colors.lightGrey};
@@ -33,7 +33,7 @@ const StyledLabel = styled.label`
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const Select = ({ id, title, value, onChange, onBlur, start, end, disabled }) => {

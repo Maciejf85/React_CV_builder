@@ -7,7 +7,10 @@ import store from 'store';
 
 Font.register({
   family: 'Montserrat',
-  fonts: [{ src: Montserrat, fontWeight: 'normal' }, { src: MontserratBold, fontWeight: 'bold' }],
+  fonts: [
+    { src: Montserrat, fontWeight: 'normal' },
+    { src: MontserratBold, fontWeight: 'bold' },
+  ],
 });
 
 const Heading = styled.Text`
@@ -17,26 +20,54 @@ const Heading = styled.Text`
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
+const UserName = styled.Text`
+  font-size: 28pt;
+  margin-top: 42pt;
+  font-family: 'Montserrat';
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  color: #494949;
+  text-transform: uppercase;
+  letter-spacing: 2pt;
+`;
+const Profession = styled.Text`
+  font-size: 11pt;
+  font-family: 'Montserrat';
+  letter-spacing: 1pt;
+  text-transform: uppercase;
+`;
+
 const Image = styled.Image`
   width: 100%;
   margin: 10pt auto;
+`;
+const ImageRound = styled.Image`
+  margin-top: 23pt;
+  margin-left: 23pt;
+  width: 98pt;
+  height: 98pt;
+  border-radius: 100px;
 `;
 
 const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
 `;
+const ImageContainer = styled.View`
+  width: 165pt;
+  height: 165pt;
+`;
 const LeftColumn = styled.View`
-  width: 150pt;
+  padding: 10px;
+  width: 165pt;
   height: 100%;
   color: white;
-  background-color: #2c313a;
+  background-color: #494949;
 `;
 const RightColumn = styled.View`
-  width: 446pt;
+  width: 100%;
   height: 100%;
   font-family: 'Montserrat';
-  padding: 10px;
+  padding: 10pt;
 `;
 
 const Section = styled.Text`
@@ -68,23 +99,32 @@ class MyDocument extends Component {
     const { currentCv, personalData } = state;
     const { name, surname, email, adress, github, linkedin, profession } = personalData;
     const { education, languages, experience, currentItem } = currentCv;
+    console.log('state', state);
 
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4" wrap>
           <LeftColumn>
-            <Heading bold>{name}</Heading>
-            <Heading bold>{surname}</Heading>
-            <Image src={state.image.image} />
+            {/* <Heading bold>{name}</Heading> */}
+            {/* <Heading bold>{surname}</Heading> */}
+            {/* <Image src={state.image.image} /> */}
+            <ImageContainer>
+              <ImageRound src={state.image.image} />
+            </ImageContainer>
             <Heading>{email}</Heading>
             <Heading>{adress}</Heading>
-            <Link href={github} target="_blank">
+            <Link href={github} target="_blank" rel="noopener noreferrer">
               {github}
             </Link>
-            <Link href={linkedin}>{linkedin}</Link>
+            <Link href={linkedin} target="_blank" rel="noopener noreferrer">
+              {linkedin}
+            </Link>
           </LeftColumn>
           <RightColumn>
-            <Heading bold>{profession}</Heading>
+            <UserName bold>
+              {name} {surname}
+            </UserName>
+            <Profession bold>{profession}</Profession>
 
             {education.map(item => (
               <TextSection key={item.id}>

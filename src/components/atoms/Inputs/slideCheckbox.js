@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const StyleWrapper = styled.input`
   position: relative;
-  width: 48px;
-  height: 22px;
+  width: 38px;
+  height: 16px;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.inputGrey};
   background: #ccc;
@@ -14,8 +14,8 @@ const StyleWrapper = styled.input`
 
   &::before {
     content: '';
-    width: 22px;
-    height: 22px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     position: absolute;
     top: -1px;
@@ -26,7 +26,7 @@ const StyleWrapper = styled.input`
     transition: all 0.3s;
   }
   &:checked::before {
-    left: 32px;
+    left: 28px;
     border: 1px solid ${({ theme }) => theme.colors.inputGrey};
     background:white;
 
@@ -51,7 +51,7 @@ const slideCheckbox = ({ handleCheckbox, checkboxState, language }) => {
     <>
       <StyleWrapper id="c1" type="checkbox" onChange={handleCheckbox} checked={checkboxState} />
       <Label htmlFor="c1" checkboxState={checkboxState}>
-        {polishLanguage ? 'nadal trwa' : 'in progress'}
+        {polishLanguage ? 'w trakcie' : 'in progress'}
       </Label>
     </>
   );

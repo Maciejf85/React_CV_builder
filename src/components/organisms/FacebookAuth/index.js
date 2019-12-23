@@ -31,8 +31,6 @@ export default class Facebook extends Component {
     !isRegister ? login(response, 'facebook') : register(response, 'facebook');
   };
 
-  componentClicked = () => console.log('clicked');
-
   render() {
     let fbContent;
     const { isLogedIn } = this.state;
