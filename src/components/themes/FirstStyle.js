@@ -20,6 +20,22 @@ const Heading = styled.Text`
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
+const UserName = styled.Text`
+  font-size: 28pt;
+  margin-top: 42pt;
+  font-family: 'Montserrat';
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  color: #494949;
+  text-transform: uppercase;
+  letter-spacing: 2pt;
+`;
+const Profession = styled.Text`
+  font-size: 11pt;
+  font-family: 'Montserrat';
+  letter-spacing: 1pt;
+  text-transform: uppercase;
+`;
+
 const Image = styled.Image`
   width: 100%;
   margin: 10pt auto;
@@ -105,7 +121,10 @@ class MyDocument extends Component {
             </Link>
           </LeftColumn>
           <RightColumn>
-            <Heading bold>{profession}</Heading>
+            <UserName bold>
+              {name} {surname}
+            </UserName>
+            <Profession bold>{profession}</Profession>
 
             {education.map(item => (
               <TextSection key={item.id}>
