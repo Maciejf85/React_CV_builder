@@ -12,7 +12,10 @@ import path from '../path';
 
 Font.register({
   family: 'Montserrat',
-  fonts: [{ src: Montserrat, fontWeight: 'normal' }, { src: MontserratBold, fontWeight: 'bold' }],
+  fonts: [
+    { src: Montserrat, fontWeight: 'normal' },
+    { src: MontserratBold, fontWeight: 'bold' },
+  ],
 });
 
 const styles = StyleSheet.create({
@@ -63,7 +66,6 @@ class Preview extends Component {
 
   render() {
     const { currentCv, personalData, language } = this.props;
-    console.log('lang', language);
     const { name } = personalData;
     const { currentItem } = currentCv;
 
@@ -77,7 +79,7 @@ class Preview extends Component {
         <NavBar language={language} />
         <StyledWrapper>
           <PDFViewer style={styles.view} name={name}>
-            <FirstStyle downloadButton={this.handleButton} />
+            <FirstStyle downloadButton={this.handleButton} language={language} />
           </PDFViewer>
         </StyledWrapper>
 

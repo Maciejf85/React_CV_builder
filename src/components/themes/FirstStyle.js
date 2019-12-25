@@ -21,7 +21,7 @@ const Heading = styled.Text`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const UserName = styled.Text`
-  font-size: 28pt;
+  font-size: 24pt;
   margin-top: 42pt;
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
@@ -36,10 +36,10 @@ const Profession = styled.Text`
   text-transform: uppercase;
 `;
 
-const Image = styled.Image`
-  width: 100%;
-  margin: 10pt auto;
-`;
+// const Image = styled.Image`
+//   width: 100%;
+//   margin: 10pt auto;
+// `;
 const ImageRound = styled.Image`
   margin-top: 23pt;
   margin-left: 23pt;
@@ -47,14 +47,25 @@ const ImageRound = styled.Image`
   height: 98pt;
   border-radius: 100px;
 `;
+const SectionTitle = styled.Text`
+  font-size: 11pt;
+  padding-bottom: 2pt;
+  text-transform: uppercase;
+`;
+const TitleDecoration = styled.View`
+  width: 30pt;
+  height: 5pt;
+  border-top: 2pt solid #494949;
+`;
 
 const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
 `;
-const ImageContainer = styled.View`
-  width: 165pt;
+const HeadContainer = styled.View`
+  width: 100%;
   height: 165pt;
+  /* border: 1px solid red; */
 `;
 const LeftColumn = styled.View`
   padding: 10px;
@@ -64,10 +75,11 @@ const LeftColumn = styled.View`
   background-color: #494949;
 `;
 const RightColumn = styled.View`
-  width: 100%;
+  width: 430pt;
   height: 100%;
   font-family: 'Montserrat';
   padding: 10pt;
+  background: #eee;
 `;
 
 const Section = styled.Text`
@@ -85,7 +97,8 @@ const Link = styled.Link`
 `;
 const TextSection = styled.View`
   margin-bottom: 10px;
-  padding: 10px 0;
+  padding: 5pt 0;
+  background: #ccc;
 `;
 // const path = 'https://cors-anywhere.herokuapp.com/https://maciejf.pl/cv-builder/';
 // Create Document Component
@@ -96,11 +109,11 @@ class MyDocument extends Component {
 
   render() {
     const state = store.getState();
+    const { language } = this.props;
     const { currentCv, personalData } = state;
     const { name, surname, email, adress, github, linkedin, profession } = personalData;
     const { education, languages, experience, currentItem } = currentCv;
-    console.log('state', state);
-
+    console.log('education', education);
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4" wrap>
@@ -108,9 +121,9 @@ class MyDocument extends Component {
             {/* <Heading bold>{name}</Heading> */}
             {/* <Heading bold>{surname}</Heading> */}
             {/* <Image src={state.image.image} /> */}
-            <ImageContainer>
+            <HeadContainer>
               <ImageRound src={state.image.image} />
-            </ImageContainer>
+            </HeadContainer>
             <Heading>{email}</Heading>
             <Heading>{adress}</Heading>
             <Link href={github} target="_blank" rel="noopener noreferrer">
@@ -121,14 +134,19 @@ class MyDocument extends Component {
             </Link>
           </LeftColumn>
           <RightColumn>
-            <UserName bold>
-              {name} {surname}
-            </UserName>
-            <Profession bold>{profession}</Profession>
-
+            <HeadContainer>
+              <UserName bold>
+                {name} {surname}
+              </UserName>
+              <Profession bold>{profession}</Profession>
+            </HeadContainer>
+            <SectionTitle>{language === 'PL' ? 'Doświadczenie' : 'work experiance'}</SectionTitle>
+            <TitleDecoration />
             {education.map(item => (
               <TextSection key={item.id}>
-                <Section>{` ${item.name} ${item.startYear} - ${item.startMonth} ${item.endYear} - ${item.endMonth} `}</Section>
+                {console.log('item', item)}
+                <Section>{` ${item.name} ${item.startYear} ${item.startMonth}  ${item.inProgress ||
+                  item.endYear} ${item.inProgress || item.endMonth}`}</Section>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
