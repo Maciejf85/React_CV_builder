@@ -187,6 +187,7 @@ export const updatePersonalData = (state, id, token) => {
       name: state.currentName,
       surname: state.currentSurname,
       email: state.currentEmail,
+      phone: state.currentPhone,
       birthday: state.currentBirthday,
       adress: state.currentAdress,
       github: state.currentGithub,
