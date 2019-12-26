@@ -61,25 +61,36 @@ const TitleDecoration = styled.View`
 const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
+  border: 1px solid red;
+  margin-bottom: 100pt;
 `;
 const HeadContainer = styled.View`
   width: 100%;
   height: 165pt;
-  /* border: 1px solid red; */
+  border: 1px solid red;
+`;
+
+const Footer = styled.View`
+  position: absolute;
+  bottom: 10pt;
+  left: 10pt;
+  width: 100%;
+  background: #aaa;
+  border: 1px solid blue;
 `;
 const LeftColumn = styled.View`
-  padding: 10px;
   width: 165pt;
-  height: 100%;
+  height: 842pt;
   color: white;
   background-color: #494949;
+  padding: 10px;
 `;
 const RightColumn = styled.View`
   width: 430pt;
-  height: 100%;
+  /* max-height: 842pt; */
   font-family: 'Montserrat';
   padding: 10pt;
-  background: #eee;
+  /* background: lightsalmon; */
 `;
 
 const Section = styled.Text`
@@ -110,13 +121,14 @@ class MyDocument extends Component {
   render() {
     const state = store.getState();
     const { language } = this.props;
-    const { currentCv, personalData } = state;
+    const { currentCv, personalData, confidential } = state;
     const { name, surname, email, adress, github, linkedin, profession } = personalData;
     const { education, languages, experience, currentItem } = currentCv;
-    console.log('education', education);
+    console.log('state', state);
+    console.log('confidential', confidential);
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
-        <MainContainer size="A4" wrap>
+        <MainContainer size="A4">
           <LeftColumn>
             {/* <Heading bold>{name}</Heading> */}
             {/* <Heading bold>{surname}</Heading> */}
@@ -143,26 +155,30 @@ class MyDocument extends Component {
             <SectionTitle>{language === 'PL' ? 'Doświadczenie' : 'work experiance'}</SectionTitle>
             <TitleDecoration />
             {education.map(item => (
-              <TextSection key={item.id}>
+              <TextSection key={item.id} wrap={false}>
                 {console.log('item', item)}
-                <Section>{` ${item.name} ${item.startYear} ${item.startMonth}  ${item.inProgress ||
-                  item.endYear} ${item.inProgress || item.endMonth}`}</Section>
+                <Section>{` ${item.name} ${item.startYear} ${item.startMonth}  ${
+                  !item.inProgress ? item.endYear : ''
+                } ${!item.inProgress ? item.endMonth : ''}`}</Section>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
             {languages.map(item => (
-              <TextSection key={item.id}>
+              <TextSection key={item.id} wrap={false}>
                 <Section>{` ${item.name}`}</Section>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
             {experience.map(item => (
-              <TextSection key={item.id}>
+              <TextSection key={item.id} wrap={false}>
                 <Section>{` ${item.name}`}</Section>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
           </RightColumn>
+          <Footer>
+            <Section>{'123'}</Section>
+          </Footer>
         </MainContainer>
       </Document>
     );
