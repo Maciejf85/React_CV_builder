@@ -193,7 +193,7 @@ class ExperiencePanel extends Component {
         <Textarea
           edit
           placeholder="opis stanowiska"
-          id="description"
+          data-id="description"
           value={description}
           onChange={this.handleForm}
         />

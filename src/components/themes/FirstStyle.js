@@ -72,34 +72,40 @@ const ImageRound = styled.Image`
   border-radius: 100px;
 `;
 
-const SectionTitle = styled.Text`
-  margin-top: 15pt;
+const ContentTitleBox = styled.View`
+  margin: 15pt 0;
   font-size: 11pt;
   text-transform: uppercase;
-  background: #ddd;
+  /* background: #aaa; */
+`;
+const ContentTitle = styled.Text`
+  font-size: 11pt;
+  text-transform: uppercase;
+  /* background: #ddd; */
 `;
 const TitleDecoration = styled.View`
   width: 30pt;
   height: 5pt;
-  padding: 15pt 0 0;
-  border-top: 2pt solid #494949;
-  background: #eee;
+  border-bottom: 3pt solid #494949;
 `;
 
 const HeadContainer = styled.View`
   width: 100%;
   height: 155pt;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 const Section = styled.Text`
-  margin: 10pt 0;
-  display: inline-block;
+  margin: 0 0 10pt;
   color: black;
   font-size: 10pt;
   padding: 5px 0;
-  letter-spacing: 1px;
-  font-weight: ${({ bold }) => (bold ? 'medium' : 'normal')};
+`;
+const SectionTitle = styled.Text`
+  margin: 5pt 0;
+  font-size: 11pt;
+  color: black;
+  font-weight: medium;
 `;
 
 const Link = styled.Link`
@@ -110,9 +116,8 @@ const Link = styled.Link`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const TextSection = styled.View`
-  /* margin-bottom: 10pt; */
-  padding: 5pt 0;
-  background: #ccc;
+  margin-bottom: 10pt;
+  /* background: #ccc; */
 `;
 
 const Footer = styled.View`
@@ -150,7 +155,6 @@ class MyDocument extends Component {
     const { name, surname, email, adress, github, linkedin, profession } = personalData;
     const { education, languages, experience, currentItem } = currentCv;
     console.log('state', state);
-    console.log('confidential', confidential);
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
@@ -177,33 +181,40 @@ class MyDocument extends Component {
               </UserName>
               <Profession bold>{profession}</Profession>
             </HeadContainer>
-            <SectionTitle wrap={false}>{language === 'PL' ? 'edukacja' : 'education'}</SectionTitle>
-            <TitleDecoration />
+
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'edukacja' : 'education'}</ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
             {education.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <Section>{` ${item.name} ${item.startYear} ${item.startMonth}  ${
+                <SectionTitle bold>{item.name}</SectionTitle>
+                <Section>{`${item.startYear} ${item.startMonth}  ${
                   !item.inProgress ? item.endYear : ''
                 } ${!item.inProgress ? item.endMonth : ''}`}</Section>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
-            <SectionTitle wrap={false}>
-              {language === 'PL' ? 'Języki obce' : 'Languages'}
-            </SectionTitle>
-            <TitleDecoration />
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
             {languages.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <Section>{` ${item.name}`}</Section>
+                <SectionTitle>{` ${item.name}`}</SectionTitle>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
-            <SectionTitle wrap={false}>
-              {language === 'PL' ? 'Doświadczenie' : 'work experiance'}
-            </SectionTitle>
-            <TitleDecoration />
+
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'Doświadczenie' : 'work experiance'}</ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
             {experience.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <Section>{` ${item.name}`}</Section>
+                <SectionTitle>{` ${item.name}`}</SectionTitle>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
             ))}
