@@ -21,7 +21,16 @@ const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
   background-color: #494949;
+  padding-top: 5pt;
   padding-bottom: 100pt;
+`;
+const Masking = styled.View`
+  position: absolute;
+  width: 430pt;
+  height: 7pt;
+  top: 0;
+  left: 165pt;
+  background: white;
 `;
 
 const LeftColumn = styled.View`
@@ -175,11 +184,13 @@ class MyDocument extends Component {
     const { language } = this.props;
     const { currentCv, personalData, confidential } = state;
     const { name, surname, email, adress, github, linkedin, profession } = personalData;
-    const { education, languages, experience, currentItem } = currentCv;
+    const { education, languages, experience, currentItem, skills } = currentCv;
     console.log('state', state);
+    console.log('education', education);
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
+          <Masking fixed />
           <LeftColumn>
             {/* <Heading bold>{name}</Heading> */}
             {/* <Heading bold>{surname}</Heading> */}
@@ -205,7 +216,9 @@ class MyDocument extends Component {
             </HeadContainer>
 
             <ContentTitleBox wrap={false}>
-              <ContentTitle>{language === 'PL' ? 'edukacja' : 'education'}</ContentTitle>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'edukacja' : 'education'}
+              </ContentTitle>
               <TitleDecoration />
             </ContentTitleBox>
 
@@ -244,6 +257,15 @@ class MyDocument extends Component {
                 <DecorationBottom />
                 <SectionTitle>{` ${item.name}`}</SectionTitle>
                 <Section>{`  ${item.description}`}</Section>
+              </TextSection>
+            ))}
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'Umiejętnosci' : 'Skills'}</ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+            {skills.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <Section>{` ${item.name}`}</Section>
               </TextSection>
             ))}
           </RightColumn>
