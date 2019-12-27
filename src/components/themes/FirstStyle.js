@@ -5,6 +5,8 @@ import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratMedium from 'assets/fonts/Montserrat-Medium.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import store from 'store';
 
 Font.register({
@@ -21,7 +23,16 @@ const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
   background-color: #494949;
+  padding-top: 15pt;
   padding-bottom: 100pt;
+`;
+const Masking = styled.View`
+  position: absolute;
+  width: 430pt;
+  height: 16pt;
+  top: 0;
+  left: 165pt;
+  background: white;
 `;
 
 const LeftColumn = styled.View`
@@ -45,8 +56,8 @@ const Heading = styled.Text`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const UserName = styled.Text`
-  font-size: 24pt;
-  margin-top: 42pt;
+  font-size: 22pt;
+  margin-top: 46pt;
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
   color: #494949;
@@ -58,6 +69,11 @@ const Profession = styled.Text`
   font-family: 'Montserrat';
   letter-spacing: 1pt;
   text-transform: uppercase;
+`;
+const Icon = styled.View`
+  width: 20pt;
+  height: 20pt;
+  border: 1px solid white;
 `;
 
 // const Image = styled.Image`
@@ -72,34 +88,41 @@ const ImageRound = styled.Image`
   border-radius: 100px;
 `;
 
-const SectionTitle = styled.Text`
-  margin-top: 15pt;
+const ContentTitleBox = styled.View`
+  margin: 15pt 0;
   font-size: 11pt;
   text-transform: uppercase;
-  background: #ddd;
+  /* background: #aaa; */
+`;
+const ContentTitle = styled.Text`
+  font-size: 11pt;
+  text-transform: uppercase;
+  letter-spacing: 0.9pt;
+  font-weight: medium;
+
+  /* background: #ddd; */
 `;
 const TitleDecoration = styled.View`
   width: 30pt;
   height: 5pt;
-  padding: 15pt 0 0;
-  border-top: 2pt solid #494949;
-  background: #eee;
+  border-bottom: 3pt solid ${({ white }) => (white ? 'white' : '#494949')};
 `;
 
 const HeadContainer = styled.View`
   width: 100%;
   height: 155pt;
-  border: 1px solid red;
 `;
 
 const Section = styled.Text`
-  margin: 10pt 0;
-  display: inline-block;
+  margin: 0 0 10pt;
   color: black;
-  font-size: 10pt;
+  font-size: 9.5pt;
   padding: 5px 0;
-  letter-spacing: 1px;
-  font-weight: ${({ bold }) => (bold ? 'medium' : 'normal')};
+`;
+const SectionTitle = styled.Text`
+  font-size: 9.5pt;
+  color: black;
+  font-weight: medium;
 `;
 
 const Link = styled.Link`
@@ -110,15 +133,53 @@ const Link = styled.Link`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const TextSection = styled.View`
+  position: relative;
   /* margin-bottom: 10pt; */
-  padding: 5pt 0;
-  background: #ccc;
+  padding-right: 10pt;
+`;
+const Decoration = styled.View`
+  position: absolute;
+  top: -2.5pt;
+  left: -3.5pt;
+  width: 6pt;
+  height: 6pt;
+  border-radius: 50pt;
+  background: #494949;
+`;
+const DecorationBottom = styled.View`
+  position: absolute;
+  bottom: -3.5pt;
+  left: -3.5pt;
+  width: 6pt;
+  height: 6pt;
+  border-radius: 50pt;
+  background: #494949;
+`;
+const ContentBox = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 430pt;
+`;
+
+const RightSide = styled.View`
+  position: relative;
+  border-left: 1pt solid #494949;
+  flex-basis: 277pt;
+  padding-left: 10pt;
+`;
+
+const LeftSide = styled.View`
+  flex-basis: 133pt;
+  padding-right: 10pt;
+  text-align: left;
 `;
 
 const Footer = styled.View`
   position: absolute;
   display: flex;
+  flex-direction: row;
   align-items: flex-end;
+  justify-content: center;
   bottom: 0pt;
   left: 165pt;
   width: 430pt;
@@ -148,19 +209,34 @@ class MyDocument extends Component {
     const { language } = this.props;
     const { currentCv, personalData, confidential } = state;
     const { name, surname, email, adress, github, linkedin, profession } = personalData;
-    const { education, languages, experience, currentItem } = currentCv;
+    const { education, languages, experience, currentItem, skills } = currentCv;
     console.log('state', state);
-    console.log('confidential', confidential);
+    console.log('education', education);
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
+          <Masking fixed />
           <LeftColumn>
-            {/* <Heading bold>{name}</Heading> */}
-            {/* <Heading bold>{surname}</Heading> */}
-            {/* <Image src={state.image.image} /> */}
             <HeadContainer>
               <ImageRound src={state.image.image} />
             </HeadContainer>
+            <ContentBox>
+              <LeftSide>
+                <ContentTitleBox wrap={false}>
+                  <ContentTitle visible={education.length > 0}>
+                    {language === 'PL' ? 'dane osobowe' : 'personal'}
+                  </ContentTitle>
+                  <TitleDecoration white />
+                </ContentTitleBox>
+                <SectionTitle bold orphans={3} widows={4}>
+                  <Icon>
+                    <FontAwesomeIcon icon={faPhoneAlt} />
+                  </Icon>
+                  {email}
+                </SectionTitle>
+              </LeftSide>
+            </ContentBox>
+
             <Heading>{email}</Heading>
             <Heading>{adress}</Heading>
             <Link href={github} target="_blank" rel="noopener noreferrer">
@@ -177,34 +253,93 @@ class MyDocument extends Component {
               </UserName>
               <Profession bold>{profession}</Profession>
             </HeadContainer>
-            <SectionTitle wrap={false}>{language === 'PL' ? 'edukacja' : 'education'}</SectionTitle>
-            <TitleDecoration />
+
+            <ContentTitleBox wrap={false}>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'edukacja' : 'education'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
             {education.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <Section>{` ${item.name} ${item.startYear} ${item.startMonth}  ${
-                  !item.inProgress ? item.endYear : ''
-                } ${!item.inProgress ? item.endMonth : ''}`}</Section>
-                <Section>{`  ${item.description}`}</Section>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.name}
+                    </SectionTitle>
+                    <Section orphans={3} widows={4}>{`${item.startYear} ${item.startMonth}  ${
+                      !item.inProgress ? item.endYear : ''
+                    } ${!item.inProgress ? item.endMonth : ''}`}</Section>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
               </TextSection>
             ))}
-            <SectionTitle wrap={false}>
-              {language === 'PL' ? 'Języki obce' : 'Languages'}
-            </SectionTitle>
-            <TitleDecoration />
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
             {languages.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <Section>{` ${item.name}`}</Section>
-                <Section>{`  ${item.description}`}</Section>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.name}
+                    </SectionTitle>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
               </TextSection>
             ))}
-            <SectionTitle wrap={false}>
-              {language === 'PL' ? 'Doświadczenie' : 'work experiance'}
-            </SectionTitle>
-            <TitleDecoration />
+
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'Doświadczenie' : 'work experiance'}</ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
             {experience.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <Section>{` ${item.name}`}</Section>
-                <Section>{`  ${item.description}`}</Section>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.name}
+                    </SectionTitle>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'Umiejętnosci' : 'Skills'}</ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+            {skills.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.name}
+                    </SectionTitle>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
               </TextSection>
             ))}
           </RightColumn>
