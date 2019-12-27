@@ -102,7 +102,6 @@ const Section = styled.Text`
   padding: 5px 0;
 `;
 const SectionTitle = styled.Text`
-  margin: 5pt 0;
   font-size: 11pt;
   color: black;
   font-weight: medium;
@@ -116,14 +115,37 @@ const Link = styled.Link`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const TextSection = styled.View`
-  margin-bottom: 10pt;
+  position: relative;
+  border-left: 1pt solid #494949;
+  /* margin-bottom: 10pt; */
+  padding-left: 10pt;
   /* background: #ccc; */
+`;
+const Decoration = styled.View`
+  position: absolute;
+  top: -2.5pt;
+  left: -3.5pt;
+  width: 6pt;
+  height: 6pt;
+  border-radius: 50pt;
+  background: #494949;
+`;
+const DecorationBottom = styled.View`
+  position: absolute;
+  bottom: -3.5pt;
+  left: -3.5pt;
+  width: 6pt;
+  height: 6pt;
+  border-radius: 50pt;
+  background: #494949;
 `;
 
 const Footer = styled.View`
   position: absolute;
   display: flex;
+  flex-direction: row;
   align-items: flex-end;
+  justify-content: center;
   bottom: 0pt;
   left: 165pt;
   width: 430pt;
@@ -189,6 +211,8 @@ class MyDocument extends Component {
 
             {education.map(item => (
               <TextSection key={item.id} wrap={false}>
+                <Decoration />
+                <DecorationBottom />
                 <SectionTitle bold>{item.name}</SectionTitle>
                 <Section>{`${item.startYear} ${item.startMonth}  ${
                   !item.inProgress ? item.endYear : ''
@@ -202,6 +226,8 @@ class MyDocument extends Component {
             </ContentTitleBox>
             {languages.map(item => (
               <TextSection key={item.id} wrap={false}>
+                <Decoration />
+                <DecorationBottom />
                 <SectionTitle>{` ${item.name}`}</SectionTitle>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
@@ -214,6 +240,8 @@ class MyDocument extends Component {
 
             {experience.map(item => (
               <TextSection key={item.id} wrap={false}>
+                <Decoration />
+                <DecorationBottom />
                 <SectionTitle>{` ${item.name}`}</SectionTitle>
                 <Section>{`  ${item.description}`}</Section>
               </TextSection>
