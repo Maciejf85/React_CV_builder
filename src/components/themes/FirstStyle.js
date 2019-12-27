@@ -5,6 +5,8 @@ import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratMedium from 'assets/fonts/Montserrat-Medium.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import store from 'store';
 
 Font.register({
@@ -21,13 +23,13 @@ const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
   background-color: #494949;
-  padding-top: 5pt;
+  padding-top: 15pt;
   padding-bottom: 100pt;
 `;
 const Masking = styled.View`
   position: absolute;
   width: 430pt;
-  height: 7pt;
+  height: 16pt;
   top: 0;
   left: 165pt;
   background: white;
@@ -54,8 +56,8 @@ const Heading = styled.Text`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 const UserName = styled.Text`
-  font-size: 24pt;
-  margin-top: 42pt;
+  font-size: 22pt;
+  margin-top: 46pt;
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
   color: #494949;
@@ -67,6 +69,11 @@ const Profession = styled.Text`
   font-family: 'Montserrat';
   letter-spacing: 1pt;
   text-transform: uppercase;
+`;
+const Icon = styled.View`
+  width: 20pt;
+  height: 20pt;
+  border: 1px solid white;
 `;
 
 // const Image = styled.Image`
@@ -90,28 +97,30 @@ const ContentTitleBox = styled.View`
 const ContentTitle = styled.Text`
   font-size: 11pt;
   text-transform: uppercase;
+  letter-spacing: 0.9pt;
+  font-weight: medium;
+
   /* background: #ddd; */
 `;
 const TitleDecoration = styled.View`
   width: 30pt;
   height: 5pt;
-  border-bottom: 3pt solid #494949;
+  border-bottom: 3pt solid ${({ white }) => (white ? 'white' : '#494949')};
 `;
 
 const HeadContainer = styled.View`
   width: 100%;
   height: 155pt;
-  /* border: 1px solid red; */
 `;
 
 const Section = styled.Text`
   margin: 0 0 10pt;
   color: black;
-  font-size: 10pt;
+  font-size: 9.5pt;
   padding: 5px 0;
 `;
 const SectionTitle = styled.Text`
-  font-size: 11pt;
+  font-size: 9.5pt;
   color: black;
   font-weight: medium;
 `;
@@ -125,10 +134,8 @@ const Link = styled.Link`
 `;
 const TextSection = styled.View`
   position: relative;
-  border-left: 1pt solid #494949;
   /* margin-bottom: 10pt; */
-  padding-left: 10pt;
-  /* background: #ccc; */
+  padding-right: 10pt;
 `;
 const Decoration = styled.View`
   position: absolute;
@@ -147,6 +154,24 @@ const DecorationBottom = styled.View`
   height: 6pt;
   border-radius: 50pt;
   background: #494949;
+`;
+const ContentBox = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 430pt;
+`;
+
+const RightSide = styled.View`
+  position: relative;
+  border-left: 1pt solid #494949;
+  flex-basis: 277pt;
+  padding-left: 10pt;
+`;
+
+const LeftSide = styled.View`
+  flex-basis: 133pt;
+  padding-right: 10pt;
+  text-align: left;
 `;
 
 const Footer = styled.View`
@@ -192,12 +217,26 @@ class MyDocument extends Component {
         <MainContainer size="A4">
           <Masking fixed />
           <LeftColumn>
-            {/* <Heading bold>{name}</Heading> */}
-            {/* <Heading bold>{surname}</Heading> */}
-            {/* <Image src={state.image.image} /> */}
             <HeadContainer>
               <ImageRound src={state.image.image} />
             </HeadContainer>
+            <ContentBox>
+              <LeftSide>
+                <ContentTitleBox wrap={false}>
+                  <ContentTitle visible={education.length > 0}>
+                    {language === 'PL' ? 'dane osobowe' : 'personal'}
+                  </ContentTitle>
+                  <TitleDecoration white />
+                </ContentTitleBox>
+                <SectionTitle bold orphans={3} widows={4}>
+                  <Icon>
+                    <FontAwesomeIcon icon={faPhoneAlt} />
+                  </Icon>
+                  {email}
+                </SectionTitle>
+              </LeftSide>
+            </ContentBox>
+
             <Heading>{email}</Heading>
             <Heading>{adress}</Heading>
             <Link href={github} target="_blank" rel="noopener noreferrer">
@@ -224,13 +263,21 @@ class MyDocument extends Component {
 
             {education.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <Decoration />
-                <DecorationBottom />
-                <SectionTitle bold>{item.name}</SectionTitle>
-                <Section>{`${item.startYear} ${item.startMonth}  ${
-                  !item.inProgress ? item.endYear : ''
-                } ${!item.inProgress ? item.endMonth : ''}`}</Section>
-                <Section>{`  ${item.description}`}</Section>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.name}
+                    </SectionTitle>
+                    <Section orphans={3} widows={4}>{`${item.startYear} ${item.startMonth}  ${
+                      !item.inProgress ? item.endYear : ''
+                    } ${!item.inProgress ? item.endMonth : ''}`}</Section>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
               </TextSection>
             ))}
             <ContentTitleBox wrap={false}>
@@ -239,10 +286,18 @@ class MyDocument extends Component {
             </ContentTitleBox>
             {languages.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <Decoration />
-                <DecorationBottom />
-                <SectionTitle>{` ${item.name}`}</SectionTitle>
-                <Section>{`  ${item.description}`}</Section>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.name}
+                    </SectionTitle>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
               </TextSection>
             ))}
 
@@ -253,10 +308,18 @@ class MyDocument extends Component {
 
             {experience.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <Decoration />
-                <DecorationBottom />
-                <SectionTitle>{` ${item.name}`}</SectionTitle>
-                <Section>{`  ${item.description}`}</Section>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.name}
+                    </SectionTitle>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
               </TextSection>
             ))}
             <ContentTitleBox wrap={false}>
@@ -265,7 +328,18 @@ class MyDocument extends Component {
             </ContentTitleBox>
             {skills.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <Section>{` ${item.name}`}</Section>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.name}
+                    </SectionTitle>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
               </TextSection>
             ))}
           </RightColumn>
