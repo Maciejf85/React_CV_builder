@@ -13,6 +13,7 @@ class EducationPanel extends Component {
   state = {
     id: '',
     name: '',
+    department: '',
     startYear: 0,
     startMonth: 0,
     endYear: 0,
@@ -27,6 +28,7 @@ class EducationPanel extends Component {
     const {
       id,
       name,
+      department,
       startYear,
       startMonth,
       endYear,
@@ -38,6 +40,7 @@ class EducationPanel extends Component {
     this.setState({
       id,
       name,
+      department,
       startMonth,
       startYear,
       endYear,
@@ -103,7 +106,16 @@ class EducationPanel extends Component {
   render() {
     const { id } = this.props.item;
     const { index, current, newItem, language } = this.props;
-    const { name, startYear, startMonth, endYear, endMonth, description, inProgress } = this.state;
+    const {
+      name,
+      department,
+      startYear,
+      startMonth,
+      endYear,
+      endMonth,
+      description,
+      inProgress,
+    } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
     return (
@@ -116,6 +128,12 @@ class EducationPanel extends Component {
         />
         <div className="inputContainer">
           <Input placeholder="nazwa szkoły" id="name" value={name} onChange={this.handleForm} />
+          <Input
+            placeholder="kierunek"
+            id="department"
+            value={department}
+            onChange={this.handleForm}
+          />
 
           <Select
             title="data rozpoczęcia"

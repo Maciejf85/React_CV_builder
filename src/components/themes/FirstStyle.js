@@ -5,8 +5,6 @@ import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratMedium from 'assets/fonts/Montserrat-Medium.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import store from 'store';
 
 Font.register({
@@ -40,6 +38,7 @@ const LeftColumn = styled.View`
   height: 100%;
   color: white;
   padding: 10px;
+  font-family: 'Montserrat';
 `;
 const RightColumn = styled.View`
   width: 430pt;
@@ -69,11 +68,6 @@ const Profession = styled.Text`
   font-family: 'Montserrat';
   letter-spacing: 1pt;
   text-transform: uppercase;
-`;
-const Icon = styled.View`
-  width: 20pt;
-  height: 20pt;
-  border: 1px solid white;
 `;
 
 // const Image = styled.Image`
@@ -113,16 +107,44 @@ const HeadContainer = styled.View`
   height: 155pt;
 `;
 
+const SectionTitle = styled.Text`
+  font-size: 9.5pt;
+  color: black;
+  font-weight: medium;
+`;
+
 const Section = styled.Text`
   margin: 0 0 10pt;
   color: black;
   font-size: 9.5pt;
   padding: 5px 0;
+  letter-spacing: 0.3pt;
 `;
-const SectionTitle = styled.Text`
+
+const SectionLeftBox = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const SectionTitleLeft = styled.Text`
   font-size: 9.5pt;
-  color: black;
+  color: white;
   font-weight: medium;
+`;
+const SectionTitleLeftDot = styled.View`
+  margin: 0 4pt;
+  width: 4pt;
+  height: 4pt;
+  background: white;
+  border-radius: 50pt;
+`;
+
+const SectionLeft = styled.Text`
+  margin: 0 0 10pt;
+  color: white;
+  font-size: 9pt;
+  padding: 5pt 0 0 10pt;
 `;
 
 const Link = styled.Link`
@@ -220,6 +242,7 @@ class MyDocument extends Component {
             <HeadContainer>
               <ImageRound src={state.image.image} />
             </HeadContainer>
+
             <ContentBox>
               <LeftSide>
                 <ContentTitleBox wrap={false}>
@@ -229,13 +252,42 @@ class MyDocument extends Component {
                   <TitleDecoration white />
                 </ContentTitleBox>
                 <SectionTitle bold orphans={3} widows={4}>
-                  <Icon>
-                    <FontAwesomeIcon icon={faPhoneAlt} />
-                  </Icon>
                   {email}
                 </SectionTitle>
               </LeftSide>
             </ContentBox>
+
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
+              <TitleDecoration white />
+            </ContentTitleBox>
+            {languages.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <SectionLeftBox>
+                  <SectionTitleLeftDot />
+                  <SectionTitleLeft bold orphans={3} widows={4}>
+                    {item.name}
+                  </SectionTitleLeft>
+                </SectionLeftBox>
+                <SectionLeft>{`${item.description}`}</SectionLeft>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'Umiejętności' : 'Skills'}</ContentTitle>
+              <TitleDecoration white />
+            </ContentTitleBox>
+            {skills.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <SectionLeftBox>
+                  <SectionTitleLeftDot />
+                  <SectionTitleLeft bold orphans={3} widows={4}>
+                    {item.name}
+                  </SectionTitleLeft>
+                </SectionLeftBox>
+                <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+              </TextSection>
+            ))}
 
             <Heading>{email}</Heading>
             <Heading>{adress}</Heading>
@@ -268,33 +320,25 @@ class MyDocument extends Component {
                     <SectionTitle bold orphans={3} widows={4}>
                       {item.name}
                     </SectionTitle>
-                    <Section orphans={3} widows={4}>{`${item.startYear} ${item.startMonth}  ${
-                      !item.inProgress ? item.endYear : ''
-                    } ${!item.inProgress ? item.endMonth : ''}`}</Section>
+                    <Section orphans={3} widows={4}>
+                      {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}/${
+                        item.startYear
+                      }  ${
+                        !item.inProgress
+                          ? item.endMonth < 10
+                            ? '- 0' + item.endMonth + '-'
+                            : '- ' + item.endMonth + '-'
+                          : ''
+                      }${!item.inProgress ? item.endYear : ''} 
+                     `}
+                    </Section>
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <Section>{`${item.description}`}</Section>
-                  </RightSide>
-                </ContentBox>
-              </TextSection>
-            ))}
-            <ContentTitleBox wrap={false}>
-              <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
-              <TitleDecoration />
-            </ContentTitleBox>
-            {languages.map(item => (
-              <TextSection key={item.id} wrap={false}>
-                <ContentBox>
-                  <LeftSide>
                     <SectionTitle bold orphans={3} widows={4}>
-                      {item.name}
+                      {item.department}
                     </SectionTitle>
-                  </LeftSide>
-                  <RightSide>
-                    <Decoration />
-                    <DecorationBottom />
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
@@ -302,31 +346,13 @@ class MyDocument extends Component {
             ))}
 
             <ContentTitleBox wrap={false}>
-              <ContentTitle>{language === 'PL' ? 'Doświadczenie' : 'work experiance'}</ContentTitle>
+              <ContentTitle>
+                {language === 'PL' ? 'Doświadczenie zawodowe' : 'work experiance'}
+              </ContentTitle>
               <TitleDecoration />
             </ContentTitleBox>
 
             {experience.map(item => (
-              <TextSection key={item.id} wrap={false}>
-                <ContentBox>
-                  <LeftSide>
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.name}
-                    </SectionTitle>
-                  </LeftSide>
-                  <RightSide>
-                    <Decoration />
-                    <DecorationBottom />
-                    <Section>{`${item.description}`}</Section>
-                  </RightSide>
-                </ContentBox>
-              </TextSection>
-            ))}
-            <ContentTitleBox wrap={false}>
-              <ContentTitle>{language === 'PL' ? 'Umiejętnosci' : 'Skills'}</ContentTitle>
-              <TitleDecoration />
-            </ContentTitleBox>
-            {skills.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
