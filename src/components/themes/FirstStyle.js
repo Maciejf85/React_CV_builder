@@ -363,6 +363,7 @@ class MyDocument extends Component {
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
+                    <SectionTitle>{item.position}</SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>

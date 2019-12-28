@@ -118,6 +118,7 @@ class EducationPanel extends Component {
     } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
+    const isPolish = language === 'PL';
     return (
       <StyledInputSection id={id}>
         <InputHeader
@@ -127,16 +128,21 @@ class EducationPanel extends Component {
           removeItem={this.handleRemoveItem}
         />
         <div className="inputContainer">
-          <Input placeholder="nazwa szkoły" id="name" value={name} onChange={this.handleForm} />
           <Input
-            placeholder="kierunek"
+            placeholder={isPolish ? 'Nazwa szkoły' : 'School'}
+            id="name"
+            value={name}
+            onChange={this.handleForm}
+          />
+          <Input
+            placeholder={isPolish ? 'Kierunek' : 'Department'}
             id="department"
             value={department}
             onChange={this.handleForm}
           />
 
           <Select
-            title="data rozpoczęcia"
+            title={isPolish ? 'Data rozpoczęcia' : 'Started at'}
             id="startYear"
             value={startYear}
             onChange={this.handleForm}
