@@ -108,8 +108,9 @@ const HeadContainer = styled.View`
 `;
 
 const SectionTitle = styled.Text`
+  text-transform: capitalize;
   font-size: 9.5pt;
-  color: black;
+  color: ${({ white }) => (white ? 'white' : 'black')};
   font-weight: medium;
 `;
 
@@ -117,8 +118,15 @@ const Section = styled.Text`
   margin: 0 0 10pt;
   color: black;
   font-size: 9.5pt;
-  padding: 5px 0;
+  padding: 5pt 0 5pt 5pt;
   letter-spacing: 0.3pt;
+`;
+const SectionDate = styled.Text`
+  margin: 0 0 10pt;
+  color: black;
+  font-size: 9pt;
+  letter-spacing: 0.3pt;
+  padding-left: 5pt;
 `;
 
 const SectionLeftBox = styled.View`
@@ -144,13 +152,14 @@ const SectionLeft = styled.Text`
   margin: 0 0 10pt;
   color: white;
   font-size: 9pt;
-  padding: 5pt 0 0 10pt;
+  padding: 5pt 0 0 11pt;
 `;
 
 const Link = styled.Link`
-  font-size: 11pt;
-  margin-left: 5pt;
-  margin-bottom: 5pt;
+  margin: 0 0 10pt;
+  color: white;
+  font-size: 9pt;
+  padding: 5pt 0 0 11pt;
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
@@ -230,7 +239,7 @@ class MyDocument extends Component {
     const state = store.getState();
     const { language } = this.props;
     const { currentCv, personalData, confidential } = state;
-    const { name, surname, email, adress, github, linkedin, profession } = personalData;
+    const { name, surname, email, adress, phone, github, linkedin, profession } = personalData;
     const { education, languages, experience, currentItem, skills } = currentCv;
     console.log('state', state);
     console.log('education', education);
@@ -251,9 +260,36 @@ class MyDocument extends Component {
                   </ContentTitle>
                   <TitleDecoration white />
                 </ContentTitleBox>
-                <SectionTitle bold orphans={3} widows={4}>
-                  {email}
-                </SectionTitle>
+
+                <SectionLeftBox>
+                  <SectionTitleLeft white bold orphans={3} widows={4}>
+                    Phone:
+                  </SectionTitleLeft>
+                  <SectionLeft>{phone}</SectionLeft>
+                </SectionLeftBox>
+                <SectionLeftBox>
+                  <SectionTitleLeft white bold orphans={3} widows={4}>
+                    Email:
+                  </SectionTitleLeft>
+                  <SectionLeft>{email}</SectionLeft>
+                </SectionLeftBox>
+
+                <SectionTitleLeft white bold orphans={3} widows={4}>
+                  Github:
+                </SectionTitleLeft>
+                <SectionLeft>
+                  <Link href={github} target="_blank" rel="noopener noreferrer">
+                    {github}
+                  </Link>
+                </SectionLeft>
+                <SectionTitleLeft white bold orphans={3} widows={4}>
+                  Linkedin:
+                </SectionTitleLeft>
+                <SectionLeft>
+                  <Link href={linkedin} target="_blank" rel="noopener noreferrer">
+                    {linkedin}
+                  </Link>
+                </SectionLeft>
               </LeftSide>
             </ContentBox>
 
@@ -288,15 +324,6 @@ class MyDocument extends Component {
                 <SectionLeft>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
             ))}
-
-            <Heading>{email}</Heading>
-            <Heading>{adress}</Heading>
-            <Link href={github} target="_blank" rel="noopener noreferrer">
-              {github}
-            </Link>
-            <Link href={linkedin} target="_blank" rel="noopener noreferrer">
-              {linkedin}
-            </Link>
           </LeftColumn>
           <RightColumn>
             <HeadContainer>
@@ -305,45 +332,6 @@ class MyDocument extends Component {
               </UserName>
               <Profession bold>{profession}</Profession>
             </HeadContainer>
-
-            <ContentTitleBox wrap={false}>
-              <ContentTitle visible={education.length > 0}>
-                {language === 'PL' ? 'edukacja' : 'education'}
-              </ContentTitle>
-              <TitleDecoration />
-            </ContentTitleBox>
-
-            {education.map(item => (
-              <TextSection key={item.id} wrap={false}>
-                <ContentBox>
-                  <LeftSide>
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.name}
-                    </SectionTitle>
-                    <Section orphans={3} widows={4}>
-                      {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}/${
-                        item.startYear
-                      }  ${
-                        !item.inProgress
-                          ? item.endMonth < 10
-                            ? '- 0' + item.endMonth + '-'
-                            : '- ' + item.endMonth + '-'
-                          : ''
-                      }${!item.inProgress ? item.endYear : ''} 
-                     `}
-                    </Section>
-                  </LeftSide>
-                  <RightSide>
-                    <Decoration />
-                    <DecorationBottom />
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.department}
-                    </SectionTitle>
-                    <Section>{`${item.description}`}</Section>
-                  </RightSide>
-                </ContentBox>
-              </TextSection>
-            ))}
 
             <ContentTitleBox wrap={false}>
               <ContentTitle>
@@ -359,11 +347,62 @@ class MyDocument extends Component {
                     <SectionTitle bold orphans={3} widows={4}>
                       {item.name}
                     </SectionTitle>
+                    <SectionDate orphans={3} widows={4}>
+                      {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
+                        item.startYear
+                      } - ${
+                        !item.inProgress
+                          ? item.endMonth < 10
+                            ? '0' + item.endMonth + '.'
+                            : item.endMonth + '.'
+                          : ''
+                      }${!item.inProgress ? item.endYear : ''} 
+                     `}
+                    </SectionDate>
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
                     <SectionTitle>{item.position}</SectionTitle>
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox wrap={false}>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'edukacja' : 'education'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
+            {education.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.name}
+                    </SectionTitle>
+                    <SectionDate orphans={3} widows={4}>
+                      {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
+                        item.startYear
+                      } - ${
+                        !item.inProgress
+                          ? item.endMonth < 10
+                            ? '0' + item.endMonth + '.'
+                            : item.endMonth + '.'
+                          : ''
+                      }${!item.inProgress ? item.endYear : ''} 
+                     `}
+                    </SectionDate>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.department}
+                    </SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
