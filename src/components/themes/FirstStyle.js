@@ -5,6 +5,11 @@ import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratMedium from 'assets/fonts/Montserrat-Medium.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
+import linkedIcon from 'assets/linked.png';
+import phoneIcon from 'assets/phone.png';
+import emailIcon from 'assets/email.png';
+import githubIcon from 'assets/github.png';
+import addressIcon from 'assets/address.png';
 import store from 'store';
 
 Font.register({
@@ -37,32 +42,49 @@ const LeftColumn = styled.View`
   width: 165pt;
   height: 100%;
   color: white;
-  padding: 10px;
+  padding: 0 10px;
   font-family: 'Montserrat';
 `;
 const RightColumn = styled.View`
   width: 430pt;
   /* max-height: 842pt; */
   font-family: 'Montserrat';
-  padding: 10pt;
+  padding: 0 10pt;
   background: white;
 `;
 
-const Heading = styled.Text`
-  font-size: 11pt;
-  margin: 15pt 5pt 0;
-  font-family: 'Montserrat';
-  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+const HeadContainerLeft = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 140pt;
 `;
+
+const HeadContainerRight = styled.View`
+  width: 100%;
+  height: 140pt;
+`;
+
+const UserNameContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-top: 44pt;
+`;
+
 const UserName = styled.Text`
-  font-size: 22pt;
-  margin-top: 46pt;
+  font-size: 30pt;
   font-family: 'Montserrat';
-  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  font-weight: bold;
+  margin-right: 10px;
   color: #494949;
   text-transform: uppercase;
   letter-spacing: 2pt;
+  /* border: 1px solid blanchedalmond; */
 `;
+
 const Profession = styled.Text`
   font-size: 11pt;
   font-family: 'Montserrat';
@@ -70,20 +92,14 @@ const Profession = styled.Text`
   text-transform: uppercase;
 `;
 
-// const Image = styled.Image`
-//   width: 100%;
-//   margin: 10pt auto;
-// `;
 const ImageRound = styled.Image`
-  margin-top: 23pt;
-  margin-left: 23pt;
-  width: 98pt;
-  height: 98pt;
+  width: 100pt;
+  height: 100pt;
   border-radius: 100px;
 `;
 
 const ContentTitleBox = styled.View`
-  margin: 15pt 0;
+  margin: 25pt 0;
   font-size: 11pt;
   text-transform: uppercase;
   /* background: #aaa; */
@@ -92,7 +108,8 @@ const ContentTitle = styled.Text`
   font-size: 11pt;
   text-transform: uppercase;
   letter-spacing: 0.9pt;
-  font-weight: medium;
+  /* font-weight: medium; */
+  font-weight: semiBold;
 
   /* background: #ddd; */
 `;
@@ -102,16 +119,11 @@ const TitleDecoration = styled.View`
   border-bottom: 3pt solid ${({ white }) => (white ? 'white' : '#494949')};
 `;
 
-const HeadContainer = styled.View`
-  width: 100%;
-  height: 155pt;
-`;
-
 const SectionTitle = styled.Text`
-  text-transform: capitalize;
-  font-size: 9.5pt;
+  font-size: 9.6pt;
   color: ${({ white }) => (white ? 'white' : 'black')};
-  font-weight: medium;
+  font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
+  letter-spacing: 0.2pt;
 `;
 
 const Section = styled.Text`
@@ -122,11 +134,11 @@ const Section = styled.Text`
   letter-spacing: 0.3pt;
 `;
 const SectionDate = styled.Text`
+  min-height: 9pt;
   margin: 0 0 10pt;
   color: black;
   font-size: 9pt;
   letter-spacing: 0.3pt;
-  padding-left: 5pt;
 `;
 
 const SectionLeftBox = styled.View`
@@ -134,11 +146,22 @@ const SectionLeftBox = styled.View`
   flex-direction: row;
   align-items: center;
 `;
+const Icon = styled.Image`
+  width: 15pt;
+  height: 9pt;
+  background-position: center center;
+`;
 
 const SectionTitleLeft = styled.Text`
-  font-size: 9.5pt;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  text-transform: capitalize;
   color: white;
-  font-weight: medium;
+  font-size: 9.8pt;
+  font-weight: semiBold;
+  letter-spacing: 0.2pt;
 `;
 const SectionTitleLeftDot = styled.View`
   margin: 0 4pt;
@@ -146,6 +169,11 @@ const SectionTitleLeftDot = styled.View`
   height: 4pt;
   background: white;
   border-radius: 50pt;
+`;
+
+const PersonalDataSection = styled.View`
+  display: flex;
+  flex-direction: column;
 `;
 
 const SectionLeft = styled.Text`
@@ -158,7 +186,7 @@ const SectionLeft = styled.Text`
 const Link = styled.Link`
   margin: 0 0 10pt;
   color: white;
-  font-size: 9pt;
+  font-size: 8.5pt;
   padding: 5pt 0 0 11pt;
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
@@ -240,17 +268,28 @@ class MyDocument extends Component {
     const { language } = this.props;
     const { currentCv, personalData, confidential } = state;
     const { name, surname, email, adress, phone, github, linkedin, profession } = personalData;
-    const { education, languages, experience, currentItem, skills } = currentCv;
+    const {
+      education,
+      experience,
+      skills,
+      languages,
+      certificates,
+      courses,
+      publications,
+      conferences,
+      licenses,
+      interests,
+      currentItem,
+    } = currentCv;
     console.log('state', state);
-    console.log('education', education);
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
           <Masking fixed />
           <LeftColumn>
-            <HeadContainer>
+            <HeadContainerLeft>
               <ImageRound src={state.image.image} />
-            </HeadContainer>
+            </HeadContainerLeft>
 
             <ContentBox>
               <LeftSide>
@@ -261,35 +300,43 @@ class MyDocument extends Component {
                   <TitleDecoration white />
                 </ContentTitleBox>
 
-                <SectionLeftBox>
+                <PersonalDataSection>
                   <SectionTitleLeft white bold orphans={3} widows={4}>
-                    Phone:
+                    <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
                   </SectionTitleLeft>
                   <SectionLeft>{phone}</SectionLeft>
-                </SectionLeftBox>
-                <SectionLeftBox>
+                </PersonalDataSection>
+
+                <PersonalDataSection>
                   <SectionTitleLeft white bold orphans={3} widows={4}>
-                    Email:
+                    <Icon src={emailIcon} /> Email:
                   </SectionTitleLeft>
                   <SectionLeft>{email}</SectionLeft>
-                </SectionLeftBox>
+                </PersonalDataSection>
+
+                <PersonalDataSection>
+                  <SectionTitleLeft white bold orphans={3} widows={4}>
+                    <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
+                  </SectionTitleLeft>
+                  <SectionLeft>{adress}</SectionLeft>
+                </PersonalDataSection>
 
                 <SectionTitleLeft white bold orphans={3} widows={4}>
-                  Github:
+                  <Icon src={githubIcon} /> Github:
                 </SectionTitleLeft>
-                <SectionLeft>
+                <PersonalDataSection>
                   <Link href={github} target="_blank" rel="noopener noreferrer">
                     {github}
                   </Link>
-                </SectionLeft>
+                </PersonalDataSection>
                 <SectionTitleLeft white bold orphans={3} widows={4}>
-                  Linkedin:
+                  <Icon src={linkedIcon} /> Linkedin:
                 </SectionTitleLeft>
-                <SectionLeft>
+                <PersonalDataSection>
                   <Link href={linkedin} target="_blank" rel="noopener noreferrer">
                     {linkedin}
                   </Link>
-                </SectionLeft>
+                </PersonalDataSection>
               </LeftSide>
             </ContentBox>
 
@@ -324,14 +371,29 @@ class MyDocument extends Component {
                 <SectionLeft>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
             ))}
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'zainteresowania' : 'interests'}</ContentTitle>
+              <TitleDecoration white />
+            </ContentTitleBox>
+            {interests.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <SectionLeftBox>
+                  <SectionTitleLeft bold orphans={3} widows={4}>
+                    {item.name}
+                  </SectionTitleLeft>
+                </SectionLeftBox>
+                <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+              </TextSection>
+            ))}
           </LeftColumn>
           <RightColumn>
-            <HeadContainer>
-              <UserName bold>
-                {name} {surname}
-              </UserName>
+            <HeadContainerRight>
+              <UserNameContainer bold>
+                <UserName>{name}</UserName>
+                <UserName>{surname}</UserName>
+              </UserNameContainer>
               <Profession bold>{profession}</Profession>
-            </HeadContainer>
+            </HeadContainerRight>
 
             <ContentTitleBox wrap={false}>
               <ContentTitle>
@@ -404,6 +466,151 @@ class MyDocument extends Component {
                       {item.department}
                     </SectionTitle>
                     <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'certyfikaty' : 'certificates'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
+            {certificates.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.description}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle orphans={20} widows={20}>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'kursy' : 'courses'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
+            {courses.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.description}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle orphans={20} widows={20}>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'publikacje' : 'publications'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
+            {publications.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.description}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle orphans={20} widows={20}>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'konferencje' : 'conferences'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
+            {conferences.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.description}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle orphans={20} widows={20}>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'licencje' : 'licenses'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
+            {licenses.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.description}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle orphans={20} widows={20}>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
                   </RightSide>
                 </ContentBox>
               </TextSection>
