@@ -17,16 +17,18 @@ export default class Skills extends Component {
   state = {
     id: '',
     name: '',
+    description: '',
     statusActive: false,
   };
 
   componentDidMount() {
     this.mounted = true;
-    const { id, name } = this.props.item;
+    const { id, name, description } = this.props.item;
 
     this.setState({
       id,
       name,
+      description,
     });
   }
 
@@ -76,7 +78,7 @@ export default class Skills extends Component {
   render() {
     const { id } = this.props.item;
     const { index, current, newItem } = this.props;
-    const { name } = this.state;
+    const { name, description } = this.state;
 
     return (
       <StyledInputSection id={id}>
@@ -88,6 +90,12 @@ export default class Skills extends Component {
         />
         <StyledWrapper>
           <Input placeholder="umiejętność" id="name" value={name} onChange={this.handleForm} />
+          <Input
+            placeholder="opis"
+            id="description"
+            value={description}
+            onChange={this.handleForm}
+          />
         </StyledWrapper>
       </StyledInputSection>
     );

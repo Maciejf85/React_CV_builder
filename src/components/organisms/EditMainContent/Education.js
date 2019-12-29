@@ -27,6 +27,7 @@ class Education extends Component {
     store.dispatch(
       addNewItemToCurrentCv(currentView, {
         name: '',
+        department: '',
         startYear: 2000,
         startMonth: 1,
         endYear: 2000,

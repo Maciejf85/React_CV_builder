@@ -5,8 +5,11 @@ import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratMedium from 'assets/fonts/Montserrat-Medium.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
+import linkedIcon from 'assets/linked.png';
+import phoneIcon from 'assets/phone.png';
+import emailIcon from 'assets/email.png';
+import githubIcon from 'assets/github.png';
+import addressIcon from 'assets/address.png';
 import store from 'store';
 
 Font.register({
@@ -39,57 +42,64 @@ const LeftColumn = styled.View`
   width: 165pt;
   height: 100%;
   color: white;
-  padding: 10px;
+  padding: 0 10px;
+  font-family: 'Montserrat';
 `;
 const RightColumn = styled.View`
   width: 430pt;
   /* max-height: 842pt; */
   font-family: 'Montserrat';
-  padding: 10pt;
+  padding: 0 10pt;
   background: white;
 `;
 
-const Heading = styled.Text`
-  font-size: 11pt;
-  margin: 15pt 5pt 0;
-  font-family: 'Montserrat';
-  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+const HeadContainerLeft = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 140pt;
 `;
+
+const HeadContainerRight = styled.View`
+  width: 100%;
+  height: 140pt;
+`;
+
+const UserNameContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-top: 44pt;
+`;
+
 const UserName = styled.Text`
-  font-size: 22pt;
-  margin-top: 46pt;
+  font-size: 30pt;
   font-family: 'Montserrat';
-  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  font-weight: bold;
+  margin-right: 10px;
   color: #494949;
   text-transform: uppercase;
   letter-spacing: 2pt;
+  /* border: 1px solid blanchedalmond; */
 `;
+
 const Profession = styled.Text`
   font-size: 11pt;
   font-family: 'Montserrat';
   letter-spacing: 1pt;
   text-transform: uppercase;
 `;
-const Icon = styled.View`
-  width: 20pt;
-  height: 20pt;
-  border: 1px solid white;
-`;
 
-// const Image = styled.Image`
-//   width: 100%;
-//   margin: 10pt auto;
-// `;
 const ImageRound = styled.Image`
-  margin-top: 23pt;
-  margin-left: 23pt;
-  width: 98pt;
-  height: 98pt;
+  width: 100pt;
+  height: 100pt;
   border-radius: 100px;
 `;
 
 const ContentTitleBox = styled.View`
-  margin: 15pt 0;
+  margin: 25pt 0;
   font-size: 11pt;
   text-transform: uppercase;
   /* background: #aaa; */
@@ -98,7 +108,8 @@ const ContentTitle = styled.Text`
   font-size: 11pt;
   text-transform: uppercase;
   letter-spacing: 0.9pt;
-  font-weight: medium;
+  /* font-weight: medium; */
+  font-weight: semiBold;
 
   /* background: #ddd; */
 `;
@@ -108,27 +119,75 @@ const TitleDecoration = styled.View`
   border-bottom: 3pt solid ${({ white }) => (white ? 'white' : '#494949')};
 `;
 
-const HeadContainer = styled.View`
-  width: 100%;
-  height: 155pt;
+const SectionTitle = styled.Text`
+  font-size: 9.6pt;
+  color: ${({ white }) => (white ? 'white' : 'black')};
+  font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
+  letter-spacing: 0.2pt;
 `;
 
 const Section = styled.Text`
   margin: 0 0 10pt;
   color: black;
   font-size: 9.5pt;
-  padding: 5px 0;
+  padding: 5pt 0 5pt 5pt;
+  letter-spacing: 0.3pt;
 `;
-const SectionTitle = styled.Text`
-  font-size: 9.5pt;
+const SectionDate = styled.Text`
+  min-height: 9pt;
+  margin: 0 0 10pt;
   color: black;
-  font-weight: medium;
+  font-size: 9pt;
+  letter-spacing: 0.3pt;
+`;
+
+const SectionLeftBox = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+const Icon = styled.Image`
+  width: 15pt;
+  height: 9pt;
+  background-position: center center;
+`;
+
+const SectionTitleLeft = styled.Text`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  text-transform: capitalize;
+  color: white;
+  font-size: 9.8pt;
+  font-weight: semiBold;
+  letter-spacing: 0.2pt;
+`;
+const SectionTitleLeftDot = styled.View`
+  margin: 0 4pt;
+  width: 4pt;
+  height: 4pt;
+  background: white;
+  border-radius: 50pt;
+`;
+
+const PersonalDataSection = styled.View`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SectionLeft = styled.Text`
+  margin: 0 0 10pt;
+  color: white;
+  font-size: 9pt;
+  padding: 5pt 0 0 11pt;
 `;
 
 const Link = styled.Link`
-  font-size: 11pt;
-  margin-left: 5pt;
-  margin-bottom: 5pt;
+  margin: 0 0 10pt;
+  color: white;
+  font-size: 8.5pt;
+  padding: 5pt 0 0 11pt;
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
@@ -208,18 +267,30 @@ class MyDocument extends Component {
     const state = store.getState();
     const { language } = this.props;
     const { currentCv, personalData, confidential } = state;
-    const { name, surname, email, adress, github, linkedin, profession } = personalData;
-    const { education, languages, experience, currentItem, skills } = currentCv;
+    const { name, surname, email, adress, phone, github, linkedin, profession } = personalData;
+    const {
+      education,
+      experience,
+      skills,
+      languages,
+      certificates,
+      courses,
+      publications,
+      conferences,
+      licenses,
+      interests,
+      currentItem,
+    } = currentCv;
     console.log('state', state);
-    console.log('education', education);
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
           <Masking fixed />
           <LeftColumn>
-            <HeadContainer>
+            <HeadContainerLeft>
               <ImageRound src={state.image.image} />
-            </HeadContainer>
+            </HeadContainerLeft>
+
             <ContentBox>
               <LeftSide>
                 <ContentTitleBox wrap={false}>
@@ -228,31 +299,138 @@ class MyDocument extends Component {
                   </ContentTitle>
                   <TitleDecoration white />
                 </ContentTitleBox>
-                <SectionTitle bold orphans={3} widows={4}>
-                  <Icon>
-                    <FontAwesomeIcon icon={faPhoneAlt} />
-                  </Icon>
-                  {email}
-                </SectionTitle>
+
+                <PersonalDataSection>
+                  <SectionTitleLeft white bold orphans={3} widows={4}>
+                    <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
+                  </SectionTitleLeft>
+                  <SectionLeft>{phone}</SectionLeft>
+                </PersonalDataSection>
+
+                <PersonalDataSection>
+                  <SectionTitleLeft white bold orphans={3} widows={4}>
+                    <Icon src={emailIcon} /> Email:
+                  </SectionTitleLeft>
+                  <SectionLeft>{email}</SectionLeft>
+                </PersonalDataSection>
+
+                <PersonalDataSection>
+                  <SectionTitleLeft white bold orphans={3} widows={4}>
+                    <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
+                  </SectionTitleLeft>
+                  <SectionLeft>{adress}</SectionLeft>
+                </PersonalDataSection>
+
+                <SectionTitleLeft white bold orphans={3} widows={4}>
+                  <Icon src={githubIcon} /> Github:
+                </SectionTitleLeft>
+                <PersonalDataSection>
+                  <Link href={github} target="_blank" rel="noopener noreferrer">
+                    {github}
+                  </Link>
+                </PersonalDataSection>
+                <SectionTitleLeft white bold orphans={3} widows={4}>
+                  <Icon src={linkedIcon} /> Linkedin:
+                </SectionTitleLeft>
+                <PersonalDataSection>
+                  <Link href={linkedin} target="_blank" rel="noopener noreferrer">
+                    {linkedin}
+                  </Link>
+                </PersonalDataSection>
               </LeftSide>
             </ContentBox>
 
-            <Heading>{email}</Heading>
-            <Heading>{adress}</Heading>
-            <Link href={github} target="_blank" rel="noopener noreferrer">
-              {github}
-            </Link>
-            <Link href={linkedin} target="_blank" rel="noopener noreferrer">
-              {linkedin}
-            </Link>
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
+              <TitleDecoration white />
+            </ContentTitleBox>
+            {languages.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <SectionLeftBox>
+                  <SectionTitleLeftDot />
+                  <SectionTitleLeft bold orphans={3} widows={4}>
+                    {item.name}
+                  </SectionTitleLeft>
+                </SectionLeftBox>
+                <SectionLeft>{`${item.description}`}</SectionLeft>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'Umiejętności' : 'Skills'}</ContentTitle>
+              <TitleDecoration white />
+            </ContentTitleBox>
+            {skills.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <SectionLeftBox>
+                  <SectionTitleLeftDot />
+                  <SectionTitleLeft bold orphans={3} widows={4}>
+                    {item.name}
+                  </SectionTitleLeft>
+                </SectionLeftBox>
+                <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+              </TextSection>
+            ))}
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'zainteresowania' : 'interests'}</ContentTitle>
+              <TitleDecoration white />
+            </ContentTitleBox>
+            {interests.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <SectionLeftBox>
+                  <SectionTitleLeft bold orphans={3} widows={4}>
+                    {item.name}
+                  </SectionTitleLeft>
+                </SectionLeftBox>
+                <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+              </TextSection>
+            ))}
           </LeftColumn>
           <RightColumn>
-            <HeadContainer>
-              <UserName bold>
-                {name} {surname}
-              </UserName>
+            <HeadContainerRight>
+              <UserNameContainer bold>
+                <UserName>{name}</UserName>
+                <UserName>{surname}</UserName>
+              </UserNameContainer>
               <Profession bold>{profession}</Profession>
-            </HeadContainer>
+            </HeadContainerRight>
+
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>
+                {language === 'PL' ? 'Doświadczenie zawodowe' : 'work experiance'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
+            {experience.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.name}
+                    </SectionTitle>
+                    <SectionDate orphans={3} widows={4}>
+                      {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
+                        item.startYear
+                      } - ${
+                        !item.inProgress
+                          ? item.endMonth < 10
+                            ? '0' + item.endMonth + '.'
+                            : item.endMonth + '.'
+                          : ''
+                      }${!item.inProgress ? item.endYear : ''} 
+                     `}
+                    </SectionDate>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle>{item.position}</SectionTitle>
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
 
             <ContentTitleBox wrap={false}>
               <ContentTitle visible={education.length > 0}>
@@ -268,76 +446,171 @@ class MyDocument extends Component {
                     <SectionTitle bold orphans={3} widows={4}>
                       {item.name}
                     </SectionTitle>
-                    <Section orphans={3} widows={4}>{`${item.startYear} ${item.startMonth}  ${
-                      !item.inProgress ? item.endYear : ''
-                    } ${!item.inProgress ? item.endMonth : ''}`}</Section>
+                    <SectionDate orphans={3} widows={4}>
+                      {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
+                        item.startYear
+                      } - ${
+                        !item.inProgress
+                          ? item.endMonth < 10
+                            ? '0' + item.endMonth + '.'
+                            : item.endMonth + '.'
+                          : ''
+                      }${!item.inProgress ? item.endYear : ''} 
+                     `}
+                    </SectionDate>
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <Section>{`${item.description}`}</Section>
-                  </RightSide>
-                </ContentBox>
-              </TextSection>
-            ))}
-            <ContentTitleBox wrap={false}>
-              <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
-              <TitleDecoration />
-            </ContentTitleBox>
-            {languages.map(item => (
-              <TextSection key={item.id} wrap={false}>
-                <ContentBox>
-                  <LeftSide>
                     <SectionTitle bold orphans={3} widows={4}>
-                      {item.name}
+                      {item.department}
                     </SectionTitle>
-                  </LeftSide>
-                  <RightSide>
-                    <Decoration />
-                    <DecorationBottom />
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
               </TextSection>
             ))}
 
-            <ContentTitleBox wrap={false}>
-              <ContentTitle>{language === 'PL' ? 'Doświadczenie' : 'work experiance'}</ContentTitle>
+            <ContentTitleBox>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'certyfikaty' : 'certificates'}
+              </ContentTitle>
               <TitleDecoration />
             </ContentTitleBox>
 
-            {experience.map(item => (
+            {certificates.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
                     <SectionTitle bold orphans={3} widows={4}>
-                      {item.name}
+                      {item.description}
                     </SectionTitle>
+                    <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <Section>{`${item.description}`}</Section>
+                    <SectionTitle orphans={20} widows={20}>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
                   </RightSide>
                 </ContentBox>
               </TextSection>
             ))}
-            <ContentTitleBox wrap={false}>
-              <ContentTitle>{language === 'PL' ? 'Umiejętnosci' : 'Skills'}</ContentTitle>
+
+            <ContentTitleBox>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'kursy' : 'courses'}
+              </ContentTitle>
               <TitleDecoration />
             </ContentTitleBox>
-            {skills.map(item => (
+
+            {courses.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
                     <SectionTitle bold orphans={3} widows={4}>
-                      {item.name}
+                      {item.description}
                     </SectionTitle>
+                    <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <Section>{`${item.description}`}</Section>
+                    <SectionTitle orphans={20} widows={20}>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'publikacje' : 'publications'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
+            {publications.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.description}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle orphans={20} widows={20}>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'konferencje' : 'conferences'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
+            {conferences.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.description}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle orphans={20} widows={20}>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            <ContentTitleBox>
+              <ContentTitle visible={education.length > 0}>
+                {language === 'PL' ? 'licencje' : 'licenses'}
+              </ContentTitle>
+              <TitleDecoration />
+            </ContentTitleBox>
+
+            {licenses.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold orphans={3} widows={4}>
+                      {item.description}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle orphans={20} widows={20}>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
                   </RightSide>
                 </ContentBox>
               </TextSection>
