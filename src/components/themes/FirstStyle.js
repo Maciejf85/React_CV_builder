@@ -117,6 +117,10 @@ const TitleDecoration = styled.View`
 `;
 
 const SectionTitle = styled.Text`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center;
   font-size: 9pt;
   color: ${({ white }) => (white ? 'white' : 'black')};
   font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
@@ -496,17 +500,19 @@ class MyDocument extends Component {
             {courses.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
-                  <LeftSide>
-                    <SectionTitle bold>{item.description}</SectionTitle>
+                  <LeftSide small>
+                    <SectionTitle>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle>
-                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
-                        item.endYear
-                      }`}
+                    <SectionTitle bold orphans={20} widows={20}>
+                      {item.description}
                     </SectionTitle>
                   </RightSide>
                 </ContentBox>
@@ -523,17 +529,19 @@ class MyDocument extends Component {
             {publications.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
-                  <LeftSide>
-                    <SectionTitle bold>{item.description}</SectionTitle>
+                  <LeftSide small>
+                    <SectionTitle>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle>
-                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
-                        item.endYear
-                      }`}
+                    <SectionTitle bold orphans={20} widows={20}>
+                      {item.description}
                     </SectionTitle>
                   </RightSide>
                 </ContentBox>
@@ -550,17 +558,19 @@ class MyDocument extends Component {
             {conferences.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
-                  <LeftSide>
-                    <SectionTitle bold>{item.description}</SectionTitle>
+                  <LeftSide small>
+                    <SectionTitle>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle>
-                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
-                        item.endYear
-                      }`}
+                    <SectionTitle bold orphans={20} widows={20}>
+                      {item.description}
                     </SectionTitle>
                   </RightSide>
                 </ContentBox>
@@ -577,17 +587,19 @@ class MyDocument extends Component {
             {licenses.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
-                  <LeftSide>
-                    <SectionTitle bold>{item.description}</SectionTitle>
+                  <LeftSide small>
+                    <SectionTitle>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle>
-                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
-                        item.endYear
-                      }`}
+                    <SectionTitle bold orphans={20} widows={20}>
+                      {item.description}
                     </SectionTitle>
                   </RightSide>
                 </ContentBox>
