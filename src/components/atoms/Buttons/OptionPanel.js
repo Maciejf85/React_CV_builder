@@ -127,7 +127,7 @@ class OptionPanel extends Component {
         ) : (
           <>
             <li>
-              <p>{polishLanguage ? 'czy usunąć ?' : 'delete ?'}</p>
+              <p>{polishLanguage ? 'czy usunąć ?' : 'are you sure ?'}</p>
             </li>
             <li>
               <ConfirmButton data-name="remove" id={id} onClick={this.handleClick}>

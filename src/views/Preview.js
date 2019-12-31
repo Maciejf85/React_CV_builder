@@ -75,7 +75,15 @@ class Preview extends Component {
         {isReady ? (
           <StyledWrapper>
             <PDFDownloadLink document={<FirstStyle />} fileName={`${currentItem.title}.pdf`}>
-              {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
+              {({ loading }) =>
+                loading
+                  ? language === 'PL'
+                    ? 'pobieranie...'
+                    : 'downloading...'
+                  : language === 'PL'
+                  ? 'Pobierz PDF'
+                  : 'Download PDF'
+              }
             </PDFDownloadLink>
           </StyledWrapper>
         ) : null}

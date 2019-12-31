@@ -423,7 +423,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentAdress"
-              placeholder={polishLanguage ? 'miasto, Kraj' : 'city, country'}
+              placeholder={polishLanguage ? 'miasto, kraj' : 'city, country'}
               value={currentAdress}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}
