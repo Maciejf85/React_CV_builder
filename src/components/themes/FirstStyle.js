@@ -27,7 +27,7 @@ const MainContainer = styled.Page`
   flex-direction: row;
   background-color: #494949;
   padding-top: 15pt;
-  padding-bottom: 80pt;
+  padding-bottom: 100pt;
 `;
 const Masking = styled.View`
   position: absolute;
@@ -47,7 +47,7 @@ const LeftColumn = styled.View`
 `;
 const RightColumn = styled.View`
   width: 430pt;
-  /* max-height: 842pt; */
+  height: 100%;
   font-family: 'Montserrat';
   padding: 0 10pt;
   background: white;
@@ -106,7 +106,7 @@ const ContentTitleBox = styled.View`
 const ContentTitle = styled.Text`
   font-size: 11pt;
   text-transform: uppercase;
-  letter-spacing: 0.9pt;
+  letter-spacing: 0.5pt;
   /* font-weight: medium; */
   font-weight: semiBold;
 `;
@@ -456,7 +456,7 @@ class MyDocument extends Component {
               </TextSection>
             ))}
 
-            <ContentTitleBox>
+            <ContentTitleBox wrap={false} orphans={3}>
               <ContentTitle visible={education.length > 0}>
                 {language === 'PL' ? 'certyfikaty' : 'certificates'}
               </ContentTitle>
