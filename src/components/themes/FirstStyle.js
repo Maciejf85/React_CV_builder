@@ -117,10 +117,11 @@ const TitleDecoration = styled.View`
 `;
 
 const SectionTitle = styled.Text`
-  font-size: 9.6pt;
+  font-size: 9pt;
   color: ${({ white }) => (white ? 'white' : 'black')};
   font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
   letter-spacing: 0.2pt;
+  text-align: ${({ right }) => (right ? 'right' : 'left')};
 `;
 
 const Section = styled.Text`
@@ -225,7 +226,7 @@ const RightSide = styled.View`
 `;
 
 const LeftSide = styled.View`
-  flex-basis: 133pt;
+  flex-basis: ${({ small }) => (small ? '70pt' : '133pt')};
   padding-right: 10pt;
   text-align: left;
 `;
@@ -466,17 +467,19 @@ class MyDocument extends Component {
             {certificates.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
-                  <LeftSide>
-                    <SectionTitle bold>{item.description}</SectionTitle>
+                  <LeftSide small>
+                    <SectionTitle>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle orphans={20} widows={20}>
-                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
-                        item.endYear
-                      }`}
+                    <SectionTitle bold orphans={20} widows={20}>
+                      {item.description}
                     </SectionTitle>
                   </RightSide>
                 </ContentBox>
