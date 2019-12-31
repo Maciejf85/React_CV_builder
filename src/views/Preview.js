@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
 import NavBar from 'components/organisms/Navigation/NavBar';
-import { PDFDownloadLink, StyleSheet, PDFViewer, Font } from '@react-pdf/renderer';
+import { PDFDownloadLink, StyleSheet, PDFViewer } from '@react-pdf/renderer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import FirstStyle from 'components/themes/FirstStyle';
 
-import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
-import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import path from '../path';
-
-Font.register({
-  family: 'Montserrat',
-  fonts: [
-    { src: Montserrat, fontWeight: 'normal' },
-    { src: MontserratBold, fontWeight: 'bold' },
-  ],
-});
 
 const styles = StyleSheet.create({
   page: { backgroundColor: 'tomato' },
@@ -38,8 +28,6 @@ const styles = StyleSheet.create({
     outline: 'none',
   },
   view: {
-    minWidth: '800px',
-    minHeight: '800px',
     width: '100vw',
     height: '93vh',
     border: 'none',
@@ -51,6 +39,7 @@ const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   background: #525659;
+  color: white;
 `;
 
 class Preview extends Component {
