@@ -47,7 +47,7 @@ const LeftColumn = styled.View`
 `;
 const RightColumn = styled.View`
   width: 430pt;
-  /* max-height: 842pt; */
+  height: 100%;
   font-family: 'Montserrat';
   padding: 0 10pt;
   background: white;
@@ -95,23 +95,20 @@ const Profession = styled.Text`
 const ImageRound = styled.Image`
   width: 100pt;
   height: 100pt;
-  border-radius: 100px;
+  border-radius: 100pt;
 `;
 
 const ContentTitleBox = styled.View`
   margin: 25pt 0;
   font-size: 11pt;
   text-transform: uppercase;
-  /* background: #aaa; */
 `;
 const ContentTitle = styled.Text`
   font-size: 11pt;
   text-transform: uppercase;
-  letter-spacing: 0.9pt;
+  letter-spacing: 0.5pt;
   /* font-weight: medium; */
   font-weight: semiBold;
-
-  /* background: #ddd; */
 `;
 const TitleDecoration = styled.View`
   width: 30pt;
@@ -301,27 +298,27 @@ class MyDocument extends Component {
                 </ContentTitleBox>
 
                 <PersonalDataSection>
-                  <SectionTitleLeft white bold orphans={3} widows={4}>
+                  <SectionTitleLeft white bold>
                     <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
                   </SectionTitleLeft>
                   <SectionLeft>{phone}</SectionLeft>
                 </PersonalDataSection>
 
                 <PersonalDataSection>
-                  <SectionTitleLeft white bold orphans={3} widows={4}>
+                  <SectionTitleLeft white bold>
                     <Icon src={emailIcon} /> Email:
                   </SectionTitleLeft>
                   <SectionLeft>{email}</SectionLeft>
                 </PersonalDataSection>
 
                 <PersonalDataSection>
-                  <SectionTitleLeft white bold orphans={3} widows={4}>
+                  <SectionTitleLeft white bold>
                     <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
                   </SectionTitleLeft>
                   <SectionLeft>{adress}</SectionLeft>
                 </PersonalDataSection>
 
-                <SectionTitleLeft white bold orphans={3} widows={4}>
+                <SectionTitleLeft white bold>
                   <Icon src={githubIcon} /> Github:
                 </SectionTitleLeft>
                 <PersonalDataSection>
@@ -329,7 +326,7 @@ class MyDocument extends Component {
                     {github}
                   </Link>
                 </PersonalDataSection>
-                <SectionTitleLeft white bold orphans={3} widows={4}>
+                <SectionTitleLeft white bold>
                   <Icon src={linkedIcon} /> Linkedin:
                 </SectionTitleLeft>
                 <PersonalDataSection>
@@ -348,9 +345,7 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox>
                   <SectionTitleLeftDot />
-                  <SectionTitleLeft bold orphans={3} widows={4}>
-                    {item.name}
-                  </SectionTitleLeft>
+                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
                 </SectionLeftBox>
                 <SectionLeft>{`${item.description}`}</SectionLeft>
               </TextSection>
@@ -364,9 +359,7 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox>
                   <SectionTitleLeftDot />
-                  <SectionTitleLeft bold orphans={3} widows={4}>
-                    {item.name}
-                  </SectionTitleLeft>
+                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
                 </SectionLeftBox>
                 <SectionLeft>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
@@ -378,9 +371,7 @@ class MyDocument extends Component {
             {interests.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox>
-                  <SectionTitleLeft bold orphans={3} widows={4}>
-                    {item.name}
-                  </SectionTitleLeft>
+                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
                 </SectionLeftBox>
                 <SectionLeft>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
@@ -406,10 +397,8 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.name}
-                    </SectionTitle>
-                    <SectionDate orphans={3} widows={4}>
+                    <SectionTitle bold>{item.name}</SectionTitle>
+                    <SectionDate>
                       {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
                         item.startYear
                       } - ${
@@ -443,10 +432,8 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.name}
-                    </SectionTitle>
-                    <SectionDate orphans={3} widows={4}>
+                    <SectionTitle bold>{item.name}</SectionTitle>
+                    <SectionDate>
                       {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
                         item.startYear
                       } - ${
@@ -462,16 +449,14 @@ class MyDocument extends Component {
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.department}
-                    </SectionTitle>
+                    <SectionTitle bold>{item.department}</SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
               </TextSection>
             ))}
 
-            <ContentTitleBox>
+            <ContentTitleBox wrap={false} orphans={3}>
               <ContentTitle visible={education.length > 0}>
                 {language === 'PL' ? 'certyfikaty' : 'certificates'}
               </ContentTitle>
@@ -482,9 +467,7 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.description}
-                    </SectionTitle>
+                    <SectionTitle bold>{item.description}</SectionTitle>
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
@@ -511,15 +494,13 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.description}
-                    </SectionTitle>
+                    <SectionTitle bold>{item.description}</SectionTitle>
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle orphans={20} widows={20}>
+                    <SectionTitle>
                       {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
                         item.endYear
                       }`}
@@ -540,15 +521,13 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.description}
-                    </SectionTitle>
+                    <SectionTitle bold>{item.description}</SectionTitle>
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle orphans={20} widows={20}>
+                    <SectionTitle>
                       {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
                         item.endYear
                       }`}
@@ -569,15 +548,13 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.description}
-                    </SectionTitle>
+                    <SectionTitle bold>{item.description}</SectionTitle>
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle orphans={20} widows={20}>
+                    <SectionTitle>
                       {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
                         item.endYear
                       }`}
@@ -598,15 +575,13 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
-                    <SectionTitle bold orphans={3} widows={4}>
-                      {item.description}
-                    </SectionTitle>
+                    <SectionTitle bold>{item.description}</SectionTitle>
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle orphans={20} widows={20}>
+                    <SectionTitle>
                       {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
                         item.endYear
                       }`}
