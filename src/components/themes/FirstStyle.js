@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Document, Font } from '@react-pdf/renderer';
 import styled from '@react-pdf/styled-components';
-import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
-import MontserratMedium from 'assets/fonts/Montserrat-Medium.ttf';
-import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
-import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
+// import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
+// import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
+// import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import linkedIcon from 'assets/linked.png';
 import phoneIcon from 'assets/phone.png';
 import emailIcon from 'assets/email.png';
@@ -12,15 +11,14 @@ import githubIcon from 'assets/github.png';
 import addressIcon from 'assets/address.png';
 import store from 'store';
 
-Font.register({
-  family: 'Montserrat',
-  fonts: [
-    { src: Montserrat, fontWeight: 'normal' },
-    { src: MontserratMedium, fontWeight: 'medium' },
-    { src: MontserratSemiBold, fontWeight: 'semiBold' },
-    { src: MontserratBold, fontWeight: 'bold' },
-  ],
-});
+// Font.register({
+//   family: 'Montserrat',
+//   fonts: [
+//     { src: Montserrat, fontWeight: 'normal' },
+//     { src: MontserratSemiBold, fontWeight: 'semiBold' },
+//     { src: MontserratBold, fontWeight: 'bold' },
+//   ],
+// });
 
 const MainContainer = styled.Page`
   display: flex;
@@ -107,7 +105,6 @@ const ContentTitle = styled.Text`
   font-size: 11pt;
   text-transform: uppercase;
   letter-spacing: 0.5pt;
-  /* font-weight: medium; */
   font-weight: semiBold;
 `;
 const TitleDecoration = styled.View`
@@ -254,7 +251,6 @@ const FooterText = styled.Text`
   text-align: center;
 `;
 
-// const path = 'https://cors-anywhere.herokuapp.com/https://maciejf.pl/cv-builder/';
 // Create Document Component
 class MyDocument extends Component {
   componentDidMount() {
