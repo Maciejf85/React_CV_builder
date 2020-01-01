@@ -139,6 +139,7 @@ class SectionBody extends Component {
       name,
       surname,
       email,
+      phone,
       adress,
       birthday,
       github,
@@ -179,6 +180,9 @@ class SectionBody extends Component {
               </li>
               <li>
                 <span>email:</span> {email}
+              </li>
+              <li>
+                <span>{polishLanguage ? 'telefon' : 'phone'}:</span> {phone}
               </li>
               <li>
                 <span>{polishLanguage ? 'adres' : 'address'}:</span> {adress}
@@ -252,6 +256,7 @@ SectionBody.propTypes = {
     name: PropTypes.string,
     surname: PropTypes.string,
     email: PropTypes.string,
+    phone: PropTypes.string,
     adress: PropTypes.string,
     birthday: PropTypes.string,
     github: PropTypes.string,
@@ -268,6 +273,7 @@ SectionBody.defaultProps = {
     name: 'puste',
     surname: 'puste',
     email: 'puste',
+    phone: 'puste',
     adress: 'puste',
     birthday: 'puste',
     github: 'puste',

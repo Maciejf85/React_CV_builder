@@ -13,6 +13,7 @@ class EducationPanel extends Component {
   state = {
     id: '',
     name: '',
+    department: '',
     startYear: 0,
     startMonth: 0,
     endYear: 0,
@@ -27,6 +28,7 @@ class EducationPanel extends Component {
     const {
       id,
       name,
+      department,
       startYear,
       startMonth,
       endYear,
@@ -38,6 +40,7 @@ class EducationPanel extends Component {
     this.setState({
       id,
       name,
+      department,
       startMonth,
       startYear,
       endYear,
@@ -103,9 +106,19 @@ class EducationPanel extends Component {
   render() {
     const { id } = this.props.item;
     const { index, current, newItem, language } = this.props;
-    const { name, startYear, startMonth, endYear, endMonth, description, inProgress } = this.state;
+    const {
+      name,
+      department,
+      startYear,
+      startMonth,
+      endYear,
+      endMonth,
+      description,
+      inProgress,
+    } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
+    const isPolish = language === 'PL';
     return (
       <StyledInputSection id={id}>
         <InputHeader
@@ -115,10 +128,21 @@ class EducationPanel extends Component {
           removeItem={this.handleRemoveItem}
         />
         <div className="inputContainer">
-          <Input placeholder="nazwa szkoły" id="name" value={name} onChange={this.handleForm} />
+          <Input
+            placeholder={isPolish ? 'Nazwa szkoły' : 'School'}
+            id="name"
+            value={name}
+            onChange={this.handleForm}
+          />
+          <Input
+            placeholder={isPolish ? 'Kierunek' : 'Department'}
+            id="department"
+            value={department}
+            onChange={this.handleForm}
+          />
 
           <Select
-            title="data rozpoczęcia"
+            title={isPolish ? 'Data rozpoczęcia' : 'Started at'}
             id="startYear"
             value={startYear}
             onChange={this.handleForm}

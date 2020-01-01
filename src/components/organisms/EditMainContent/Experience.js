@@ -23,7 +23,7 @@ class Experience extends Component {
     store.dispatch(
       addNewItemToCurrentCv(currentView, {
         name: '',
-        employer: '',
+        position: '',
         startYear: 2000,
         startMonth: 1,
         endYear: 2000,

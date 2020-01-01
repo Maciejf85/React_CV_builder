@@ -36,6 +36,7 @@ class UserData extends Component {
     currentName: '',
     currentSurname: '',
     currentEmail: '',
+    currentPhone: '',
     currentBirthday: '',
     birthdayValid: false,
     currentAdress: '',
@@ -53,6 +54,7 @@ class UserData extends Component {
       name,
       surname,
       email,
+      phone,
       birthday,
       adress,
       github,
@@ -66,6 +68,7 @@ class UserData extends Component {
       currentName: name,
       currentSurname: surname,
       currentEmail: email,
+      currentPhone: phone,
       currentBirthday: birthday,
       currentAdress: adress,
       currentGithub: github,
@@ -83,6 +86,7 @@ class UserData extends Component {
         name,
         surname,
         email,
+        phone,
         birthday,
         adress,
         github,
@@ -96,6 +100,7 @@ class UserData extends Component {
           currentName: name,
           currentSurname: surname,
           currentEmail: email,
+          currentPhone: phone,
           currentBirthday: birthday,
           currentAdress: adress,
           currentGithub: github,
@@ -164,9 +169,9 @@ class UserData extends Component {
 
   handleForm = (e, test = true) => {
     const { statusActive } = this.state;
-    if (e.target.id !== 'currentTitle') {
+    if (e.target.dataset.id !== 'currentTitle') {
       this.setState({
-        [e.target.id]: e.target.value,
+        [e.target.dataset.id]: e.target.value,
       });
       if (!statusActive && test) {
         this.handleTimer();
@@ -176,7 +181,7 @@ class UserData extends Component {
       }
     } else {
       this.setState({
-        [e.target.id]: e.target.value,
+        [e.target.dataset.id]: e.target.value,
       });
     }
   };
@@ -194,6 +199,32 @@ class UserData extends Component {
     }
   };
 
+  handlePhoneValidation = e => {
+    let { value } = e.target;
+    const { statusActive } = this.state;
+    const reg = /\B(?=(\d{3}))/g;
+    const test = reg.test(value);
+    console.log('test', test.toString());
+
+    const numberWithSpaces = value => {
+      return value.replace(/\B(?=(\d{3})+(?!\d))/g, '-');
+    };
+    const result = numberWithSpaces(value);
+    console.log('result', result);
+
+    if (value.length <= 11) {
+      this.setState({
+        [e.target.dataset.id]: result,
+      });
+      if (!statusActive) {
+        this.handleTimer();
+        this.setState({
+          statusActive: true,
+        });
+      }
+    }
+  };
+
   // UPDATE STORE PERSONAL DATA
 
   handleStoreUpdate = () => {
@@ -205,7 +236,16 @@ class UserData extends Component {
   handleTitle = e => {
     const { id } = e.target;
     const { currentTitle, changeTitle, currentTempTitle } = this.state;
+    console.log(
+      'id,currentTitle, currentTempTitle, changeTitle',
+      id,
+      currentTitle,
+      currentTempTitle,
+      changeTitle,
+    );
+
     // change title is active set temp title
+
     if (!changeTitle) {
       this.setState({ currentTempTitle: currentTitle });
     }
@@ -234,6 +274,7 @@ class UserData extends Component {
       currentName,
       currentSurname,
       currentEmail,
+      currentPhone,
       currentBirthday,
       currentAdress,
       currentGithub,
@@ -258,7 +299,7 @@ class UserData extends Component {
               {changeTitle ? (
                 <input
                   type="text"
-                  id="currentTitle"
+                  data-id="currentTitle"
                   value={currentTitle}
                   onChange={this.handleForm}
                   autoFocus
@@ -363,6 +404,14 @@ class UserData extends Component {
             />
             <Input
               type="text"
+              id="currentPhone"
+              placeholder={polishLanguage ? 'telefon' : 'phone'}
+              value={currentPhone}
+              onChange={this.handleForm}
+              onBlur={this.handleStoreUpdate}
+            />
+            <Input
+              type="text"
               id="currentBirthday"
               placeholder={polishLanguage ? 'data ur' : 'birthday'}
               value={currentBirthday}
@@ -374,7 +423,7 @@ class UserData extends Component {
             <Input
               type="text"
               id="currentAdress"
-              placeholder={polishLanguage ? 'miasto, Kraj' : 'city, country'}
+              placeholder={polishLanguage ? 'miasto, kraj' : 'city, country'}
               value={currentAdress}
               onChange={this.handleForm}
               onBlur={this.handleStoreUpdate}

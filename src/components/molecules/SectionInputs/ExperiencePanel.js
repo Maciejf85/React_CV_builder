@@ -21,7 +21,7 @@ class ExperiencePanel extends Component {
   state = {
     id: '',
     name: '',
-    employer: '',
+    position: '',
     startYear: 0,
     startMonth: 0,
     endYear: 0,
@@ -36,7 +36,7 @@ class ExperiencePanel extends Component {
     const {
       id,
       name,
-      employer,
+      position,
       startYear,
       startMonth,
       endYear,
@@ -48,7 +48,7 @@ class ExperiencePanel extends Component {
     this.setState({
       id,
       name,
-      employer,
+      position,
       startMonth,
       startYear,
       endYear,
@@ -116,7 +116,7 @@ class ExperiencePanel extends Component {
     const { index, current, newItem, language } = this.props;
     const {
       name,
-      employer,
+      position,
       startYear,
       startMonth,
       endYear,
@@ -144,9 +144,9 @@ class ExperiencePanel extends Component {
           />
           <Input
             isSmall
-            placeholder="nazwa stanowiska"
-            id="employer"
-            value={employer}
+            placeholder="stanowisko"
+            id="position"
+            value={position}
             onChange={this.handleForm}
           />
 
@@ -193,7 +193,7 @@ class ExperiencePanel extends Component {
         <Textarea
           edit
           placeholder="opis stanowiska"
-          id="description"
+          data-id="description"
           value={description}
           onChange={this.handleForm}
         />

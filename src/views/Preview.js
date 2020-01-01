@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import NavBar from 'components/organisms/Navigation/NavBar';
-import { PDFDownloadLink, StyleSheet, PDFViewer, Font } from '@react-pdf/renderer';
+import { StyleSheet, PDFViewer, Font } from '@react-pdf/renderer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import FirstStyle from 'components/themes/FirstStyle';
-
 import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
+import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import path from '../path';
 
 Font.register({
   family: 'Montserrat',
-  fonts: [{ src: Montserrat, fontWeight: 'normal' }, { src: MontserratBold, fontWeight: 'bold' }],
+  fonts: [
+    { src: Montserrat, fontWeight: 'normal' },
+    { src: MontserratSemiBold, fontWeight: 'semiBold' },
+    { src: MontserratBold, fontWeight: 'bold' },
+  ],
 });
-
 const styles = StyleSheet.create({
   page: { backgroundColor: 'tomato' },
   section: { color: 'white', textAlign: 'center', margin: 30 },
@@ -35,8 +38,6 @@ const styles = StyleSheet.create({
     outline: 'none',
   },
   view: {
-    minWidth: '800px',
-    minHeight: '800px',
     width: '100vw',
     height: '93vh',
     border: 'none',
@@ -48,6 +49,7 @@ const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   background: #525659;
+  color: white;
 `;
 
 class Preview extends Component {
@@ -63,9 +65,9 @@ class Preview extends Component {
 
   render() {
     const { currentCv, personalData, language } = this.props;
-    console.log('lang', language);
     const { name } = personalData;
     const { currentItem } = currentCv;
+    console.log('Font', Font.register);
 
     const { isReady } = this.state;
     if (!Object.entries(currentCv).length) {
@@ -77,17 +79,25 @@ class Preview extends Component {
         <NavBar language={language} />
         <StyledWrapper>
           <PDFViewer style={styles.view} name={name}>
-            <FirstStyle downloadButton={this.handleButton} />
+            <FirstStyle downloadButton={this.handleButton} language={language} />
           </PDFViewer>
         </StyledWrapper>
 
-        {isReady ? (
+        {/* {isReady ? (
           <StyledWrapper>
             <PDFDownloadLink document={<FirstStyle />} fileName={`${currentItem.title}.pdf`}>
-              {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
+              {({ loading }) =>
+                loading
+                  ? language === 'PL'
+                    ? 'pobieranie...'
+                    : 'downloading...'
+                  : language === 'PL'
+                  ? 'Pobierz PDF'
+                  : 'Download PDF'
+              }
             </PDFDownloadLink>
           </StyledWrapper>
-        ) : null}
+        ) : null} */}
       </>
     );
   }
