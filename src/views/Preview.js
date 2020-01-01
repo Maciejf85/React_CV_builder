@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import NavBar from 'components/organisms/Navigation/NavBar';
-import { PDFDownloadLink, StyleSheet, PDFViewer } from '@react-pdf/renderer';
+import { StyleSheet, PDFViewer, Font } from '@react-pdf/renderer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import FirstStyle from 'components/themes/FirstStyle';
-
+import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
+import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
+import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import path from '../path';
 
+Font.register({
+  family: 'Montserrat',
+  fonts: [
+    { src: Montserrat, fontWeight: 'normal' },
+    { src: MontserratSemiBold, fontWeight: 'semiBold' },
+    { src: MontserratBold, fontWeight: 'bold' },
+  ],
+});
 const styles = StyleSheet.create({
   page: { backgroundColor: 'tomato' },
   section: { color: 'white', textAlign: 'center', margin: 30 },
@@ -57,6 +67,7 @@ class Preview extends Component {
     const { currentCv, personalData, language } = this.props;
     const { name } = personalData;
     const { currentItem } = currentCv;
+    console.log('Font', Font.register);
 
     const { isReady } = this.state;
     if (!Object.entries(currentCv).length) {
@@ -72,7 +83,7 @@ class Preview extends Component {
           </PDFViewer>
         </StyledWrapper>
 
-        {isReady ? (
+        {/* {isReady ? (
           <StyledWrapper>
             <PDFDownloadLink document={<FirstStyle />} fileName={`${currentItem.title}.pdf`}>
               {({ loading }) =>
@@ -86,7 +97,7 @@ class Preview extends Component {
               }
             </PDFDownloadLink>
           </StyledWrapper>
-        ) : null}
+        ) : null} */}
       </>
     );
   }
