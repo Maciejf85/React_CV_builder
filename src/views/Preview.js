@@ -60,15 +60,10 @@ class Preview extends Component {
     isReady: false,
   };
 
-  handleButton = () => {
-    this.setState({
-      isReady: true,
-    });
-  };
-
   render() {
     const { currentCv, personalData, language } = this.props;
     const { name } = personalData;
+    const { template } = this.props.template;
     // const { currentItem } = currentCv;
     if (!Object.entries(currentCv).length) {
       return <Redirect to={path.login} />;
@@ -79,7 +74,9 @@ class Preview extends Component {
         <NavBar language={language} />
         <StyledWrapper>
           <PDFViewer style={styles.view} name={name}>
-            <FirstStyle downloadButton={this.handleButton} language={language} />
+            {!template === 1 || (
+              <FirstStyle downloadButton={this.handleButton} language={language} />
+            )}
           </PDFViewer>
         </StyledWrapper>
         <Footer language={language} />
@@ -109,5 +106,6 @@ const mapStateToProps = ({ currentCv, personalData, appState }) => ({
   currentCv,
   personalData,
   language: appState.language,
+  template: currentCv.currentItem,
 });
 export default connect(mapStateToProps)(Preview);
