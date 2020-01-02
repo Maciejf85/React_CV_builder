@@ -18,6 +18,7 @@ const StyledWrapper = styled.nav`
   width: 100%;
   height: 50px;
   background-color: ${({ theme }) => theme.colors.mainGrey};
+
   .lang{
     color:white;
     margin:0 10px;

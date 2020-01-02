@@ -36,12 +36,6 @@ const path = (state = initialState, { type }) => {
         nameL: 'Confidentiality clause',
         currentView: 'confidentiality',
       };
-    case 'templates':
-      return {
-        name: 'Szablony',
-        nameL: 'templates',
-        currentView: 'templates',
-      };
 
     default:
       return state;

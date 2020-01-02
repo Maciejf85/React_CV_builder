@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
 import NavBar from 'components/organisms/Navigation/NavBar';
-import EditSidebar from 'components/molecules/SideBar/EditSidebar';
-import EditMainContent from 'components/organisms/EditMainContent/EditMainContent';
+import Footer from 'components/organisms/Footer/Footer';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
 import path from '../path';
 
 const StyledWrapper = styled.div`
   width: 100%;
   height: calc(100vh - 50px);
-  color: white;
+  color: black;
   display: flex;
 `;
-class Edit extends Component {
+class Template extends Component {
   componentDidMount() {
     // console.log('Component Edit did mount');
   }
 
   render() {
-    const { isVisible, error, language } = this.props.appState;
+    const { language } = this.props.appState;
+    const { template } = this.props;
     if (this.props.isSet === undefined) {
       return <Redirect to={path.login} />;
     }
@@ -28,11 +27,8 @@ class Edit extends Component {
     return (
       <>
         <NavBar language={language} />
-        <StyledWrapper>
-          <EditSidebar language={language} />
-          <EditMainContent language={language} />
-          <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
-        </StyledWrapper>
+        <StyledWrapper>{template.template}</StyledWrapper>
+        <Footer language={language} />
       </>
     );
   }
@@ -41,5 +37,6 @@ class Edit extends Component {
 const MapStateToProps = ({ appState, currentCv }) => ({
   appState,
   isSet: currentCv.currentItem,
+  template: currentCv.currentItem,
 });
-export default connect(MapStateToProps)(Edit);
+export default connect(MapStateToProps)(Template);

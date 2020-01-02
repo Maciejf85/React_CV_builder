@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from 'components/organisms/Navigation/NavBar';
+import Footer from 'components/organisms/Footer/Footer';
 import { StyleSheet, PDFViewer } from '@react-pdf/renderer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -40,8 +41,9 @@ const styles = StyleSheet.create({
   },
   view: {
     width: '100vw',
-    height: '93vh',
+    height: 'calc(100vh - 50px)',
     border: 'none',
+    paddingBottom: '41px',
   },
 });
 const StyledWrapper = styled.div`
@@ -68,8 +70,6 @@ class Preview extends Component {
     const { currentCv, personalData, language } = this.props;
     const { name } = personalData;
     // const { currentItem } = currentCv;
-
-    // const { isReady } = this.state;
     if (!Object.entries(currentCv).length) {
       return <Redirect to={path.login} />;
     }
@@ -82,6 +82,8 @@ class Preview extends Component {
             <FirstStyle downloadButton={this.handleButton} language={language} />
           </PDFViewer>
         </StyledWrapper>
+        <Footer language={language} />
+
         {/* 
         {isReady ? (
           <StyledWrapper>

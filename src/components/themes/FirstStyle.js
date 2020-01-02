@@ -253,10 +253,6 @@ const FooterText = styled.Text`
 
 // Create Document Component
 class MyDocument extends Component {
-  componentDidMount() {
-    setTimeout(this.props.downloadButton, 1000);
-  }
-
   render() {
     const state = store.getState();
     const { language } = this.props;
@@ -275,14 +271,14 @@ class MyDocument extends Component {
       interests,
       currentItem,
     } = currentCv;
-    console.log('state', state);
+    // console.log('state', state);
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
           <Masking fixed />
           <LeftColumn>
             <HeadContainerLeft>
-              <ImageRound src={state.image.image} />
+              {!state.image.image || <ImageRound src={state.image.image} />}
             </HeadContainerLeft>
 
             <ContentBox>
@@ -291,44 +287,54 @@ class MyDocument extends Component {
                   <ContentTitle>{language === 'PL' ? 'dane osobowe' : 'personal'}</ContentTitle>
                   <TitleDecoration white />
                 </ContentTitleBox>
-
-                <PersonalDataSection>
-                  <SectionTitleLeft white bold>
-                    <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
-                  </SectionTitleLeft>
-                  <SectionLeft>{phone}</SectionLeft>
-                </PersonalDataSection>
-
-                <PersonalDataSection>
-                  <SectionTitleLeft white bold>
-                    <Icon src={emailIcon} /> Email:
-                  </SectionTitleLeft>
-                  <SectionLeft>{email}</SectionLeft>
-                </PersonalDataSection>
-
-                <PersonalDataSection>
-                  <SectionTitleLeft white bold>
-                    <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
-                  </SectionTitleLeft>
-                  <SectionLeft>{adress}</SectionLeft>
-                </PersonalDataSection>
-
-                <SectionTitleLeft white bold>
-                  <Icon src={githubIcon} /> Github:
-                </SectionTitleLeft>
-                <PersonalDataSection>
-                  <Link href={github} target="_blank" rel="noopener noreferrer">
-                    {github}
-                  </Link>
-                </PersonalDataSection>
-                <SectionTitleLeft white bold>
-                  <Icon src={linkedIcon} /> Linkedin:
-                </SectionTitleLeft>
-                <PersonalDataSection>
-                  <Link href={linkedin} target="_blank" rel="noopener noreferrer">
-                    {linkedin}
-                  </Link>
-                </PersonalDataSection>
+                {!phone || (
+                  <PersonalDataSection>
+                    <SectionTitleLeft white bold>
+                      <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
+                    </SectionTitleLeft>
+                    <SectionLeft>{phone}</SectionLeft>
+                  </PersonalDataSection>
+                )}
+                {!email || (
+                  <PersonalDataSection>
+                    <SectionTitleLeft white bold>
+                      <Icon src={emailIcon} /> Email:
+                    </SectionTitleLeft>
+                    <SectionLeft>{email}</SectionLeft>
+                  </PersonalDataSection>
+                )}
+                {!adress || (
+                  <PersonalDataSection>
+                    <SectionTitleLeft white bold>
+                      <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
+                    </SectionTitleLeft>
+                    <SectionLeft>{adress}</SectionLeft>
+                  </PersonalDataSection>
+                )}
+                {!github || (
+                  <>
+                    <SectionTitleLeft white bold>
+                      <Icon src={githubIcon} /> Github:
+                    </SectionTitleLeft>
+                    <PersonalDataSection>
+                      <Link href={github} target="_blank" rel="noopener noreferrer">
+                        {github}
+                      </Link>
+                    </PersonalDataSection>
+                  </>
+                )}
+                {!linkedin || (
+                  <>
+                    <SectionTitleLeft white bold>
+                      <Icon src={linkedIcon} /> Linkedin:
+                    </SectionTitleLeft>
+                    <PersonalDataSection>
+                      <Link href={linkedin} target="_blank" rel="noopener noreferrer">
+                        {linkedin}
+                      </Link>
+                    </PersonalDataSection>
+                  </>
+                )}
               </LeftSide>
             </ContentBox>
 

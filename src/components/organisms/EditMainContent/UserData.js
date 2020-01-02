@@ -199,32 +199,6 @@ class UserData extends Component {
     }
   };
 
-  handlePhoneValidation = e => {
-    let { value } = e.target;
-    const { statusActive } = this.state;
-    const reg = /\B(?=(\d{3}))/g;
-    const test = reg.test(value);
-    console.log('test', test.toString());
-
-    const numberWithSpaces = value => {
-      return value.replace(/\B(?=(\d{3})+(?!\d))/g, '-');
-    };
-    const result = numberWithSpaces(value);
-    console.log('result', result);
-
-    if (value.length <= 11) {
-      this.setState({
-        [e.target.dataset.id]: result,
-      });
-      if (!statusActive) {
-        this.handleTimer();
-        this.setState({
-          statusActive: true,
-        });
-      }
-    }
-  };
-
   // UPDATE STORE PERSONAL DATA
 
   handleStoreUpdate = () => {
