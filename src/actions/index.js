@@ -248,3 +248,12 @@ export const changeLanguage = data => {
     payload: data,
   };
 };
+
+export const changeTemplate = id => {
+  return {
+    type: 'CHANGE_TEMPLATE',
+    payload: {
+      id,
+    },
+  };
+};

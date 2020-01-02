@@ -4,11 +4,11 @@ import styled from '@react-pdf/styled-components';
 import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
-import linkedIcon from 'assets/linked.png';
-import phoneIcon from 'assets/phone.png';
-import emailIcon from 'assets/email.png';
-import githubIcon from 'assets/github.png';
-import addressIcon from 'assets/address.png';
+import linkedIcon from 'assets/icons/linked.png';
+import phoneIcon from 'assets/icons/phone.png';
+import emailIcon from 'assets/icons/email.png';
+import githubIcon from 'assets/icons/github.png';
+import addressIcon from 'assets/icons/address.png';
 import store from 'store';
 
 Font.register({
