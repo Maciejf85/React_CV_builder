@@ -64,7 +64,6 @@ class Preview extends Component {
     const { currentCv, personalData, language } = this.props;
     const { name } = personalData;
     const { template } = this.props.template;
-    console.log('template', template);
     // const { currentItem } = currentCv;
     if (!Object.entries(currentCv).length) {
       return <Redirect to={path.login} />;
@@ -75,7 +74,7 @@ class Preview extends Component {
         <NavBar language={language} />
         <StyledWrapper>
           <PDFViewer style={styles.view} name={name}>
-            {!template === 0 || (
+            {!template === 1 || (
               <FirstStyle downloadButton={this.handleButton} language={language} />
             )}
           </PDFViewer>
