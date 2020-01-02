@@ -236,13 +236,6 @@ class UserData extends Component {
   handleTitle = e => {
     const { id } = e.target;
     const { currentTitle, changeTitle, currentTempTitle } = this.state;
-    console.log(
-      'id,currentTitle, currentTempTitle, changeTitle',
-      id,
-      currentTitle,
-      currentTempTitle,
-      changeTitle,
-    );
 
     // change title is active set temp title
 

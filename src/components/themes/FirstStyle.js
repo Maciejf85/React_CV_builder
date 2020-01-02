@@ -122,7 +122,7 @@ const SectionTitle = styled.Text`
 `;
 
 const Section = styled.Text`
-  margin: 0 0 10pt;
+  margin: 0 0 0pt;
   color: black;
   font-size: 9.5pt;
   padding: 5pt 0 5pt 5pt;
@@ -418,7 +418,7 @@ class MyDocument extends Component {
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle>{item.position}</SectionTitle>
+                    <SectionTitle bold>{item.position}</SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
