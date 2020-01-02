@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faEdit, faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faEdit, faFilePdf, faFileImage } from '@fortawesome/free-solid-svg-icons';
 import path from '../../../path';
 
 const StyledWrapper = styled.ul`
@@ -97,6 +97,18 @@ const NavButtons = () => {
           <span>{language === 'PL' ? 'Edytor' : 'Editor'}</span>
           <div className="icon">
             <FontAwesomeIcon icon={faEdit} />
+          </div>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          activeClassName="active"
+          className={containsCv ? '' : 'disable'}
+          to={path.templates}
+        >
+          <span>{language === 'PL' ? 'Szablony' : 'Templates'}</span>
+          <div className="icon">
+            <FontAwesomeIcon icon={faFileImage} />
           </div>
         </NavLink>
       </li>

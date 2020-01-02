@@ -89,7 +89,7 @@ class SignUp extends Component {
       });
     }
 
-    if (!isVerified === false) {
+    if (isVerified === false) {
       error = true;
       this.setState({ recaptchaError: true });
     }
