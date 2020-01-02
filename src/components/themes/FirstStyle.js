@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Document, Font } from '@react-pdf/renderer';
 import styled from '@react-pdf/styled-components';
-// import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
-// import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
-// import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
+import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
+import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
+import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import linkedIcon from 'assets/linked.png';
 import phoneIcon from 'assets/phone.png';
 import emailIcon from 'assets/email.png';
@@ -11,14 +11,14 @@ import githubIcon from 'assets/github.png';
 import addressIcon from 'assets/address.png';
 import store from 'store';
 
-// Font.register({
-//   family: 'Montserrat',
-//   fonts: [
-//     { src: Montserrat, fontWeight: 'normal' },
-//     { src: MontserratSemiBold, fontWeight: 'semiBold' },
-//     { src: MontserratBold, fontWeight: 'bold' },
-//   ],
-// });
+Font.register({
+  family: 'Montserrat',
+  fonts: [
+    { src: Montserrat, fontWeight: 'normal' },
+    { src: MontserratSemiBold, fontWeight: 'semiBold' },
+    { src: MontserratBold, fontWeight: 'bold' },
+  ],
+});
 
 const MainContainer = styled.Page`
   display: flex;
@@ -122,7 +122,7 @@ const SectionTitle = styled.Text`
 `;
 
 const Section = styled.Text`
-  margin: 0 0 10pt;
+  margin: 0 0 0pt;
   color: black;
   font-size: 9.5pt;
   padding: 5pt 0 5pt 5pt;
@@ -418,7 +418,7 @@ class MyDocument extends Component {
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle>{item.position}</SectionTitle>
+                    <SectionTitle bold>{item.position}</SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>

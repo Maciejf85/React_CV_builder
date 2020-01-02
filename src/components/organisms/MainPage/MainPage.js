@@ -5,6 +5,7 @@ import MyCv from 'components/organisms/MainPageViews/MyCv';
 import MyDocuments from 'components/organisms/MainPageViews/MyDocuments';
 import MyAccount from 'components/organisms/MainPageViews/MyAccount';
 import Confidential from 'components/organisms/MainPageViews/Confidential';
+import Templates from 'components/organisms/MainPageViews/Templates';
 import { useSelector } from 'react-redux';
 
 const StyledWrapper = styled.div`
@@ -38,6 +39,7 @@ const MainPage = ({ language }) => {
         {currentView === 'cv' && <MyCv language={language} />}
         {currentView === 'documents' && <MyDocuments language={language} />}
         {currentView === 'confidentiality' && <Confidential language={language} />}
+        {currentView === 'templates' && <Templates language={language} />}
       </StyledWrapper>
     </>
   );
