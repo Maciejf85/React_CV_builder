@@ -31,13 +31,15 @@ const StyledWrapper = styled.div`
 class Template extends Component {
   componentDidUpdate(prevProps) {
     const { isSet, currentCv } = this.props;
-    if (prevProps.isSet.template === isSet.template) return;
+    if (isSet !== undefined) {
+      if (prevProps.isSet.template === isSet.template) return;
 
-    const token =
-      localStorage.getItem('userID') !== null
-        ? localStorage.getItem('userID')
-        : sessionStorage.getItem('userID');
-    store.dispatch(setNewCurrentCVData('update', token, isSet.id, currentCv));
+      const token =
+        localStorage.getItem('userID') !== null
+          ? localStorage.getItem('userID')
+          : sessionStorage.getItem('userID');
+      store.dispatch(setNewCurrentCVData('update', token, isSet.id, currentCv));
+    }
   }
 
   handleChangeTemplate = e => {
@@ -46,7 +48,9 @@ class Template extends Component {
   };
 
   render() {
-    if (this.props.isSet === undefined) {
+    const { currentCv } = this.props;
+
+    if (!Object.entries(currentCv).length) {
       return <Redirect to={path.login} />;
     }
     const { isVisible, error, language } = this.props.appState;
