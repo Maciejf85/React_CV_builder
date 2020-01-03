@@ -25,7 +25,6 @@ const StyledWrapper = styled.div`
   width: 800px;
   color: black;
   padding: 10px;
-  /* border: 3px dashed #ccc; */
 `;
 
 class UserData extends Component {

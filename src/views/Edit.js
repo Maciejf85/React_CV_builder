@@ -15,10 +15,6 @@ const StyledWrapper = styled.div`
   display: flex;
 `;
 class Edit extends Component {
-  componentDidMount() {
-    // console.log('Component Edit did mount');
-  }
-
   render() {
     const { isVisible, error, language } = this.props.appState;
     if (this.props.isSet === undefined) {

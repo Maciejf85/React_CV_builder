@@ -1,16 +1,10 @@
 {
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react"
-  ],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "rules": {
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js"
-        ]
+        "extensions": [".js"]
       }
     ],
     "jsx-a11y/no-autofocus": [
@@ -33,7 +27,7 @@
       }
     ],
     // off console log warning
-    "no-console": "off",
+    "no-console": "warn",
     "react/jsx-no-target-blank": [
       2,
       {
@@ -53,15 +47,13 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": [
-          "src"
-        ]
+        "paths": ["src"]
       }
     }
   },
   "env": {
     "browser": true,
-    "node": true,
+    "node": true
   },
   "globals": {
     "document": false
@@ -74,6 +66,6 @@
       "jsx": true,
       "modules": true,
       "experimentalObjectRestSpread": true
-    },
+    }
   }
 }

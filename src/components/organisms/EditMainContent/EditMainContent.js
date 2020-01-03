@@ -17,18 +17,12 @@ const StyledWrapper = styled.div`
   width: 100%;
   margin: 20px;
   height: (100vh - 50px);
-  /* border: 1px solid red; */
   margin-top: 70px;
   margin-left: 300px;
   color: black;
-  /* border: 1px solid black; */
 `;
 
 class EditMainContent extends Component {
-  componentDidUpdate() {
-    console.log('EditMainPage did update');
-  }
-
   render() {
     const { language } = this.props;
     const { currentView } = this.props.editComponentView;

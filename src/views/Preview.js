@@ -64,12 +64,11 @@ class Preview extends Component {
 
   render() {
     const { currentCv, personalData, language } = this.props;
-    const { name } = personalData;
-    const { template } = this.props.template;
-    // const { currentItem } = currentCv;
     if (!Object.entries(currentCv).length) {
       return <Redirect to={path.login} />;
     }
+    const { name } = personalData;
+    const { template } = this.props.template;
 
     return (
       <>
