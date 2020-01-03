@@ -112,6 +112,7 @@ class Login extends Component {
           if (data.success) {
             store.dispatch(serverResponse(data));
             this.setState({ isRegistered: true });
+            this.handleLogin({ email, id }, type, false);
           }
         });
     }

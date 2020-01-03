@@ -6,7 +6,7 @@ const StyledWrapper = styled.div`
   width: 300px;
   height: 423px;
   border: 1px solid #ccc;
-  margin: 0 50px;
+  margin: 50px;
   transform: ${({ active }) => (active ? 'scale(1.2)' : 'none')};
   filter: ${({ active }) => (active ? 'brightness(100%)' : 'brightness(45%)')};
   transition: all 0.4s;
@@ -28,12 +28,14 @@ const StyledWrapper = styled.div`
     position: absolute;
     bottom: 20px;
     left: 0;
+    font-family: 'Satisfy', cursive;
     background: rgba(255, 255, 255, 0.7);
     text-align: center;
     color: black;
     line-height: 50px;
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 2rem;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
     pointer-events: none;
   }
 
