@@ -17,20 +17,15 @@ import path from '../path';
 const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   width: 100%;
-  height: calc(70vh - 50px);
+  min-height: calc(70vh - 50px);
   padding: 90px 50px 0;
   color: black;
   @media ${({ theme }) => theme.media.medium} {
     flex-direction: column;
     align-items: center;
   }
-`;
-
-const TemplateSelected = styled.div`
-  width: 100%;
-  height: 100px;
-  text-align: center;
 `;
 
 class Template extends Component {
@@ -80,7 +75,6 @@ class Template extends Component {
             changeTemplate={this.handleChangeTemplate}
           />
         </StyledWrapper>
-        <TemplateSelected>{'Template ' + template + '/3'}</TemplateSelected>
         <Footer language={language} />
         <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
       </>
