@@ -10,14 +10,14 @@ import { connect } from 'react-redux';
 
 class SignUp extends Component {
   state = {
-    login: ``,
-    // login: `${Math.random().toFixed(2) * 10000000}@wp.pl`,
-    password: '',
-    // password: '123456',
-    name: '',
-    // name: 'Maciej',
-    surname: '',
-    // surname: 'Fiałkowski',
+    // login: ``,
+    login: `${Math.random().toFixed(2) * 10000000}@wp.pl`,
+    // password: '',
+    password: '123456',
+    // name: '',
+    name: 'Maciej',
+    // surname: '',
+    surname: 'Fiałkowski',
     nameValid: '',
     surnameValid: '',
     loginValid: '',

@@ -29,6 +29,8 @@ export default class Facebook extends Component {
 
     // eslint-disable-next-line no-unused-expressions
     !isRegister ? login(response, 'facebook') : register(response, 'facebook');
+    console.log('response', response);
+    console.log('isRegister', isRegister);
   };
 
   render() {
