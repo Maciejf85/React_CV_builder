@@ -46,6 +46,24 @@ export const getCvData = (type, id, token, redir) => dispatch => {
     });
 };
 
+// UPDATE TEMPLATE CURRENT CV
+
+export const updateTemplate = (type, id, token, data) => {
+  return axios
+    .post(`${path.cors}handleCurrentCv.php`, {
+      type,
+      id,
+      token,
+      data,
+    })
+    .then(({ data }) => {
+      console.log('data', data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
 //  GET USER CONFIDENTIAL PERSONAL DATA AND LIST OF CV's
 
 export const getMainData = (

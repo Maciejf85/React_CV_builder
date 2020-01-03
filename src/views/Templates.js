@@ -9,6 +9,8 @@ import temp0 from 'assets/template/template_0.jpg';
 import temp1 from 'assets/template/template_1.jpg';
 import temp2 from 'assets/template/template_2.jpg';
 import { changeTemplate } from 'actions';
+import { setNewCurrentCVData } from 'functions';
+import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
 import store from 'store';
 import path from '../path';
 
@@ -19,6 +21,10 @@ const StyledWrapper = styled.div`
   height: calc(70vh - 50px);
   padding: 90px 50px 0;
   color: black;
+  @media ${({ theme }) => theme.media.medium} {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const TemplateSelected = styled.div`
@@ -28,14 +34,29 @@ const TemplateSelected = styled.div`
 `;
 
 class Template extends Component {
+  componentDidUpdate(prevProps) {
+    const { isSet, currentCv } = this.props;
+    console.log(
+      'prevProps.isSet.template === isSet.template',
+      prevProps.isSet.template === isSet.template,
+    );
+    if (prevProps.isSet.template === isSet.template) return;
+
+    const token =
+      localStorage.getItem('userID') !== null
+        ? localStorage.getItem('userID')
+        : sessionStorage.getItem('userID');
+    store.dispatch(setNewCurrentCVData('update', token, isSet.id, currentCv));
+  }
+
   handleChangeTemplate = e => {
     const { id } = e.target;
     store.dispatch(changeTemplate(id));
   };
 
   render() {
-    const { language } = this.props.appState;
-    const { template } = this.props.template;
+    const { isVisible, error, language } = this.props.appState;
+    const { template } = this.props.isSet;
     if (this.props.isSet === undefined) {
       return <Redirect to={path.login} />;
     }
@@ -45,19 +66,19 @@ class Template extends Component {
         <NavBar language={language} />
         <StyledWrapper>
           <TemplateItem
-            active={template == 1}
+            active={parseInt(template) === 1}
             img={temp0}
             id={1}
             changeTemplate={this.handleChangeTemplate}
           />
           <TemplateItem
-            active={template == 2}
+            active={parseInt(template) === 2}
             img={temp1}
             id={2}
             changeTemplate={this.handleChangeTemplate}
           />
           <TemplateItem
-            active={template == 3}
+            active={parseInt(template) === 3}
             img={temp2}
             id={3}
             changeTemplate={this.handleChangeTemplate}
@@ -65,6 +86,7 @@ class Template extends Component {
         </StyledWrapper>
         <TemplateSelected>{'Template ' + template + '/3'}</TemplateSelected>
         <Footer language={language} />
+        <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
       </>
     );
   }
@@ -73,6 +95,6 @@ class Template extends Component {
 const MapStateToProps = ({ appState, currentCv }) => ({
   appState,
   isSet: currentCv.currentItem,
-  template: currentCv.currentItem,
+  currentCv,
 });
 export default connect(MapStateToProps)(Template);

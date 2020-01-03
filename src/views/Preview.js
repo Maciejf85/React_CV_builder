@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import FirstStyle from 'components/themes/FirstStyle';
+import SecondStyle from 'components/themes/SecondStyle';
+import ThirdStyle from 'components/themes/ThirdStyle';
 // import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 // import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 // import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
@@ -21,7 +23,7 @@ import path from '../path';
 // });
 
 const styles = StyleSheet.create({
-  page: { backgroundColor: 'tomato' },
+  page: { backgroundColor: 'white' },
   section: { color: 'white', textAlign: 'center', margin: 30 },
   button: {
     display: 'flex',
@@ -74,8 +76,14 @@ class Preview extends Component {
         <NavBar language={language} />
         <StyledWrapper>
           <PDFViewer style={styles.view} name={name}>
-            {!template === 1 || (
+            {parseInt(template) === 1 && (
               <FirstStyle downloadButton={this.handleButton} language={language} />
+            )}
+            {parseInt(template) === 2 && (
+              <SecondStyle downloadButton={this.handleButton} language={language} />
+            )}
+            {parseInt(template) === 3 && (
+              <ThirdStyle downloadButton={this.handleButton} language={language} />
             )}
           </PDFViewer>
         </StyledWrapper>
