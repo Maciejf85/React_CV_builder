@@ -36,10 +36,6 @@ const TemplateSelected = styled.div`
 class Template extends Component {
   componentDidUpdate(prevProps) {
     const { isSet, currentCv } = this.props;
-    console.log(
-      'prevProps.isSet.template === isSet.template',
-      prevProps.isSet.template === isSet.template,
-    );
     if (prevProps.isSet.template === isSet.template) return;
 
     const token =
@@ -55,11 +51,11 @@ class Template extends Component {
   };
 
   render() {
-    const { isVisible, error, language } = this.props.appState;
-    const { template } = this.props.isSet;
     if (this.props.isSet === undefined) {
       return <Redirect to={path.login} />;
     }
+    const { isVisible, error, language } = this.props.appState;
+    const { template } = this.props.isSet;
 
     return (
       <>
