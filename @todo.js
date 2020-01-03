@@ -14,7 +14,7 @@
 | 12. zmiana ID na data-set we wszystkich zakładkach Edit Component - >>>>>>> GOTOWE <<<<<<<
 | 13. Angielskie nazwy placeholderów w editor
 | 14. telefon w danych >>>>>>> GOTOWE <<<<<<<
-| 15. nie działa logowanie po utworzeniu konta przez facebook
+| 15. nie działa logowanie po utworzeniu konta przez facebook >>>>>>> GOTOWE <<<<<<<
 |--------------------------------------------------
 */
 

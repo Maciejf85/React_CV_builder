@@ -10,14 +10,14 @@ import { connect } from 'react-redux';
 
 class SignUp extends Component {
   state = {
-    // login: ``,
-    login: `${Math.random().toFixed(2) * 10000000}@wp.pl`,
-    // password: '',
-    password: '123456',
-    // name: '',
-    name: 'Maciej',
-    // surname: '',
-    surname: 'Fiałkowski',
+    login: ``,
+    // login: `${Math.random().toFixed(2) * 10000000}@wp.pl`,
+    password: '',
+    // password: '123456',
+    name: '',
+    // name: 'test',
+    surname: '',
+    // surname: 'test',
     nameValid: '',
     surnameValid: '',
     loginValid: '',
@@ -133,24 +133,9 @@ class SignUp extends Component {
       passwordValid,
       nameValid,
       surnameValid,
-      autoLogin,
     } = this.state;
-    const { error, success, isActive } = this.props;
-    return success || autoLogin ? (
-      <>
-        <Notification>
-          {autoLogin ? (
-            <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '35px' }} />
-          ) : (
-            <span>{success}</span>
-          )}
-        </Notification>
-
-        <Submit id="login" type="button" onClick={this.handleLogin}>
-          Zaloguj
-        </Submit>
-      </>
-    ) : (
+    const { error, isActive } = this.props;
+    return (
       <>
         <LoginInput
           id="login"

@@ -87,15 +87,12 @@ class Login extends Component {
   handleClearNotification = () => store.dispatch(serverResponse({ error: undefined }));
 
   handleLogin = ({ email, id }, type, autolog) => {
-    console.log('HANDLE LOGIN, name,email,id,type', email, id, type, autolog);
     this.handleClearNotification();
     store.dispatch(getMainData(type, email, id, autolog));
     store.dispatch({ type: 'REQUEST_STARTED' });
   };
 
   handleRegister = ({ name, email, id }, type) => {
-    console.log('HANDLE REGISTER name,email,id,type', name, email, id, type);
-
     this.handleClearNotification();
     store.dispatch({ type: 'REQUEST_STARTED' });
     if (name && email && id && type) {
@@ -115,6 +112,7 @@ class Login extends Component {
           if (data.success) {
             store.dispatch(serverResponse(data));
             this.setState({ isRegistered: true });
+            this.handleLogin({ email, id }, type, false);
           }
         });
     }
