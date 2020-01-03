@@ -116,6 +116,7 @@ export const setNewCurrentCVData = (type, token, id, data) => () => {
     })
     .then(result => {
       sidePanel(result.data);
+      console.log('result', result);
     })
     .catch(error => {
       console.log(error);
