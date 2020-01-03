@@ -23,7 +23,7 @@ Font.register({
 const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
-  background-color: #494949;
+  background-color: #002b47;
   padding-top: 15pt;
   padding-bottom: 100pt;
 `;

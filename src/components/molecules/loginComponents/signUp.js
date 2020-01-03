@@ -10,10 +10,14 @@ import { connect } from 'react-redux';
 
 class SignUp extends Component {
   state = {
-    login: `${Math.random().toFixed(2) * 10000000}@wp.pl`,
-    password: '123456',
-    name: 'Maciej',
-    surname: 'Fiałkowski',
+    login: ``,
+    // login: `${Math.random().toFixed(2) * 10000000}@wp.pl`,
+    password: '',
+    // password: '123456',
+    name: '',
+    // name: 'Maciej',
+    surname: '',
+    // surname: 'Fiałkowski',
     nameValid: '',
     surnameValid: '',
     loginValid: '',
@@ -85,7 +89,7 @@ class SignUp extends Component {
       });
     }
 
-    if (!isVerified === false) {
+    if (isVerified === false) {
       error = true;
       this.setState({ recaptchaError: true });
     }

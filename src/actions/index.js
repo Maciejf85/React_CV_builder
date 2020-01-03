@@ -46,6 +46,24 @@ export const getCvData = (type, id, token, redir) => dispatch => {
     });
 };
 
+// UPDATE TEMPLATE CURRENT CV
+
+export const updateTemplate = (type, id, token, data) => {
+  return axios
+    .post(`${path.cors}handleCurrentCv.php`, {
+      type,
+      id,
+      token,
+      data,
+    })
+    .then(({ data }) => {
+      console.log('data', data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
 //  GET USER CONFIDENTIAL PERSONAL DATA AND LIST OF CV's
 
 export const getMainData = (
@@ -156,7 +174,6 @@ export const updateCVList = (type, token, cvId = null, redir, cvTitle = null) =>
       const { cvList, currentCv } = data;
       const list = cvList ? JSON.parse(cvList) : null;
       const currentItem = currentCv ? JSON.parse(currentCv) : null;
-      console.log('login');
       return (
         dispatch({ type: 'SAVE_CV_LIST', payload: list }),
         dispatch({ type: 'SAVE_CURRENT_CV', payload: currentItem }),
@@ -247,5 +264,14 @@ export const changeLanguage = data => {
   return {
     type: 'CHANGE_LANGUAGE',
     payload: data,
+  };
+};
+
+export const changeTemplate = id => {
+  return {
+    type: 'CHANGE_TEMPLATE',
+    payload: {
+      id,
+    },
   };
 };

@@ -32,6 +32,15 @@ const currentCv = (state = initialState, { type, payload }) => {
       };
     }
 
+    case 'CHANGE_TEMPLATE':
+      return {
+        ...state,
+        currentItem: {
+          ...state.currentItem,
+          template: payload.id,
+        },
+      };
+
     default:
       return state;
   }

@@ -25,7 +25,6 @@ const StyledWrapper = styled.div`
   width: 800px;
   color: black;
   padding: 10px;
-  /* border: 3px dashed #ccc; */
 `;
 
 class UserData extends Component {
@@ -199,32 +198,6 @@ class UserData extends Component {
     }
   };
 
-  handlePhoneValidation = e => {
-    let { value } = e.target;
-    const { statusActive } = this.state;
-    const reg = /\B(?=(\d{3}))/g;
-    const test = reg.test(value);
-    console.log('test', test.toString());
-
-    const numberWithSpaces = value => {
-      return value.replace(/\B(?=(\d{3})+(?!\d))/g, '-');
-    };
-    const result = numberWithSpaces(value);
-    console.log('result', result);
-
-    if (value.length <= 11) {
-      this.setState({
-        [e.target.dataset.id]: result,
-      });
-      if (!statusActive) {
-        this.handleTimer();
-        this.setState({
-          statusActive: true,
-        });
-      }
-    }
-  };
-
   // UPDATE STORE PERSONAL DATA
 
   handleStoreUpdate = () => {
@@ -236,13 +209,6 @@ class UserData extends Component {
   handleTitle = e => {
     const { id } = e.target;
     const { currentTitle, changeTitle, currentTempTitle } = this.state;
-    console.log(
-      'id,currentTitle, currentTempTitle, changeTitle',
-      id,
-      currentTitle,
-      currentTempTitle,
-      changeTitle,
-    );
 
     // change title is active set temp title
 

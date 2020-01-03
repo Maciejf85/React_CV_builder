@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
 import NavBar from 'components/organisms/Navigation/NavBar';
-import { StyleSheet, PDFViewer, Font } from '@react-pdf/renderer';
+import Footer from 'components/organisms/Footer/Footer';
+import { StyleSheet, PDFViewer } from '@react-pdf/renderer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import FirstStyle from 'components/themes/FirstStyle';
-import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
-import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
-import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
+import SecondStyle from 'components/themes/SecondStyle';
+import ThirdStyle from 'components/themes/ThirdStyle';
+// import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
+// import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
+// import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import path from '../path';
 
-Font.register({
-  family: 'Montserrat',
-  fonts: [
-    { src: Montserrat, fontWeight: 'normal' },
-    { src: MontserratSemiBold, fontWeight: 'semiBold' },
-    { src: MontserratBold, fontWeight: 'bold' },
-  ],
-});
+// Font.register({
+//   family: 'Montserrat',
+//   fonts: [
+//     { src: Montserrat, fontWeight: 'normal' },
+//     { src: MontserratSemiBold, fontWeight: 'semiBold' },
+//     { src: MontserratBold, fontWeight: 'bold' },
+//   ],
+// });
+
 const styles = StyleSheet.create({
-  page: { backgroundColor: 'tomato' },
+  page: { backgroundColor: 'white' },
   section: { color: 'white', textAlign: 'center', margin: 30 },
   button: {
     display: 'flex',
@@ -39,8 +43,9 @@ const styles = StyleSheet.create({
   },
   view: {
     width: '100vw',
-    height: '93vh',
+    height: 'calc(100vh - 50px)',
     border: 'none',
+    paddingBottom: '41px',
   },
 });
 const StyledWrapper = styled.div`
@@ -57,33 +62,34 @@ class Preview extends Component {
     isReady: false,
   };
 
-  handleButton = () => {
-    this.setState({
-      isReady: true,
-    });
-  };
-
   render() {
     const { currentCv, personalData, language } = this.props;
-    const { name } = personalData;
-    const { currentItem } = currentCv;
-    console.log('Font', Font.register);
-
-    const { isReady } = this.state;
     if (!Object.entries(currentCv).length) {
       return <Redirect to={path.login} />;
     }
+    const { name } = personalData;
+    const { template } = this.props.template;
 
     return (
       <>
         <NavBar language={language} />
         <StyledWrapper>
           <PDFViewer style={styles.view} name={name}>
-            <FirstStyle downloadButton={this.handleButton} language={language} />
+            {parseInt(template) === 1 && (
+              <FirstStyle downloadButton={this.handleButton} language={language} />
+            )}
+            {parseInt(template) === 2 && (
+              <SecondStyle downloadButton={this.handleButton} language={language} />
+            )}
+            {parseInt(template) === 3 && (
+              <ThirdStyle downloadButton={this.handleButton} language={language} />
+            )}
           </PDFViewer>
         </StyledWrapper>
+        <Footer language={language} />
 
-        {/* {isReady ? (
+        {/* 
+        {isReady ? (
           <StyledWrapper>
             <PDFDownloadLink document={<FirstStyle />} fileName={`${currentItem.title}.pdf`}>
               {({ loading }) =>
@@ -107,5 +113,6 @@ const mapStateToProps = ({ currentCv, personalData, appState }) => ({
   currentCv,
   personalData,
   language: appState.language,
+  template: currentCv.currentItem,
 });
 export default connect(mapStateToProps)(Preview);
