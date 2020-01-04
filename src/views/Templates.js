@@ -26,6 +26,10 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     align-items: center;
   }
+  @media ${({ theme }) => theme.media.desktop} {
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 class Template extends Component {
