@@ -15,9 +15,9 @@ class SignUp extends Component {
     password: '',
     // password: '123456',
     name: '',
-    // name: 'Maciej',
+    // name: 'test',
     surname: '',
-    // surname: 'Fiałkowski',
+    // surname: 'test',
     nameValid: '',
     surnameValid: '',
     loginValid: '',
@@ -133,24 +133,9 @@ class SignUp extends Component {
       passwordValid,
       nameValid,
       surnameValid,
-      autoLogin,
     } = this.state;
-    const { error, success, isActive } = this.props;
-    return success || autoLogin ? (
-      <>
-        <Notification>
-          {autoLogin ? (
-            <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '35px' }} />
-          ) : (
-            <span>{success}</span>
-          )}
-        </Notification>
-
-        <Submit id="login" type="button" onClick={this.handleLogin}>
-          Zaloguj
-        </Submit>
-      </>
-    ) : (
+    const { error, isActive } = this.props;
+    return (
       <>
         <LoginInput
           id="login"

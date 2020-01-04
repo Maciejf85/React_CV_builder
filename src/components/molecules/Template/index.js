@@ -20,6 +20,7 @@ const StyledWrapper = styled.div`
 
   img {
     width: 100%;
+    height: 100%;
   }
 
   header {
@@ -42,6 +43,11 @@ const StyledWrapper = styled.div`
   @media ${({ theme }) => theme.media.tablet} {
     width: 200px;
     height: 282px;
+    margin: 0 25px;
+  }
+  @media ${({ theme }) => theme.media.desktop} {
+    width: 250px;
+    height: 352px;
     margin: 0 25px;
   }
 `;
