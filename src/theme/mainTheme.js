@@ -42,7 +42,8 @@ const theme = {
     small: ' (min-width:320px) and (max-width:575.98px)',
     medium: '(min-width:576px) and (max-width: 767.98px)',
     tablet: '(min-width:768px) and (max-width: 1199.98px)',
-    desktop: '(min-width: 1200px)',
+    desktop: '(min-width: 1200px) and (max-width: 1598.98px)',
+    bigDesktop: '(min-width: 1600px)',
   },
 };
 export default theme;
