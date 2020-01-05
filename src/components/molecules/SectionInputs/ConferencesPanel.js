@@ -74,7 +74,7 @@ class ConferencesPanel extends Component {
 
   render() {
     const { id } = this.props.item;
-    const { index, current, newItem } = this.props;
+    const { index, current, newItem, language } = this.props;
     const { description, endYear, endMonth } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
@@ -85,6 +85,7 @@ class ConferencesPanel extends Component {
           current={current}
           newItem={newItem}
           removeItem={this.handleRemoveItem}
+          language={language}
         />
         <div className="inputContainer">
           <Input

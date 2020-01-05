@@ -30,7 +30,7 @@ class Conferences extends Component {
   };
 
   render() {
-    const { cvId, currentCv, current } = this.props;
+    const { cvId, currentCv, current, language } = this.props;
     const { conferences } = currentCv;
     const { currentView } = current;
     return (
@@ -46,6 +46,7 @@ class Conferences extends Component {
                 cvId={cvId}
                 current={currentView}
                 newItem={this.handleNewItem}
+                language={language}
               />
             );
           })

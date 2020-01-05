@@ -12,6 +12,7 @@ import Courses from 'components/organisms/EditMainContent/Courses';
 import Conferences from 'components/organisms/EditMainContent/Conferences';
 import Publications from 'components/organisms/EditMainContent/Publications';
 import Licenses from 'components/organisms/EditMainContent/Licenses';
+import WebApi from 'components/organisms/EditMainContent/WebApi';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -39,6 +40,7 @@ class EditMainContent extends Component {
         {currentView === 'publications' && <Publications language={language} />}
         {currentView === 'licenses' && <Licenses language={language} />}
         {currentView === 'certificates' && <Certificates language={language} />}
+        {currentView === 'webApi' && <WebApi language={language} />}
       </StyledWrapper>
     );
   }
