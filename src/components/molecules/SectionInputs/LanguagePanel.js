@@ -77,7 +77,7 @@ export default class LanguagePanel extends Component {
 
   render() {
     const { id } = this.props.item;
-    const { index, current, newItem } = this.props;
+    const { index, current, newItem, language } = this.props;
     const { name, description } = this.state;
 
     return (
@@ -87,6 +87,7 @@ export default class LanguagePanel extends Component {
           current={current}
           newItem={newItem}
           removeItem={this.handleRemoveItem}
+          language={language}
         />
         <StyledWrapper>
           <Input placeholder="język" id="name" value={name} onChange={this.handleForm} />

@@ -124,7 +124,7 @@ const SectionTitle = styled.Text`
 const Section = styled.Text`
   margin: 0 0 0pt;
   color: black;
-  font-size: 9.5pt;
+  font-size: 9pt;
   padding: 5pt 0 5pt 5pt;
   letter-spacing: 0.3pt;
 `;
@@ -270,6 +270,7 @@ class MyDocument extends Component {
       licenses,
       interests,
       currentItem,
+      webApi,
     } = currentCv;
     // console.log('state', state);
     return (
@@ -458,6 +459,30 @@ class MyDocument extends Component {
                     <Decoration />
                     <DecorationBottom />
                     <SectionTitle bold>{item.department}</SectionTitle>
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+            {!webApi.length || (
+              <ContentTitleBox wrap={false}>
+                <ContentTitle>
+                  {language === 'PL' ? 'Aplikacje webowe' : 'Web application'}
+                </ContentTitle>
+                <TitleDecoration />
+              </ContentTitleBox>
+            )}
+            {webApi.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide small>
+                    <SectionDate>{`${item.endYear}`}</SectionDate>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle bold>{item.name}</SectionTitle>
+                    <Section>{`${item.technology}`}</Section>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>

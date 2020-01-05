@@ -33,6 +33,7 @@ const StyledWrapper = styled.nav`
     flex-shrink: 0;
     span {
       color: ${({ theme }) => theme.colors.primaryBlue};
+    font-weight: ${({ theme }) => theme.font.xbold};
     }
     @media ${({ theme }) => theme.media.small} {
       display: none;
