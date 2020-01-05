@@ -9,6 +9,7 @@ const publications = 'publications';
 const conferences = 'conferences';
 const licenses = 'licenses';
 const interests = 'interests';
+const webApi = 'webApi';
 
 const initialState = {
   currentView: 'personal',
@@ -59,6 +60,10 @@ const path = (state = initialState, { type }) => {
     case interests:
       return {
         currentView: 'interests',
+      };
+    case webApi:
+      return {
+        currentView: 'webApi',
       };
 
     default:

@@ -86,6 +86,7 @@ class CertificatesPanel extends Component {
           current={current}
           newItem={newItem}
           removeItem={this.handleRemoveItem}
+          language={language}
         />
         <div className="inputContainer">
           <Input

@@ -17,10 +17,14 @@ const StyledComponents = styled.div`
   }
 `;
 
-const InputHeader = ({ index, current, newItem, removeItem }) => {
+const InputHeader = ({ index, current, newItem, removeItem, language }) => {
+  const isPolish = language === 'PL';
+  const panelName = getPanelName(current);
   return (
     <StyledComponents>
-      <div className="panelTitle">{`${getPanelName(current)}  #${index}`}</div>
+      <div className="panelTitle">{`${
+        isPolish ? panelName.name : panelName.nameL
+      }  #${index}`}</div>
       <div>
         <PanelButton icon={faPlus} handleAction={newItem} />
         <PanelButton remove icon={faTimes} handleAction={removeItem} />

@@ -29,7 +29,7 @@ class Languages extends Component {
   };
 
   render() {
-    const { cvId, currentCv, current } = this.props;
+    const { cvId, currentCv, current, language } = this.props;
     const { languages } = currentCv;
     const { currentView } = current;
     console.log('currentView', currentView);
@@ -46,6 +46,7 @@ class Languages extends Component {
                 cvId={cvId}
                 current={currentView}
                 newItem={this.handleNewItem}
+                language={language}
               />
             );
           })
