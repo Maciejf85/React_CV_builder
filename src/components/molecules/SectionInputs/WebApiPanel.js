@@ -13,6 +13,7 @@ class EducationPanel extends Component {
     id: '',
     name: '',
     technology: '',
+    link: '',
     endYear: 0,
     description: '',
     statusActive: false,
@@ -20,12 +21,13 @@ class EducationPanel extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    const { id, name, technology, endYear, description } = this.props.item;
+    const { id, name, technology, endYear, description, link } = this.props.item;
 
     this.setState({
       id,
       name,
       technology,
+      link,
       endYear,
       description,
     });
@@ -86,7 +88,7 @@ class EducationPanel extends Component {
   render() {
     const { id } = this.props.item;
     const { index, current, newItem, language } = this.props;
-    const { name, technology, endYear, description } = this.state;
+    const { name, technology, endYear, description, link } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
     const isPolish = language === 'PL';
@@ -107,10 +109,17 @@ class EducationPanel extends Component {
             onChange={this.handleForm}
           />
           <Input
-            placeholder={isPolish ? 'Użyte technologie' : 'technologies used'}
+            placeholder={isPolish ? 'Użyte technologie' : 'Technologies used'}
             id="technology"
             value={technology}
             onChange={this.handleForm}
+          />
+          <Input
+            placeholder={isPolish ? 'adres URL' : 'URL address'}
+            id="link"
+            value={link}
+            onChange={this.handleForm}
+            isSmall
           />
 
           <Select

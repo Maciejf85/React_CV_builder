@@ -24,6 +24,7 @@ class WebApi extends Component {
       addNewItemToCurrentCv(currentView, {
         name: '',
         technology: '',
+        link: '',
         endYear: 2000,
         description: '',
         inProgress: false,

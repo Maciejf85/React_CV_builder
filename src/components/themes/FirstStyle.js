@@ -135,6 +135,14 @@ const SectionDate = styled.Text`
   font-size: 9pt;
   letter-spacing: 0.3pt;
 `;
+const LiveDemo = styled.Link`
+  margin: 0 0 0pt;
+  color: black;
+  font-size: 9pt;
+  padding: 5pt 0 5pt 5pt;
+  letter-spacing: 0.3pt;
+  text-decoration: none;
+`;
 
 const SectionLeftBox = styled.View`
   display: flex;
@@ -482,6 +490,9 @@ class MyDocument extends Component {
                     <Decoration />
                     <DecorationBottom />
                     <SectionTitle bold>{item.name}</SectionTitle>
+                    <LiveDemo href={item.link} target="_blank" rel="noopener noreferrer">
+                      {item.link}
+                    </LiveDemo>
                     <Section>{`${item.technology}`}</Section>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
