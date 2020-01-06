@@ -116,7 +116,7 @@ const TitleDecoration = styled.View`
 const SectionTitle = styled.Text`
   font-size: 9pt;
   color: ${({ white }) => (white ? 'white' : 'black')};
-  font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'semiBold')};
   letter-spacing: 0.2pt;
   text-align: ${({ right }) => (right ? 'right' : 'left')};
 `;
@@ -136,7 +136,7 @@ const SectionDate = styled.Text`
   letter-spacing: 0.3pt;
 `;
 const LiveDemo = styled.Link`
-  margin: 0 0 0pt;
+  margin-left: 5pt;
   color: black;
   font-size: 9pt;
   padding: 5pt 0 5pt 5pt;
@@ -493,7 +493,9 @@ class MyDocument extends Component {
                     <LiveDemo href={item.link} target="_blank" rel="noopener noreferrer">
                       {item.link}
                     </LiveDemo>
+                    <SectionTitle>Użyte technologie : </SectionTitle>
                     <Section>{`${item.technology}`}</Section>
+                    <SectionTitle>Opis aplikacji :</SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
