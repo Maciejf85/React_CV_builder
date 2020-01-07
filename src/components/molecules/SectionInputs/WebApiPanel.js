@@ -38,7 +38,7 @@ class EducationPanel extends Component {
   }
 
   handleForm = e => {
-    const value = e.target;
+    const value = e.target.value;
     this.setState({
       [e.target.dataset.id]: value,
       statusActive: true,
@@ -166,7 +166,3 @@ class EducationPanel extends Component {
 // };
 
 export default EducationPanel;
-
-// @TODO: wyniesienie update store i update pliku do wyższych komponentów
-// data-actionType
-// const { actiontype } = e.target.dataset;
