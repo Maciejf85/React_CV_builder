@@ -38,17 +38,18 @@ const Masking = styled.View`
 
 const LeftColumn = styled.View`
   width: 177pt;
-  height: 779pt;
-  color: #444;
-  padding: 0 17pt;
-  margin-left: 28pt;
-  margin-top: 36pt;
+  height: 740pt;
+  color: red;
+  border-right: 1px solid red;
+  /* padding: 0 17pt; */
+  /* margin-left: 28pt; */
+  /* margin-top: 36pt; */
   background: #eee5e6;
   font-family: 'Montserrat';
 `;
 const RightColumn = styled.View`
-  width: 274pt;
-  /* height: 100%; */
+  width: 418pt;
+  height: 100%;
   font-family: 'Montserrat';
   padding: 0 19pt;
   background: white;
@@ -61,6 +62,7 @@ const TopHeader = styled.View`
   height: 144.5pt;
   width: 100%;
   background: #444444;
+  z-index: 55555;
 `;
 
 const Footer = styled.View`
@@ -110,17 +112,9 @@ class MyDocument extends Component {
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
-          <TopHeader>
-            {/* <UserNameContainer bold>
-              <UserName>{name}</UserName>
-              <UserName>{surname}</UserName>
-              <Profession bold>{profession}</Profession>
-            </UserNameContainer>
-            <Masking fixed /> */}
-          </TopHeader>
-          {/* <HeadContainerLeft>
-            {!state.image.image || <ImageRound src={state.image.image} />}
-          </HeadContainerLeft> */}
+          <TopHeader />
+          <LeftColumn />
+          <RightColumn />
 
           <Footer wrap={false} break fixed>
             <FooterText break>{confidential.confidential}</FooterText>
