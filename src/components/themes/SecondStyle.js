@@ -62,7 +62,6 @@ const TopHeader = styled.View`
   height: 144pt;
   width: 100%;
   background: #444444;
-  z-index: 55555;
 `;
 
 const UserNameContainer = styled.View`
@@ -71,7 +70,6 @@ const UserNameContainer = styled.View`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border: 1px solid white;
   height: 144pt;
   width: 391pt;
   margin-left: 204pt;
@@ -83,6 +81,20 @@ const UserNameContainerDecoration = styled.View`
   margin: 10pt 0;
 `;
 
+const NameAndSurname = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 290pt;
+`;
+
+const ImageRound = styled.Image`
+  width: 100pt;
+  height: 100pt;
+  border-radius: 100pt;
+`;
+
 const UserName = styled.Text`
   font-size: 20pt;
   font-family: 'Montserrat';
@@ -90,6 +102,7 @@ const UserName = styled.Text`
   color: white;
   text-transform: uppercase;
   letter-spacing: 2pt;
+  padding-left: 10pt;
   /* border: 1px solid blanchedalmond; */
 `;
 
@@ -101,6 +114,15 @@ const Profession = styled.Text`
   color: white;
 `;
 
+const HeadContainerLeft = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 140pt;
+`;
+
 const Footer = styled.View`
   position: absolute;
   display: flex;
@@ -110,7 +132,6 @@ const Footer = styled.View`
   bottom: 0pt;
   left: 165pt;
   width: 430pt;
-  background: #eee;
   padding: 5pt 10pt;
   height: 101pt;
 `;
@@ -150,13 +171,19 @@ class MyDocument extends Component {
         <MainContainer size="A4">
           <TopHeader>
             <UserNameContainer bold>
-              <UserName>{name}</UserName>
-              <UserName>{surname}</UserName>
+              <NameAndSurname>
+                <UserName>{name}</UserName>
+                <UserName>{surname}</UserName>
+              </NameAndSurname>
               <UserNameContainerDecoration />
               <Profession bold>{profession}</Profession>
             </UserNameContainer>
           </TopHeader>
-          <LeftColumn />
+          <LeftColumn>
+            <HeadContainerLeft>
+              {!state.image.image || <ImageRound src={state.image.image} />}
+            </HeadContainerLeft>
+          </LeftColumn>
           <RightColumn />
 
           <Footer wrap={false} break fixed>
