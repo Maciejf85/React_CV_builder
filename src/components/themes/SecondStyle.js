@@ -22,7 +22,7 @@ Font.register({
 
 const MainContainer = styled.Page`
   position: relative;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   background-color: white;
   padding-bottom: 100pt;
@@ -37,32 +37,68 @@ const Masking = styled.View`
 `;
 
 const LeftColumn = styled.View`
-  width: 177pt;
-  height: 740pt;
+  width: 176pt;
+  height: 705pt;
   color: red;
-  border-right: 1px solid red;
-  /* padding: 0 17pt; */
-  /* margin-left: 28pt; */
-  /* margin-top: 36pt; */
+  padding: 0 17pt;
+  margin-left: 28pt;
+  margin-top: 36pt;
   background: #eee5e6;
   font-family: 'Montserrat';
 `;
 const RightColumn = styled.View`
-  width: 418pt;
+  width: 391pt;
   height: 100%;
+  margin-top: 144pt;
   font-family: 'Montserrat';
   padding: 0 19pt;
-  background: white;
+  background: #eee;
 `;
 
 const TopHeader = styled.View`
   position: absolute;
   top: 0;
   left: 0;
-  height: 144.5pt;
+  height: 144pt;
   width: 100%;
   background: #444444;
   z-index: 55555;
+`;
+
+const UserNameContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  height: 144pt;
+  width: 391pt;
+  margin-left: 204pt;
+`;
+const UserNameContainerDecoration = styled.View`
+  height: 1pt;
+  width: 100pt;
+  background: white;
+  margin: 10pt 0;
+`;
+
+const UserName = styled.Text`
+  font-size: 20pt;
+  font-family: 'Montserrat';
+  font-weight: normal;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2pt;
+  /* border: 1px solid blanchedalmond; */
+`;
+
+const Profession = styled.Text`
+  font-size: 10pt;
+  font-family: 'Montserrat';
+  letter-spacing: 1pt;
+  text-transform: uppercase;
+  color: white;
 `;
 
 const Footer = styled.View`
@@ -112,7 +148,14 @@ class MyDocument extends Component {
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
-          <TopHeader />
+          <TopHeader>
+            <UserNameContainer bold>
+              <UserName>{name}</UserName>
+              <UserName>{surname}</UserName>
+              <UserNameContainerDecoration />
+              <Profession bold>{profession}</Profession>
+            </UserNameContainer>
+          </TopHeader>
           <LeftColumn />
           <RightColumn />
 
