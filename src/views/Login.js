@@ -16,8 +16,7 @@ const StyledWrapper = styled.div`
   padding: 10px 0;
   display: flex;
   align-items: center;
-  /* margin-top: -50px; */
-  @media ${({ theme }) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.bigDesktop} {
     margin-top: -50px;
   }
 `;
@@ -34,11 +33,6 @@ const MainWrapper = styled.div`
     color: ${({ theme }) => theme.colors.secondaryGrey};
     font-weight: ${({ theme }) => theme.font.thin};
     letter-spacing: -1px;
-  }
-
-  @media ${({ theme }) => theme.media.desktop} {
-    margin-top: -50px;
-    padding: 50px 0;
   }
 `;
 

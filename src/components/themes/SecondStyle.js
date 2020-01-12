@@ -26,20 +26,26 @@ const MainContainer = styled.Page`
   flex-direction: row;
   background-color: white;
   padding-bottom: 100pt;
+  padding-top: 15pt;
 `;
 const Masking = styled.View`
   position: absolute;
-  width: 430pt;
-  height: 16pt;
+  left: 0;
   top: 0;
-  left: 165pt;
-  background: white;
+  width: 595pt;
+  height: 16pt;
+`;
+const MaskContent = styled.View`
+  width: 176pt;
+  height: 100%;
+  margin-left: 28pt;
+  background: #eee5e6;
 `;
 
 const LeftColumn = styled.View`
-  width: 177pt;
-  height: 779pt;
-  color: #444;
+  width: 176pt;
+  overflow: hidden;
+  color: #444444;
   padding: 0 17pt;
   margin-left: 28pt;
   margin-top: 36pt;
@@ -47,20 +53,153 @@ const LeftColumn = styled.View`
   font-family: 'Montserrat';
 `;
 const RightColumn = styled.View`
-  width: 274pt;
-  /* height: 100%; */
+  width: 391pt;
+  margin-top: 144pt;
   font-family: 'Montserrat';
   padding: 0 19pt;
-  background: white;
+  background: #eee;
 `;
 
 const TopHeader = styled.View`
   position: absolute;
   top: 0;
   left: 0;
-  height: 144.5pt;
+  height: 144pt;
   width: 100%;
   background: #444444;
+`;
+
+const UserNameContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 144pt;
+  width: 391pt;
+  margin-left: 204pt;
+`;
+const UserNameContainerDecoration = styled.View`
+  height: 1pt;
+  width: 100pt;
+  background: white;
+  margin: 10pt 0;
+`;
+
+const NameAndSurname = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 290pt;
+`;
+
+const ImageRound = styled.Image`
+  width: 100pt;
+  height: 100pt;
+  border-radius: 100pt;
+`;
+
+const UserName = styled.Text`
+  font-size: 20pt;
+  font-family: 'Montserrat';
+  font-weight: normal;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2pt;
+  padding-left: 10pt;
+  /* border: 1px solid blanchedalmond; */
+`;
+
+const Profession = styled.Text`
+  font-size: 10pt;
+  font-family: 'Montserrat';
+  letter-spacing: 1pt;
+  text-transform: uppercase;
+  color: white;
+`;
+
+const HeadContainerLeft = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 140pt;
+`;
+
+const Icon = styled.Image`
+  width: 15pt;
+  height: 9pt;
+  background-position: center center;
+`;
+
+const PersonalDataSection = styled.View`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SectionLeft = styled.Text`
+  margin: 0 0 10pt;
+  color: #444444;
+  font-size: 9pt;
+  padding: 5pt 0 0 11pt;
+`;
+
+const ContentTitleBox = styled.View`
+  margin: 25pt 0;
+  font-size: 11pt;
+  text-transform: uppercase;
+`;
+const ContentTitle = styled.Text`
+  font-size: 11pt;
+  text-transform: uppercase;
+  letter-spacing: 0.5pt;
+  font-weight: semiBold;
+`;
+const TitleDecoration = styled.View`
+  width: 30pt;
+  height: 5pt;
+  border-bottom: 3pt solid ${({ dark }) => (dark ? '#444444' : 'white')};
+`;
+
+const SectionTitleLeft = styled.Text`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  text-transform: capitalize;
+  color: #444444;
+  font-size: 9.8pt;
+  font-weight: semiBold;
+  letter-spacing: 0.2pt;
+`;
+const Link = styled.Link`
+  margin: 0 0 10pt;
+  color: #444444;
+  font-size: 8.5pt;
+  padding: 5pt 0 0 11pt;
+  font-family: 'Montserrat';
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+`;
+
+const TextSection = styled.View`
+  position: relative;
+  /* margin-bottom: 10pt; */
+  padding-right: 10pt;
+`;
+
+const SectionLeftBox = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+const SectionTitleLeftDot = styled.View`
+  margin: 0 4pt;
+  width: 4pt;
+  height: 4pt;
+  background: white;
+  border-radius: 50pt;
 `;
 
 const Footer = styled.View`
@@ -72,14 +211,13 @@ const Footer = styled.View`
   bottom: 0pt;
   left: 165pt;
   width: 430pt;
-  background: #eee;
   padding: 5pt 10pt;
   height: 101pt;
 `;
 const FooterText = styled.Text`
   align-items: flex-end;
   font-family: 'Montserrat';
-  color: black;
+  color: #444444;
   font-size: 8pt;
   line-height: 1.5pt;
   padding: 5px 0;
@@ -110,17 +248,126 @@ class MyDocument extends Component {
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
+          <Masking fixed>
+            <MaskContent />
+          </Masking>
           <TopHeader>
-            {/* <UserNameContainer bold>
-              <UserName>{name}</UserName>
-              <UserName>{surname}</UserName>
+            <UserNameContainer bold>
+              <NameAndSurname>
+                <UserName>{name}</UserName>
+                <UserName>{surname}</UserName>
+              </NameAndSurname>
+              <UserNameContainerDecoration />
               <Profession bold>{profession}</Profession>
             </UserNameContainer>
-            <Masking fixed /> */}
           </TopHeader>
-          {/* <HeadContainerLeft>
-            {!state.image.image || <ImageRound src={state.image.image} />}
-          </HeadContainerLeft> */}
+          <LeftColumn>
+            <HeadContainerLeft>
+              {!state.image.image || <ImageRound src={state.image.image} />}
+            </HeadContainerLeft>
+
+            <ContentTitleBox wrap={false}>
+              <ContentTitle>{language === 'PL' ? 'dane osobowe' : 'personal'}</ContentTitle>
+              <TitleDecoration dark />
+            </ContentTitleBox>
+            {!phone || (
+              <PersonalDataSection>
+                <SectionTitleLeft white bold>
+                  <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
+                </SectionTitleLeft>
+                <SectionLeft>{phone}</SectionLeft>
+              </PersonalDataSection>
+            )}
+            {!email || (
+              <PersonalDataSection>
+                <SectionTitleLeft white bold>
+                  <Icon src={emailIcon} /> Email:
+                </SectionTitleLeft>
+                <SectionLeft>{email}</SectionLeft>
+              </PersonalDataSection>
+            )}
+            {!adress || (
+              <PersonalDataSection>
+                <SectionTitleLeft white bold>
+                  <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
+                </SectionTitleLeft>
+                <SectionLeft>{adress}</SectionLeft>
+              </PersonalDataSection>
+            )}
+            {!github || (
+              <>
+                <SectionTitleLeft white bold>
+                  <Icon src={githubIcon} /> Github:
+                </SectionTitleLeft>
+                <PersonalDataSection>
+                  <Link href={github} target="_blank" rel="noopener noreferrer">
+                    {github}
+                  </Link>
+                </PersonalDataSection>
+              </>
+            )}
+            {!linkedin || (
+              <>
+                <SectionTitleLeft white bold>
+                  <Icon src={linkedIcon} /> Linkedin:
+                </SectionTitleLeft>
+                <PersonalDataSection>
+                  <Link href={linkedin} target="_blank" rel="noopener noreferrer">
+                    {linkedin}
+                  </Link>
+                </PersonalDataSection>
+              </>
+            )}
+
+            {!languages.length || (
+              <ContentTitleBox wrap={false}>
+                <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
+                <TitleDecoration white />
+              </ContentTitleBox>
+            )}
+
+            {languages.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <SectionLeftBox>
+                  <SectionTitleLeftDot />
+                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                </SectionLeftBox>
+                <SectionLeft>{`${item.description}`}</SectionLeft>
+              </TextSection>
+            ))}
+
+            {!skills.length || (
+              <ContentTitleBox wrap={false}>
+                <ContentTitle>{language === 'PL' ? 'Umiejętności' : 'Skills'}</ContentTitle>
+                <TitleDecoration white />
+              </ContentTitleBox>
+            )}
+
+            {skills.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <SectionLeftBox>
+                  <SectionTitleLeftDot />
+                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                </SectionLeftBox>
+                <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+              </TextSection>
+            ))}
+            {!interests.length || (
+              <ContentTitleBox wrap={false}>
+                <ContentTitle>{language === 'PL' ? 'zainteresowania' : 'interests'}</ContentTitle>
+                <TitleDecoration />
+              </ContentTitleBox>
+            )}
+            {interests.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <SectionLeftBox>
+                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                </SectionLeftBox>
+                <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+              </TextSection>
+            ))}
+          </LeftColumn>
+          <RightColumn />
 
           <Footer wrap={false} break fixed>
             <FooterText break>{confidential.confidential}</FooterText>
