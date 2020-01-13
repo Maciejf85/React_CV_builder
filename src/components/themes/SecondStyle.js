@@ -46,7 +46,7 @@ const LeftColumn = styled.View`
   width: 176pt;
   /* overflow: hidden; */
   color: #444444;
-  padding: 0 17pt;
+  padding: 0 15pt;
   margin-left: 28pt;
   margin-top: 26pt;
   background: #eee5e6;
@@ -181,7 +181,6 @@ const SectionTitleLeft = styled.Text`
   font-size: 9.8pt;
   font-weight: semiBold;
   letter-spacing: 0.2pt;
-  border: 1px solid #444;
 `;
 const SectionTitleLeftIcon = styled.View`
   display: flex;
@@ -192,11 +191,10 @@ const SectionTitleLeftIcon = styled.View`
   /* border: 1px solid #444; */
 `;
 const Link = styled.Link`
-  margin: 0 0 10pt;
   color: #444444;
   font-size: 8.5pt;
-  padding: 5pt 0 0 11pt;
   font-family: 'Montserrat';
+  max-width: 125pt;
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 
@@ -291,42 +289,37 @@ class MyDocument extends Component {
             {!email || (
               <PersonalDataSection>
                 <SectionTitleLeftIcon white bold>
-                  <Icon src={emailIcon} />
-                  <IconText> Email: </IconText>
+                  <Icon src={phoneIcon} />
+                  <IconText> {email}</IconText>
                 </SectionTitleLeftIcon>
-                <SectionLeft>{email}</SectionLeft>
               </PersonalDataSection>
             )}
             {!adress || (
               <PersonalDataSection>
-                <SectionTitleLeft white bold>
-                  <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
-                </SectionTitleLeft>
-                <SectionLeft>{adress}</SectionLeft>
+                <SectionTitleLeftIcon white bold>
+                  <Icon src={phoneIcon} />
+                  <IconText> {adress}</IconText>
+                </SectionTitleLeftIcon>
               </PersonalDataSection>
             )}
             {!github || (
               <>
-                <SectionTitleLeft white bold>
-                  <Icon src={githubIcon} /> <IconText> Github: </IconText>
-                </SectionTitleLeft>
-                <PersonalDataSection>
+                <SectionTitleLeftIcon white bold>
+                  <Icon src={phoneIcon} />
                   <Link href={github} target="_blank" rel="noopener noreferrer">
                     {github}
                   </Link>
-                </PersonalDataSection>
+                </SectionTitleLeftIcon>
               </>
             )}
             {!linkedin || (
               <>
-                <SectionTitleLeft white bold>
-                  <Icon src={linkedIcon} /> <IconText> Linkedin: </IconText>
-                </SectionTitleLeft>
-                <PersonalDataSection>
+                <SectionTitleLeftIcon white bold>
+                  <Icon src={phoneIcon} />
                   <Link href={linkedin} target="_blank" rel="noopener noreferrer">
                     {linkedin}
                   </Link>
-                </PersonalDataSection>
+                </SectionTitleLeftIcon>
               </>
             )}
 
@@ -369,9 +362,6 @@ class MyDocument extends Component {
             )}
             {interests.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <SectionLeftBox>
-                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
-                </SectionLeftBox>
                 <SectionLeft>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
             ))}
