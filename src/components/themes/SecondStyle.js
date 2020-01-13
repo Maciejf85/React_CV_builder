@@ -133,7 +133,7 @@ const Icon = styled.Image`
   height: 13pt;
   background-position: center center;
   margin-right: 5pt;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 const IconText = styled.Text`
@@ -188,7 +188,8 @@ const SectionTitleLeftIcon = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  border: 1px solid #444;
+  margin: 5pt 0;
+  /* border: 1px solid #444; */
 `;
 const Link = styled.Link`
   margin: 0 0 10pt;
@@ -283,9 +284,8 @@ class MyDocument extends Component {
               <PersonalDataSection>
                 <SectionTitleLeftIcon white bold>
                   <Icon src={phoneIcon} />
-                  <IconText>{language === 'PL' ? 'telefon' : 'phone'}:</IconText>
+                  <IconText>{phone}</IconText>
                 </SectionTitleLeftIcon>
-                <SectionLeft>{phone}</SectionLeft>
               </PersonalDataSection>
             )}
             {!email || (
