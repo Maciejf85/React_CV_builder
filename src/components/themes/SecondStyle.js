@@ -5,7 +5,7 @@ import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import linkedIcon from 'assets/icons/linked.png';
-import phoneIcon from 'assets/icons/phone.png';
+import phoneIcon from 'assets/icons/phone_dark.png';
 import emailIcon from 'assets/icons/email.png';
 import githubIcon from 'assets/icons/github.png';
 import addressIcon from 'assets/icons/address.png';
@@ -44,11 +44,11 @@ const MaskContent = styled.View`
 
 const LeftColumn = styled.View`
   width: 176pt;
-  overflow: hidden;
+  /* overflow: hidden; */
   color: #444444;
   padding: 0 17pt;
   margin-left: 28pt;
-  margin-top: 36pt;
+  margin-top: 26pt;
   background: #eee5e6;
   font-family: 'Montserrat';
 `;
@@ -125,13 +125,22 @@ const HeadContainerLeft = styled.View`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 140pt;
+  height: 120pt;
 `;
 
 const Icon = styled.Image`
-  width: 15pt;
-  height: 9pt;
+  width: 13pt;
+  height: 13pt;
   background-position: center center;
+  margin-right: 5pt;
+  border: 1px solid red;
+`;
+
+const IconText = styled.Text`
+  color: #444;
+  font-size: 9.8pt;
+  font-family: 'Montserrat';
+  text-transform: capitalize;
 `;
 
 const PersonalDataSection = styled.View`
@@ -143,36 +152,43 @@ const SectionLeft = styled.Text`
   margin: 0 0 10pt;
   color: #444444;
   font-size: 9pt;
-  padding: 5pt 0 0 11pt;
+  padding: 5pt 0;
 `;
 
 const ContentTitleBox = styled.View`
-  margin: 25pt 0;
+  margin: ${({ first }) => (first ? '10pt 0 15pt' : '25pt 0 15pt')};
   font-size: 11pt;
   text-transform: uppercase;
 `;
 const ContentTitle = styled.Text`
-  font-size: 11pt;
+  font-size: 10pt;
   text-transform: uppercase;
-  letter-spacing: 0.5pt;
-  font-weight: semiBold;
+  letter-spacing: 1pt;
+  font-weight: normal;
 `;
 const TitleDecoration = styled.View`
-  width: 30pt;
-  height: 5pt;
-  border-bottom: 3pt solid ${({ dark }) => (dark ? '#444444' : 'white')};
+  width: 100%;
+  margin-top: 5pt;
+  height: 2pt;
+  border-bottom: 1pt solid ${({ dark }) => (dark ? '#444444' : 'white')};
 `;
 
 const SectionTitleLeft = styled.Text`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
   text-transform: capitalize;
+  width: 100%;
+  height: 15pt;
   color: #444444;
   font-size: 9.8pt;
   font-weight: semiBold;
   letter-spacing: 0.2pt;
+  border: 1px solid #444;
+`;
+const SectionTitleLeftIcon = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #444;
 `;
 const Link = styled.Link`
   margin: 0 0 10pt;
@@ -193,13 +209,6 @@ const SectionLeftBox = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
-const SectionTitleLeftDot = styled.View`
-  margin: 0 4pt;
-  width: 4pt;
-  height: 4pt;
-  background: white;
-  border-radius: 50pt;
 `;
 
 const Footer = styled.View`
@@ -266,23 +275,25 @@ class MyDocument extends Component {
               {!state.image.image || <ImageRound src={state.image.image} />}
             </HeadContainerLeft>
 
-            <ContentTitleBox wrap={false}>
+            <ContentTitleBox wrap={false} first>
               <ContentTitle>{language === 'PL' ? 'dane osobowe' : 'personal'}</ContentTitle>
               <TitleDecoration dark />
             </ContentTitleBox>
             {!phone || (
               <PersonalDataSection>
-                <SectionTitleLeft white bold>
-                  <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
-                </SectionTitleLeft>
+                <SectionTitleLeftIcon white bold>
+                  <Icon src={phoneIcon} />
+                  <IconText>{language === 'PL' ? 'telefon' : 'phone'}:</IconText>
+                </SectionTitleLeftIcon>
                 <SectionLeft>{phone}</SectionLeft>
               </PersonalDataSection>
             )}
             {!email || (
               <PersonalDataSection>
-                <SectionTitleLeft white bold>
-                  <Icon src={emailIcon} /> Email:
-                </SectionTitleLeft>
+                <SectionTitleLeftIcon white bold>
+                  <Icon src={emailIcon} />
+                  <IconText> Email: </IconText>
+                </SectionTitleLeftIcon>
                 <SectionLeft>{email}</SectionLeft>
               </PersonalDataSection>
             )}
@@ -297,7 +308,7 @@ class MyDocument extends Component {
             {!github || (
               <>
                 <SectionTitleLeft white bold>
-                  <Icon src={githubIcon} /> Github:
+                  <Icon src={githubIcon} /> <IconText> Github: </IconText>
                 </SectionTitleLeft>
                 <PersonalDataSection>
                   <Link href={github} target="_blank" rel="noopener noreferrer">
@@ -309,7 +320,7 @@ class MyDocument extends Component {
             {!linkedin || (
               <>
                 <SectionTitleLeft white bold>
-                  <Icon src={linkedIcon} /> Linkedin:
+                  <Icon src={linkedIcon} /> <IconText> Linkedin: </IconText>
                 </SectionTitleLeft>
                 <PersonalDataSection>
                   <Link href={linkedin} target="_blank" rel="noopener noreferrer">
@@ -322,14 +333,13 @@ class MyDocument extends Component {
             {!languages.length || (
               <ContentTitleBox wrap={false}>
                 <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
-                <TitleDecoration white />
+                <TitleDecoration dark />
               </ContentTitleBox>
             )}
 
             {languages.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox>
-                  <SectionTitleLeftDot />
                   <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
                 </SectionLeftBox>
                 <SectionLeft>{`${item.description}`}</SectionLeft>
@@ -339,14 +349,13 @@ class MyDocument extends Component {
             {!skills.length || (
               <ContentTitleBox wrap={false}>
                 <ContentTitle>{language === 'PL' ? 'Umiejętności' : 'Skills'}</ContentTitle>
-                <TitleDecoration white />
+                <TitleDecoration dark />
               </ContentTitleBox>
             )}
 
             {skills.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox>
-                  <SectionTitleLeftDot />
                   <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
                 </SectionLeftBox>
                 <SectionLeft>{`${item.description || ''}`}</SectionLeft>
@@ -355,7 +364,7 @@ class MyDocument extends Component {
             {!interests.length || (
               <ContentTitleBox wrap={false}>
                 <ContentTitle>{language === 'PL' ? 'zainteresowania' : 'interests'}</ContentTitle>
-                <TitleDecoration />
+                <TitleDecoration dark />
               </ContentTitleBox>
             )}
             {interests.map(item => (
