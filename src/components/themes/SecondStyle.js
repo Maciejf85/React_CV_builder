@@ -4,11 +4,11 @@ import styled from '@react-pdf/styled-components';
 import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
-import linkedIcon from 'assets/icons/linked.png';
+import linkedIcon from 'assets/icons/linked_dark.png';
 import phoneIcon from 'assets/icons/phone_dark.png';
-import emailIcon from 'assets/icons/email.png';
-import githubIcon from 'assets/icons/github.png';
-import addressIcon from 'assets/icons/address.png';
+import emailIcon from 'assets/icons/email_dark.png';
+import githubIcon from 'assets/icons/github_dark.png';
+import addressIcon from 'assets/icons/address_dark.png';
 import store from 'store';
 
 Font.register({
@@ -138,7 +138,7 @@ const Icon = styled.Image`
 
 const IconText = styled.Text`
   color: #444;
-  font-size: 9.8pt;
+  font-size: 8.5pt;
   font-family: 'Montserrat';
   text-transform: capitalize;
 `;
@@ -171,6 +171,21 @@ const TitleDecoration = styled.View`
   margin-top: 5pt;
   height: 2pt;
   border-bottom: 1pt solid ${({ dark }) => (dark ? '#444444' : 'white')};
+`;
+
+const RightSideContentTitleBox = styled.View`
+  margin: ${({ first }) => (first ? '10pt 0 15pt' : '25pt 0 15pt')};
+  padding: 5pt 0;
+  font-size: 11pt;
+  background: #eee5e6;
+`;
+const RightSideContentTitle = styled.Text`
+  font-size: 9.5pt;
+  text-transform: uppercase;
+  letter-spacing: 1pt;
+  font-weight: semiBold;
+  color: #444;
+  text-align: center;
 `;
 
 const SectionTitleLeft = styled.Text`
@@ -289,7 +304,7 @@ class MyDocument extends Component {
             {!email || (
               <PersonalDataSection>
                 <SectionTitleLeftIcon white bold>
-                  <Icon src={phoneIcon} />
+                  <Icon src={emailIcon} />
                   <IconText> {email}</IconText>
                 </SectionTitleLeftIcon>
               </PersonalDataSection>
@@ -297,7 +312,7 @@ class MyDocument extends Component {
             {!adress || (
               <PersonalDataSection>
                 <SectionTitleLeftIcon white bold>
-                  <Icon src={phoneIcon} />
+                  <Icon src={addressIcon} />
                   <IconText> {adress}</IconText>
                 </SectionTitleLeftIcon>
               </PersonalDataSection>
@@ -305,7 +320,7 @@ class MyDocument extends Component {
             {!github || (
               <>
                 <SectionTitleLeftIcon white bold>
-                  <Icon src={phoneIcon} />
+                  <Icon src={githubIcon} />
                   <Link href={github} target="_blank" rel="noopener noreferrer">
                     {github}
                   </Link>
@@ -315,7 +330,7 @@ class MyDocument extends Component {
             {!linkedin || (
               <>
                 <SectionTitleLeftIcon white bold>
-                  <Icon src={phoneIcon} />
+                  <Icon src={linkedIcon} />
                   <Link href={linkedin} target="_blank" rel="noopener noreferrer">
                     {linkedin}
                   </Link>
@@ -366,7 +381,15 @@ class MyDocument extends Component {
               </TextSection>
             ))}
           </LeftColumn>
-          <RightColumn />
+          <RightColumn>
+            {!experience.length || (
+              <RightSideContentTitleBox wrap={false}>
+                <RightSideContentTitle>
+                  {language === 'PL' ? 'Doświadczenie zawodowe' : 'work experiance'}
+                </RightSideContentTitle>
+              </RightSideContentTitleBox>
+            )}
+          </RightColumn>
 
           <Footer wrap={false} break fixed>
             <FooterText break>{confidential.confidential}</FooterText>
