@@ -388,9 +388,6 @@ class MyDocument extends Component {
             )}
             {interests.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <SectionLeftBox>
-                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
-                </SectionLeftBox>
                 <SectionLeft>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
             ))}

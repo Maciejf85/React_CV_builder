@@ -4,11 +4,11 @@ import styled from '@react-pdf/styled-components';
 import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
-import linkedIcon from 'assets/icons/linked.png';
+import linkedIcon from 'assets/icons/linked_dark.png';
 import phoneIcon from 'assets/icons/phone_dark.png';
-import emailIcon from 'assets/icons/email.png';
-import githubIcon from 'assets/icons/github.png';
-import addressIcon from 'assets/icons/address.png';
+import emailIcon from 'assets/icons/email_dark.png';
+import githubIcon from 'assets/icons/github_dark.png';
+import addressIcon from 'assets/icons/address_dark.png';
 import store from 'store';
 
 Font.register({
@@ -46,7 +46,7 @@ const LeftColumn = styled.View`
   width: 176pt;
   /* overflow: hidden; */
   color: #444444;
-  padding: 0 17pt;
+  padding: 0 15pt;
   margin-left: 28pt;
   margin-top: 26pt;
   background: #eee5e6;
@@ -138,7 +138,7 @@ const Icon = styled.Image`
 
 const IconText = styled.Text`
   color: #444;
-  font-size: 9.8pt;
+  font-size: 8.5pt;
   font-family: 'Montserrat';
   text-transform: capitalize;
 `;
@@ -173,6 +173,21 @@ const TitleDecoration = styled.View`
   border-bottom: 1pt solid ${({ dark }) => (dark ? '#444444' : 'white')};
 `;
 
+const RightSideContentTitleBox = styled.View`
+  margin: ${({ first }) => (first ? '10pt 0 15pt' : '25pt 0 15pt')};
+  padding: 5pt 0;
+  font-size: 11pt;
+  background: #eee5e6;
+`;
+const RightSideContentTitle = styled.Text`
+  font-size: 9.5pt;
+  text-transform: uppercase;
+  letter-spacing: 1pt;
+  font-weight: semiBold;
+  color: #444;
+  text-align: center;
+`;
+
 const SectionTitleLeft = styled.Text`
   text-transform: capitalize;
   width: 100%;
@@ -181,7 +196,6 @@ const SectionTitleLeft = styled.Text`
   font-size: 9.8pt;
   font-weight: semiBold;
   letter-spacing: 0.2pt;
-  border: 1px solid #444;
 `;
 const SectionTitleLeftIcon = styled.View`
   display: flex;
@@ -192,11 +206,10 @@ const SectionTitleLeftIcon = styled.View`
   /* border: 1px solid #444; */
 `;
 const Link = styled.Link`
-  margin: 0 0 10pt;
   color: #444444;
   font-size: 8.5pt;
-  padding: 5pt 0 0 11pt;
   font-family: 'Montserrat';
+  max-width: 125pt;
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 
@@ -292,41 +305,36 @@ class MyDocument extends Component {
               <PersonalDataSection>
                 <SectionTitleLeftIcon white bold>
                   <Icon src={emailIcon} />
-                  <IconText> Email: </IconText>
+                  <IconText> {email}</IconText>
                 </SectionTitleLeftIcon>
-                <SectionLeft>{email}</SectionLeft>
               </PersonalDataSection>
             )}
             {!adress || (
               <PersonalDataSection>
-                <SectionTitleLeft white bold>
-                  <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
-                </SectionTitleLeft>
-                <SectionLeft>{adress}</SectionLeft>
+                <SectionTitleLeftIcon white bold>
+                  <Icon src={addressIcon} />
+                  <IconText> {adress}</IconText>
+                </SectionTitleLeftIcon>
               </PersonalDataSection>
             )}
             {!github || (
               <>
-                <SectionTitleLeft white bold>
-                  <Icon src={githubIcon} /> <IconText> Github: </IconText>
-                </SectionTitleLeft>
-                <PersonalDataSection>
+                <SectionTitleLeftIcon white bold>
+                  <Icon src={githubIcon} />
                   <Link href={github} target="_blank" rel="noopener noreferrer">
                     {github}
                   </Link>
-                </PersonalDataSection>
+                </SectionTitleLeftIcon>
               </>
             )}
             {!linkedin || (
               <>
-                <SectionTitleLeft white bold>
-                  <Icon src={linkedIcon} /> <IconText> Linkedin: </IconText>
-                </SectionTitleLeft>
-                <PersonalDataSection>
+                <SectionTitleLeftIcon white bold>
+                  <Icon src={linkedIcon} />
                   <Link href={linkedin} target="_blank" rel="noopener noreferrer">
                     {linkedin}
                   </Link>
-                </PersonalDataSection>
+                </SectionTitleLeftIcon>
               </>
             )}
 
@@ -369,14 +377,19 @@ class MyDocument extends Component {
             )}
             {interests.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <SectionLeftBox>
-                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
-                </SectionLeftBox>
                 <SectionLeft>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
             ))}
           </LeftColumn>
-          <RightColumn />
+          <RightColumn>
+            {!experience.length || (
+              <RightSideContentTitleBox wrap={false}>
+                <RightSideContentTitle>
+                  {language === 'PL' ? 'Doświadczenie zawodowe' : 'work experiance'}
+                </RightSideContentTitle>
+              </RightSideContentTitleBox>
+            )}
+          </RightColumn>
 
           <Footer wrap={false} break fixed>
             <FooterText break>{confidential.confidential}</FooterText>
