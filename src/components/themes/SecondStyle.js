@@ -156,7 +156,7 @@ const SectionLeft = styled.Text`
 `;
 
 const ContentTitleBox = styled.View`
-  margin: ${({ first }) => (first ? '10pt 0 15pt' : '25pt 0 15pt')};
+  margin: ${({ first }) => (first ? '10pt 0 15pt' : '15pt 0')};
   font-size: 11pt;
   text-transform: uppercase;
 `;
@@ -225,6 +225,64 @@ const SectionLeftBox = styled.View`
   align-items: center;
 `;
 
+const Decoration = styled.View`
+  position: absolute;
+  top: -2.5pt;
+  left: -3.5pt;
+  width: 6pt;
+  height: 6pt;
+  border-radius: 50pt;
+  background: #494949;
+`;
+const DecorationBottom = styled.View`
+  position: absolute;
+  bottom: -3.5pt;
+  left: -3.5pt;
+  width: 6pt;
+  height: 6pt;
+  border-radius: 50pt;
+  background: #494949;
+`;
+const ContentBox = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 430pt;
+`;
+
+const RightSide = styled.View`
+  position: relative;
+  border-left: 1pt solid #494949;
+  flex-basis: 277pt;
+  padding-left: 10pt;
+`;
+
+const LeftSide = styled.View`
+  flex-basis: ${({ small }) => (small ? '70pt' : '133pt')};
+  padding-right: 10pt;
+  text-align: left;
+`;
+const SectionTitle = styled.Text`
+  font-size: 9pt;
+  color: ${({ white }) => (white ? 'white' : 'black')};
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'semiBold')};
+  letter-spacing: 0.2pt;
+  text-align: ${({ right }) => (right ? 'right' : 'left')};
+`;
+
+const Section = styled.Text`
+  margin: 0 0 0pt;
+  color: black;
+  font-size: 9pt;
+  padding: 5pt 0 5pt 5pt;
+  letter-spacing: 0.3pt;
+`;
+const SectionDate = styled.Text`
+  min-height: 9pt;
+  margin: 0 0 10pt;
+  color: black;
+  font-size: 9pt;
+  letter-spacing: 0.3pt;
+`;
 const Footer = styled.View`
   position: absolute;
   display: flex;
@@ -389,6 +447,34 @@ class MyDocument extends Component {
                 </RightSideContentTitle>
               </RightSideContentTitleBox>
             )}
+
+            {experience.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold>{item.name}</SectionTitle>
+                    <SectionDate>
+                      {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
+                        item.startYear
+                      } - ${
+                        !item.inProgress
+                          ? item.endMonth < 10
+                            ? '0' + item.endMonth + '.'
+                            : item.endMonth + '.'
+                          : ''
+                      }${!item.inProgress ? item.endYear : ''} 
+                     `}
+                    </SectionDate>
+                  </LeftSide>
+                  <RightSide>
+                    <Decoration />
+                    <DecorationBottom />
+                    <SectionTitle bold>{item.position}</SectionTitle>
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
           </RightColumn>
 
           <Footer wrap={false} break fixed>
