@@ -57,7 +57,7 @@ const RightColumn = styled.View`
   margin-top: 144pt;
   font-family: 'Montserrat';
   padding: 0 19pt;
-  background: #eee;
+  /* background: #eee; */
 `;
 
 const TopHeader = styled.View`
@@ -225,24 +225,6 @@ const SectionLeftBox = styled.View`
   align-items: center;
 `;
 
-const Decoration = styled.View`
-  position: absolute;
-  top: -2.5pt;
-  left: -3.5pt;
-  width: 6pt;
-  height: 6pt;
-  border-radius: 50pt;
-  background: #494949;
-`;
-const DecorationBottom = styled.View`
-  position: absolute;
-  bottom: -3.5pt;
-  left: -3.5pt;
-  width: 6pt;
-  height: 6pt;
-  border-radius: 50pt;
-  background: #494949;
-`;
 const ContentBox = styled.View`
   display: flex;
   flex-direction: row;
@@ -251,14 +233,13 @@ const ContentBox = styled.View`
 
 const RightSide = styled.View`
   position: relative;
-  border-left: 1pt solid #494949;
   flex-basis: 277pt;
   padding-left: 10pt;
 `;
 
 const LeftSide = styled.View`
-  flex-basis: ${({ small }) => (small ? '70pt' : '133pt')};
-  padding-right: 10pt;
+  flex-basis: ${({ small }) => (small ? '95pt' : '133pt')};
+  /* padding-right: 5pt; */
   text-align: left;
 `;
 const SectionTitle = styled.Text`
@@ -267,10 +248,11 @@ const SectionTitle = styled.Text`
   font-weight: ${({ bold }) => (bold ? 'bold' : 'semiBold')};
   letter-spacing: 0.2pt;
   text-align: ${({ right }) => (right ? 'right' : 'left')};
+  text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : 'none')};
+  text-indent: ${({ uppercase }) => (uppercase ? '0' : '5pt')};
 `;
 
 const Section = styled.Text`
-  margin: 0 0 0pt;
   color: black;
   font-size: 9pt;
   padding: 5pt 0 5pt 5pt;
@@ -280,7 +262,7 @@ const SectionDate = styled.Text`
   min-height: 9pt;
   margin: 0 0 10pt;
   color: black;
-  font-size: 9pt;
+  font-size: 8pt;
   letter-spacing: 0.3pt;
 `;
 const Footer = styled.View`
@@ -451,8 +433,7 @@ class MyDocument extends Component {
             {experience.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
-                  <LeftSide>
-                    <SectionTitle bold>{item.name}</SectionTitle>
+                  <LeftSide small>
                     <SectionDate>
                       {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
                         item.startYear
@@ -467,9 +448,9 @@ class MyDocument extends Component {
                     </SectionDate>
                   </LeftSide>
                   <RightSide>
-                    <Decoration />
-                    <DecorationBottom />
-                    <SectionTitle bold>{item.position}</SectionTitle>
+                    <SectionTitle uppercase bold>
+                      {`${item.position} / ${item.name}`}
+                    </SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
