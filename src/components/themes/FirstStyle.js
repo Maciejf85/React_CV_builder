@@ -42,6 +42,7 @@ const LeftColumn = styled.View`
   color: white;
   padding: 0 10px;
   font-family: 'Montserrat';
+  padding-right: 5pt;
 `;
 const RightColumn = styled.View`
   width: 430pt;
@@ -115,7 +116,7 @@ const TitleDecoration = styled.View`
 
 const SectionTitle = styled.Text`
   font-size: 9pt;
-  color: ${({ white }) => (white ? 'white' : 'black')};
+  color: ${({ white }) => (white ? 'white' : '#494949')};
   font-weight: ${({ bold }) => (bold ? 'bold' : 'semiBold')};
   letter-spacing: 0.2pt;
   text-align: ${({ right }) => (right ? 'right' : 'left')};
@@ -188,12 +189,13 @@ const SectionLeft = styled.Text`
 
 const Link = styled.Link`
   margin: 0 0 10pt;
-  color: white;
   font-size: 8.5pt;
   padding: 5pt 0 0 11pt;
+  font-size: 8.5pt;
   font-family: 'Montserrat';
-  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  color: white;
 `;
+
 const TextSection = styled.View`
   position: relative;
   /* margin-bottom: 10pt; */
@@ -232,7 +234,7 @@ const RightSide = styled.View`
 
 const LeftSide = styled.View`
   flex-basis: ${({ small }) => (small ? '70pt' : '133pt')};
-  padding-right: 10pt;
+  padding-right: 5pt;
   text-align: left;
 `;
 
@@ -326,7 +328,12 @@ class MyDocument extends Component {
                       <Icon src={githubIcon} /> Github:
                     </SectionTitleLeft>
                     <PersonalDataSection>
-                      <Link href={github} target="_blank" rel="noopener noreferrer">
+                      <Link
+                        href={github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
                         {github}
                       </Link>
                     </PersonalDataSection>
@@ -338,7 +345,12 @@ class MyDocument extends Component {
                       <Icon src={linkedIcon} /> Linkedin:
                     </SectionTitleLeft>
                     <PersonalDataSection>
-                      <Link href={linkedin} target="_blank" rel="noopener noreferrer">
+                      <Link
+                        href={linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
                         {linkedin}
                       </Link>
                     </PersonalDataSection>

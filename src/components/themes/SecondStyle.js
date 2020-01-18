@@ -203,14 +203,12 @@ const SectionTitleLeftIcon = styled.View`
   align-items: center;
   justify-content: flex-start;
   margin: 5pt 0;
+  max-width: 120pt;
   /* border: 1px solid #444; */
 `;
 const Link = styled.Link`
   color: #444444;
   font-size: 8.5pt;
-  font-family: 'Montserrat';
-  max-width: 125pt;
-  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 
 const TextSection = styled.View`
@@ -236,8 +234,9 @@ const RightSide = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   position: relative;
-  flex-basis: 277pt;
-  padding-left: 10pt;
+  max-width: 230pt;
+  color: #444444;
+  padding-left: 5pt;
 `;
 
 const LeftSide = styled.View`
@@ -247,17 +246,16 @@ const LeftSide = styled.View`
 `;
 const SectionTitle = styled.Text`
   font-size: 9pt;
-  color: ${({ white }) => (white ? 'white' : 'black')};
+  color: ${({ white }) => (white ? 'white' : '#444444;')};
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
   letter-spacing: 0.2pt;
   text-align: ${({ right }) => (right ? 'right' : 'left')};
   text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : 'none')};
-  text-indent: ${({ uppercase }) => (uppercase ? '0' : '5pt')};
+  /* text-indent: ${({ uppercase }) => (uppercase ? '0' : '5pt')}; */
 `;
 
 const Section = styled.Text`
-  width: 100%;
-  color: black;
+  color: #444;
   font-size: 9pt;
   padding: 5pt 0 5pt 5pt;
   letter-spacing: 0.3pt;
@@ -376,7 +374,12 @@ class MyDocument extends Component {
               <>
                 <SectionTitleLeftIcon white bold>
                   <Icon src={githubIcon} />
-                  <Link href={github} target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none' }}
+                  >
                     {github}
                   </Link>
                 </SectionTitleLeftIcon>
@@ -386,7 +389,12 @@ class MyDocument extends Component {
               <>
                 <SectionTitleLeftIcon white bold>
                   <Icon src={linkedIcon} />
-                  <Link href={linkedin} target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none' }}
+                  >
                     {linkedin}
                   </Link>
                 </SectionTitleLeftIcon>
@@ -463,8 +471,8 @@ class MyDocument extends Component {
                     </SectionDate>
                   </LeftSide>
                   <RightSide>
-                    <SectionTitle uppercase bold>{`${item.position} /`}</SectionTitle>
-                    <SectionTitle>{`${item.name}`}</SectionTitle>
+                    <SectionTitle uppercase bold>{`${item.position} `}</SectionTitle>
+                    <SectionTitle>{`/ ${item.name}`}</SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
