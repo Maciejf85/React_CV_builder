@@ -57,7 +57,7 @@ const RightColumn = styled.View`
   margin-top: 144pt;
   font-family: 'Montserrat';
   padding: 0 19pt;
-  background: #eee;
+  /* background: #eee; */
 `;
 
 const TopHeader = styled.View`
@@ -156,7 +156,7 @@ const SectionLeft = styled.Text`
 `;
 
 const ContentTitleBox = styled.View`
-  margin: ${({ first }) => (first ? '10pt 0 15pt' : '25pt 0 15pt')};
+  margin: ${({ first }) => (first ? '10pt 0 15pt' : '15pt 0')};
   font-size: 11pt;
   text-transform: uppercase;
 `;
@@ -203,14 +203,12 @@ const SectionTitleLeftIcon = styled.View`
   align-items: center;
   justify-content: flex-start;
   margin: 5pt 0;
+  max-width: 120pt;
   /* border: 1px solid #444; */
 `;
 const Link = styled.Link`
   color: #444444;
   font-size: 8.5pt;
-  font-family: 'Montserrat';
-  max-width: 125pt;
-  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 
 const TextSection = styled.View`
@@ -223,6 +221,60 @@ const SectionLeftBox = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
+`;
+
+const ContentBox = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 430pt;
+`;
+
+const RightSide = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  max-width: 230pt;
+  color: #444444;
+  padding-left: 5pt;
+`;
+
+const LeftSide = styled.View`
+  flex-basis: ${({ small }) => (small ? '95pt' : '133pt')};
+  /* padding-right: 5pt; */
+  text-align: left;
+`;
+const SectionTitle = styled.Text`
+  font-size: 9pt;
+  color: ${({ white }) => (white ? 'white' : '#444444;')};
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  letter-spacing: 0.2pt;
+  text-align: ${({ right }) => (right ? 'right' : 'left')};
+  text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : 'none')};
+  /* text-indent: ${({ uppercase }) => (uppercase ? '0' : '5pt')}; */
+`;
+
+const Section = styled.Text`
+  color: #444;
+  font-size: 9pt;
+  padding: 5pt 0 5pt 5pt;
+  letter-spacing: 0.3pt;
+`;
+const SectionDate = styled.Text`
+  min-height: 9pt;
+  margin: 0 0 10pt;
+  color: black;
+  font-size: 8pt;
+  letter-spacing: 0.3pt;
+`;
+
+const LiveDemo = styled.Link`
+  margin-left: 5pt;
+  color: black;
+  font-size: 9pt;
+  padding: 5pt 0 5pt 5pt;
+  letter-spacing: 0.3pt;
+  text-decoration: none;
 `;
 
 const Footer = styled.View`
@@ -266,6 +318,7 @@ class MyDocument extends Component {
       licenses,
       interests,
       currentItem,
+      webApi,
     } = currentCv;
     // console.log('state', state);
     return (
@@ -321,7 +374,12 @@ class MyDocument extends Component {
               <>
                 <SectionTitleLeftIcon white bold>
                   <Icon src={githubIcon} />
-                  <Link href={github} target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none' }}
+                  >
                     {github}
                   </Link>
                 </SectionTitleLeftIcon>
@@ -331,7 +389,12 @@ class MyDocument extends Component {
               <>
                 <SectionTitleLeftIcon white bold>
                   <Icon src={linkedIcon} />
-                  <Link href={linkedin} target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none' }}
+                  >
                     {linkedin}
                   </Link>
                 </SectionTitleLeftIcon>
@@ -389,6 +452,232 @@ class MyDocument extends Component {
                 </RightSideContentTitle>
               </RightSideContentTitleBox>
             )}
+
+            {experience.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide small>
+                    <SectionDate>
+                      {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
+                        item.startYear
+                      } - ${
+                        !item.inProgress
+                          ? item.endMonth < 10
+                            ? '0' + item.endMonth + '.'
+                            : item.endMonth + '.'
+                          : ''
+                      }${!item.inProgress ? item.endYear : ''} 
+                     `}
+                    </SectionDate>
+                  </LeftSide>
+                  <RightSide>
+                    <SectionTitle uppercase bold>{`${item.position} `}</SectionTitle>
+                    <SectionTitle>{`/ ${item.name}`}</SectionTitle>
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            {!education.length || (
+              <RightSideContentTitleBox wrap={false}>
+                <RightSideContentTitle>
+                  {language === 'PL' ? 'edukacja' : 'education'}
+                </RightSideContentTitle>
+              </RightSideContentTitleBox>
+            )}
+            {education.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide>
+                    <SectionTitle bold>{item.name}</SectionTitle>
+                    <SectionDate>
+                      {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
+                        item.startYear
+                      } - ${
+                        !item.inProgress
+                          ? item.endMonth < 10
+                            ? '0' + item.endMonth + '.'
+                            : item.endMonth + '.'
+                          : ''
+                      }${!item.inProgress ? item.endYear : ''} 
+                     `}
+                    </SectionDate>
+                  </LeftSide>
+                  <RightSide>
+                    <SectionTitle bold>{item.department}</SectionTitle>
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+            {!webApi.length || (
+              <RightSideContentTitleBox wrap={false}>
+                <RightSideContentTitle>
+                  {language === 'PL' ? 'Aplikacje webowe' : 'Web application'}
+                </RightSideContentTitle>
+              </RightSideContentTitleBox>
+            )}
+            {webApi.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide small>
+                    <SectionDate>{`${item.endYear}`}</SectionDate>
+                  </LeftSide>
+                  <RightSide>
+                    <SectionTitle bold>{item.name}</SectionTitle>
+                    <LiveDemo href={item.link} target="_blank" rel="noopener noreferrer">
+                      {item.link}
+                    </LiveDemo>
+                    <SectionTitle>Użyte technologie : </SectionTitle>
+                    <Section>{`${item.technology}`}</Section>
+                    <SectionTitle>Opis aplikacji :</SectionTitle>
+                    <Section>{`${item.description}`}</Section>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            {!certificates.length || (
+              <RightSideContentTitleBox wrap={false} orphans={3}>
+                <RightSideContentTitle>
+                  {language === 'PL' ? 'certyfikaty' : 'certificates'}
+                </RightSideContentTitle>
+              </RightSideContentTitleBox>
+            )}
+
+            {certificates.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide small>
+                    <SectionTitle>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <SectionTitle bold orphans={20} widows={20}>
+                      {item.description}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            {!courses.length || (
+              <RightSideContentTitleBox>
+                <RightSideContentTitle>
+                  {language === 'PL' ? 'kursy' : 'courses'}
+                </RightSideContentTitle>
+              </RightSideContentTitleBox>
+            )}
+
+            {courses.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide small>
+                    <SectionTitle>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <SectionTitle bold orphans={20} widows={20}>
+                      {item.description}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            {!publications.length || (
+              <RightSideContentTitleBox>
+                <RightSideContentTitle>
+                  {language === 'PL' ? 'publikacje' : 'publications'}
+                </RightSideContentTitle>
+              </RightSideContentTitleBox>
+            )}
+
+            {publications.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide small>
+                    <SectionTitle>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <SectionTitle bold orphans={20} widows={20}>
+                      {item.description}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            {!conferences.length || (
+              <RightSideContentTitleBox>
+                <RightSideContentTitle>
+                  {language === 'PL' ? 'konferencje' : 'conferences'}
+                </RightSideContentTitle>
+              </RightSideContentTitleBox>
+            )}
+
+            {conferences.map(item => (
+              <TextSection key={item.id} wrap={false}>
+                <ContentBox>
+                  <LeftSide small>
+                    <SectionTitle>
+                      {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                        item.endYear
+                      }`}
+                    </SectionTitle>
+                    <SectionDate />
+                  </LeftSide>
+                  <RightSide>
+                    <SectionTitle bold orphans={20} widows={20}>
+                      {item.description}
+                    </SectionTitle>
+                  </RightSide>
+                </ContentBox>
+              </TextSection>
+            ))}
+
+            {!licenses.length || (
+              <RightSideContentTitleBox>
+                <RightSideContentTitle>
+                  {language === 'PL' ? 'licencje' : 'licenses'}
+                </RightSideContentTitle>
+              </RightSideContentTitleBox>
+            )}
+
+            {!licenses.length ||
+              licenses.map(item => (
+                <TextSection key={item.id} wrap={false}>
+                  <ContentBox>
+                    <LeftSide small>
+                      <SectionTitle>
+                        {` ${item.endMonth < 10 ? '0' + item.endMonth + '.' : item.endMonth + '.'}${
+                          item.endYear
+                        }`}
+                      </SectionTitle>
+                      <SectionDate />
+                    </LeftSide>
+                    <RightSide>
+                      <SectionTitle bold orphans={20} widows={20}>
+                        {item.description}
+                      </SectionTitle>
+                    </RightSide>
+                  </ContentBox>
+                </TextSection>
+              ))}
           </RightColumn>
 
           <Footer wrap={false} break fixed>

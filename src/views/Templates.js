@@ -76,12 +76,12 @@ class Template extends Component {
             id={2}
             changeTemplate={this.handleChangeTemplate}
           />
-          <TemplateItem
+          {/* <TemplateItem
             active={parseInt(template) === 3}
             img={temp2}
             id={3}
             changeTemplate={this.handleChangeTemplate}
-          />
+          /> */}
         </StyledWrapper>
         <Footer language={language} />
         <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
