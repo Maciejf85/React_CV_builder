@@ -38,18 +38,16 @@ const StyledWrapper = styled.ul`
       min-width: auto;
       width: 40px;
     }
-
-    &:hover :not(.active) {
-      background: ${({ theme }) => theme.colors.secondaryBlue};
-      /* color: ${({ theme }) => theme.colors.primaryBlue}; */
-      cursor: pointer;
+    span {
+      color: white;
+      @media ${({ theme }) => theme.media.small} {
+        display: none;
+      }
     }
 
-  }
-  span {
-    color: white;
-    @media ${({ theme }) => theme.media.small} {
-      display: none;
+    &:hover:not(.active) {
+      background: ${({ theme }) => theme.colors.primaryBlue};
+      cursor: pointer;
     }
   }
 

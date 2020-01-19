@@ -48,7 +48,7 @@ const RightColumn = styled.View`
   width: 430pt;
   /* height: 100%; */
   font-family: 'Montserrat';
-  padding: 0 10pt;
+  padding: 0 15pt;
   background: white;
 `;
 
@@ -229,7 +229,7 @@ const RightSide = styled.View`
   position: relative;
   border-left: 1pt solid #494949;
   flex-basis: 277pt;
-  padding-left: 10pt;
+  padding: 0 10pt;
 `;
 
 const LeftSide = styled.View`
