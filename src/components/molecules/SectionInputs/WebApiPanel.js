@@ -4,7 +4,6 @@ import Input from 'components/atoms/Inputs/Input';
 import Select from 'components/atoms/Inputs/Select';
 import { Textarea } from 'components/atoms/Inputs';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
-import SlideCheckox from 'components/atoms/Inputs/slideCheckbox';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
 import store from 'store';
 // import PropTypes from 'prop-types';
@@ -13,40 +12,24 @@ class EducationPanel extends Component {
   state = {
     id: '',
     name: '',
-    department: '',
-    startYear: 0,
-    startMonth: 0,
+    technology: '',
+    link: '',
     endYear: 0,
-    endMonth: 0,
     description: '',
-    inProgress: false,
     statusActive: false,
   };
 
   componentDidMount() {
     this.mounted = true;
-    const {
-      id,
-      name,
-      department,
-      startYear,
-      startMonth,
-      endYear,
-      endMonth,
-      description,
-      inProgress,
-    } = this.props.item;
+    const { id, name, technology, endYear, description, link } = this.props.item;
 
     this.setState({
       id,
       name,
-      department,
-      startMonth,
-      startYear,
+      technology,
+      link,
       endYear,
-      endMonth,
       description,
-      inProgress,
     });
   }
 
@@ -55,7 +38,7 @@ class EducationPanel extends Component {
   }
 
   handleForm = e => {
-    const value = parseInt(e.target.value, 10) || e.target.value;
+    const value = e.target.value;
     this.setState({
       [e.target.dataset.id]: value,
       statusActive: true,
@@ -95,7 +78,6 @@ class EducationPanel extends Component {
 
   handleCheckbox = () => {
     this.setState({
-      inProgress: !this.state.inProgress,
       statusActive: true,
     });
     if (!this.state.statusActive) {
@@ -106,16 +88,7 @@ class EducationPanel extends Component {
   render() {
     const { id } = this.props.item;
     const { index, current, newItem, language } = this.props;
-    const {
-      name,
-      department,
-      startYear,
-      startMonth,
-      endYear,
-      endMonth,
-      description,
-      inProgress,
-    } = this.state;
+    const { name, technology, endYear, description, link } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
     const isPolish = language === 'PL';
@@ -130,33 +103,25 @@ class EducationPanel extends Component {
         />
         <div className="inputContainer">
           <Input
-            placeholder={isPolish ? 'Nazwa szkoły' : 'School'}
+            placeholder={isPolish ? 'Nazwa aplikacji' : 'Aplications name'}
             id="name"
             value={name}
             onChange={this.handleForm}
           />
           <Input
-            placeholder={isPolish ? 'Kierunek' : 'Department'}
-            id="department"
-            value={department}
+            placeholder={isPolish ? 'Użyte technologie' : 'Technologies used'}
+            id="technology"
+            value={technology}
             onChange={this.handleForm}
+          />
+          <Input
+            placeholder={isPolish ? 'adres URL' : 'URL address'}
+            id="link"
+            value={link}
+            onChange={this.handleForm}
+            isSmall
           />
 
-          <Select
-            title={isPolish ? 'Data rozpoczęcia' : 'Started at'}
-            id="startYear"
-            value={startYear}
-            onChange={this.handleForm}
-            start={startY}
-            end={endY}
-          />
-          <Select
-            id="startMonth"
-            value={startMonth}
-            onChange={this.handleForm}
-            start={0}
-            end={12}
-          />
           <Select
             title="data zakończenia"
             id="endYear"
@@ -164,25 +129,8 @@ class EducationPanel extends Component {
             onChange={this.handleForm}
             start={startY}
             end={endY}
-            disabled={inProgress}
-          />
-          <Select
-            id="endMonth"
-            value={endMonth}
-            onChange={this.handleForm}
-            start={0}
-            end={12}
-            disabled={inProgress}
           />
         </div>
-        <div className="checkboxContainer">
-          <SlideCheckox
-            handleCheckbox={this.handleCheckbox}
-            checkboxState={inProgress}
-            language={language}
-          />
-        </div>
-
         <Textarea
           edit
           placeholder="opis"
@@ -218,7 +166,3 @@ class EducationPanel extends Component {
 // };
 
 export default EducationPanel;
-
-// @TODO: wyniesienie update store i update pliku do wyższych komponentów
-// data-actionType
-// const { actiontype } = e.target.dataset;

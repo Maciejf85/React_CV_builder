@@ -10,15 +10,11 @@ import path from '../path';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  height: (100vh - 50px);
+  height: calc(100vh - 50px);
   color: white;
   display: flex;
 `;
 class Edit extends Component {
-  componentDidMount() {
-    // console.log('Component Edit did mount');
-  }
-
   render() {
     const { isVisible, error, language } = this.props.appState;
     if (this.props.isSet === undefined) {

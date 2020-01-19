@@ -23,7 +23,7 @@ Font.register({
 const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
-  background-color: #494949;
+  background-color: #000d2b;
   padding-top: 15pt;
   padding-bottom: 100pt;
 `;
@@ -42,7 +42,6 @@ const LeftColumn = styled.View`
   color: white;
   padding: 0 10px;
   font-family: 'Montserrat';
-  padding-right: 5pt;
 `;
 const RightColumn = styled.View`
   width: 430pt;
@@ -116,8 +115,8 @@ const TitleDecoration = styled.View`
 
 const SectionTitle = styled.Text`
   font-size: 9pt;
-  color: ${({ white }) => (white ? 'white' : '#494949')};
-  font-weight: ${({ bold }) => (bold ? 'bold' : 'semiBold')};
+  color: ${({ white }) => (white ? 'white' : 'black')};
+  font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
   letter-spacing: 0.2pt;
   text-align: ${({ right }) => (right ? 'right' : 'left')};
 `;
@@ -125,7 +124,7 @@ const SectionTitle = styled.Text`
 const Section = styled.Text`
   margin: 0 0 0pt;
   color: black;
-  font-size: 9pt;
+  font-size: 9.5pt;
   padding: 5pt 0 5pt 5pt;
   letter-spacing: 0.3pt;
 `;
@@ -135,14 +134,6 @@ const SectionDate = styled.Text`
   color: black;
   font-size: 9pt;
   letter-spacing: 0.3pt;
-`;
-const LiveDemo = styled.Link`
-  margin-left: 5pt;
-  color: black;
-  font-size: 9pt;
-  padding: 5pt 0 5pt 5pt;
-  letter-spacing: 0.3pt;
-  text-decoration: none;
 `;
 
 const SectionLeftBox = styled.View`
@@ -189,13 +180,12 @@ const SectionLeft = styled.Text`
 
 const Link = styled.Link`
   margin: 0 0 10pt;
+  color: white;
   font-size: 8.5pt;
   padding: 5pt 0 0 11pt;
-  font-size: 8.5pt;
   font-family: 'Montserrat';
-  color: white;
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
-
 const TextSection = styled.View`
   position: relative;
   /* margin-bottom: 10pt; */
@@ -234,7 +224,7 @@ const RightSide = styled.View`
 
 const LeftSide = styled.View`
   flex-basis: ${({ small }) => (small ? '70pt' : '133pt')};
-  padding-right: 5pt;
+  padding-right: 10pt;
   text-align: left;
 `;
 
@@ -280,7 +270,6 @@ class MyDocument extends Component {
       licenses,
       interests,
       currentItem,
-      webApi,
     } = currentCv;
     // console.log('state', state);
     return (
@@ -328,12 +317,7 @@ class MyDocument extends Component {
                       <Icon src={githubIcon} /> Github:
                     </SectionTitleLeft>
                     <PersonalDataSection>
-                      <Link
-                        href={github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ textDecoration: 'none' }}
-                      >
+                      <Link href={github} target="_blank" rel="noopener noreferrer">
                         {github}
                       </Link>
                     </PersonalDataSection>
@@ -345,12 +329,7 @@ class MyDocument extends Component {
                       <Icon src={linkedIcon} /> Linkedin:
                     </SectionTitleLeft>
                     <PersonalDataSection>
-                      <Link
-                        href={linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ textDecoration: 'none' }}
-                      >
+                      <Link href={linkedin} target="_blank" rel="noopener noreferrer">
                         {linkedin}
                       </Link>
                     </PersonalDataSection>
@@ -400,6 +379,9 @@ class MyDocument extends Component {
             )}
             {interests.map(item => (
               <TextSection key={item.id} wrap={false}>
+                <SectionLeftBox>
+                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                </SectionLeftBox>
                 <SectionLeft>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
             ))}
@@ -476,35 +458,6 @@ class MyDocument extends Component {
                     <Decoration />
                     <DecorationBottom />
                     <SectionTitle bold>{item.department}</SectionTitle>
-                    <Section>{`${item.description}`}</Section>
-                  </RightSide>
-                </ContentBox>
-              </TextSection>
-            ))}
-            {!webApi.length || (
-              <ContentTitleBox wrap={false}>
-                <ContentTitle>
-                  {language === 'PL' ? 'Aplikacje webowe' : 'Web application'}
-                </ContentTitle>
-                <TitleDecoration />
-              </ContentTitleBox>
-            )}
-            {webApi.map(item => (
-              <TextSection key={item.id} wrap={false}>
-                <ContentBox>
-                  <LeftSide small>
-                    <SectionDate>{`${item.endYear}`}</SectionDate>
-                  </LeftSide>
-                  <RightSide>
-                    <Decoration />
-                    <DecorationBottom />
-                    <SectionTitle bold>{item.name}</SectionTitle>
-                    <LiveDemo href={item.link} target="_blank" rel="noopener noreferrer">
-                      {item.link}
-                    </LiveDemo>
-                    <SectionTitle>Użyte technologie : </SectionTitle>
-                    <Section>{`${item.technology}`}</Section>
-                    <SectionTitle>Opis aplikacji :</SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>

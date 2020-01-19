@@ -7,10 +7,6 @@ import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
 
 class Education extends Component {
-  componentDidMount() {
-    console.log(' Mount - Education Component');
-  }
-
   componentDidUpdate(prevProps) {
     const { language } = prevProps;
     if (language === this.props.language) {

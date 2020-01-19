@@ -2,6 +2,7 @@ import React from 'react';
 import Main from 'views/Main';
 import Login from 'views/Login';
 import Edit from 'views/Edit';
+import Templates from 'views/Templates';
 import Preview from 'views/Preview';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import GlobalStyle from 'theme/GlobalStyle';
@@ -19,6 +20,7 @@ const Root = () => {
             <Route path={path.login} exact component={Login} />
             <Route path={path.main} exact component={Main} />
             <Route path={path.edit} exact component={Edit} />
+            <Route path={path.templates} exact component={Templates} />
             <Route path={path.preview} exact component={Preview} />
           </>
         </Router>

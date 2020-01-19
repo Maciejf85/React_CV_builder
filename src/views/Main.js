@@ -10,8 +10,6 @@ import { Redirect } from 'react-router-dom';
 import path from '../path';
 
 const StyledWrapper = styled.div`
-  /* margin: 0 20px; */
-  /* border: 1px solid orange; */
   overflow: hidden;
 `;
 

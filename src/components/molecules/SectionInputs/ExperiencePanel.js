@@ -133,6 +133,7 @@ class ExperiencePanel extends Component {
           current={current}
           newItem={newItem}
           removeItem={this.handleRemoveItem}
+          language={language}
         />
         <InputWrapper>
           <Input

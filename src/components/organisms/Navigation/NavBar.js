@@ -18,6 +18,7 @@ const StyledWrapper = styled.nav`
   width: 100%;
   height: 50px;
   background-color: ${({ theme }) => theme.colors.mainGrey};
+
   .lang{
     color:white;
     margin:0 10px;
@@ -32,6 +33,7 @@ const StyledWrapper = styled.nav`
     flex-shrink: 0;
     span {
       color: ${({ theme }) => theme.colors.primaryBlue};
+    font-weight: ${({ theme }) => theme.font.xbold};
     }
     @media ${({ theme }) => theme.media.small} {
       display: none;

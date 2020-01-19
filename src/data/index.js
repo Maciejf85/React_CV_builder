@@ -3,7 +3,6 @@ import {
   faEnvelope,
   faFileAlt,
   faFileContract,
-  faThLarge,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const editViews = [
@@ -18,7 +17,7 @@ export const editViews = [
   { name: 'Konferencje', nameL: 'Conferences', link: 'conferences', icon: 'graduation-cap' },
   { name: 'Licencje', nameL: 'Licenses', link: 'licenses', icon: 'graduation-cap' },
   { name: 'Zainteresowania', nameL: 'Interests', link: 'interests', icon: 'graduation-cap' },
-  // { name: 'Klauzula poufności', link: 'confidential', icon: 'apple-alt' },
+  { name: 'Aplikacje webowe', nameL: 'Web aplications', link: 'webApi', icon: 'graduation-cap' },
 ];
 
 export const mainViews = [
@@ -31,5 +30,4 @@ export const mainViews = [
     link: 'confidentiality',
     icon: [faFileContract],
   },
-  { name: 'Szablony', nameL: 'Templates', link: 'templates', icon: [faThLarge] },
 ];

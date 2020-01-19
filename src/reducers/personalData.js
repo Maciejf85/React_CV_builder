@@ -19,6 +19,7 @@ const personalData = (state = initialState, { type, payload }) => {
       return payload;
     case 'UPDATE_PERSONAL_DATA':
       return {
+        ...state,
         name: payload.currentName,
         surname: payload.currentSurname,
         email: payload.currentEmail,

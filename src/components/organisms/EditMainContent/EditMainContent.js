@@ -12,23 +12,18 @@ import Courses from 'components/organisms/EditMainContent/Courses';
 import Conferences from 'components/organisms/EditMainContent/Conferences';
 import Publications from 'components/organisms/EditMainContent/Publications';
 import Licenses from 'components/organisms/EditMainContent/Licenses';
+import WebApi from 'components/organisms/EditMainContent/WebApi';
 
 const StyledWrapper = styled.div`
   width: 100%;
   margin: 20px;
   height: (100vh - 50px);
-  /* border: 1px solid red; */
   margin-top: 70px;
   margin-left: 300px;
   color: black;
-  /* border: 1px solid black; */
 `;
 
 class EditMainContent extends Component {
-  componentDidUpdate() {
-    console.log('EditMainPage did update');
-  }
-
   render() {
     const { language } = this.props;
     const { currentView } = this.props.editComponentView;
@@ -45,6 +40,7 @@ class EditMainContent extends Component {
         {currentView === 'publications' && <Publications language={language} />}
         {currentView === 'licenses' && <Licenses language={language} />}
         {currentView === 'certificates' && <Certificates language={language} />}
+        {currentView === 'webApi' && <WebApi language={language} />}
       </StyledWrapper>
     );
   }

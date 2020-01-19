@@ -98,9 +98,9 @@ export const sidePanel = result => {
   const { inProgress } = appState;
   const { content, error } = result;
   if (!inProgress) {
-    store.dispatch(changeSidePanelState({ content, error }));
+    setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), 500);
     setTimeout(() => store.dispatch(changeSidePanelState({ content, error })), error ? 3000 : 2000);
-    setTimeout(() => store.dispatch({ type: 'UNLOCK_SIDE_PANEL' }), 3500);
+    setTimeout(() => store.dispatch({ type: 'UNLOCK_SIDE_PANEL' }), 4000);
   }
 };
 
@@ -125,34 +125,70 @@ export const setNewCurrentCVData = (type, token, id, data) => () => {
 export const getPanelName = name => {
   switch (name) {
     case 'education': {
-      return 'Szkoła';
+      return {
+        name: 'Szkoła',
+        nameL: 'School',
+      };
     }
     case 'languages': {
-      return 'Język';
+      return {
+        name: 'Język',
+        nameL: 'Language',
+      };
     }
     case 'skills': {
-      return 'Umiejętność';
+      return {
+        name: 'Umiejętność',
+        nameL: 'Skill',
+      };
     }
     case 'interests': {
-      return 'Zainteresowania';
+      return {
+        name: 'Zainteresowanie',
+        nameL: 'Interest',
+      };
     }
     case 'experience': {
-      return 'Doświadczenie';
+      return {
+        name: 'Doświadczenie zawodowe',
+        nameL: 'Work experience',
+      };
     }
     case 'certificates': {
-      return 'Certyfikat';
+      return {
+        name: 'Certyfikat',
+        nameL: 'Certificate',
+      };
     }
     case 'courses': {
-      return 'Kurs';
+      return {
+        name: 'Kurs',
+        nameL: 'Course',
+      };
     }
     case 'publications': {
-      return 'Publikację';
+      return {
+        name: 'Publikacja',
+        nameL: 'Publication',
+      };
     }
     case 'conferences': {
-      return 'Konferencję';
+      return {
+        name: 'Konferencja',
+        nameL: 'Conference',
+      };
     }
     case 'licenses': {
-      return 'Licencję';
+      return {
+        name: 'Licencja',
+        nameL: 'License',
+      };
+    }
+    case 'webApi': {
+      return {
+        name: 'Aplikacja',
+        nameL: 'Application',
+      };
     }
 
     default: {
@@ -173,6 +209,7 @@ export const getNewItemName = currentView => {
     { publications: 'nową publikację' },
     { conferences: 'nową konferencję' },
     { licenses: 'nową licencję' },
+    { webApi: 'nową aplikację' },
   ];
 
   const index = array.find(item => String(Object.keys(item)) === currentView);
