@@ -10,7 +10,7 @@ const StyledWrapper = styled.ul`
   flex-direction: column;
   /* border: 1px solid black; */
   @media ${({ theme }) => theme.media.small} {
-    background: red;
+    /* background: red; */
     min-width: auto;
     width: 100%;
     margin: 0;
@@ -18,6 +18,10 @@ const StyledWrapper = styled.ul`
   }
   @media ${({ theme }) => theme.media.medium} {
     background: green;
+    min-width: auto;
+    width: 100%;
+    margin: 0;
+    flex-direction: row;
   }
   @media ${({ theme }) => theme.media.tablet} {
     background: blue;

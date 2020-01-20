@@ -38,6 +38,8 @@ const StyledWrapper = styled(PosedLi)`
     @media ${({ theme }) => theme.media.small} {
       display: none;
     }
+    @media ${({ theme }) => theme.media.medium} {
+    }
   }
   .icon {
     display: none;

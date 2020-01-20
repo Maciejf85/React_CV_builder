@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import posed from 'react-pose';
 import { logOut } from 'actions';
 import store from 'store';
@@ -37,13 +37,14 @@ const StyledWrapper = styled.div`
     letter-spacing: 1px;
     font-weight: ${({ theme }) => theme.font.thin};
     @media ${({ theme }) => theme.media.small} {
-      font-size: 1.15rem;
-      letter-spacing: 0;
+      display: none;
     }
   }
   @media ${({ theme }) => theme.media.small} {
-    width: 160px;
-    grid-gap: 3px;
+    padding: 10px 5px;
+    min-width: 38px;
+    border-radius: 5px;
+    grid-template-columns: 1fr;
   }
 `;
 const PosedMenu = posed.div({
@@ -80,11 +81,19 @@ const DropBox = styled(PosedMenu)`
     background: ${({ theme }) => theme.colors.mediumGrey};
     font-weight: ${({ theme }) => theme.font.bold};
   }
+  @media ${({ theme }) => theme.media.small} {
+    text-align: center;
+  }
 
   &.active {
     pointer-events: auto;
     &:hover {
       cursor: pointer;
+    }
+  }
+  div {
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
     }
   }
 `;
@@ -116,19 +125,18 @@ class LoggedIn extends Component {
         <div>
           <FontAwesomeIcon icon={faAngleDown} className="iconStyle" onClick={this.handleDropdown} />
           {/* {isVisible && <DropBox pose={isVisible ? 'visible' : 'hidden'}>wyloguj</DropBox>} */}
+
           <DropBox
             className={isVisible ? 'active' : ''}
             pose={isVisible ? 'visible' : 'hidden'}
             onClick={this.handleLogout}
           >
-            Wyloguj
-          </DropBox>
-          <DropBox
-            className={isVisible ? 'active' : ''}
-            pose={isVisible ? 'visible' : 'hidden'}
-            onClick={this.handleLogout}
-          >
-            {language === 'PL' ? 'Wyloguj' : 'Logout'}
+            <div>{language === 'PL' ? 'Wyloguj' : 'Logout'}</div>
+            <FontAwesomeIcon
+              icon={faSignOutAlt}
+              className="iconStyle"
+              onClick={this.handleDropdown}
+            />
           </DropBox>
         </div>
       </StyledWrapper>

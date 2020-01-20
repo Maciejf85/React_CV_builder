@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import TemplateItem from 'components/molecules/Template';
 import temp0 from 'assets/template/template_0.jpg';
 import temp1 from 'assets/template/template_1.jpg';
-import temp2 from 'assets/template/template_2.jpg';
+// import temp2 from 'assets/template/template_2.jpg';
 import { changeTemplate } from 'actions';
 import { setNewCurrentCVData } from 'functions';
 import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
