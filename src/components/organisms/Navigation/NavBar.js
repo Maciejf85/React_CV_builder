@@ -38,6 +38,9 @@ const StyledWrapper = styled.nav`
     @media ${({ theme }) => theme.media.small} {
       display: none;
     }
+    @media ${({ theme }) => theme.media.medium} {
+      display: none;
+    }
   }
   ${({ editor }) =>
     editor &&
@@ -67,11 +70,6 @@ const NavBar = ({ location, language }) => {
     </StyledWrapper>
   );
 };
-
-/* tablet */
-// @media ${ ({ theme }) => theme.media.tablet } {
-//   width: 150px;
-// }
 
 // NavBar.propTypes = {
 //   logo: PropTypes.bool,

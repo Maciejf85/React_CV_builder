@@ -25,6 +25,9 @@ const StyledWrapper = styled.footer`
     flex-wrap: wrap;
     text-align: center;
   }
+  @media ${({ theme }) => theme.media.medium} {
+    position: relative;
+  }
 `;
 
 const Footer = ({ language }) => (

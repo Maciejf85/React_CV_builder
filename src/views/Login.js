@@ -15,7 +15,9 @@ const StyledWrapper = styled.div`
   min-height: 100vh;
   padding: 10px 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   @media ${({ theme }) => theme.media.bigDesktop} {
     margin-top: -50px;
   }
