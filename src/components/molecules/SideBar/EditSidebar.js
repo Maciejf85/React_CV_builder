@@ -29,6 +29,7 @@ const EditSidebar = ({ language }) => {
             key={item.link}
             name={language === 'PL' ? item.name : item.nameL}
             link={item.link}
+            icon={item.icon}
           />
         ))}
       </ul>
