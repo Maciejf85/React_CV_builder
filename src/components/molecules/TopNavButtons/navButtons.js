@@ -38,9 +38,18 @@ const StyledWrapper = styled.ul`
       min-width: auto;
       width: 40px;
     }
+    @media ${({ theme }) => theme.media.medium} {
+      font-size: ${({ theme }) => theme.fontSize.s};
+      padding: 0;
+      min-width: auto;
+      width: 40px;
+    }
     span {
       color: white;
       @media ${({ theme }) => theme.media.small} {
+        display: none;
+      }
+      @media ${({ theme }) => theme.media.medium} {
         display: none;
       }
     }
@@ -70,6 +79,10 @@ const StyledWrapper = styled.ul`
   .icon {
     display: none;
     @media ${({ theme }) => theme.media.small} {
+      font-size: 1.5rem;
+      display: block;
+    }
+    @media ${({ theme }) => theme.media.medium} {
       font-size: 1.5rem;
       display: block;
     }

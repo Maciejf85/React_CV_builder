@@ -17,7 +17,16 @@ const StyledWrapper = styled.div`
   margin: 0 auto;
 
   @media ${({ theme }) => theme.media.small} {
-    background: red;
+    /* background: red; */
+    min-width: auto;
+    height: auto;
+    width: 100vw;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    flex-direction: row;
+  }
+  @media ${({ theme }) => theme.media.medium} {
     min-width: auto;
     height: auto;
     width: 100vw;

@@ -38,6 +38,8 @@ const StyledWrapper = styled(PosedLi)`
     @media ${({ theme }) => theme.media.small} {
       display: none;
     }
+    @media ${({ theme }) => theme.media.medium} {
+    }
   }
   .icon {
     display: none;
@@ -56,6 +58,10 @@ const StyledWrapper = styled(PosedLi)`
     height: 50px;
     flex: 1 1 50px;
     border: none;
+  }
+  @media ${({ theme }) => theme.media.medium} {
+    width: 25%;
+    text-align: center;
   }
 `;
 class MainPageListItem extends Component {
