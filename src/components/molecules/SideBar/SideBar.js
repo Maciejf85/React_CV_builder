@@ -17,7 +17,6 @@ const StyledWrapper = styled.ul`
     flex-direction: row;
   }
   @media ${({ theme }) => theme.media.medium} {
-    background: green;
     min-width: auto;
     width: 100%;
     margin: 0;

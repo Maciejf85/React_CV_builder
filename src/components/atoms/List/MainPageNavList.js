@@ -59,6 +59,10 @@ const StyledWrapper = styled(PosedLi)`
     flex: 1 1 50px;
     border: none;
   }
+  @media ${({ theme }) => theme.media.medium} {
+    width: 25%;
+    text-align: center;
+  }
 `;
 class MainPageListItem extends Component {
   handlePathChange = e => {
