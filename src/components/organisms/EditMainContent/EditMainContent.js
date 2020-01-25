@@ -21,6 +21,11 @@ const StyledWrapper = styled.div`
   margin-top: 70px;
   margin-left: 300px;
   color: black;
+
+  @media ${({ theme }) => theme.media.small} {
+    margin-left: 55px;
+    margin-top: 55px;
+  }
 `;
 
 class EditMainContent extends Component {

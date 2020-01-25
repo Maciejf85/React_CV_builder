@@ -23,6 +23,12 @@ align-items:center;
     cursor: pointer;
   }
 
+  @media ${({ theme }) => theme.media.small}{
+    height:22px;
+    width:100px;
+    font-size:${({ theme }) => theme.fontSize.s};
+  }
+
   &:disabled {
   background: ${({ theme }) => theme.colors.darkGrey};
   cursor:default ;

@@ -16,6 +16,7 @@ const Button = styled.div`
       cursor: pointer;
       background: #3e58a1;
     }
+    margin-bottom: 45px;
   }
 `;
 

@@ -46,6 +46,11 @@ const StyledInputSection = styled.div`
     font-weight: ${({ theme }) => theme.font.bold};
     background: ${({ theme }) => theme.colors.buttonActive};
     font-size: ${({ theme }) => theme.fontSize.ml};
+
+    @media ${({ theme }) => theme.media.small} {
+      flex-direction: column;
+      padding: 5px 0;
+    }
   }
   p {
     width: 100%;
@@ -81,6 +86,9 @@ const StyledInputSection = styled.div`
     visibility: visible;
     transition: visibility 0.6s, opacity 0.6s;
     background: ${({ white }) => (white ? 'rgba(100, 100, 100, 0.35)' : 'rgba(0, 0, 0, 0.75)')};
+  }
+  @media ${({ theme }) => theme.media.small} {
+    width: calc(100vw - 80px);
   }
 `;
 

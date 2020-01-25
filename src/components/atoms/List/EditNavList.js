@@ -26,9 +26,20 @@ const StyledWrapper = styled.li`
     background: ${({ theme }) => theme.colors.secondaryBlue};
     cursor: pointer;
   }
+  .iconStyle {
+    text-align: center;
+  }
 
   div {
-    /* border: 1px dotted red; */
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
+    }
+  }
+  @media ${({ theme }) => theme.media.small} {
+    grid-template-columns: 1fr;
+    padding: 0;
+    border-right-width: 5px;
+    justify-items: center;
   }
 `;
 
@@ -52,7 +63,7 @@ class EditNavList extends Component {
         content={content}
       >
         <div>{name}</div>
-        <FontAwesomeIcon icon={iconContent} />
+        <FontAwesomeIcon icon={iconContent} className="iconStyle" />
       </StyledWrapper>
     );
   }
