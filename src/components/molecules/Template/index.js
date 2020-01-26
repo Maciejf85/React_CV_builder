@@ -40,6 +40,11 @@ const StyledWrapper = styled.div`
     pointer-events: none;
   }
 
+  @media ${({ theme }) => theme.media.small} {
+    margin: 35px 0;
+    background: #000;
+  }
+
   @media ${({ theme }) => theme.media.tablet} {
     width: 200px;
     height: 282px;

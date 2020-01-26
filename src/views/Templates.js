@@ -22,7 +22,13 @@ const StyledWrapper = styled.div`
   min-height: calc(70vh - 50px);
   padding: 90px 50px 0;
   color: black;
+  @media ${({ theme }) => theme.media.small} {
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+  }
   @media ${({ theme }) => theme.media.medium} {
+    padding: 10px;
     flex-direction: column;
     align-items: center;
   }
