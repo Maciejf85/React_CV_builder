@@ -21,6 +21,10 @@ const StyledInputSection = styled.div`
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+    @media ${({ theme }) => theme.media.small} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
   .checkboxContainer {
     display: flex;

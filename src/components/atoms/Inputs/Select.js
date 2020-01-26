@@ -34,6 +34,9 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 5px;
+  @media ${({ theme }) => theme.media.small} {
+    margin-left: 10px;
+  }
 `;
 
 const Select = ({ id, title, value, onChange, onBlur, start, end, disabled }) => {

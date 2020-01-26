@@ -7,7 +7,6 @@ import InputHeader from 'components/atoms/Inputs/InputHeader';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
 import SlideCheckox from 'components/atoms/Inputs/slideCheckbox';
 import styled from 'styled-components';
-
 import store from 'store';
 // import PropTypes from 'prop-types';
 
@@ -15,6 +14,9 @@ const InputWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  @media ${({ theme }) => theme.media.small} {
+    flex-direction: column;
+  }
 `;
 
 class ExperiencePanel extends Component {

@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import LicensesPanel from 'components/molecules/SectionInputs/LicensesPanel';
 import NewItemButton from 'components/atoms/Buttons/newItemButton';
 import store from 'store';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
+
+const StyledWrapper = styled.div`
+  margin-left: 10px;
+  margin-top: 10px;
+`;
 
 class Licenses extends Component {
   componentDidUpdate(prevProps) {
@@ -34,7 +40,7 @@ class Licenses extends Component {
     const { licenses } = currentCv;
     const { currentView } = current;
     return (
-      <>
+      <StyledWrapper>
         {licenses.length ? (
           licenses.map((item, idx) => {
             const { id } = item;
@@ -53,7 +59,7 @@ class Licenses extends Component {
         ) : (
           <NewItemButton view={currentView} handleClick={this.handleNewItem} />
         )}
-      </>
+      </StyledWrapper>
     );
   }
 }

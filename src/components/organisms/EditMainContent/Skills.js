@@ -5,6 +5,12 @@ import store from 'store';
 import { connect } from 'react-redux';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
+import styled from 'styled-components';
+
+const StyledWrapper = styled.div`
+  margin-left: 10px;
+  margin-top: 10px;
+`;
 
 class Languages extends Component {
   componentDidUpdate(prevProps) {
@@ -33,7 +39,7 @@ class Languages extends Component {
     const { skills } = currentCv;
     const { currentView } = current;
     return (
-      <>
+      <StyledWrapper>
         {skills.length ? (
           skills.map((item, idx) => {
             const { id } = item;
@@ -52,7 +58,7 @@ class Languages extends Component {
         ) : (
           <NewItemButton view={currentView} handleClick={this.handleNewItem} />
         )}
-      </>
+      </StyledWrapper>
     );
   }
 }

@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import CertificatesPanel from 'components/molecules/SectionInputs/CertificatesPanel';
 import NewItemButton from 'components/atoms/Buttons/newItemButton';
 import store from 'store';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
 
+const StyledWrapper = styled.div`
+  margin-left: 10px;
+  margin-top: 10px;
+`;
 class Certificates extends Component {
   componentDidUpdate(prevProps) {
     const { language } = prevProps;
@@ -34,7 +39,7 @@ class Certificates extends Component {
     const { certificates } = currentCv;
     const { currentView } = current;
     return (
-      <>
+      <StyledWrapper>
         {certificates.length ? (
           certificates.map((item, idx) => {
             const { id } = item;
@@ -53,7 +58,7 @@ class Certificates extends Component {
         ) : (
           <NewItemButton view={currentView} handleClick={this.handleNewItem} />
         )}
-      </>
+      </StyledWrapper>
     );
   }
 }

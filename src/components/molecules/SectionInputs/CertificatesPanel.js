@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import StyledInputSection from 'components/atoms/Inputs/StyledInputSection';
 import Input from 'components/atoms/Inputs/Input';
 import Select from 'components/atoms/Inputs/Select';
+import store from 'store';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
 
-import store from 'store';
 // import PropTypes from 'prop-types';
 
 class CertificatesPanel extends Component {
