@@ -17,4 +17,7 @@ export const Textarea = styled.textarea`
   &:focus {
     border-top: 2px solid ${({ theme }) => theme.colors.lightBlue};
   }
+  /* @media ${({ theme }) => theme.media.small} {
+    min-height: 58vh;
+  } */
 `;

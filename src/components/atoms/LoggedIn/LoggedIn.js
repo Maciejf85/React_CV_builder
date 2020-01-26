@@ -29,6 +29,13 @@ const StyledWrapper = styled.div`
     }
   }
 
+  .logout {
+    display: none;
+    @media ${({ theme }) => theme.media.small} {
+      display: block;
+    }
+  }
+
   p {
     white-space: nowrap;
     font-size: ${({ theme }) => theme.fontSize.ms};
@@ -134,7 +141,7 @@ class LoggedIn extends Component {
             <div>{language === 'PL' ? 'Wyloguj' : 'Logout'}</div>
             <FontAwesomeIcon
               icon={faSignOutAlt}
-              className="iconStyle"
+              className="iconStyle logout"
               onClick={this.handleDropdown}
             />
           </DropBox>

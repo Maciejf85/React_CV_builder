@@ -25,6 +25,11 @@ const StyledWrapper = styled.div`
   width: 800px;
   color: black;
   padding: 10px;
+
+  @media ${({ theme }) => theme.media.small} {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 class UserData extends Component {

@@ -37,6 +37,10 @@ const StyledWrapper = styled.div`
     color: ${({ theme, error }) => (error ? theme.colors.alertColor : theme.colors.buttonActive)};
     font-size: ${({ theme }) => theme.fontSize.s};
   }
+
+  @media ${({ theme }) => theme.media.small} {
+    width: 100%;
+  }
 `;
 
 const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall, error, tip }) => {

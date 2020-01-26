@@ -3,8 +3,14 @@ import { connect } from 'react-redux';
 import WebApiPanel from 'components/molecules/SectionInputs/WebApiPanel';
 import NewItemButton from 'components/atoms/Buttons/newItemButton';
 import store from 'store';
+import styled from 'styled-components';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
+
+const StyledWrapper = styled.div`
+  margin-left: 10px;
+  margin-top: 10px;
+`;
 
 class WebApi extends Component {
   componentDidUpdate(prevProps) {
@@ -37,7 +43,7 @@ class WebApi extends Component {
     const { webApi } = currentCv;
     const { currentView } = current;
     return (
-      <>
+      <StyledWrapper>
         {webApi.length ? (
           webApi.map((item, idx) => {
             const { id } = item;
@@ -56,7 +62,7 @@ class WebApi extends Component {
         ) : (
           <NewItemButton view={currentView} handleClick={this.handleNewItem} />
         )}
-      </>
+      </StyledWrapper>
     );
   }
 }

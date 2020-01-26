@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import PublicationsPanel from 'components/molecules/SectionInputs/PublicationsPanel';
 import NewItemButton from 'components/atoms/Buttons/newItemButton';
 import store from 'store';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
+
+const StyledWrapper = styled.div`
+  margin-left: 10px;
+  margin-top: 10px;
+`;
 
 class Publications extends Component {
   componentDidUpdate(prevProps) {
@@ -34,7 +40,7 @@ class Publications extends Component {
     const { publications } = currentCv;
     const { currentView } = current;
     return (
-      <>
+      <StyledWrapper>
         {publications.length ? (
           publications.map((item, idx) => {
             const { id } = item;
@@ -53,7 +59,7 @@ class Publications extends Component {
         ) : (
           <NewItemButton view={currentView} handleClick={this.handleNewItem} />
         )}
-      </>
+      </StyledWrapper>
     );
   }
 }

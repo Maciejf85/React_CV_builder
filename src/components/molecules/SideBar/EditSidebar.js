@@ -18,6 +18,9 @@ const StyledWrapper = styled.div`
   ul {
     margin-top: 50px;
   }
+  @media ${({ theme }) => theme.media.small} {
+    width: 50px;
+  }
 `;
 
 const EditSidebar = ({ language }) => {
@@ -29,6 +32,7 @@ const EditSidebar = ({ language }) => {
             key={item.link}
             name={language === 'PL' ? item.name : item.nameL}
             link={item.link}
+            icon={item.icon}
           />
         ))}
       </ul>

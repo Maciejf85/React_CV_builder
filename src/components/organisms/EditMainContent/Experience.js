@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ExperiencePanel from 'components/molecules/SectionInputs/ExperiencePanel';
 import NewItemButton from 'components/atoms/Buttons/newItemButton';
+import styled from 'styled-components';
 import store from 'store';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
+
+const StyledWrapper = styled.div`
+  margin-left: 10px;
+  margin-top: 10px;
+`;
 
 class Experience extends Component {
   componentDidUpdate(prevProps) {
@@ -39,7 +45,7 @@ class Experience extends Component {
     const { experience } = currentCv;
     const { currentView } = current;
     return (
-      <>
+      <StyledWrapper>
         {experience.length ? (
           experience.map((item, idx) => {
             const { id } = item;
@@ -58,7 +64,7 @@ class Experience extends Component {
         ) : (
           <NewItemButton view={currentView} handleClick={this.handleNewItem} />
         )}
-      </>
+      </StyledWrapper>
     );
   }
 }

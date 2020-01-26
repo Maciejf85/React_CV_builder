@@ -120,77 +120,78 @@ class EducationPanel extends Component {
     const endY = new Date().getFullYear();
     const isPolish = language === 'PL';
     return (
-      <StyledInputSection id={id}>
-        <InputHeader
-          index={`${index + 1}`}
-          current={current}
-          newItem={newItem}
-          removeItem={this.handleRemoveItem}
-          language={language}
-        />
-        <div className="inputContainer">
-          <Input
-            placeholder={isPolish ? 'Nazwa szkoły' : 'School'}
-            id="name"
-            value={name}
-            onChange={this.handleForm}
-          />
-          <Input
-            placeholder={isPolish ? 'Kierunek' : 'Department'}
-            id="department"
-            value={department}
-            onChange={this.handleForm}
-          />
-
-          <Select
-            title={isPolish ? 'Data rozpoczęcia' : 'Started at'}
-            id="startYear"
-            value={startYear}
-            onChange={this.handleForm}
-            start={startY}
-            end={endY}
-          />
-          <Select
-            id="startMonth"
-            value={startMonth}
-            onChange={this.handleForm}
-            start={0}
-            end={12}
-          />
-          <Select
-            title="data zakończenia"
-            id="endYear"
-            value={endYear}
-            onChange={this.handleForm}
-            start={startY}
-            end={endY}
-            disabled={inProgress}
-          />
-          <Select
-            id="endMonth"
-            value={endMonth}
-            onChange={this.handleForm}
-            start={0}
-            end={12}
-            disabled={inProgress}
-          />
-        </div>
-        <div className="checkboxContainer">
-          <SlideCheckox
-            handleCheckbox={this.handleCheckbox}
-            checkboxState={inProgress}
+      <>
+        <StyledInputSection id={id}>
+          <InputHeader
+            index={`${index + 1}`}
+            current={current}
+            newItem={newItem}
+            removeItem={this.handleRemoveItem}
             language={language}
           />
-        </div>
+          <div className="inputContainer">
+            <Input
+              placeholder={isPolish ? 'Nazwa szkoły' : 'School'}
+              id="name"
+              value={name}
+              onChange={this.handleForm}
+            />
+            <Input
+              placeholder={isPolish ? 'Kierunek' : 'Department'}
+              id="department"
+              value={department}
+              onChange={this.handleForm}
+            />
+            <Select
+              title={isPolish ? 'Data rozpoczęcia' : 'Started at'}
+              id="startYear"
+              value={startYear}
+              onChange={this.handleForm}
+              start={startY}
+              end={endY}
+            />
+            <Select
+              id="startMonth"
+              value={startMonth}
+              onChange={this.handleForm}
+              start={0}
+              end={12}
+            />
+            <Select
+              title="data zakończenia"
+              id="endYear"
+              value={endYear}
+              onChange={this.handleForm}
+              start={startY}
+              end={endY}
+              disabled={inProgress}
+            />
+            <Select
+              id="endMonth"
+              value={endMonth}
+              onChange={this.handleForm}
+              start={0}
+              end={12}
+              disabled={inProgress}
+            />
+          </div>
+          <div className="checkboxContainer">
+            <SlideCheckox
+              handleCheckbox={this.handleCheckbox}
+              checkboxState={inProgress}
+              language={language}
+            />
+          </div>
 
-        <Textarea
-          edit
-          placeholder="opis"
-          data-id="description"
-          value={description}
-          onChange={this.handleForm}
-        />
-      </StyledInputSection>
+          <Textarea
+            edit
+            placeholder="opis"
+            data-id="description"
+            value={description}
+            onChange={this.handleForm}
+          />
+        </StyledInputSection>
+      </>
     );
   }
 }

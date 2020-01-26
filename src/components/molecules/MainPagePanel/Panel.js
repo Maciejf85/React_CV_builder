@@ -141,12 +141,18 @@ class Panel extends Component {
             </PrimaryButton>
           )}
 
-          <PrimaryButton normal type="button" onClick={this.handleEditMode}>
+          <PrimaryButton normal className="confButton" type="button" onClick={this.handleEditMode}>
             {language === 'PL' ? (editValue ? 'anuluj' : 'edytuj') : editValue ? 'cancel' : 'edit'}
           </PrimaryButton>
 
           {!editValue && (
-            <PrimaryButton normal type="button" id="default" onClick={this.updateConfidential}>
+            <PrimaryButton
+              normal
+              className="confButton"
+              type="button"
+              id="default"
+              onClick={this.updateConfidential}
+            >
               {language === 'PL' ? 'przywróć domyślne' : 'restore defaults'}
             </PrimaryButton>
           )}

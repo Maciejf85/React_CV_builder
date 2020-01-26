@@ -17,16 +17,29 @@ align-items:center;
   outline: none;
   font-size:${({ theme }) => theme.fontSize.ms};
 
+
+
   &:hover {
     background: ${({ theme }) => theme.colors.primaryGrey};
     border-color: ${({ theme }) => theme.colors.primaryGrey};
     cursor: pointer;
   }
 
+
+
   &:disabled {
   background: ${({ theme }) => theme.colors.darkGrey};
   cursor:default ;
   }
+
+      @media ${({ theme }) => theme.media.small} {
+        min-width:100px;
+      height: 24px;
+      max-width: 150px;
+      font-size: ${({ theme }) => theme.fontSize.s};
+    }
+
+
 
 ${({ primary }) =>
   primary &&

@@ -11,6 +11,9 @@ import styled from 'styled-components';
 const StyledWrapper = styled.div`
   width: 100%;
   display: flex;
+  @media ${({ theme }) => theme.media.small} {
+    flex-direction: column;
+  }
 `;
 
 export default class LanguagePanel extends Component {

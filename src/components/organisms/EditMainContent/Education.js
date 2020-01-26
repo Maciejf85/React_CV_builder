@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EducationPanel from 'components/molecules/SectionInputs/EducationPanel';
+import styled from 'styled-components';
 import NewItemButton from 'components/atoms/Buttons/newItemButton';
 import store from 'store';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
+
+const StyledWrapper = styled.div`
+  margin-left: 10px;
+  margin-top: 10px;
+`;
 
 class Education extends Component {
   componentDidUpdate(prevProps) {
@@ -39,7 +45,7 @@ class Education extends Component {
     const { education } = currentCv;
     const { currentView } = current;
     return (
-      <>
+      <StyledWrapper>
         {education.length ? (
           education.map((item, idx) => {
             const { id } = item;
@@ -58,7 +64,7 @@ class Education extends Component {
         ) : (
           <NewItemButton view={currentView} handleClick={this.handleNewItem} />
         )}
-      </>
+      </StyledWrapper>
     );
   }
 }

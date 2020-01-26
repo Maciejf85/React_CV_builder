@@ -24,6 +24,7 @@ const StyledWrapper = styled.footer`
     align-items: center;
     flex-wrap: wrap;
     text-align: center;
+    height: 30px;
   }
   @media ${({ theme }) => theme.media.medium} {
     position: relative;
