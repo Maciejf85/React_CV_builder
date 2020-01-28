@@ -30,6 +30,11 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     width: 100%;
   }
+  @media ${({ theme }) => theme.media.medium} {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 50px;
+  }
 `;
 
 class UserData extends Component {

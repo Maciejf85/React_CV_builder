@@ -14,12 +14,20 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
-  z-index: 0;
+  z-index: 999;
   ul {
-    margin-top: 50px;
+    margin-top: 70px;
+    @media ${({ theme }) => theme.media.medium} {
+      display: flex;
+      margin: 20px 0;
+    }
   }
   @media ${({ theme }) => theme.media.small} {
     width: 50px;
+  }
+  @media ${({ theme }) => theme.media.medium} {
+    width: 100%;
+    height: 50px;
   }
 `;
 

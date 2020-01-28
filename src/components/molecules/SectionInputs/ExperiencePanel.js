@@ -17,6 +17,9 @@ const InputWrapper = styled.div`
   @media ${({ theme }) => theme.media.small} {
     flex-direction: column;
   }
+  @media ${({ theme }) => theme.media.medium} {
+    flex-direction: column;
+  }
 `;
 
 class ExperiencePanel extends Component {

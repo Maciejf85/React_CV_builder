@@ -25,6 +25,10 @@ const StyledInputSection = styled.div`
       flex-direction: column;
       align-items: flex-start;
     }
+    @media ${({ theme }) => theme.media.medium} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
   .checkboxContainer {
     display: flex;
@@ -93,6 +97,10 @@ const StyledInputSection = styled.div`
   }
   @media ${({ theme }) => theme.media.small} {
     width: calc(100vw - 80px);
+  }
+  @media ${({ theme }) => theme.media.medium} {
+    width: calc(100vw - 80px);
+    margin: 10px auto 0;
   }
 `;
 

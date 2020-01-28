@@ -34,11 +34,11 @@ const StyledWrapper = styled(PosedLi)`
     background: ${({ theme }) => theme.colors.primaryBlue};
   }
   span {
-    display: inline;
     @media ${({ theme }) => theme.media.small} {
       display: none;
     }
     @media ${({ theme }) => theme.media.medium} {
+      font-size: ${({ theme }) => theme.fontSize.s};
     }
   }
   .icon {
