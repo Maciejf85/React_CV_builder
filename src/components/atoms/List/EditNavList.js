@@ -34,9 +34,18 @@ const StyledWrapper = styled.li`
     @media ${({ theme }) => theme.media.small} {
       display: none;
     }
+    @media ${({ theme }) => theme.media.medium} {
+      display: none;
+    }
   }
   @media ${({ theme }) => theme.media.small} {
     grid-template-columns: 1fr;
+    padding: 0;
+    border-right-width: 5px;
+    justify-items: center;
+  }
+  @media ${({ theme }) => theme.media.medium} {
+    grid-template-rows: 1fr;
     padding: 0;
     border-right-width: 5px;
     justify-items: center;

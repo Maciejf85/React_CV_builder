@@ -53,6 +53,7 @@ const StyledWrapper = styled.nav`
     @media ${({ theme }) => theme.media.small} {
       padding:0 5px;
     }
+
 `;
 
 const NavBar = ({ location, language }) => {
