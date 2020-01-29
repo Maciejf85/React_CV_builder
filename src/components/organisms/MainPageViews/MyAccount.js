@@ -4,7 +4,7 @@ import Section from 'components/molecules/Section/Section';
 
 const StyleWrapper = styled.div`
   width: 100%;
-  height: calc(100% -15px);
+  height: calc(100% - 15px);
   margin: 15px;
   @media ${({ theme }) => theme.media.small} {
     margin: 15px 0;

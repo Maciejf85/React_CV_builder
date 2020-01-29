@@ -33,6 +33,15 @@ const StyledWrapper = styled.div`
     transform: none;
     overflow: auto;
   }
+  @media ${({ theme }) => theme.media.medium} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: none;
+    overflow: auto;
+  }
 
   header {
     height: 45px;
@@ -42,6 +51,9 @@ const StyledWrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSize.ml};
     font-weight: ${({ theme }) => theme.font.bold};
     color: white;
+    @media ${({ theme }) => theme.media.medium} {
+      display: none;
+    }
   }
   section {
     display: grid;
@@ -50,6 +62,13 @@ const StyledWrapper = styled.div`
     grid-gap: 5px;
     max-height: calc(100% - 55px);
     @media ${({ theme }) => theme.media.small} {
+      margin-top: 50px;
+      min-height: 410px;
+      height: calc(100% - 250px);
+      display: block;
+      width: 100%;
+    }
+    @media ${({ theme }) => theme.media.medium} {
       margin-top: 50px;
       min-height: 410px;
       height: calc(100% - 250px);
@@ -96,6 +115,9 @@ const StyledWrapper = styled.div`
       @media ${({ theme }) => theme.media.small} {
         display: none;
       }
+      @media ${({ theme }) => theme.media.medium} {
+        display: none;
+      }
     }
   }
   .bottom {
@@ -107,6 +129,10 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 55px;
     @media ${({ theme }) => theme.media.small} {
+      justify-content: center;
+    }
+    @media ${({ theme }) => theme.media.medium} {
+      width: 100%;
       justify-content: center;
     }
   }
