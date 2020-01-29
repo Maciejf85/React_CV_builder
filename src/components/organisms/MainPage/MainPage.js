@@ -35,6 +35,14 @@ const StyledWrapper = styled.div`
     padding: 0;
     flex-direction: row;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    min-width: auto;
+    width: 100vw;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    flex-direction: row;
+  }
 `;
 
 const MainPage = ({ language }) => {

@@ -63,6 +63,9 @@ const StyledWrapper = styled(PosedLi)`
     width: 25%;
     text-align: center;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    width: 25%;
+  }
 `;
 class MainPageListItem extends Component {
   handlePathChange = e => {
