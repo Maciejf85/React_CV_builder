@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faDownload, faTimes, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTimes, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import ReactTooltip from 'react-tooltip';
 import { getCvData, updateCVList } from 'actions';
 import ConfirmButton from 'components/atoms/Buttons/ConfirmButton';

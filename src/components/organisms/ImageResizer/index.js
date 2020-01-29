@@ -38,6 +38,7 @@ const StyledWrapper = styled.div`
     top: 0;
     left: 0;
     width: 100vw;
+    height: 100vh;
     transform: none;
     overflow: auto;
   }
@@ -69,7 +70,6 @@ const StyledWrapper = styled.div`
     }
     @media ${({ theme }) => theme.media.medium} {
       margin-top: 50px;
-      height: 900px;
       display: block;
       width: 100%;
     }
@@ -85,6 +85,16 @@ const StyledWrapper = styled.div`
         user-select: none;
         img {
           height: 364px;
+        }
+
+        .ratioButtons {
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 100px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
         }
       }
     }
@@ -130,8 +140,12 @@ const StyledWrapper = styled.div`
       justify-content: center;
     }
     @media ${({ theme }) => theme.media.medium} {
-      width: 100%;
-      justify-content: center;
+      position: fixed;
+      top: 0;
+      width: 125px;
+      height: 100%;
+      flex-direction: column-reverse;
+      justify-content: flex-end;
     }
   }
   .imageInformation {
@@ -263,7 +277,7 @@ class ImageResizer extends Component {
                 onComplete={this.handleCropComplete}
                 keepSelection
               />
-              <div>
+              <div className="ratioButtons">
                 <PrimaryButton
                   type="button"
                   primary={crop.aspect === '1'}
