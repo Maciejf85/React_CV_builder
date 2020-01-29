@@ -142,10 +142,11 @@ const StyledWrapper = styled.div`
     @media ${({ theme }) => theme.media.medium} {
       position: fixed;
       top: 0;
-      width: 125px;
+      width: 145px;
       height: 100%;
       flex-direction: column-reverse;
-      justify-content: flex-end;
+      justify-content: flex-start;
+      align-items: stretch;
     }
   }
   .imageInformation {
