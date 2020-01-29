@@ -6,7 +6,7 @@ import { formatDate } from 'functions/index';
 
 const StyleWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 5px;
   width: 100%;
   padding: 5px 0;

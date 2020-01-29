@@ -17,13 +17,18 @@ const StyledWrapper = styled.div`
   z-index: 999;
   ul {
     margin-top: 70px;
+    @media ${({ theme }) => theme.media.small} {
+      margin-top: 60px;
+    }
     @media ${({ theme }) => theme.media.medium} {
       display: flex;
       margin: 20px 0;
+      border-bottom: 5px solid hsl(0, 0%, 96%);
     }
   }
   @media ${({ theme }) => theme.media.small} {
     width: 50px;
+    padding: 0;
   }
   @media ${({ theme }) => theme.media.medium} {
     width: 100%;

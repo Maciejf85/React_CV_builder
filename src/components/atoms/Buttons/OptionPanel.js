@@ -100,18 +100,6 @@ class OptionPanel extends Component {
                 <FontAwesomeIcon icon={faEdit} />
               </button>
             </li>
-            <li data-tip={polishLanguage ? 'pobierz pdf' : 'download pdf'} data-for="download">
-              <button
-                className="button"
-                type="button"
-                id={id}
-                data-name="download"
-                onClick={this.handleClick}
-              >
-                <ReactTooltip id="download" effect="solid" className="customeTheme" />
-                <FontAwesomeIcon icon={faDownload} />
-              </button>
-            </li>
             <li data-tip={polishLanguage ? 'usuń CV' : 'delete CV'} data-for="delete">
               <button
                 className="button"

@@ -10,6 +10,9 @@ import { addNewItemToCurrentCv } from 'actions';
 const StyledWrapper = styled.div`
   margin-left: 10px;
   margin-top: 10px;
+  @media ${({ theme }) => theme.media.medium} {
+    margin-top: 50px;
+  }
 `;
 
 class Languages extends Component {
@@ -38,7 +41,6 @@ class Languages extends Component {
     const { cvId, currentCv, current, language } = this.props;
     const { languages } = currentCv;
     const { currentView } = current;
-    console.log('currentView', currentView);
     return (
       <StyledWrapper>
         {languages.length ? (

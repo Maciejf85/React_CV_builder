@@ -26,8 +26,20 @@ const StyledWrapper = styled.li`
     background: ${({ theme }) => theme.colors.secondaryBlue};
     cursor: pointer;
   }
+
+  &:first-of-type {
+    border-right-color: ${({ theme }) => theme.colors.lightBlue};
+  }
+
   .iconStyle {
+    display: none;
     text-align: center;
+    @media ${({ theme }) => theme.media.small} {
+      display: block;
+    }
+    @media ${({ theme }) => theme.media.medium} {
+      display: block;
+    }
   }
 
   div {
@@ -41,13 +53,12 @@ const StyledWrapper = styled.li`
   @media ${({ theme }) => theme.media.small} {
     grid-template-columns: 1fr;
     padding: 0;
-    border-right-width: 5px;
     justify-items: center;
+    height: 35px;
   }
   @media ${({ theme }) => theme.media.medium} {
     grid-template-rows: 1fr;
     padding: 0;
-    border-right-width: 5px;
     justify-items: center;
   }
 `;

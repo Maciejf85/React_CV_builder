@@ -10,6 +10,9 @@ import { addNewItemToCurrentCv } from 'actions';
 const StyledWrapper = styled.div`
   margin-left: 10px;
   margin-top: 10px;
+  @media ${({ theme }) => theme.media.medium} {
+    margin-top: 50px;
+  }
 `;
 
 class Courses extends Component {

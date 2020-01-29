@@ -29,6 +29,15 @@ const StyledInputSection = styled.div`
       flex-direction: column;
       align-items: flex-start;
     }
+
+    .selectContainer {
+      display: flex;
+      flex-direction: row;
+      @media ${({ theme }) => theme.media.small} {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
   }
   .checkboxContainer {
     display: flex;

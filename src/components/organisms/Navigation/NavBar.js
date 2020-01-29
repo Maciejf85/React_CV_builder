@@ -53,6 +53,9 @@ const StyledWrapper = styled.nav`
     @media ${({ theme }) => theme.media.small} {
       padding:0 5px;
     }
+    @media ${({ theme }) => theme.media.medium} {
+      padding:0 5px;
+    }
 
 `;
 

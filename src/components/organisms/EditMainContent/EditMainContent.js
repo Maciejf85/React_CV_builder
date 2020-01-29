@@ -17,7 +17,7 @@ import WebApi from 'components/organisms/EditMainContent/WebApi';
 const StyledWrapper = styled.div`
   width: 100%;
   margin: 20px;
-  height: (100vh - 50px);
+  height: calc(100vh - 50px);
   margin-top: 70px;
   margin-left: 300px;
   color: black;

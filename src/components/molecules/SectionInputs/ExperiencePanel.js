@@ -141,53 +141,56 @@ class ExperiencePanel extends Component {
           language={language}
         />
         <InputWrapper>
-          <Input
-            isSmall
-            placeholder="nazwa pracodawcy"
-            id="name"
-            value={name}
-            onChange={this.handleForm}
-          />
-          <Input
-            isSmall
-            placeholder="stanowisko"
-            id="position"
-            value={position}
-            onChange={this.handleForm}
-          />
-
-          <Select
-            title="data rozpoczęcia"
-            id="startYear"
-            value={startYear}
-            onChange={this.handleForm}
-            start={startY}
-            end={endY}
-          />
-          <Select
-            id="startMonth"
-            value={startMonth}
-            onChange={this.handleForm}
-            start={0}
-            end={12}
-          />
-          <Select
-            title="data zakończenia"
-            id="endYear"
-            value={endYear}
-            onChange={this.handleForm}
-            start={startY}
-            end={endY}
-            disabled={inProgress}
-          />
-          <Select
-            id="endMonth"
-            value={endMonth}
-            onChange={this.handleForm}
-            start={0}
-            end={12}
-            disabled={inProgress}
-          />
+          <div className="inputContainer">
+            <Input
+              isSmall
+              placeholder="nazwa pracodawcy"
+              id="name"
+              value={name}
+              onChange={this.handleForm}
+            />
+            <Input
+              isSmall
+              placeholder="stanowisko"
+              id="position"
+              value={position}
+              onChange={this.handleForm}
+            />
+            <div className="selectContainer">
+              <Select
+                title="data rozpoczęcia"
+                id="startYear"
+                value={startYear}
+                onChange={this.handleForm}
+                start={startY}
+                end={endY}
+              />
+              <Select
+                id="startMonth"
+                value={startMonth}
+                onChange={this.handleForm}
+                start={0}
+                end={12}
+              />
+              <Select
+                title="data zakończenia"
+                id="endYear"
+                value={endYear}
+                onChange={this.handleForm}
+                start={startY}
+                end={endY}
+                disabled={inProgress}
+              />
+              <Select
+                id="endMonth"
+                value={endMonth}
+                onChange={this.handleForm}
+                start={0}
+                end={12}
+                disabled={inProgress}
+              />
+            </div>
+          </div>
         </InputWrapper>
         <div className="checkboxContainer">
           <SlideCheckox

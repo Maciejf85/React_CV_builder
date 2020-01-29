@@ -39,7 +39,7 @@ const StyledWrapper = styled.div`
       width: calc(100vw / 3);
     }
     @media ${({ theme }) => theme.media.medium} {
-      width: calc(100vw / 3);
+      width: 140px;
     }
   }
   li {
@@ -79,10 +79,11 @@ const StyledWrapper = styled.div`
     width: 174px;
     height: 200px;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
-    /* flex-grow: 2; */
   }
   .firstContainer {
-    /* flex-grow: 7; */
+    @media ${({ theme }) => theme.media.medium} {
+      max-width: 390px;
+    }
   }
   @media ${({ theme }) => theme.media.small} {
     flex-direction: column-reverse;
