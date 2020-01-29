@@ -38,7 +38,6 @@ const StyledWrapper = styled.div`
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
     transform: none;
     overflow: auto;
   }
@@ -64,14 +63,13 @@ const StyledWrapper = styled.div`
     @media ${({ theme }) => theme.media.small} {
       margin-top: 50px;
       min-height: 410px;
-      height: calc(100% - 250px);
+      height: calc(100% - 200px);
       display: block;
       width: 100%;
     }
     @media ${({ theme }) => theme.media.medium} {
       margin-top: 50px;
-      min-height: 410px;
-      height: calc(100% - 250px);
+      height: 900px;
       display: block;
       width: 100%;
     }
