@@ -95,16 +95,17 @@ class CertificatesPanel extends Component {
             value={description}
             onChange={this.handleForm}
           />
-
-          <Select
-            title={polishLanguage ? 'data uzyskania' : 'date'}
-            id="endYear"
-            value={endYear}
-            onChange={this.handleForm}
-            start={startY}
-            end={endY}
-          />
-          <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
+          <div className="selectContainer">
+            <Select
+              title={polishLanguage ? 'data uzyskania' : 'date'}
+              id="endYear"
+              value={endYear}
+              onChange={this.handleForm}
+              start={startY}
+              end={endY}
+            />
+            <Select id="endMonth" value={endMonth} onChange={this.handleForm} start={0} end={12} />
+          </div>
         </div>
       </StyledInputSection>
     );

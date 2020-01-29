@@ -142,38 +142,40 @@ class EducationPanel extends Component {
               value={department}
               onChange={this.handleForm}
             />
-            <Select
-              title={isPolish ? 'Data rozpoczęcia' : 'Started at'}
-              id="startYear"
-              value={startYear}
-              onChange={this.handleForm}
-              start={startY}
-              end={endY}
-            />
-            <Select
-              id="startMonth"
-              value={startMonth}
-              onChange={this.handleForm}
-              start={0}
-              end={12}
-            />
-            <Select
-              title="data zakończenia"
-              id="endYear"
-              value={endYear}
-              onChange={this.handleForm}
-              start={startY}
-              end={endY}
-              disabled={inProgress}
-            />
-            <Select
-              id="endMonth"
-              value={endMonth}
-              onChange={this.handleForm}
-              start={0}
-              end={12}
-              disabled={inProgress}
-            />
+            <div className="selectContainer">
+              <Select
+                title={isPolish ? 'Data rozpoczęcia' : 'Started at'}
+                id="startYear"
+                value={startYear}
+                onChange={this.handleForm}
+                start={startY}
+                end={endY}
+              />
+              <Select
+                id="startMonth"
+                value={startMonth}
+                onChange={this.handleForm}
+                start={0}
+                end={12}
+              />
+              <Select
+                title="data zakończenia"
+                id="endYear"
+                value={endYear}
+                onChange={this.handleForm}
+                start={startY}
+                end={endY}
+                disabled={inProgress}
+              />
+              <Select
+                id="endMonth"
+                value={endMonth}
+                onChange={this.handleForm}
+                start={0}
+                end={12}
+                disabled={inProgress}
+              />
+            </div>
           </div>
           <div className="checkboxContainer">
             <SlideCheckox

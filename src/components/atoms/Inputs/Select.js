@@ -22,6 +22,14 @@ const StyledInput = styled.select`
   &:focus {
     border-top: 2px solid ${({ theme }) => theme.colors.lightBlue};
   }
+  @media ${({ theme }) => theme.media.small} {
+    width: 45%;
+    min-width: 100px;
+  }
+  @media ${({ theme }) => theme.media.medium} {
+    width: 25%;
+    min-width: 100px;
+  }
 `;
 const StyledLabel = styled.label`
   min-height: 14px;

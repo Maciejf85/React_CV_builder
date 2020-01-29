@@ -41,7 +41,6 @@ class Languages extends Component {
     const { cvId, currentCv, current, language } = this.props;
     const { languages } = currentCv;
     const { currentView } = current;
-    console.log('currentView', currentView);
     return (
       <StyledWrapper>
         {languages.length ? (
