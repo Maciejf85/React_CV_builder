@@ -20,6 +20,9 @@ const StyleWrapper = styled.div`
   @media ${({ theme }) => theme.media.small} {
     margin: 15px 0;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    background: #000;
+  }
 `;
 
 class CvList extends Component {

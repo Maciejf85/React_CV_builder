@@ -23,7 +23,13 @@ const StyledWrapper = styled.ul`
     flex-direction: row;
   }
   @media ${({ theme }) => theme.media.tablet} {
-    background: blue;
+    width: 100%;
+    margin: 0;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  @media ${({ theme }) => theme.media.desktop} {
+    background: orange;
   }
 `;
 
