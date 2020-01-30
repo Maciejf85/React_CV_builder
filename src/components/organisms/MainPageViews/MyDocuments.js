@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const StyleWrapper = styled.div`
   width: 100%;
-  /* border: 1px solid red; */
+  height: calc(100% - 15px);
   margin: 15px;
   @media ${({ theme }) => theme.media.small} {
     margin: 15px 0;

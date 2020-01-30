@@ -25,6 +25,9 @@ const StyledWrapper = styled.div`
       margin: 20px 0;
       border-bottom: 5px solid hsl(0, 0%, 96%);
     }
+    @media ${({ theme }) => theme.media.tablet} {
+      margin-top: 43px;
+    }
   }
   @media ${({ theme }) => theme.media.small} {
     width: 50px;
@@ -33,6 +36,9 @@ const StyledWrapper = styled.div`
   @media ${({ theme }) => theme.media.medium} {
     width: 100%;
     height: 50px;
+  }
+  @media ${({ theme }) => theme.media.tablet} {
+    width: 190px;
   }
 `;
 

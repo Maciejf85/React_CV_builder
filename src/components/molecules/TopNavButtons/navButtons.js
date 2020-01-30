@@ -12,6 +12,8 @@ const StyledWrapper = styled.ul`
   list-style: none;
   display: flex;
   justify-content: flex-start;
+  text-align: center;
+
   /* border: 1px solid white; */
   padding: 0;
   a {
@@ -44,6 +46,12 @@ const StyledWrapper = styled.ul`
       min-width: auto;
       width: 40px;
     }
+    @media ${({ theme }) => theme.media.tablet} {
+      font-size: ${({ theme }) => theme.fontSize.s};
+      padding: 0;
+      min-width: auto;
+      width: 80px;
+    }
     span {
       color: white;
       @media ${({ theme }) => theme.media.small} {
@@ -65,6 +73,7 @@ const StyledWrapper = styled.ul`
     border: none;
     font-weight: ${({ theme }) => theme.font.bold};
     background: ${({ theme }) => theme.colors.primaryBlue};
+    text-align: center;
   }
   .disable {
     opacity: 0.3;

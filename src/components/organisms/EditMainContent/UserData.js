@@ -35,6 +35,11 @@ const StyledWrapper = styled.div`
     width: 100%;
     margin-top: 50px;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 30px;
+  }
 `;
 
 class UserData extends Component {

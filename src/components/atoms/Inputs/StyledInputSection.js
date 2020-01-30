@@ -111,6 +111,10 @@ const StyledInputSection = styled.div`
     width: calc(100vw - 80px);
     margin: 10px auto 0;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    width: 100%;
+    margin: 10px auto 0;
+  }
 `;
 
 export default StyledInputSection;

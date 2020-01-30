@@ -42,6 +42,14 @@ const StyledWrapper = styled.div`
     transform: none;
     overflow: auto;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 100vw;
+    transform: translateY(-50%);
+    overflow: auto;
+  }
 
   header {
     height: 45px;
@@ -88,13 +96,15 @@ const StyledWrapper = styled.div`
         }
 
         .ratioButtons {
-          position: fixed;
-          top: 0;
-          right: 0;
-          width: 100px;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
+          @media ${({ theme }) => theme.media.medium} {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+          }
         }
       }
     }
@@ -129,6 +139,7 @@ const StyledWrapper = styled.div`
     }
   }
   .bottom {
+    position: relative;
     display: flex;
     border-top: 4px solid ${({ theme }) => theme.colors.imageResizerContent};
     flex-direction: row-reverse;
@@ -136,6 +147,7 @@ const StyledWrapper = styled.div`
     padding: 0 5px;
     width: 100%;
     height: 55px;
+
     @media ${({ theme }) => theme.media.small} {
       justify-content: center;
     }
