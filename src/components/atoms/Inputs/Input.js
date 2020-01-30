@@ -44,6 +44,9 @@ const StyledWrapper = styled.div`
   @media ${({ theme }) => theme.media.medium} {
     width: 100%;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    width: 100%;
+  }
 `;
 
 const Input = ({ type, id, placeholder, value, onChange, onBlur, isSmall, error, tip }) => {

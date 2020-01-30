@@ -29,6 +29,10 @@ const StyledInputSection = styled.div`
       flex-direction: column;
       align-items: flex-start;
     }
+    @media ${({ theme }) => theme.media.tablet} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
     .selectContainer {
       display: flex;
@@ -112,7 +116,7 @@ const StyledInputSection = styled.div`
     margin: 10px auto 0;
   }
   @media ${({ theme }) => theme.media.tablet} {
-    width: 100%;
+    width: calc(100vw - 230px);
     margin: 10px auto 0;
   }
 `;

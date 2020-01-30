@@ -13,6 +13,9 @@ const StyledWrapper = styled.div`
   @media ${({ theme }) => theme.media.medium} {
     margin-top: 50px;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    margin-top: 50px;
+  }
 `;
 
 class Experience extends Component {

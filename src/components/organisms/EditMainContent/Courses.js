@@ -11,6 +11,7 @@ const StyledWrapper = styled.div`
   margin-left: 10px;
   margin-top: 10px;
   @media ${({ theme }) => theme.media.medium} {
+    margin-left: 0;
     margin-top: 50px;
   }
 `;

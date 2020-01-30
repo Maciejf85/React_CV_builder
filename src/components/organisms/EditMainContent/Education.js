@@ -14,6 +14,10 @@ const StyledWrapper = styled.div`
   @media ${({ theme }) => theme.media.medium} {
     margin-top: 50px;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    margin-left: 0;
+    margin-top: 50px;
+  }
 `;
 
 class Education extends Component {
