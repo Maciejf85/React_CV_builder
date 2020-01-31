@@ -48,6 +48,9 @@ const StyledWrapper = styled.div`
   @media ${({ theme }) => theme.media.medium} {
     margin-left: 10px;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    margin-left: 10px;
+  }
 `;
 
 const Select = ({ id, title, value, onChange, onBlur, start, end, disabled }) => {
