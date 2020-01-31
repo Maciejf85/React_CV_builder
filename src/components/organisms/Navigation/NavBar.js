@@ -18,8 +18,9 @@ const StyledWrapper = styled.nav`
   width: 100%;
   height: 50px;
   background-color: ${({ theme }) => theme.colors.mainGrey};
-    @media ${({ theme }) => theme.media.tablet} {
-    background: rgba(0,0,150,0.5);
+
+  @media ${({ theme }) => theme.media.tablet} {
+    width:100vw;
   }
   @media ${({ theme }) => theme.media.desktop} {
     background: red;
@@ -39,7 +40,7 @@ const StyledWrapper = styled.nav`
     flex-shrink: 0;
     span {
       color: ${({ theme }) => theme.colors.primaryBlue};
-    font-weight: ${({ theme }) => theme.font.xbold};
+      font-weight: ${({ theme }) => theme.font.xbold};
     }
     @media ${({ theme }) => theme.media.small} {
       display: none;

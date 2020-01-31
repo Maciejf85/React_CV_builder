@@ -14,14 +14,13 @@ import { connect } from 'react-redux';
 const StyleWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: calc(100% -15px);
+  height: calc(100% - 15px);
   /* border: 1px solid red; */
   margin: 15px;
   @media ${({ theme }) => theme.media.small} {
     margin: 15px 0;
   }
   @media ${({ theme }) => theme.media.tablet} {
-    background: #000;
   }
 `;
 

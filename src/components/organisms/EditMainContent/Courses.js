@@ -6,11 +6,14 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { setNewCurrentCVData } from 'functions';
 import { addNewItemToCurrentCv } from 'actions';
-
 const StyledWrapper = styled.div`
-  margin-left: 10px;
-  margin-top: 10px;
+  margin: 10px 0 0 10px;
+
   @media ${({ theme }) => theme.media.medium} {
+    margin-left: 0;
+    margin-top: 50px;
+  }
+  @media ${({ theme }) => theme.media.tablet} {
     margin-top: 50px;
   }
 `;
