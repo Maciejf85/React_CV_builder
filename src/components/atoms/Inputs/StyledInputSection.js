@@ -123,6 +123,16 @@ const StyledInputSection = styled.div`
     width: calc(100vw - 220px);
     margin: 10px auto 0;
   }
+
+  @media ${' (width:568px)'} {
+    margin: 10px auto 0;
+  }
+  @media ${' (width:812px)'} {
+    margin: 10px auto 0;
+  }
+  @media ${' (width:823px)'} {
+    margin: 10px auto 0;
+  }
 `;
 
 export default StyledInputSection;

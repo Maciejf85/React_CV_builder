@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from 'components/organisms/Navigation/NavBar';
 import Footer from 'components/organisms/Footer/Footer';
-import { StyleSheet, PDFViewer } from '@react-pdf/renderer';
+import { StyleSheet, PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
@@ -62,6 +62,10 @@ class Preview extends Component {
     isReady: false,
   };
 
+  componentDidMount() {
+    setTimeout(() => this.setState({ isReady: true }), 1000);
+  }
+
   render() {
     const { currentCv, personalData, language } = this.props;
     if (!Object.entries(currentCv).length) {
@@ -69,6 +73,7 @@ class Preview extends Component {
     }
     const { name } = personalData;
     const { template } = this.props.template;
+    const { isReady } = this.state;
 
     return (
       <>
@@ -88,10 +93,9 @@ class Preview extends Component {
         </StyledWrapper>
         <Footer language={language} />
 
-        {/* 
         {isReady ? (
           <StyledWrapper>
-            <PDFDownloadLink document={<FirstStyle />} fileName={`${currentItem.title}.pdf`}>
+            <PDFDownloadLink document={<FirstStyle />} fileName={`${template.title}.pdf`}>
               {({ loading }) =>
                 loading
                   ? language === 'PL'
@@ -103,7 +107,7 @@ class Preview extends Component {
               }
             </PDFDownloadLink>
           </StyledWrapper>
-        ) : null} */}
+        ) : null}
       </>
     );
   }

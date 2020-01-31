@@ -28,7 +28,23 @@ const StyledWrapper = styled.div`
     @media ${({ theme }) => theme.media.tablet} {
       margin-top: 43px;
     }
+    @media ${' (width:568px)'} {
+      display: flex;
+      margin: 45px 0;
+      border-bottom: 5px solid hsl(0, 0%, 96%);
+    }
+    @media ${' (width:812px)'} {
+      display: flex;
+      margin: 20px 0;
+      border-bottom: 5px solid hsl(0, 0%, 96%);
+    }
+    @media ${' (width:823px)'} {
+      display: flex;
+      border-bottom: 5px solid hsl(0, 0%, 96%);
+      margin: 20px 0;
+    }
   }
+
   @media ${({ theme }) => theme.media.small} {
     width: 50px;
     padding: 0;
@@ -37,8 +53,21 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 50px;
   }
+
   @media ${({ theme }) => theme.media.tablet} {
     width: 190px;
+  }
+  @media ${' (width:568px) and (orientation: landscape)'} {
+    width: 100%;
+    height: 50px;
+  }
+  @media ${' (width:812px) and (orientation: landscape)'} {
+    width: 100%;
+    height: 50px;
+  }
+  @media ${' (width:823px) and (orientation: landscape)'} {
+    width: 100%;
+    height: 50px;
   }
 `;
 
