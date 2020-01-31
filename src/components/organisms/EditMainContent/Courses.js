@@ -10,6 +10,7 @@ const StyledWrapper = styled.div`
   margin: 10px 0 0 10px;
 
   @media ${({ theme }) => theme.media.medium} {
+    margin-left: 0;
     margin-top: 50px;
   }
   @media ${({ theme }) => theme.media.tablet} {
