@@ -40,6 +40,15 @@ const StyledWrapper = styled.li`
     @media ${({ theme }) => theme.media.medium} {
       display: block;
     }
+    @media ${' (width:568px) and (orientation: landscape)'} {
+      display: block;
+    }
+    @media ${' (width:812px) and (orientation: landscape)'} {
+      display: block;
+    }
+    @media ${' (width:823px) and (orientation: landscape)'} {
+      display: block;
+    }
   }
 
   div {
@@ -47,6 +56,15 @@ const StyledWrapper = styled.li`
       display: none;
     }
     @media ${({ theme }) => theme.media.medium} {
+      display: none;
+    }
+    @media ${' (width:568px) and (orientation: landscape)'} {
+      display: none;
+    }
+    @media ${' (width:812px) and (orientation: landscape)'} {
+      display: none;
+    }
+    @media ${' (width:823px) and (orientation: landscape)'} {
       display: none;
     }
   }

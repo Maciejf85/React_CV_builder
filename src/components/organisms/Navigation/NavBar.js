@@ -26,6 +26,7 @@ const StyledWrapper = styled.nav`
     background: red;
   }
 
+
   .lang{
     color:white;
     margin:0 10px;

@@ -23,13 +23,22 @@ const StyledWrapper = styled.div`
   color: black;
 
   @media ${({ theme }) => theme.media.small} {
-    margin: 50px 0 0 55px;
+    margin: 20px 0 0 55px;
   }
   @media ${({ theme }) => theme.media.medium} {
-    margin: 55px 0 0;
+    margin: 50px 0 0;
   }
   @media ${({ theme }) => theme.media.tablet} {
     margin: 20px 0 0 185px;
+  }
+  @media ${' (width:568px) and (orientation: landscape)'} {
+    margin: 50px 0 0;
+  }
+  @media ${' (width:812px) and (orientation: landscape)'} {
+    margin: 50px 0 0;
+  }
+  @media ${' (width:823px) and (orientation: landscape)'} {
+    margin: 50px 0 0;
   }
 `;
 
