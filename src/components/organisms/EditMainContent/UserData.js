@@ -29,7 +29,6 @@ const StyledWrapper = styled.div`
   @media ${({ theme }) => theme.media.small} {
     flex-direction: column;
     width: 100%;
-    margin-top: 30px;
   }
   @media ${({ theme }) => theme.media.medium} {
     flex-direction: column;

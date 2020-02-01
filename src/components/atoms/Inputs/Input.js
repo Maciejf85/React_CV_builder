@@ -45,7 +45,16 @@ const StyledWrapper = styled.div`
     width: 100%;
   }
   @media ${({ theme }) => theme.media.tablet} {
-    /* width: 100%; */
+    width: 100%;
+  }
+  @media ${' (width:568px) and (orientation: landscape)'} {
+    width: 100%;
+  }
+  @media ${' (width:812px) and (orientation: landscape)'} {
+    width: 100%;
+  }
+  @media ${' (width:823px) and (orientation: landscape)'} {
+    width: 100%;
   }
 `;
 

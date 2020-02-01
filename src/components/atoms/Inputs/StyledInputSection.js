@@ -33,6 +33,18 @@ const StyledInputSection = styled.div`
       flex-direction: column;
       align-items: flex-start;
     }
+    @media ${' (width:568px) and (orientation: landscape)'} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    @media ${' (width:812px) and (orientation: landscape)'} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    @media ${' (width:823px) and (orientation: landscape)'} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
     .selectContainer {
       display: flex;
@@ -40,10 +52,25 @@ const StyledInputSection = styled.div`
       @media ${({ theme }) => theme.media.small} {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        align-items: end;
       }
-      @media ${'(min-width:768px) and (max-width: 1199.98px) and (orientation: portrait)'} {
+      /* @media ${'(min-width:768px) and (max-width: 1199.98px) and (orientation: portrait)'} {
         display: grid;
         grid-template-columns: 1fr 1fr;
+      } */
+
+      @media ${' (width:568px) and (orientation: landscape)'} {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+      }
+      @media ${' (width:812px) and (orientation: landscape)'} {
+        display: flex;
+        flex-direction: row;
+      }
+      @media ${' (width:823px) and (orientation: landscape)'} {
+        display: flex;
+        flex-direction: row;
       }
     }
   }
@@ -121,6 +148,10 @@ const StyledInputSection = styled.div`
   }
   @media ${({ theme }) => theme.media.tablet} {
     width: calc(100vw - 220px);
+    margin: 10px auto 0;
+  }
+    @media ${({ theme }) => theme.media.desktop} {
+        width: calc(100vw - 270px);
     margin: 10px auto 0;
   }
 

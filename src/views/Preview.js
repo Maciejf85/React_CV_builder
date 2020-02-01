@@ -56,6 +56,27 @@ const StyledWrapper = styled.div`
   background: #525659;
   color: white;
 `;
+const StyledDownload = styled.div`
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #525659;
+  color: white;
+  display: none;
+  div {
+    border: 1px solid white;
+    padding: 5px 20px;
+    border-radius: 7px;
+    &:hover {
+      background: ${({ theme }) => theme.colors.primaryBlue};
+    }
+  }
+`;
 
 class Preview extends Component {
   state = {
@@ -94,19 +115,21 @@ class Preview extends Component {
         <Footer language={language} />
 
         {isReady ? (
-          <StyledWrapper>
-            <PDFDownloadLink document={<FirstStyle />} fileName={`${template.title}.pdf`}>
-              {({ loading }) =>
-                loading
-                  ? language === 'PL'
-                    ? 'pobieranie...'
-                    : 'downloading...'
-                  : language === 'PL'
-                  ? 'Pobierz PDF'
-                  : 'Download PDF'
-              }
-            </PDFDownloadLink>
-          </StyledWrapper>
+          <StyledDownload>
+            <div>
+              <PDFDownloadLink document={<FirstStyle />} fileName={`${template}.pdf`}>
+                {({ loading }) =>
+                  loading
+                    ? language === 'PL'
+                      ? 'pobieranie...'
+                      : 'downloading...'
+                    : language === 'PL'
+                    ? 'Pobierz PDF'
+                    : 'Download PDF'
+                }
+              </PDFDownloadLink>
+            </div>
+          </StyledDownload>
         ) : null}
       </>
     );

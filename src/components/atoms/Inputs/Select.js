@@ -24,9 +24,26 @@ const StyledInput = styled.select`
   }
   @media ${({ theme }) => theme.media.small} {
     width: 45%;
-    min-width: 100px;
+    min-width: 90px;
   }
   @media ${({ theme }) => theme.media.medium} {
+    width: 25%;
+    min-width: 100px;
+  }
+  @media ${'(min-width:768px) and (max-width: 1199.98px) and (orientation: portrait)'} {
+    width: 25%;
+    min-width: 100px;
+  }
+
+  @media ${' (width:568px) and (orientation: landscape)'} {
+    width: 25%;
+    min-width: 90px;
+  }
+  @media ${' (width:812px) and (orientation: landscape)'} {
+    width: 25%;
+    min-width: 100px;
+  }
+  @media ${' (width:823px) and (orientation: landscape)'} {
     width: 25%;
     min-width: 100px;
   }

@@ -15,7 +15,7 @@ const StyledWrapper = styled.nav`
   align-items: center;
   /* justify-content: space-around; */
   padding: 0 10px;
-  width: 100%;
+  width: 100vw;
   height: 50px;
   background-color: ${({ theme }) => theme.colors.mainGrey};
 
