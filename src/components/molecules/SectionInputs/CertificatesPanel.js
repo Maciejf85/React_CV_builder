@@ -90,14 +90,14 @@ class CertificatesPanel extends Component {
         />
         <div className="inputContainer">
           <Input
-            placeholder={polishLanguage ? 'Certyfikat' : 'Certificate'}
+            placeholder={polishLanguage ? 'certyfikat' : 'certificate'}
             id="description"
             value={description}
             onChange={this.handleForm}
           />
           <div className="selectContainer">
             <Select
-              title={polishLanguage ? 'data uzyskania' : 'date'}
+              title={polishLanguage ? 'data uzyskania' : 'obtained at'}
               id="endYear"
               value={endYear}
               onChange={this.handleForm}
