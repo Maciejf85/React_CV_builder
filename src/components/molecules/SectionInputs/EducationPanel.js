@@ -159,7 +159,7 @@ class EducationPanel extends Component {
                 end={12}
               />
               <Select
-                title="data zakończenia"
+                title={isPolish ? 'Data zakończenia' : 'Ended at'}
                 id="endYear"
                 value={endYear}
                 onChange={this.handleForm}
@@ -187,7 +187,7 @@ class EducationPanel extends Component {
 
           <Textarea
             edit
-            placeholder="opis"
+            placeholder={isPolish ? 'opis' : 'description'}
             data-id="description"
             value={description}
             onChange={this.handleForm}
