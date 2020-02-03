@@ -97,7 +97,7 @@ class CertificatesPanel extends Component {
           />
           <div className="selectContainer">
             <Select
-              title={polishLanguage ? 'data uzyskania' : 'obtained at'}
+              title={polishLanguage ? 'data uzyskania' : 'obtained in'}
               id="endYear"
               value={endYear}
               onChange={this.handleForm}

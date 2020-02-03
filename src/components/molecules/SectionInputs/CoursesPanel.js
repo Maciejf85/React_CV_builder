@@ -97,7 +97,7 @@ class CoursesPanel extends Component {
           />
           <div className="selectContainer">
             <Select
-              title={polishLanguage ? 'data ukończenia' : 'ended at'}
+              title={polishLanguage ? 'data ukończenia' : 'completed in'}
               id="endYear"
               value={endYear}
               onChange={this.handleForm}

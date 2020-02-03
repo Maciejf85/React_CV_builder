@@ -98,6 +98,7 @@ class ConferencesPanel extends Component {
           <div className="selectContainer">
             <Select
               id="endYear"
+              title={polishLanguage ? 'data wydarzenia' : 'event date'}
               value={endYear}
               onChange={this.handleForm}
               start={startY}

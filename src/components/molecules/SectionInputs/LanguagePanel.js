@@ -95,14 +95,13 @@ export default class LanguagePanel extends Component {
         />
         <StyledWrapper>
           <Input
-            placeholder={polishLanguage ? 'język' : 'lamguage'}
+            placeholder={polishLanguage ? 'język' : 'language'}
             id="name"
             value={name}
             onChange={this.handleForm}
           />
           <Input
             isSmall
-            placeholder="opis"
             placeholder={polishLanguage ? 'opis' : 'description'}
             id="description"
             value={description}

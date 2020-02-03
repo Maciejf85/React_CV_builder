@@ -78,6 +78,8 @@ class ConferencesPanel extends Component {
     const { description, endYear, endMonth } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
+    const polishLanguage = language === 'PL';
+
     return (
       <StyledInputSection id={id}>
         <InputHeader
@@ -89,14 +91,14 @@ class ConferencesPanel extends Component {
         />
         <div className="inputContainer">
           <Input
-            placeholder="Publikacje"
+            placeholder={polishLanguage ? 'publikacja' : 'publication'}
             id="description"
             value={description}
             onChange={this.handleForm}
           />
           <div className="selectContainer">
             <Select
-              title="data publikacji"
+              title={polishLanguage ? 'data publikacji' : 'date of publication'}
               id="endYear"
               value={endYear}
               onChange={this.handleForm}
