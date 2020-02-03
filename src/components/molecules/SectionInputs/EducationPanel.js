@@ -118,7 +118,7 @@ class EducationPanel extends Component {
     } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
-    const isPolish = language === 'PL';
+    const polishLanguage = language === 'PL';
     return (
       <>
         <StyledInputSection id={id}>
@@ -131,20 +131,20 @@ class EducationPanel extends Component {
           />
           <div className="inputContainer">
             <Input
-              placeholder={isPolish ? 'Nazwa szkoły' : 'School'}
+              placeholder={polishLanguage ? 'nazwa szkoły' : 'school'}
               id="name"
               value={name}
               onChange={this.handleForm}
             />
             <Input
-              placeholder={isPolish ? 'Kierunek' : 'Department'}
+              placeholder={polishLanguage ? 'kierunek' : 'department'}
               id="department"
               value={department}
               onChange={this.handleForm}
             />
             <div className="selectContainer">
               <Select
-                title={isPolish ? 'Data rozpoczęcia' : 'Started at'}
+                title={polishLanguage ? 'data rozpoczęcia' : 'started at'}
                 id="startYear"
                 value={startYear}
                 onChange={this.handleForm}
@@ -159,7 +159,7 @@ class EducationPanel extends Component {
                 end={12}
               />
               <Select
-                title={isPolish ? 'Data zakończenia' : 'Ended at'}
+                title={polishLanguage ? 'data zakończenia' : 'ended at'}
                 id="endYear"
                 value={endYear}
                 onChange={this.handleForm}
@@ -187,7 +187,7 @@ class EducationPanel extends Component {
 
           <Textarea
             edit
-            placeholder={isPolish ? 'opis' : 'description'}
+            placeholder={polishLanguage ? 'opis' : 'description'}
             data-id="description"
             value={description}
             onChange={this.handleForm}
