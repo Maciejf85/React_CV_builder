@@ -131,6 +131,8 @@ class ExperiencePanel extends Component {
     } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
+    const polishLanguage = language === 'PL';
+
     return (
       <StyledInputSection id={id}>
         <InputHeader
@@ -144,21 +146,21 @@ class ExperiencePanel extends Component {
           <div className="inputContainer">
             <Input
               isSmall
-              placeholder="nazwa pracodawcy"
+              placeholder={polishLanguage ? 'nazwa pracodawcy' : 'company'}
               id="name"
               value={name}
               onChange={this.handleForm}
             />
             <Input
               isSmall
-              placeholder="stanowisko"
+              placeholder={polishLanguage ? 'stanowisko' : 'position'}
               id="position"
               value={position}
               onChange={this.handleForm}
             />
             <div className="selectContainer">
               <Select
-                title="data rozpoczęcia"
+                title={polishLanguage ? 'data rozpoczęcia' : 'started at'}
                 id="startYear"
                 value={startYear}
                 onChange={this.handleForm}
@@ -173,7 +175,7 @@ class ExperiencePanel extends Component {
                 end={12}
               />
               <Select
-                title="data zakończenia"
+                title={polishLanguage ? 'data zakończenia' : 'ended at'}
                 id="endYear"
                 value={endYear}
                 onChange={this.handleForm}

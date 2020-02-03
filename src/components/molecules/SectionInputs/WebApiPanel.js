@@ -91,7 +91,7 @@ class EducationPanel extends Component {
     const { name, technology, endYear, description, link } = this.state;
     const startY = new Date().getFullYear() - 65;
     const endY = new Date().getFullYear();
-    const isPolish = language === 'PL';
+    const polishLanguage = language === 'PL';
     return (
       <StyledInputSection id={id}>
         <InputHeader
@@ -103,19 +103,19 @@ class EducationPanel extends Component {
         />
         <div className="inputContainer">
           <Input
-            placeholder={isPolish ? 'Nazwa aplikacji' : 'Aplications name'}
+            placeholder={polishLanguage ? 'nazwa aplikacji' : 'aplications name'}
             id="name"
             value={name}
             onChange={this.handleForm}
           />
           <Input
-            placeholder={isPolish ? 'Użyte technologie' : 'Technologies used'}
+            placeholder={polishLanguage ? 'użyte technologie' : 'technologies used'}
             id="technology"
             value={technology}
             onChange={this.handleForm}
           />
           <Input
-            placeholder={isPolish ? 'adres URL' : 'URL address'}
+            placeholder={polishLanguage ? 'adres URL' : 'URL address'}
             id="link"
             value={link}
             onChange={this.handleForm}
@@ -123,7 +123,7 @@ class EducationPanel extends Component {
           />
 
           <Select
-            title="data zakończenia"
+            title={polishLanguage ? 'data ukończenia' : 'release date'}
             id="endYear"
             value={endYear}
             onChange={this.handleForm}
@@ -133,7 +133,7 @@ class EducationPanel extends Component {
         </div>
         <Textarea
           edit
-          placeholder="opis"
+          placeholder={polishLanguage ? 'opis' : 'description'}
           data-id="description"
           value={description}
           onChange={this.handleForm}

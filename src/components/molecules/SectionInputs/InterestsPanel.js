@@ -77,30 +77,31 @@ export default class InterestsPanel extends Component {
   };
 
   render() {
-    const { id } = this.props.item;
-    const { index, current, newItem, language } = this.props;
-    const { description } = this.state;
+             const { id } = this.props.item;
+             const { index, current, newItem, language } = this.props;
+             const { description } = this.state;
+             const polishLanguage = language === 'PL';
 
-    return (
-      <StyledInputSection id={id}>
-        <InputHeader
-          index={`${index + 1}`}
-          current={current}
-          newItem={newItem}
-          removeItem={this.handleRemoveItem}
-          language={language}
-        />
-        <StyledWrapper>
-          <Input
-            placeholder="Zainteresowania"
-            id="description"
-            value={description}
-            onChange={this.handleForm}
-          />
-        </StyledWrapper>
-      </StyledInputSection>
-    );
-  }
+             return (
+               <StyledInputSection id={id}>
+                 <InputHeader
+                   index={`${index + 1}`}
+                   current={current}
+                   newItem={newItem}
+                   removeItem={this.handleRemoveItem}
+                   language={language}
+                 />
+                 <StyledWrapper>
+                   <Input
+                     placeholder={polishLanguage ? 'Zainteresowania' : 'interests'}
+                     id="description"
+                     value={description}
+                     onChange={this.handleForm}
+                   />
+                 </StyledWrapper>
+               </StyledInputSection>
+             );
+           }
 }
 
 // DefaultInputSection.propTypes = {

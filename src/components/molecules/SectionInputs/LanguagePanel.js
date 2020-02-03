@@ -82,6 +82,7 @@ export default class LanguagePanel extends Component {
     const { id } = this.props.item;
     const { index, current, newItem, language } = this.props;
     const { name, description } = this.state;
+    const polishLanguage = language === 'PL';
 
     return (
       <StyledInputSection id={id}>
@@ -93,10 +94,15 @@ export default class LanguagePanel extends Component {
           language={language}
         />
         <StyledWrapper>
-          <Input placeholder="język" id="name" value={name} onChange={this.handleForm} />
+          <Input
+            placeholder={polishLanguage ? 'język' : 'language'}
+            id="name"
+            value={name}
+            onChange={this.handleForm}
+          />
           <Input
             isSmall
-            placeholder="opis"
+            placeholder={polishLanguage ? 'opis' : 'description'}
             id="description"
             value={description}
             onChange={this.handleForm}
