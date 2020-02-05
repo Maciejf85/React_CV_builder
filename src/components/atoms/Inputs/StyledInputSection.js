@@ -45,9 +45,7 @@ const StyledInputSection = styled.div`
       flex-direction: column;
       align-items: flex-start;
     }
-    @media ${'(-webkit-min-device-pixel-ratio:1) and (min-width:320px) and (max-width:1600px) and (orientation: landscape)'} {
-background: #000;
-    }
+
 
     .selectContainer {
       display: flex;

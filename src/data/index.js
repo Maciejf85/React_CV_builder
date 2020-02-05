@@ -17,7 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export const editViews = [
-  { name: 'Dane osobowe', nameL: 'Personal info', link: 'personal', icon: [faUserAlt] },
+  { name: 'Dane osobowe', nameL: 'Personal data', link: 'personal', icon: [faUserAlt] },
   { name: 'Edukacja', nameL: 'Education', link: 'education', icon: [faUserGraduate] },
   { name: 'Doświadczenie', nameL: 'Experience', link: 'experience', icon: [faBriefcase] },
   { name: 'Umiejętności', nameL: 'Skills', link: 'skills', icon: [faPuzzlePiece] },

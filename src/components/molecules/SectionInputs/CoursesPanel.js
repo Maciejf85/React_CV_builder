@@ -4,7 +4,6 @@ import Input from 'components/atoms/Inputs/Input';
 import Select from 'components/atoms/Inputs/Select';
 import InputHeader from 'components/atoms/Inputs/InputHeader';
 import { updatecurrentCVFromState, removeItemfromCurrentCv } from 'actions';
-
 import store from 'store';
 // import PropTypes from 'prop-types';
 

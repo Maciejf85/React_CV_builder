@@ -50,6 +50,33 @@ const StyledWrapper = styled.div`
     transform: translateY(-50%);
     overflow: auto;
   }
+  @media ${' (min-width:568px) and (orientation: landscape)'} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: none;
+    overflow: auto;
+  }
+  @media ${' (width:812px) and (orientation: landscape)'} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: none;
+    overflow: auto;
+  }
+  @media ${' (width:823px) and (orientation: landscape)'} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: none;
+    overflow: auto;
+  }
 
   header {
     height: 45px;
@@ -81,6 +108,27 @@ const StyledWrapper = styled.div`
       display: block;
       width: 100%;
     }
+    @media ${' (width:568px) and (orientation: landscape)'} {
+      margin-top: 50px;
+      min-height: 410px;
+      height: calc(100% - 200px);
+      display: block;
+      width: 100%;
+    }
+    @media ${' (width:812px) and (orientation: landscape)'} {
+      margin-top: 50px;
+      min-height: 410px;
+      height: calc(100% - 200px);
+      display: block;
+      width: 100%;
+    }
+    @media ${' (width:823px) and (orientation: landscape)'} {
+      margin-top: 50px;
+      min-height: 410px;
+      height: calc(100% - 200px);
+      display: block;
+      width: 100%;
+    }
 
     .imageContainer {
       display: flex;
@@ -97,6 +145,33 @@ const StyledWrapper = styled.div`
 
         .ratioButtons {
           @media ${({ theme }) => theme.media.medium} {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+          }
+          @media ${' (min-width:568px) and (orientation: landscape)'} {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+          }
+          @media ${' (width:812px) and (orientation: landscape)'} {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+          }
+          @media ${' (width:823px) and (orientation: landscape)'} {
             position: fixed;
             top: 0;
             right: 0;
@@ -136,6 +211,15 @@ const StyledWrapper = styled.div`
       @media ${({ theme }) => theme.media.medium} {
         display: none;
       }
+      @media ${' (width:568px) and (orientation: landscape)'} {
+        display: none;
+      }
+      @media ${' (width:812px) and (orientation: landscape)'} {
+        display: none;
+      }
+      @media ${' (width:823px) and (orientation: landscape)'} {
+        display: none;
+      }
     }
   }
   .bottom {
@@ -152,6 +236,33 @@ const StyledWrapper = styled.div`
       justify-content: center;
     }
     @media ${({ theme }) => theme.media.medium} {
+      position: fixed;
+      top: 0;
+      width: 145px;
+      height: 100%;
+      flex-direction: column-reverse;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+    @media ${' (width:568px) and (orientation: landscape)'} {
+      position: fixed;
+      top: 0;
+      width: 145px;
+      height: 100%;
+      flex-direction: column-reverse;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+    @media ${' (width:812px) and (orientation: landscape)'} {
+      position: fixed;
+      top: 0;
+      width: 145px;
+      height: 100%;
+      flex-direction: column-reverse;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+    @media ${' (width:823px) and (orientation: landscape)'} {
       position: fixed;
       top: 0;
       width: 145px;
