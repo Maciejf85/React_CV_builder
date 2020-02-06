@@ -89,6 +89,15 @@ const StyledWrapper = styled.div`
     @media ${({ theme }) => theme.media.medium} {
       display: none;
     }
+    @media ${' (width:568px) and (orientation: landscape)'} {
+      display: none;
+    }
+    @media ${' (width:812px) and (orientation: landscape)'} {
+      display: none;
+    }
+    @media ${' (width:823px) and (orientation: landscape)'} {
+      display: none;
+    }
   }
   section {
     display: grid;
@@ -234,6 +243,7 @@ const StyledWrapper = styled.div`
 
     @media ${({ theme }) => theme.media.small} {
       justify-content: center;
+      border: none;
     }
     @media ${({ theme }) => theme.media.medium} {
       position: fixed;
@@ -243,6 +253,7 @@ const StyledWrapper = styled.div`
       flex-direction: column-reverse;
       justify-content: flex-start;
       align-items: stretch;
+      border: none;
     }
     @media ${' (width:568px) and (orientation: landscape)'} {
       position: fixed;
@@ -252,6 +263,7 @@ const StyledWrapper = styled.div`
       flex-direction: column-reverse;
       justify-content: flex-start;
       align-items: stretch;
+      border: none;
     }
     @media ${' (width:812px) and (orientation: landscape)'} {
       position: fixed;
@@ -261,6 +273,7 @@ const StyledWrapper = styled.div`
       flex-direction: column-reverse;
       justify-content: flex-start;
       align-items: stretch;
+      border: none;
     }
     @media ${' (width:823px) and (orientation: landscape)'} {
       position: fixed;
@@ -270,6 +283,7 @@ const StyledWrapper = styled.div`
       flex-direction: column-reverse;
       justify-content: flex-start;
       align-items: stretch;
+      border: none;
     }
   }
   .imageInformation {
