@@ -10,6 +10,9 @@ import { addNewItemToCurrentCv } from 'actions';
 const StyledWrapper = styled.div`
   margin: 10px 0 0 10px;
 
+  @media ${'(min-width:320px) and (max-width:575.98px) and (orientation: landscape)'} {
+    margin-top: 50px;
+  }
   @media ${({ theme }) => theme.media.medium} {
     margin-top: 50px;
   }

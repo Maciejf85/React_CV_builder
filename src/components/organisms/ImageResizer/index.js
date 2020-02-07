@@ -86,6 +86,9 @@ const StyledWrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSize.ml};
     font-weight: ${({ theme }) => theme.font.bold};
     color: white;
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
+    }
     @media ${({ theme }) => theme.media.medium} {
       display: none;
     }
@@ -165,7 +168,7 @@ const StyledWrapper = styled.div`
           @media ${' (min-width:568px) and (orientation: landscape)'} {
             position: fixed;
             top: 0;
-            right: 0;
+            right: 10px;
             width: 100px;
             height: 100%;
             display: flex;
@@ -243,6 +246,8 @@ const StyledWrapper = styled.div`
 
     @media ${({ theme }) => theme.media.small} {
       justify-content: center;
+      align-items: flex-end;
+      margin: 10px 0;
       border: none;
     }
     @media ${({ theme }) => theme.media.medium} {
@@ -262,6 +267,7 @@ const StyledWrapper = styled.div`
       height: 100%;
       flex-direction: column-reverse;
       justify-content: flex-start;
+      margin: 0;
       align-items: stretch;
       border: none;
     }
