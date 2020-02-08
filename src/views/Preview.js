@@ -101,9 +101,10 @@ class Preview extends Component {
             <div>
               <PDFDownloadLink
                 document={
-                  [[<FirstStyle language={language} />], [[<SecondStyle language={language} />]]][
-                    templateNumber
-                  ]
+                  [
+                    [<FirstStyle language={language} key={1} />],
+                    [[<SecondStyle language={language} key={2} />]],
+                  ][templateNumber]
                 }
                 fileName={`${CVtitle}.pdf`}
               >

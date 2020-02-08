@@ -269,6 +269,7 @@ const SectionDate = styled.Text`
 `;
 
 const LiveDemo = styled.Link`
+  width: 100%;
   margin-left: 5pt;
   color: black;
   font-size: 9pt;
