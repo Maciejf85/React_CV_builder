@@ -61,13 +61,26 @@ const StyledDownload = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 200px;
-    border: 1px solid white;
     text-align: center;
-    padding: 5px 20px;
-    border-radius: 7px;
-    &:hover {
-      background: ${({ theme }) => theme.colors.primaryBlue};
+
+    .pdfButton {
+      width: 200px;
+      border: 1px solid white;
+      text-align: center;
+      padding: 5px 20px;
+      border-radius: 7px;
+      &:hover {
+        background: ${({ theme }) => theme.colors.primaryBlue};
+      }
+    }
+    span {
+      display: inline-block;
+      width: 100%;
+      color: white;
+      font-style: italic;
+      font-size: ${({ theme }) => theme.fontSize.ms};
+      text-align: center;
+      margin: 20px 0;
     }
   }
 `;
@@ -107,6 +120,7 @@ class Preview extends Component {
                   ][templateNumber]
                 }
                 fileName={`${CVtitle}.pdf`}
+                className="pdfButton"
               >
                 {({ loading }) => {
                   return loading
@@ -118,6 +132,11 @@ class Preview extends Component {
                     : 'Download PDF';
                 }}
               </PDFDownloadLink>
+              <span>
+                {language === 'PL'
+                  ? 'Brak podglądu na urządzeniach mobilnych'
+                  : 'No preview on mobile devices'}
+              </span>
             </div>
           </StyledDownload>
         ) : null}
