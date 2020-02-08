@@ -68,7 +68,7 @@ class WebApi extends Component {
             );
           })
         ) : (
-          <NewItemButton view={currentView} handleClick={this.handleNewItem} />
+          <NewItemButton view={currentView} handleClick={this.handleNewItem} language={language} />
         )}
       </StyledWrapper>
     );

@@ -32,12 +32,17 @@ const StyledWrapper = styled.button`
   }
 `;
 
-const NewItemButton = ({ view, handleClick }) => {
+const NewItemButton = ({ view, handleClick, language }) => {
+  const polishLanguage = language === 'PL';
   return (
     <StyledWrapper onClick={handleClick}>
       <div>
         <FontAwesomeIcon icon={faPlus} />
-        <span>{` dodaj ${getNewItemName(view)}`}</span>
+        {polishLanguage ? (
+          <span>{` dodaj ${getNewItemName(view)}`}</span>
+        ) : (
+          <span>{` add new item`}</span>
+        )}
       </div>
     </StyledWrapper>
   );
