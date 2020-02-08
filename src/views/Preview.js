@@ -8,19 +8,7 @@ import styled from 'styled-components';
 import FirstStyle from 'components/themes/FirstStyle';
 import SecondStyle from 'components/themes/SecondStyle';
 import ThirdStyle from 'components/themes/ThirdStyle';
-// import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
-// import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
-// import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import path from '../path';
-
-// Font.register({
-//   family: 'Montserrat',
-//   fonts: [
-//     { src: Montserrat, fontWeight: 'normal' },
-//     { src: MontserratSemiBold, fontWeight: 'semiBold' },
-//     { src: MontserratBold, fontWeight: 'bold' },
-//   ],
-// });
 
 const styles = StyleSheet.create({
   page: { backgroundColor: 'white' },
@@ -61,15 +49,21 @@ const StyledDownload = styled.div`
   top: 50px;
   left: 0;
   width: 100%;
-  height: calc(100vh - 50px);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #525659;
   color: white;
-  display: none;
+  z-index: 9999;
   div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
     border: 1px solid white;
+    text-align: center;
     padding: 5px 20px;
     border-radius: 7px;
     &:hover {
@@ -95,11 +89,38 @@ class Preview extends Component {
     const { name } = personalData;
     const { template } = this.props.template;
     const { isReady } = this.state;
-
+    const CVtitle = currentCv.currentItem.title;
+    const templateNumber = parseInt(template) - 1;
+    let isMobile = window.orientation > -1;
     return (
       <>
         <NavBar language={language} />
-        <StyledWrapper>
+
+        {isReady ? (
+          <StyledDownload style={{ display: isMobile ? 'block' : 'none' }}>
+            <div>
+              <PDFDownloadLink
+                document={
+                  [[<FirstStyle language={language} />], [[<SecondStyle language={language} />]]][
+                    templateNumber
+                  ]
+                }
+                fileName={`${CVtitle}.pdf`}
+              >
+                {({ loading }) => {
+                  return loading
+                    ? language === 'PL'
+                      ? 'pobieranie...'
+                      : 'downloading...'
+                    : language === 'PL'
+                    ? 'Pobierz PDF'
+                    : 'Download PDF';
+                }}
+              </PDFDownloadLink>
+            </div>
+          </StyledDownload>
+        ) : null}
+        <StyledWrapper style={{ display: isMobile ? 'none' : 'block' }}>
           <PDFViewer style={styles.view} name={name}>
             {parseInt(template) === 1 && (
               <FirstStyle downloadButton={this.handleButton} language={language} />
@@ -113,24 +134,6 @@ class Preview extends Component {
           </PDFViewer>
         </StyledWrapper>
         <Footer language={language} />
-
-        {isReady ? (
-          <StyledDownload>
-            <div>
-              <PDFDownloadLink document={<FirstStyle />} fileName={`${template}.pdf`}>
-                {({ loading }) =>
-                  loading
-                    ? language === 'PL'
-                      ? 'pobieranie...'
-                      : 'downloading...'
-                    : language === 'PL'
-                    ? 'Pobierz PDF'
-                    : 'Download PDF'
-                }
-              </PDFDownloadLink>
-            </div>
-          </StyledDownload>
-        ) : null}
       </>
     );
   }

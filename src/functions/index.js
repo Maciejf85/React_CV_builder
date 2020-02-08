@@ -236,7 +236,6 @@ export const updatePersonalData = (state, id, token) => {
       sidePanel(result.data);
     })
     .catch(error => {
-      console.log('error :', error);
       sidePanel({ content: 'brak internetu', error: true });
     });
 };

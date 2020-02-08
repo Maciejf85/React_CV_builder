@@ -50,7 +50,7 @@ const StyledWrapper = styled.div`
     transform: translateY(-50%);
     overflow: auto;
   }
-  @media ${' (min-width:568px) and (orientation: landscape)'} {
+  @media ${' (width:568px) and (orientation: landscape)'} {
     position: absolute;
     top: 0;
     left: 0;
@@ -165,7 +165,7 @@ const StyledWrapper = styled.div`
             display: flex;
             flex-direction: column;
           }
-          @media ${' (min-width:568px) and (orientation: landscape)'} {
+          @media ${' (width:568px) and (orientation: landscape)'} {
             position: fixed;
             top: 0;
             right: 10px;
