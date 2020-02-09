@@ -136,7 +136,7 @@ class SignUp extends Component {
     } = this.state;
     const { error, isActive } = this.props;
     return (
-      <>
+      <form>
         <LoginInput
           id="login"
           placeholder="e-mail"
@@ -190,7 +190,7 @@ class SignUp extends Component {
             Zarejestruj
           </Submit>
         )}
-      </>
+      </form>
     );
   }
 }
