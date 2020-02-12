@@ -33,6 +33,10 @@ const StyledInputSection = styled.div`
       flex-direction: column;
       align-items: flex-start;
     }
+    @media ${({ theme }) => theme.media.desktop} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
     @media ${' (width:568px) and (orientation: landscape)'} {
       flex-direction: column;
       align-items: flex-start;
@@ -73,6 +77,10 @@ const StyledInputSection = styled.div`
         display: flex;
         flex-direction: row;
       }
+      @media ${({ theme }) => theme.media.desktop}{
+        margin: 0 10px;
+      }
+
     }
   }
   .checkboxContainer {
