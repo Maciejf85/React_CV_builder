@@ -22,9 +22,7 @@ const StyledWrapper = styled.nav`
   @media ${({ theme }) => theme.media.tablet} {
     width:100vw;
   }
-  @media ${({ theme }) => theme.media.desktop} {
-    background: red;
-  }
+
 
 
   .lang{
@@ -52,6 +50,7 @@ const StyledWrapper = styled.nav`
     @media ${({ theme }) => theme.media.tablet} {
       display: none;
     }
+
   }
   ${({ editor }) =>
     editor &&
@@ -60,6 +59,11 @@ const StyledWrapper = styled.nav`
       top: 0;
       left: 0;
       z-index: 1000;
+      p.logo {
+        @media ${({ theme }) => theme.media.desktop} {
+          flex-basis: 220px;
+        }
+      }
     `}
     @media ${({ theme }) => theme.media.small} {
       padding:0 5px;
@@ -67,6 +71,7 @@ const StyledWrapper = styled.nav`
     @media ${({ theme }) => theme.media.medium} {
       padding:0 5px;
     }
+
 
 `;
 

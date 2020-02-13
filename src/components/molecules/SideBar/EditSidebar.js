@@ -28,6 +28,9 @@ const StyledWrapper = styled.div`
     @media ${({ theme }) => theme.media.tablet} {
       margin-top: 43px;
     }
+    @media ${({ theme }) => theme.media.desktop} {
+      margin-top: 40px;
+    }
     @media ${' (width:568px)'} {
       display: flex;
       margin: 45px 0;

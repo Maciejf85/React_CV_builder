@@ -28,9 +28,6 @@ const StyledWrapper = styled.ul`
     flex-direction: row;
     justify-content: space-around;
   }
-  @media ${({ theme }) => theme.media.desktop} {
-    background: orange;
-  }
 `;
 
 const sideBar = ({ language }) => {
