@@ -5,6 +5,7 @@ import { StyleSheet, PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import Loader from 'components/atoms/Loader';
 import FirstStyle from 'components/themes/FirstStyle';
 import SecondStyle from 'components/themes/SecondStyle';
 import ThirdStyle from 'components/themes/ThirdStyle';
@@ -108,7 +109,7 @@ class Preview extends Component {
     return (
       <>
         <NavBar language={language} />
-
+        <Loader blue />
         {isReady ? (
           <StyledDownload style={{ display: isMobile ? 'block' : 'none' }}>
             <div>
