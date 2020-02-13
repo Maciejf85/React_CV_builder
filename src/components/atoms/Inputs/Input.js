@@ -47,6 +47,9 @@ const StyledWrapper = styled.div`
   @media ${({ theme }) => theme.media.tablet} {
     width: 100%;
   }
+  @media ${({ theme }) => theme.media.desktop} {
+    width: 100%;
+  }
   @media ${' (width:568px) and (orientation: landscape)'} {
     width: 100%;
   }

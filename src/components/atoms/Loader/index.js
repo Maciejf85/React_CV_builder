@@ -15,15 +15,14 @@ const StyledWrapper = styled.div`
   height: 150px;
   border-radius: 10px;
   .spiner {
-    color: rgba(255, 255, 255, 0.6);
-    /* color: ${({ theme }) => theme.colors.secondaryBlue}; */
+    color: ${({ blue, theme }) => (blue ? theme.colors.lightGrey : 'rgba(255, 255, 255, 0.6)')};
     opacity: 0.8;
     font-size: 10rem;
   }
 `;
 
-const Loader = () => (
-  <StyledWrapper>
+const Loader = ({ blue }) => (
+  <StyledWrapper blue={blue}>
     <FontAwesomeIcon icon={faSyncAlt} spin className="spiner" />
   </StyledWrapper>
 );
