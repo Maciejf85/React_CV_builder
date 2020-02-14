@@ -81,7 +81,7 @@ const StyledDownload = styled.div`
       font-style: italic;
       font-size: ${({ theme }) => theme.fontSize.ms};
       text-align: center;
-      margin: 20px 0;
+      margin-top: 20px;
     }
   }
 `;
@@ -124,13 +124,7 @@ class Preview extends Component {
                 className="pdfButton"
               >
                 {({ loading }) => {
-                  return loading
-                    ? language === 'PL'
-                      ? 'pobieranie...'
-                      : 'downloading...'
-                    : language === 'PL'
-                    ? 'Pobierz PDF'
-                    : 'Download PDF';
+                  return loading ? '' : language === 'PL' ? 'Pobierz PDF' : 'Download PDF';
                 }}
               </PDFDownloadLink>
               <span>

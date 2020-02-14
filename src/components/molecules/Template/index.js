@@ -30,9 +30,11 @@ const StyledWrapper = styled.div`
     bottom: 20px;
     left: 0;
     font-family: 'Satisfy', cursive;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.4);
+    background: ${({ theme }) => theme.colors.mainGrey};
+    opacity: 0.85;
     text-align: center;
-    color: black;
+    color: white;
     line-height: 50px;
     font-size: 2rem;
     border-top: 1px solid #aaa;
@@ -60,7 +62,7 @@ const StyledWrapper = styled.div`
 const Template = ({ active, img, changeTemplate, id }) => {
   return (
     <StyledWrapper active={active} onClick={changeTemplate}>
-      <header>template {id}</header>
+      <header>#{id}</header>
       <img src={img} alt="pdf template" id={id} />
     </StyledWrapper>
   );
