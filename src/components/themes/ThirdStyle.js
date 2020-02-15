@@ -19,11 +19,25 @@ Font.register({
     { src: MontserratBold, fontWeight: 'bold' },
   ],
 });
+Font.registerHyphenationCallback(word => {
+  if (word.length > 23) {
+    const newWord = word.split('in/');
+    if (newWord[1] && newWord[1].length > 23) {
+      const secPart = newWord[1].substring(0, 23);
+      const third = newWord[1].substring(24);
+      const result = [];
+      result.push(newWord[0], secPart, third);
+      return result;
+    }
+    return newWord;
+  }
+  return [word];
+});
 
 const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
-  background-color: grey;
+  background-color: #2f2f2f;
   padding-top: 15pt;
   padding-bottom: 100pt;
 `;
@@ -68,32 +82,40 @@ const HeadContainerRight = styled.View`
 const UserNameContainer = styled.View`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
-  padding-top: 44pt;
+  border: 1px solid grey;
+  margin-top: 40pt;
+  margin-bottom: 5pt;
+  padding-left: 5pt;
+  padding-right: 5pt;
+  padding-top: 5pt;
+  padding-bottom: 5pt;
 `;
 
 const UserName = styled.Text`
-  font-size: 30pt;
+  font-size: 11pt;
   font-family: 'Montserrat';
   font-weight: bold;
-  margin-right: 10px;
-  color: #494949;
+  color: white;
   text-transform: uppercase;
-  letter-spacing: 2pt;
+  margin-right: 5pt;
   /* border: 1px solid blanchedalmond; */
 `;
 
 const Profession = styled.Text`
-  font-size: 11pt;
+  font-size: 9pt;
   font-family: 'Montserrat';
   letter-spacing: 1pt;
   text-transform: uppercase;
+  text-align: center;
 `;
 
 const ImageRound = styled.Image`
+  margin-top: 40pt;
   width: 100pt;
-  height: 100pt;
-  border-radius: 100pt;
+  height: 150pt;
+  border: 2px solid white;
 `;
 
 const ContentTitleBox = styled.View`
@@ -169,6 +191,7 @@ const SectionTitleLeftDot = styled.View`
 const PersonalDataSection = styled.View`
   display: flex;
   flex-direction: column;
+  max-width: 150pt;
 `;
 
 const SectionLeft = styled.Text`
@@ -280,6 +303,13 @@ class MyDocument extends Component {
             <HeadContainerLeft>
               {!state.image.image || <ImageRound src={state.image.image} />}
             </HeadContainerLeft>
+            <UserNameContainer bold>
+              <UserName>{name}</UserName>
+              <UserName>{surname}</UserName>
+            </UserNameContainer>
+            <Profession bold hyphenationCallback={1000}>
+              {profession}
+            </Profession>
 
             <ContentBox>
               <LeftSide>
@@ -387,13 +417,7 @@ class MyDocument extends Component {
             ))}
           </LeftColumn>
           <RightColumn>
-            <HeadContainerRight>
-              <UserNameContainer bold>
-                <UserName>{name}</UserName>
-                <UserName>{surname}</UserName>
-              </UserNameContainer>
-              <Profession bold>{profession}</Profession>
-            </HeadContainerRight>
+            <HeadContainerRight></HeadContainerRight>
             {!experience.length || (
               <ContentTitleBox wrap={false}>
                 <ContentTitle>

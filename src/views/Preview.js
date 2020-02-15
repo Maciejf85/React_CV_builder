@@ -117,7 +117,8 @@ class Preview extends Component {
                 document={
                   [
                     [<FirstStyle language={language} key={1} />],
-                    [[<SecondStyle language={language} key={2} />]],
+                    [<SecondStyle language={language} key={2} />],
+                    [<ThirdStyle language={language} key={3} />],
                   ][templateNumber]
                 }
                 fileName={`${CVtitle}.pdf`}
