@@ -44,19 +44,24 @@ const StyledWrapper = styled.div`
   }
 
   @media ${({ theme }) => theme.media.small} {
-    margin: 35px 0;
+    margin: 60px 0;
     background: #000;
   }
 
+  @media ${({ theme }) => theme.media.medium} {
+    width: 170px;
+    height: 240px;
+    margin: 60px 0;
+  }
   @media ${({ theme }) => theme.media.tablet} {
-    width: 200px;
-    height: 282px;
-    margin: 0 25px;
+    width: 170px;
+    height: 240px;
+    margin: 0 35px;
   }
   @media ${({ theme }) => theme.media.desktop} {
     width: 250px;
     height: 352px;
-    margin: 0 25px;
+    margin: 0 35px;
   }
 `;
 
