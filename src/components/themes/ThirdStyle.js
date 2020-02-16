@@ -19,7 +19,7 @@ Font.registerHyphenationCallback(word => {
     const newWord = word.split('in/');
     if (newWord[1] && newWord[1].length > 23) {
       const secPart = newWord[1].substring(0, 23);
-      const third = newWord[1].substring(24);
+      const third = newWord[1].substring(23);
       const result = [];
       result.push(newWord[0], secPart, third);
       return result;
