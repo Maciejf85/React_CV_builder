@@ -4,11 +4,6 @@ import styled from '@react-pdf/styled-components';
 import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
-import linkedIcon from 'assets/icons/linked.png';
-import phoneIcon from 'assets/icons/phone.png';
-import emailIcon from 'assets/icons/email.png';
-import githubIcon from 'assets/icons/github.png';
-import addressIcon from 'assets/icons/address.png';
 import store from 'store';
 
 Font.register({
@@ -74,19 +69,15 @@ const HeadContainerLeft = styled.View`
   height: 140pt;
 `;
 
-const HeadContainerRight = styled.View`
-  width: 100%;
-  height: 140pt;
-`;
-
 const UserNameContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
   border: 1px solid grey;
-  margin-top: 40pt;
-  margin-bottom: 5pt;
+  border-radius: 3pt;
+  margin-top: 45pt;
+  margin-bottom: 7pt;
   padding-left: 5pt;
   padding-right: 5pt;
   padding-top: 5pt;
@@ -109,25 +100,35 @@ const Profession = styled.Text`
   letter-spacing: 1pt;
   text-transform: uppercase;
   text-align: center;
+  margin-bottom: 15pt;
 `;
 
 const ImageRound = styled.Image`
   margin-top: 40pt;
-  width: 100pt;
-  height: 150pt;
+  width: 120pt;
+  height: 160pt;
   border: 2px solid white;
 `;
 
 const ContentTitleBox = styled.View`
-  margin: 25pt 0;
+  margin: 10pt 0 15pt;
   font-size: 11pt;
   text-transform: uppercase;
+  text-align: center;
+  min-width: 145pt;
 `;
 const ContentTitle = styled.Text`
-  font-size: 11pt;
+  min-width: 145pt;
+  font-size: ${({ rightSide }) => (rightSide ? '13pt' : '11pt')};
   text-transform: uppercase;
   letter-spacing: 0.5pt;
   font-weight: semiBold;
+  font-weight: ${({ rightSide }) => (rightSide ? 'bold' : 'semiBold')};
+  padding-bottom: 3pt;
+  margin-top: 10pt;
+  text-align: ${({ leftSide }) => (leftSide ? 'center' : 'left')};
+  color: ${({ leftSide }) => (leftSide ? 'white' : '#494949')};
+  border-bottom: ${({ leftSide }) => (leftSide ? '1pt solid #ddd' : 'none')};
 `;
 const TitleDecoration = styled.View`
   width: 30pt;
@@ -136,11 +137,13 @@ const TitleDecoration = styled.View`
 `;
 
 const SectionTitle = styled.Text`
+  margin-top: -5pt;
   font-size: 9pt;
   color: ${({ white }) => (white ? 'white' : 'black')};
   font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
   letter-spacing: 0.2pt;
   text-align: ${({ right }) => (right ? 'right' : 'left')};
+  text-transform: uppercase;
 `;
 
 const Section = styled.Text`
@@ -163,42 +166,44 @@ const SectionLeftBox = styled.View`
   flex-direction: row;
   align-items: center;
 `;
-const Icon = styled.Image`
-  width: 15pt;
-  height: 9pt;
-  background-position: center center;
-`;
 
 const SectionTitleLeft = styled.Text`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  text-transform: capitalize;
+  justify-content: center;
+  text-transform: uppercase;
+  text-align: center;
   color: white;
   font-size: 9.8pt;
-  font-weight: semiBold;
-  letter-spacing: 0.2pt;
+  font-weight: normal;
+  letter-spacing: -0.1pt;
+  min-width: ${({ listItems }) => (listItems ? '135pt' : '145pt')};
+  padding-right: ${({ listItems }) => (listItems ? '15pt' : '0')};
+  margin-top: 10pt;
 `;
+
 const SectionTitleLeftDot = styled.View`
   margin: 0 4pt;
   width: 4pt;
   height: 4pt;
   background: white;
   border-radius: 50pt;
+  margin-top: 9pt;
 `;
 
 const PersonalDataSection = styled.View`
   display: flex;
   flex-direction: column;
-  max-width: 150pt;
+  min-width: 145pt;
 `;
 
 const SectionLeft = styled.Text`
-  margin: 0 0 10pt;
+  padding: 3pt 0;
   color: white;
-  font-size: 9pt;
-  padding: 5pt 0 0 11pt;
+  font-size: 8pt;
+  min-width: 145pt;
+  text-align: center;
 `;
 
 const Link = styled.Link`
@@ -208,6 +213,8 @@ const Link = styled.Link`
   padding: 5pt 0 0 11pt;
   font-family: 'Montserrat';
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  text-decoration: none;
+  text-decoration-color: transparent;
 `;
 const TextSection = styled.View`
   position: relative;
@@ -247,8 +254,7 @@ const RightSide = styled.View`
 
 const LeftSide = styled.View`
   flex-basis: ${({ small }) => (small ? '70pt' : '133pt')};
-  padding-right: 10pt;
-  text-align: left;
+  text-align: center;
 `;
 
 const Footer = styled.View`
@@ -307,28 +313,26 @@ class MyDocument extends Component {
               <UserName>{name}</UserName>
               <UserName>{surname}</UserName>
             </UserNameContainer>
-            <Profession bold hyphenationCallback={1000}>
-              {profession}
-            </Profession>
+            <Profession>{profession}</Profession>
 
             <ContentBox>
               <LeftSide>
                 <ContentTitleBox wrap={false}>
-                  <ContentTitle>{language === 'PL' ? 'dane osobowe' : 'personal'}</ContentTitle>
-                  <TitleDecoration white />
+                  <ContentTitle leftSide>{language === 'PL' ? 'Informacje' : 'Info'}</ContentTitle>
                 </ContentTitleBox>
                 {!phone || (
                   <PersonalDataSection>
                     <SectionTitleLeft white bold>
-                      <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
+                      {language === 'PL' ? 'telefon' : 'phone'}
                     </SectionTitleLeft>
+
                     <SectionLeft>{phone}</SectionLeft>
                   </PersonalDataSection>
                 )}
                 {!email || (
                   <PersonalDataSection>
                     <SectionTitleLeft white bold>
-                      <Icon src={emailIcon} /> Email:
+                      Email
                     </SectionTitleLeft>
                     <SectionLeft>{email}</SectionLeft>
                   </PersonalDataSection>
@@ -336,18 +340,25 @@ class MyDocument extends Component {
                 {!adress || (
                   <PersonalDataSection>
                     <SectionTitleLeft white bold>
-                      <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
+                      {language === 'PL' ? 'adres' : 'address'}
                     </SectionTitleLeft>
+
                     <SectionLeft>{adress}</SectionLeft>
                   </PersonalDataSection>
                 )}
                 {!github || (
                   <>
-                    <SectionTitleLeft white bold>
-                      <Icon src={githubIcon} /> Github:
-                    </SectionTitleLeft>
                     <PersonalDataSection>
-                      <Link href={github} target="_blank" rel="noopener noreferrer">
+                      <SectionTitleLeft white bold>
+                        Github
+                      </SectionTitleLeft>
+
+                      <Link
+                        href={github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
                         {github}
                       </Link>
                     </PersonalDataSection>
@@ -355,11 +366,17 @@ class MyDocument extends Component {
                 )}
                 {!linkedin || (
                   <>
-                    <SectionTitleLeft white bold>
-                      <Icon src={linkedIcon} /> Linkedin:
-                    </SectionTitleLeft>
                     <PersonalDataSection>
-                      <Link href={linkedin} target="_blank" rel="noopener noreferrer">
+                      <SectionTitleLeft white bold>
+                        Linkedin
+                      </SectionTitleLeft>
+
+                      <Link
+                        href={linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
                         {linkedin}
                       </Link>
                     </PersonalDataSection>
@@ -370,8 +387,9 @@ class MyDocument extends Component {
 
             {!languages.length || (
               <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
-                <TitleDecoration white />
+                <ContentTitle leftSide>
+                  {language === 'PL' ? 'Języki obce' : 'Languages'}
+                </ContentTitle>
               </ContentTitleBox>
             )}
 
@@ -379,7 +397,9 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox>
                   <SectionTitleLeftDot />
-                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                  <SectionTitleLeft bold listItems>
+                    {item.name}
+                  </SectionTitleLeft>
                 </SectionLeftBox>
                 <SectionLeft>{`${item.description}`}</SectionLeft>
               </TextSection>
@@ -387,8 +407,9 @@ class MyDocument extends Component {
 
             {!skills.length || (
               <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'Umiejętności' : 'Skills'}</ContentTitle>
-                <TitleDecoration white />
+                <ContentTitle leftSide>
+                  {language === 'PL' ? 'Umiejętności' : 'Skills'}
+                </ContentTitle>
               </ContentTitleBox>
             )}
 
@@ -396,15 +417,18 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox>
                   <SectionTitleLeftDot />
-                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                  <SectionTitleLeft bold listItems>
+                    {item.name}
+                  </SectionTitleLeft>
                 </SectionLeftBox>
                 <SectionLeft>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
             ))}
             {!interests.length || (
               <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'zainteresowania' : 'interests'}</ContentTitle>
-                <TitleDecoration white />
+                <ContentTitle leftSide>
+                  {language === 'PL' ? 'zainteresowania' : 'interests'}
+                </ContentTitle>
               </ContentTitleBox>
             )}
             {interests.map(item => (
@@ -417,10 +441,9 @@ class MyDocument extends Component {
             ))}
           </LeftColumn>
           <RightColumn>
-            <HeadContainerRight></HeadContainerRight>
             {!experience.length || (
               <ContentTitleBox wrap={false}>
-                <ContentTitle>
+                <ContentTitle rightSide>
                   {language === 'PL' ? 'Doświadczenie zawodowe' : 'work experiance'}
                 </ContentTitle>
                 <TitleDecoration />
@@ -456,7 +479,9 @@ class MyDocument extends Component {
             ))}
             {!education.length || (
               <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'edukacja' : 'education'}</ContentTitle>
+                <ContentTitle rightSide>
+                  {language === 'PL' ? 'edukacja' : 'education'}
+                </ContentTitle>
                 <TitleDecoration />
               </ContentTitleBox>
             )}
@@ -490,7 +515,9 @@ class MyDocument extends Component {
 
             {!certificates.length || (
               <ContentTitleBox wrap={false} orphans={3}>
-                <ContentTitle>{language === 'PL' ? 'certyfikaty' : 'certificates'}</ContentTitle>
+                <ContentTitle rightSide>
+                  {language === 'PL' ? 'certyfikaty' : 'certificates'}
+                </ContentTitle>
                 <TitleDecoration />
               </ContentTitleBox>
             )}
@@ -519,7 +546,7 @@ class MyDocument extends Component {
 
             {!courses.length || (
               <ContentTitleBox>
-                <ContentTitle>{language === 'PL' ? 'kursy' : 'courses'}</ContentTitle>
+                <ContentTitle rightSide>{language === 'PL' ? 'kursy' : 'courses'}</ContentTitle>
                 <TitleDecoration />
               </ContentTitleBox>
             )}
@@ -548,7 +575,9 @@ class MyDocument extends Component {
 
             {!publications.length || (
               <ContentTitleBox>
-                <ContentTitle>{language === 'PL' ? 'publikacje' : 'publications'}</ContentTitle>
+                <ContentTitle rightSide>
+                  {language === 'PL' ? 'publikacje' : 'publications'}
+                </ContentTitle>
                 <TitleDecoration />
               </ContentTitleBox>
             )}
@@ -577,7 +606,9 @@ class MyDocument extends Component {
 
             {!conferences.length || (
               <ContentTitleBox>
-                <ContentTitle>{language === 'PL' ? 'konferencje' : 'conferences'}</ContentTitle>
+                <ContentTitle rightSide>
+                  {language === 'PL' ? 'konferencje' : 'conferences'}
+                </ContentTitle>
                 <TitleDecoration />
               </ContentTitleBox>
             )}
@@ -606,7 +637,7 @@ class MyDocument extends Component {
 
             {!licenses.length || (
               <ContentTitleBox>
-                <ContentTitle>{language === 'PL' ? 'licencje' : 'licenses'}</ContentTitle>
+                <ContentTitle rightSide>{language === 'PL' ? 'licencje' : 'licenses'}</ContentTitle>
                 <TitleDecoration />
               </ContentTitleBox>
             )}
