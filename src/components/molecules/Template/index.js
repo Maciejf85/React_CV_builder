@@ -26,6 +26,7 @@ const StyledWrapper = styled.div`
   header {
     width: 100%;
     height: 50px;
+    padding: 0 10px;
     position: absolute;
     bottom: 20px;
     left: 0;
@@ -59,10 +60,15 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Template = ({ active, img, changeTemplate, id }) => {
+const Template = ({ active, img, changeTemplate, id, language }) => {
+  const isPolish = language === 'PL';
   return (
     <StyledWrapper active={active} onClick={changeTemplate}>
-      <header>#{id}</header>
+      <header>
+        <div>
+          {isPolish ? 'Szablon ' : 'Template '} #{id}
+        </div>
+      </header>
       <img src={img} alt="pdf template" id={id} />
     </StyledWrapper>
   );

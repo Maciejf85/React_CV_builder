@@ -19,7 +19,7 @@ Font.registerHyphenationCallback(word => {
     const newWord = word.split('in/');
     if (newWord[1] && newWord[1].length > 23) {
       const secPart = newWord[1].substring(0, 23);
-      const third = newWord[1].substring(24);
+      const third = newWord[1].substring(23);
       const result = [];
       result.push(newWord[0], secPart, third);
       return result;
@@ -137,12 +137,21 @@ const TitleDecoration = styled.View`
 `;
 
 const SectionTitle = styled.Text`
-  margin-top: -5pt;
+  margin-top: 5pt;
   font-size: 9pt;
   color: ${({ white }) => (white ? 'white' : 'black')};
   font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
   letter-spacing: 0.2pt;
   text-align: ${({ right }) => (right ? 'right' : 'left')};
+  text-transform: uppercase;
+`;
+const SectionSubTitle = styled.Text`
+  font-size: 8.5pt;
+  color: #494949;
+  margin-left: 10pt;
+  font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
+  margin-top: 2pt;
+  /* letter-spacing: 0.2pt; */
   text-transform: uppercase;
 `;
 
@@ -154,11 +163,12 @@ const Section = styled.Text`
   letter-spacing: 0.3pt;
 `;
 const SectionDate = styled.Text`
-  min-height: 9pt;
-  margin: 0 0 10pt;
+  min-height: 8.5pt;
+  margin: 5pt 0 10pt;
   color: black;
-  font-size: 9pt;
+  font-size: 10pt;
   letter-spacing: 0.3pt;
+  text-align: left;
 `;
 
 const SectionLeftBox = styled.View`
@@ -454,7 +464,6 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
-                    <SectionTitle bold>{item.name}</SectionTitle>
                     <SectionDate>
                       {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
                         item.startYear
@@ -471,7 +480,8 @@ class MyDocument extends Component {
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle bold>{item.position}</SectionTitle>
+                    <SectionTitle bold>{item.name}</SectionTitle>
+                    <SectionSubTitle bold>{item.position}</SectionSubTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
@@ -489,7 +499,6 @@ class MyDocument extends Component {
               <TextSection key={item.id} wrap={false}>
                 <ContentBox>
                   <LeftSide>
-                    <SectionTitle bold>{item.name}</SectionTitle>
                     <SectionDate>
                       {` ${item.startMonth < 10 ? '0' + item.startMonth : item.startMonth}.${
                         item.startYear
@@ -506,7 +515,8 @@ class MyDocument extends Component {
                   <RightSide>
                     <Decoration />
                     <DecorationBottom />
-                    <SectionTitle bold>{item.department}</SectionTitle>
+                    <SectionTitle bold>{item.name}</SectionTitle>
+                    <SectionSubTitle bold>{item.department}</SectionSubTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>

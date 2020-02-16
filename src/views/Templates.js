@@ -8,7 +8,7 @@ import TemplateItem from 'components/molecules/Template';
 import temp0 from 'assets/template/template_0.jpg';
 import temp1 from 'assets/template/template_1.jpg';
 import temp2 from 'assets/template/template_2.jpg';
-import temp3 from 'assets/template/template_3.jpg';
+// import temp3 from 'assets/template/template_3.jpg';
 import { changeTemplate } from 'actions';
 import { setNewCurrentCVData } from 'functions';
 import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
@@ -76,25 +76,29 @@ class Template extends Component {
             img={temp0}
             id={1}
             changeTemplate={this.handleChangeTemplate}
+            language={language}
           />
           <TemplateItem
             active={parseInt(template) === 2}
             img={temp1}
             id={2}
             changeTemplate={this.handleChangeTemplate}
+            language={language}
           />
           <TemplateItem
             active={parseInt(template) === 3}
             img={temp2}
             id={3}
             changeTemplate={this.handleChangeTemplate}
+            language={language}
           />
-          <TemplateItem
+          {/* <TemplateItem
             active={parseInt(template) === 4}
             img={temp3}
             id={4}
             changeTemplate={this.handleChangeTemplate}
-          />
+            language={language}
+          /> */}
         </StyledWrapper>
         <Footer language={language} />
         <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
