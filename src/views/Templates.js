@@ -7,7 +7,8 @@ import { Redirect } from 'react-router-dom';
 import TemplateItem from 'components/molecules/Template';
 import temp0 from 'assets/template/template_0.jpg';
 import temp1 from 'assets/template/template_1.jpg';
-// import temp2 from 'assets/template/template_2.jpg';
+import temp2 from 'assets/template/template_2.jpg';
+import temp3 from 'assets/template/template_3.jpg';
 import { changeTemplate } from 'actions';
 import { setNewCurrentCVData } from 'functions';
 import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
@@ -84,13 +85,13 @@ class Template extends Component {
           />
           <TemplateItem
             active={parseInt(template) === 3}
-            img={temp1}
+            img={temp2}
             id={3}
             changeTemplate={this.handleChangeTemplate}
           />
           <TemplateItem
             active={parseInt(template) === 4}
-            img={temp1}
+            img={temp3}
             id={4}
             changeTemplate={this.handleChangeTemplate}
           />
