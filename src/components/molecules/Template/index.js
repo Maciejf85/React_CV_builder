@@ -42,6 +42,13 @@ const StyledWrapper = styled.div`
     border-bottom: 1px solid #aaa;
     pointer-events: none;
   }
+  .info {
+    position: absolute;
+    bottom: -25px;
+    color: ${({ theme }) => theme.colors.darkGrey};
+    font-size: ${({ theme }) => theme.fontSize.s};
+    font-style: italic;
+  }
 
   @media ${({ theme }) => theme.media.small} {
     margin: 60px 0;
@@ -65,7 +72,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Template = ({ active, img, changeTemplate, id, language }) => {
+const Template = ({ active, img, changeTemplate, id, language, ratio }) => {
   const isPolish = language === 'PL';
   return (
     <StyledWrapper active={active} onClick={changeTemplate}>
@@ -75,6 +82,9 @@ const Template = ({ active, img, changeTemplate, id, language }) => {
         </div>
       </header>
       <img src={img} alt="pdf template" id={id} />
+      <div className="info">
+        * {isPolish ? 'proporcje zdjęcia ' : 'photo aspect ratio '} - {ratio}
+      </div>
     </StyledWrapper>
   );
 };

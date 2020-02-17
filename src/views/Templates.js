@@ -83,6 +83,7 @@ class Template extends Component {
             id={1}
             changeTemplate={this.handleChangeTemplate}
             language={language}
+            ratio="1:1"
           />
           <TemplateItem
             active={parseInt(template) === 2}
@@ -90,6 +91,7 @@ class Template extends Component {
             id={2}
             changeTemplate={this.handleChangeTemplate}
             language={language}
+            ratio="1:1"
           />
           <TemplateItem
             active={parseInt(template) === 3}
@@ -97,6 +99,7 @@ class Template extends Component {
             id={3}
             changeTemplate={this.handleChangeTemplate}
             language={language}
+            ratio="3:4"
           />
           {/* <TemplateItem
             active={parseInt(template) === 4}
