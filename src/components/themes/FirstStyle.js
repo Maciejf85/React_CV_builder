@@ -20,6 +20,20 @@ Font.register({
   ],
 });
 
+Font.registerHyphenationCallback(word => {
+  if (word.length > 23) {
+    const newWord = word.split('in/');
+    if (newWord[1] && newWord[1].length > 23) {
+      const secPart = newWord[1].substring(0, 23);
+      const third = newWord[1].substring(23);
+      const result = [];
+      result.push(newWord[0], secPart, third);
+      return result;
+    }
+    return newWord;
+  }
+  return [word];
+});
 const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
@@ -40,9 +54,8 @@ const LeftColumn = styled.View`
   width: 165pt;
   height: 100%;
   color: white;
-  padding: 0 10px;
+  padding: 0 5pt;
   font-family: 'Montserrat';
-  padding-right: 5pt;
 `;
 const RightColumn = styled.View`
   width: 430pt;
@@ -81,6 +94,7 @@ const UserName = styled.Text`
   color: #494949;
   text-transform: uppercase;
   letter-spacing: 2pt;
+
   /* border: 1px solid blanchedalmond; */
 `;
 
@@ -98,7 +112,7 @@ const ImageRound = styled.Image`
 `;
 
 const ContentTitleBox = styled.View`
-  margin: 25pt 0;
+  margin: 15pt 0;
   font-size: 11pt;
   text-transform: uppercase;
 `;
@@ -123,7 +137,7 @@ const SectionTitle = styled.Text`
 `;
 
 const Section = styled.Text`
-  margin: 0 0 0pt;
+  margin: 0;
   color: black;
   font-size: 9pt;
   padding: 5pt 0 5pt 5pt;
@@ -131,7 +145,7 @@ const Section = styled.Text`
 `;
 const SectionDate = styled.Text`
   min-height: 9pt;
-  margin: 0 0 10pt;
+  margin: 5pt 0 10pt;
   color: black;
   font-size: 9pt;
   letter-spacing: 0.3pt;
@@ -222,19 +236,19 @@ const DecorationBottom = styled.View`
 const ContentBox = styled.View`
   display: flex;
   flex-direction: row;
-  width: 430pt;
+  width: 410pt;
 `;
 
 const RightSide = styled.View`
   position: relative;
   border-left: 1pt solid #494949;
   flex-basis: 277pt;
-  padding: 0 10pt;
+  padding: 10pt 10pt 10pt 15pt;
 `;
 
 const LeftSide = styled.View`
   flex-basis: ${({ small }) => (small ? '70pt' : '133pt')};
-  padding-right: 5pt;
+  padding: ${({ leftSide }) => (leftSide ? '0 10pt 10pt 5pt' : '10pt 10pt 10pt 5pt')};
   text-align: left;
 `;
 
@@ -282,7 +296,6 @@ class MyDocument extends Component {
       currentItem,
       webApi,
     } = currentCv;
-    // console.log('state', state);
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
@@ -292,117 +305,115 @@ class MyDocument extends Component {
               {!state.image.image || <ImageRound src={state.image.image} />}
             </HeadContainerLeft>
 
-            <ContentBox>
-              <LeftSide>
+            <LeftSide leftSide>
+              <ContentTitleBox wrap={false}>
+                <ContentTitle>{language === 'PL' ? 'dane osobowe' : 'personal'}</ContentTitle>
+                <TitleDecoration white />
+              </ContentTitleBox>
+              {!phone || (
+                <PersonalDataSection>
+                  <SectionTitleLeft white bold>
+                    <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
+                  </SectionTitleLeft>
+                  <SectionLeft>{phone}</SectionLeft>
+                </PersonalDataSection>
+              )}
+              {!email || (
+                <PersonalDataSection>
+                  <SectionTitleLeft white bold>
+                    <Icon src={emailIcon} /> Email:
+                  </SectionTitleLeft>
+                  <SectionLeft>{email}</SectionLeft>
+                </PersonalDataSection>
+              )}
+              {!adress || (
+                <PersonalDataSection>
+                  <SectionTitleLeft white bold>
+                    <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
+                  </SectionTitleLeft>
+                  <SectionLeft>{adress}</SectionLeft>
+                </PersonalDataSection>
+              )}
+              {!github || (
+                <>
+                  <SectionTitleLeft white bold>
+                    <Icon src={githubIcon} /> Github:
+                  </SectionTitleLeft>
+                  <PersonalDataSection>
+                    <Link
+                      href={github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      {github}
+                    </Link>
+                  </PersonalDataSection>
+                </>
+              )}
+              {!linkedin || (
+                <>
+                  <SectionTitleLeft white bold>
+                    <Icon src={linkedIcon} /> Linkedin:
+                  </SectionTitleLeft>
+                  <PersonalDataSection>
+                    <Link
+                      href={linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      {linkedin}
+                    </Link>
+                  </PersonalDataSection>
+                </>
+              )}
+
+              {!languages.length || (
                 <ContentTitleBox wrap={false}>
-                  <ContentTitle>{language === 'PL' ? 'dane osobowe' : 'personal'}</ContentTitle>
+                  <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
                   <TitleDecoration white />
                 </ContentTitleBox>
-                {!phone || (
-                  <PersonalDataSection>
-                    <SectionTitleLeft white bold>
-                      <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
-                    </SectionTitleLeft>
-                    <SectionLeft>{phone}</SectionLeft>
-                  </PersonalDataSection>
-                )}
-                {!email || (
-                  <PersonalDataSection>
-                    <SectionTitleLeft white bold>
-                      <Icon src={emailIcon} /> Email:
-                    </SectionTitleLeft>
-                    <SectionLeft>{email}</SectionLeft>
-                  </PersonalDataSection>
-                )}
-                {!adress || (
-                  <PersonalDataSection>
-                    <SectionTitleLeft white bold>
-                      <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
-                    </SectionTitleLeft>
-                    <SectionLeft>{adress}</SectionLeft>
-                  </PersonalDataSection>
-                )}
-                {!github || (
-                  <>
-                    <SectionTitleLeft white bold>
-                      <Icon src={githubIcon} /> Github:
-                    </SectionTitleLeft>
-                    <PersonalDataSection>
-                      <Link
-                        href={github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ textDecoration: 'none' }}
-                      >
-                        {github}
-                      </Link>
-                    </PersonalDataSection>
-                  </>
-                )}
-                {!linkedin || (
-                  <>
-                    <SectionTitleLeft white bold>
-                      <Icon src={linkedIcon} /> Linkedin:
-                    </SectionTitleLeft>
-                    <PersonalDataSection>
-                      <Link
-                        href={linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ textDecoration: 'none' }}
-                      >
-                        {linkedin}
-                      </Link>
-                    </PersonalDataSection>
-                  </>
-                )}
-              </LeftSide>
-            </ContentBox>
+              )}
 
-            {!languages.length || (
-              <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
-                <TitleDecoration white />
-              </ContentTitleBox>
-            )}
+              {languages.map(item => (
+                <TextSection key={item.id} wrap={false}>
+                  <SectionLeftBox>
+                    <SectionTitleLeftDot />
+                    <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                  </SectionLeftBox>
+                  <SectionLeft>{`${item.description}`}</SectionLeft>
+                </TextSection>
+              ))}
 
-            {languages.map(item => (
-              <TextSection key={item.id} wrap={false}>
-                <SectionLeftBox>
-                  <SectionTitleLeftDot />
-                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
-                </SectionLeftBox>
-                <SectionLeft>{`${item.description}`}</SectionLeft>
-              </TextSection>
-            ))}
+              {!skills.length || (
+                <ContentTitleBox wrap={false}>
+                  <ContentTitle>{language === 'PL' ? 'Umiejętności' : 'Skills'}</ContentTitle>
+                  <TitleDecoration white />
+                </ContentTitleBox>
+              )}
 
-            {!skills.length || (
-              <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'Umiejętności' : 'Skills'}</ContentTitle>
-                <TitleDecoration white />
-              </ContentTitleBox>
-            )}
-
-            {skills.map(item => (
-              <TextSection key={item.id} wrap={false}>
-                <SectionLeftBox>
-                  <SectionTitleLeftDot />
-                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
-                </SectionLeftBox>
-                <SectionLeft>{`${item.description || ''}`}</SectionLeft>
-              </TextSection>
-            ))}
-            {!interests.length || (
-              <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'zainteresowania' : 'interests'}</ContentTitle>
-                <TitleDecoration white />
-              </ContentTitleBox>
-            )}
-            {interests.map(item => (
-              <TextSection key={item.id} wrap={false}>
-                <SectionLeft>{`${item.description || ''}`}</SectionLeft>
-              </TextSection>
-            ))}
+              {skills.map(item => (
+                <TextSection key={item.id} wrap={false}>
+                  <SectionLeftBox>
+                    <SectionTitleLeftDot />
+                    <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                  </SectionLeftBox>
+                  <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+                </TextSection>
+              ))}
+              {!interests.length || (
+                <ContentTitleBox wrap={false}>
+                  <ContentTitle>{language === 'PL' ? 'zainteresowania' : 'interests'}</ContentTitle>
+                  <TitleDecoration white />
+                </ContentTitleBox>
+              )}
+              {interests.map(item => (
+                <TextSection key={item.id} wrap={false}>
+                  <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+                </TextSection>
+              ))}
+            </LeftSide>
           </LeftColumn>
           <RightColumn>
             <HeadContainerRight>

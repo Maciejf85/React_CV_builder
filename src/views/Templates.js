@@ -20,7 +20,7 @@ const StyledWrapper = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-  min-height: calc(70vh - 50px);
+  min-height: calc(100vh - 50px);
   padding: 90px 50px 0;
   color: black;
   @media ${({ theme }) => theme.media.small} {
@@ -33,7 +33,13 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     align-items: center;
   }
+  @media ${({ theme }) => theme.media.tablet} {
+    padding: 10px;
+    flex-direction: row;
+    align-items: center;
+  }
   @media ${({ theme }) => theme.media.desktop} {
+    padding: 50px;
     flex-direction: row;
     align-items: center;
   }
@@ -77,6 +83,7 @@ class Template extends Component {
             id={1}
             changeTemplate={this.handleChangeTemplate}
             language={language}
+            ratio="1:1"
           />
           <TemplateItem
             active={parseInt(template) === 2}
@@ -84,6 +91,7 @@ class Template extends Component {
             id={2}
             changeTemplate={this.handleChangeTemplate}
             language={language}
+            ratio="1:1"
           />
           <TemplateItem
             active={parseInt(template) === 3}
@@ -91,6 +99,7 @@ class Template extends Component {
             id={3}
             changeTemplate={this.handleChangeTemplate}
             language={language}
+            ratio="3:4"
           />
           {/* <TemplateItem
             active={parseInt(template) === 4}

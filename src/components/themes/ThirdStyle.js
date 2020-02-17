@@ -137,7 +137,7 @@ const TitleDecoration = styled.View`
 `;
 
 const SectionTitle = styled.Text`
-  margin-top: 5pt;
+  margin-top: 10pt;
   font-size: 9pt;
   color: ${({ white }) => (white ? 'white' : 'black')};
   font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
@@ -150,7 +150,7 @@ const SectionSubTitle = styled.Text`
   color: #494949;
   margin-left: 10pt;
   font-weight: ${({ bold }) => (bold ? 'semiBold' : 'normal')};
-  margin-top: 2pt;
+  margin: 2pt 0 7pt;
   /* letter-spacing: 0.2pt; */
   text-transform: uppercase;
 `;
@@ -158,13 +158,13 @@ const SectionSubTitle = styled.Text`
 const Section = styled.Text`
   margin: 0 0 0pt;
   color: black;
-  font-size: 9.5pt;
-  padding: 5pt 0 5pt 5pt;
+  font-size: 9pt;
+  padding: 5pt 0 5pt 0pt;
   letter-spacing: 0.3pt;
 `;
 const SectionDate = styled.Text`
   min-height: 8.5pt;
-  margin: 5pt 0 10pt;
+  margin: 10pt 0;
   color: black;
   font-size: 10pt;
   letter-spacing: 0.3pt;
@@ -214,6 +214,7 @@ const SectionLeft = styled.Text`
   font-size: 8pt;
   min-width: 145pt;
   text-align: center;
+  text-align: ${({ leftSide }) => (leftSide ? 'left' : 'center')};
 `;
 
 const Link = styled.Link`
@@ -259,7 +260,7 @@ const RightSide = styled.View`
   position: relative;
   border-left: 1pt solid #494949;
   flex-basis: 277pt;
-  padding-left: 10pt;
+  padding-left: 15pt;
 `;
 
 const LeftSide = styled.View`
