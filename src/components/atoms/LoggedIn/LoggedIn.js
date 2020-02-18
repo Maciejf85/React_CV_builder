@@ -20,7 +20,8 @@ const StyledWrapper = styled.div`
   padding: 10px;
   min-width: 50px;
   color: white;
-  z-index: 1;
+  z-index: 9999999;
+
   .iconStyle {
     color: ${({ theme }) => theme.colors.lightBlue};
     &:hover {
