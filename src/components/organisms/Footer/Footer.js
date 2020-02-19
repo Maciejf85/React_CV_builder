@@ -29,6 +29,9 @@ const StyledWrapper = styled.footer`
   @media ${({ theme }) => theme.media.medium} {
     position: relative;
   }
+  @media ${'(min-width:768px) and (max-width: 1199.98px) and (orientation: landscape)'} {
+    display: none;
+  }
 `;
 
 const Footer = ({ language }) => (

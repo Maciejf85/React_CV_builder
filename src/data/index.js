@@ -42,3 +42,8 @@ export const mainViews = [
     icon: [faFileContract],
   },
 ];
+export const cvColors = [
+  { color: '#494949', index: 1 },
+  { color: '#2f2f2f', index: 2 },
+  { color: '#eee5e6', index: 3 },
+];

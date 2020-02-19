@@ -8,14 +8,16 @@ import TemplateItem from 'components/molecules/Template';
 import temp0 from 'assets/template/template_0.jpg';
 import temp1 from 'assets/template/template_1.jpg';
 import temp2 from 'assets/template/template_2.jpg';
-// import temp3 from 'assets/template/template_3.jpg';
 import { changeTemplate } from 'actions';
 import { setNewCurrentCVData } from 'functions';
+import ColorButton from 'components/atoms/Buttons/TemplateColorButton';
 import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
+import { cvColors } from 'data';
 import store from 'store';
 import path from '../path';
 
 const StyledWrapper = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -23,6 +25,22 @@ const StyledWrapper = styled.div`
   min-height: calc(100vh - 50px);
   padding: 90px 50px 0;
   color: black;
+  div {
+    display: flex;
+    flex-direction: row;
+    .colorPicker {
+      display: flex;
+      width: 80px;
+      position: absolute;
+      left: 50%;
+      bottom: -50px;
+      justify-content: space-between;
+    }
+    .disabled {
+      display: none;
+    }
+  }
+
   @media ${({ theme }) => theme.media.small} {
     padding: 20px;
     flex-direction: column;
@@ -39,8 +57,14 @@ const StyledWrapper = styled.div`
     align-items: center;
   }
   @media ${({ theme }) => theme.media.desktop} {
-    padding: 50px;
+    padding: 0;
+    padding-bottom: 100px;
     flex-direction: row;
+    align-items: center;
+  }
+  @media ${({ theme }) => theme.media.bigDesktop} {
+    padding: 0;
+    padding-bottom: 100px;
     align-items: center;
   }
 `;
@@ -72,42 +96,47 @@ class Template extends Component {
     }
     const { isVisible, error, language } = this.props.appState;
     const { template } = this.props.isSet;
-
+    const { color } = this.props.isSet;
+    console.log(cvColors);
     return (
       <>
         <NavBar language={language} />
         <StyledWrapper>
-          <TemplateItem
-            active={parseInt(template) === 1}
-            img={temp0}
-            id={1}
-            changeTemplate={this.handleChangeTemplate}
-            language={language}
-            ratio="1:1"
-          />
-          <TemplateItem
-            active={parseInt(template) === 2}
-            img={temp1}
-            id={2}
-            changeTemplate={this.handleChangeTemplate}
-            language={language}
-            ratio="1:1"
-          />
-          <TemplateItem
-            active={parseInt(template) === 3}
-            img={temp2}
-            id={3}
-            changeTemplate={this.handleChangeTemplate}
-            language={language}
-            ratio="3:4"
-          />
-          {/* <TemplateItem
-            active={parseInt(template) === 4}
-            img={temp3}
-            id={4}
-            changeTemplate={this.handleChangeTemplate}
-            language={language}
-          /> */}
+          <div>
+            <TemplateItem
+              active={parseInt(template) === 1}
+              img={temp0}
+              id={1}
+              changeTemplate={this.handleChangeTemplate}
+              language={language}
+              ratio="1:1"
+            />
+          </div>
+          <div>
+            <TemplateItem
+              active={parseInt(template) === 2}
+              img={temp1}
+              id={2}
+              changeTemplate={this.handleChangeTemplate}
+              language={language}
+              ratio="1:1"
+            />
+          </div>
+          <div>
+            <TemplateItem
+              active={parseInt(template) === 3}
+              img={temp2}
+              id={3}
+              changeTemplate={this.handleChangeTemplate}
+              language={language}
+              ratio="3:4"
+            />
+          </div>
+          <div className={parseInt(template) === 1 ? 'colorPicker' : 'colorPicker disabled'}>
+            {cvColors.map(({ color, index }) => (
+              <ColorButton key={index} color={color} active={template == index} />
+            ))}
+          </div>
         </StyledWrapper>
         <Footer language={language} />
         <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />
