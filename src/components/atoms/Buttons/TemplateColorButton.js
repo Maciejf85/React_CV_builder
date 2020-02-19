@@ -2,27 +2,27 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.button`
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   outline: none;
   border: none;
   background: ${({ color }) => color || 'black'};
   padding: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
   transition: 0.2s;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   border: 1px solid darkgray;
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.2);
   }
   &.active {
-    transform: scale(1.3);
+    transform: scale(1.4);
   }
 `;
 
 const ColorButton = ({ color, active }) => {
-  console.log('active', active);
   return (
     <StyledWrapper
       type="button"
