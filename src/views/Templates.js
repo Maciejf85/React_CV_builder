@@ -8,15 +8,16 @@ import TemplateItem from 'components/molecules/Template';
 import temp0 from 'assets/template/template_0.jpg';
 import temp1 from 'assets/template/template_1.jpg';
 import temp2 from 'assets/template/template_2.jpg';
-// import temp3 from 'assets/template/template_3.jpg';
 import { changeTemplate } from 'actions';
 import { setNewCurrentCVData } from 'functions';
 import ColorButton from 'components/atoms/Buttons/TemplateColorButton';
 import ConfirmSidePanel from 'components/atoms/ConfirmSidePanel/ConfirmSidePanel';
+import { cvColors } from 'data';
 import store from 'store';
 import path from '../path';
 
 const StyledWrapper = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -25,18 +26,18 @@ const StyledWrapper = styled.div`
   padding: 90px 50px 0;
   color: black;
   div {
-    position: relative;
     display: flex;
     flex-direction: row;
     .colorPicker {
       display: flex;
-      width: 200px;
+      width: 80px;
       position: absolute;
       left: 50%;
       bottom: -50px;
-      transform: translateX(-50%);
-      justify-content: space-around;
-      background: #000;
+      justify-content: space-between;
+    }
+    .disabled {
+      display: none;
     }
   }
 
@@ -95,7 +96,8 @@ class Template extends Component {
     }
     const { isVisible, error, language } = this.props.appState;
     const { template } = this.props.isSet;
-
+    const { color } = this.props.isSet;
+    console.log(cvColors);
     return (
       <>
         <NavBar language={language} />
@@ -109,11 +111,6 @@ class Template extends Component {
               language={language}
               ratio="1:1"
             />
-            <div className="colorPicker">
-              <ColorButton color="red" />
-              <ColorButton color="green" />
-              <ColorButton color="blue" />
-            </div>
           </div>
           <div>
             <TemplateItem
@@ -124,11 +121,6 @@ class Template extends Component {
               language={language}
               ratio="1:1"
             />
-            <div className="colorPicker">
-              <ColorButton color="red" />
-              <ColorButton color="green" />
-              <ColorButton color="blue" />
-            </div>
           </div>
           <div>
             <TemplateItem
@@ -139,19 +131,12 @@ class Template extends Component {
               language={language}
               ratio="3:4"
             />
-            <div className="colorPicker">
-              <ColorButton color="red" />
-              <ColorButton color="green" />
-              <ColorButton color="blue" />
-            </div>
           </div>
-          {/* <TemplateItem
-            active={parseInt(template) === 4}
-            img={temp3}
-            id={4}
-            changeTemplate={this.handleChangeTemplate}
-            language={language}
-          /> */}
+          <div className={parseInt(template) === 1 ? 'colorPicker' : 'colorPicker disabled'}>
+            {cvColors.map(({ color, index }) => (
+              <ColorButton key={index} color={color} active={template == index} />
+            ))}
+          </div>
         </StyledWrapper>
         <Footer language={language} />
         <ConfirmSidePanel pose={isVisible ? 'visible' : 'hidden'} error={error} />

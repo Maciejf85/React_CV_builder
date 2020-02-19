@@ -48,9 +48,6 @@ const StyledWrapper = styled.div`
     color: ${({ theme }) => theme.colors.darkGrey};
     font-size: ${({ theme }) => theme.fontSize.s};
     font-style: italic;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
 
   @media ${({ theme }) => theme.media.small} {
@@ -77,14 +74,12 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Template = ({ active, img, changeTemplate, id, language, ratio, color }) => {
+const Template = ({ active, img, changeTemplate, id, language, ratio }) => {
   const isPolish = language === 'PL';
   return (
     <StyledWrapper active={active} onClick={changeTemplate}>
       <header>
-        <div>
-          {isPolish ? 'Szablon ' : 'Template '} #{id}
-        </div>
+        {isPolish ? 'Szablon ' : 'Template '} #{id}
       </header>
       <img src={img} alt="pdf template" id={id} />
       <div className="info">
