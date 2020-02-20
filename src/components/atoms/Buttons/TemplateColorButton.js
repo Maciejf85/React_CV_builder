@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { changeTemplateColor } from 'actions';
+import store from 'store';
 
 const StyledWrapper = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   outline: none;
   border: none;
   background: ${({ color }) => color || 'black'};
@@ -22,11 +24,11 @@ const StyledWrapper = styled.button`
   }
 `;
 
-const ColorButton = ({ color, active }) => {
+const ColorButton = ({ color, active, id }) => {
   return (
     <StyledWrapper
       type="button"
-      onClick={() => alert(active.toString())}
+      onClick={() => store.dispatch(changeTemplateColor(id))}
       color={color}
       className={active ? 'active' : null}
     />

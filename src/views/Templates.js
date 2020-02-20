@@ -28,7 +28,7 @@ const StyledWrapper = styled.div`
 
   .colorPicker {
     display: flex;
-    width: 180px;
+    width: 200px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -82,6 +82,9 @@ class Template extends Component {
     const { id } = e.target;
     store.dispatch(changeTemplate(id));
   };
+  componentDidUpdate = () => {
+    console.log('did update');
+  };
 
   render() {
     const { currentCv } = this.props;
@@ -92,7 +95,6 @@ class Template extends Component {
     const { isVisible, error, language } = this.props.appState;
     const { template } = this.props.isSet;
     const { color } = this.props.isSet;
-    console.log(cvColors);
     return (
       <>
         <NavBar language={language} />
@@ -123,7 +125,7 @@ class Template extends Component {
           />
           <div className={'colorPicker'}>
             {cvColors.map(({ colorValue, index }) => (
-              <ColorButton key={index} color={colorValue} active={color === index} />
+              <ColorButton key={index} color={colorValue} active={color === index} id={index} />
             ))}
           </div>
         </StyledWrapper>

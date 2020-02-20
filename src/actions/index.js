@@ -275,3 +275,11 @@ export const changeTemplate = id => {
     },
   };
 };
+export const changeTemplateColor = id => {
+  return {
+    type: 'CHANGE_COLOR',
+    payload: {
+      id,
+    },
+  };
+};
