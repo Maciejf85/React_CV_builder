@@ -47,7 +47,7 @@ export const cvColors = [
   { colorValue: '#494949', index: 2 },
   { colorValue: '#eee5e6', index: 3 },
   { colorValue: '#005C99', index: 4 },
-  { colorValue: '#253847', index: 5 },
+  { colorValue: '#042540', index: 5 },
   { colorValue: '#700000', index: 6 },
   { colorValue: '#ffffff', index: 7 },
 ];

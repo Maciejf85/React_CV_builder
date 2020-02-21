@@ -9,6 +9,7 @@ import Loader from 'components/atoms/Loader';
 import FirstStyle from 'components/themes/FirstStyle';
 import SecondStyle from 'components/themes/SecondStyle';
 import ThirdStyle from 'components/themes/ThirdStyle';
+import { cvColors } from 'data';
 import path from '../path';
 
 const styles = StyleSheet.create({
@@ -104,8 +105,11 @@ class Preview extends Component {
     const { template } = this.props.template;
     const { isReady } = this.state;
     const CVtitle = currentCv.currentItem.title;
+    const color = currentCv.currentItem.color;
     const templateNumber = parseInt(template) - 1;
     let isMobile = window.orientation > -1;
+    const colorId = cvColors[color - 1];
+    const { colorValue } = colorId;
     return (
       <>
         <NavBar language={language} />
@@ -116,9 +120,9 @@ class Preview extends Component {
               <PDFDownloadLink
                 document={
                   [
-                    [<FirstStyle language={language} key={1} />],
-                    [<SecondStyle language={language} key={2} />],
-                    [<ThirdStyle language={language} key={3} />],
+                    [<FirstStyle language={language} key={1} color={colorValue} />],
+                    [<SecondStyle language={language} key={2} color={colorValue} />],
+                    [<ThirdStyle language={language} key={3} color={colorValue} />],
                   ][templateNumber]
                 }
                 fileName={`${CVtitle}.pdf`}
@@ -139,13 +143,25 @@ class Preview extends Component {
         <StyledWrapper style={{ display: isMobile ? 'none' : 'block' }}>
           <PDFViewer style={styles.view} name={name}>
             {parseInt(template) === 1 && (
-              <FirstStyle downloadButton={this.handleButton} language={language} />
+              <FirstStyle
+                downloadButton={this.handleButton}
+                language={language}
+                color={colorValue}
+              />
             )}
             {parseInt(template) === 2 && (
-              <SecondStyle downloadButton={this.handleButton} language={language} />
+              <SecondStyle
+                downloadButton={this.handleButton}
+                language={language}
+                color={colorValue}
+              />
             )}
             {parseInt(template) === 3 && (
-              <ThirdStyle downloadButton={this.handleButton} language={language} />
+              <ThirdStyle
+                downloadButton={this.handleButton}
+                language={language}
+                color={colorValue}
+              />
             )}
           </PDFViewer>
         </StyledWrapper>

@@ -37,7 +37,7 @@ Font.registerHyphenationCallback(word => {
 const MainContainer = styled.Page`
   display: flex;
   flex-direction: row;
-  background-color: #494949;
+  background-color: ${({ colorId }) => colorId || '#494949'};
   padding-top: 15pt;
   padding-bottom: 100pt;
 `;
@@ -52,7 +52,6 @@ const Masking = styled.View`
 
 const LeftColumn = styled.View`
   width: 165pt;
-  height: 100%;
   color: white;
   padding: 0 5pt;
   font-family: 'Montserrat';
@@ -279,7 +278,7 @@ const FooterText = styled.Text`
 class MyDocument extends Component {
   render() {
     const state = store.getState();
-    const { language } = this.props;
+    const { language, color } = this.props;
     const { currentCv, personalData, confidential } = state;
     const { name, surname, email, adress, phone, github, linkedin, profession } = personalData;
     const {
@@ -298,7 +297,7 @@ class MyDocument extends Component {
     } = currentCv;
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
-        <MainContainer size="A4">
+        <MainContainer size="A4" colorId={color}>
           <Masking fixed />
           <LeftColumn>
             <HeadContainerLeft>

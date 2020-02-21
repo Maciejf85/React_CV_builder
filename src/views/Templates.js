@@ -68,7 +68,8 @@ class Template extends Component {
   componentDidUpdate(prevProps) {
     const { isSet, currentCv } = this.props;
     if (isSet !== undefined) {
-      if (prevProps.isSet.template === isSet.template) return;
+      if (prevProps.isSet.template === isSet.template && prevProps.isSet.color === isSet.color)
+        return;
 
       const token =
         localStorage.getItem('userID') !== null
@@ -81,9 +82,6 @@ class Template extends Component {
   handleChangeTemplate = e => {
     const { id } = e.target;
     store.dispatch(changeTemplate(id));
-  };
-  componentDidUpdate = () => {
-    console.log('did update');
   };
 
   render() {

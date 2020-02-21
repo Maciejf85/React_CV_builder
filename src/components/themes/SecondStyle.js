@@ -39,7 +39,7 @@ const MaskContent = styled.View`
   width: 176pt;
   height: 100%;
   margin-left: 28pt;
-  background: #eee5e6;
+  background-color: ${({ colorId }) => colorId || '#eee5e6'};
 `;
 
 const LeftColumn = styled.View`
@@ -49,7 +49,7 @@ const LeftColumn = styled.View`
   padding: 0 15pt;
   margin-left: 28pt;
   margin-top: 26pt;
-  background: #eee5e6;
+  background-color: ${({ colorId }) => colorId || '#eee5e6'};
   font-family: 'Montserrat';
 `;
 const RightColumn = styled.View`
@@ -177,7 +177,7 @@ const RightSideContentTitleBox = styled.View`
   margin: ${({ first }) => (first ? '10pt 0 15pt' : '25pt 0 15pt')};
   padding: 5pt 0;
   font-size: 11pt;
-  background: #eee5e6;
+  background-color: ${({ colorId }) => colorId || '#eee5e6'};
 `;
 const RightSideContentTitle = styled.Text`
   font-size: 9.5pt;
@@ -304,7 +304,7 @@ const FooterText = styled.Text`
 class MyDocument extends Component {
   render() {
     const state = store.getState();
-    const { language } = this.props;
+    const { language, color } = this.props;
     const { currentCv, personalData, confidential } = state;
     const { name, surname, email, adress, phone, github, linkedin, profession } = personalData;
     const {
@@ -321,12 +321,11 @@ class MyDocument extends Component {
       currentItem,
       webApi,
     } = currentCv;
-    // console.log('state', state);
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
           <Masking fixed>
-            <MaskContent />
+            <MaskContent colorId={color} />
           </Masking>
           <TopHeader>
             <UserNameContainer bold>
@@ -338,7 +337,7 @@ class MyDocument extends Component {
               <Profession bold>{profession}</Profession>
             </UserNameContainer>
           </TopHeader>
-          <LeftColumn>
+          <LeftColumn colorId={color}>
             <HeadContainerLeft>
               {!state.image.image || <ImageRound src={state.image.image} />}
             </HeadContainerLeft>
@@ -445,9 +444,9 @@ class MyDocument extends Component {
               </TextSection>
             ))}
           </LeftColumn>
-          <RightColumn>
+          <RightColumn colorId={color}>
             {!experience.length || (
-              <RightSideContentTitleBox wrap={false}>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
                 <RightSideContentTitle>
                   {language === 'PL' ? 'Doświadczenie zawodowe' : 'work experiance'}
                 </RightSideContentTitle>
@@ -481,7 +480,7 @@ class MyDocument extends Component {
             ))}
 
             {!education.length || (
-              <RightSideContentTitleBox wrap={false}>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
                 <RightSideContentTitle>
                   {language === 'PL' ? 'edukacja' : 'education'}
                 </RightSideContentTitle>
@@ -513,7 +512,7 @@ class MyDocument extends Component {
               </TextSection>
             ))}
             {!webApi.length || (
-              <RightSideContentTitleBox wrap={false}>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
                 <RightSideContentTitle>
                   {language === 'PL' ? 'Aplikacje webowe' : 'Web application'}
                 </RightSideContentTitle>
@@ -540,7 +539,7 @@ class MyDocument extends Component {
             ))}
 
             {!certificates.length || (
-              <RightSideContentTitleBox wrap={false} orphans={3}>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
                 <RightSideContentTitle>
                   {language === 'PL' ? 'certyfikaty' : 'certificates'}
                 </RightSideContentTitle>
@@ -568,7 +567,7 @@ class MyDocument extends Component {
             ))}
 
             {!courses.length || (
-              <RightSideContentTitleBox>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
                 <RightSideContentTitle>
                   {language === 'PL' ? 'kursy' : 'courses'}
                 </RightSideContentTitle>
@@ -596,7 +595,7 @@ class MyDocument extends Component {
             ))}
 
             {!publications.length || (
-              <RightSideContentTitleBox>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
                 <RightSideContentTitle>
                   {language === 'PL' ? 'publikacje' : 'publications'}
                 </RightSideContentTitle>
@@ -624,7 +623,7 @@ class MyDocument extends Component {
             ))}
 
             {!conferences.length || (
-              <RightSideContentTitleBox>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
                 <RightSideContentTitle>
                   {language === 'PL' ? 'konferencje' : 'conferences'}
                 </RightSideContentTitle>
@@ -652,7 +651,7 @@ class MyDocument extends Component {
             ))}
 
             {!licenses.length || (
-              <RightSideContentTitleBox>
+              <RightSideContentTitleBox colorId={color}>
                 <RightSideContentTitle>
                   {language === 'PL' ? 'licencje' : 'licenses'}
                 </RightSideContentTitle>
