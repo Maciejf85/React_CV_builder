@@ -40,6 +40,14 @@ const currentCv = (state = initialState, { type, payload }) => {
           template: payload.id,
         },
       };
+    case 'CHANGE_COLOR':
+      return {
+        ...state,
+        currentItem: {
+          ...state.currentItem,
+          color: payload.id,
+        },
+      };
 
     default:
       return state;

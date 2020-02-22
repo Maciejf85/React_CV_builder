@@ -39,7 +39,7 @@ const MaskContent = styled.View`
   width: 176pt;
   height: 100%;
   margin-left: 28pt;
-  background: #eee5e6;
+  background-color: ${({ colorId }) => colorId || '#eee5e6'};
 `;
 
 const LeftColumn = styled.View`
@@ -49,7 +49,7 @@ const LeftColumn = styled.View`
   padding: 0 15pt;
   margin-left: 28pt;
   margin-top: 26pt;
-  background: #eee5e6;
+  background-color: ${({ colorId }) => colorId || '#eee5e6'};
   font-family: 'Montserrat';
 `;
 const RightColumn = styled.View`
@@ -137,7 +137,7 @@ const Icon = styled.Image`
 `;
 
 const IconText = styled.Text`
-  color: #444;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444')};
   font-size: 8.5pt;
   font-family: 'Montserrat';
   text-transform: capitalize;
@@ -150,7 +150,7 @@ const PersonalDataSection = styled.View`
 
 const SectionLeft = styled.Text`
   margin: 0 0 10pt;
-  color: #444444;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444')};
   font-size: 9pt;
   padding: 5pt 0;
 `;
@@ -165,26 +165,27 @@ const ContentTitle = styled.Text`
   text-transform: uppercase;
   letter-spacing: 1pt;
   font-weight: normal;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444')};
 `;
 const TitleDecoration = styled.View`
   width: 100%;
   margin-top: 5pt;
   height: 2pt;
-  border-bottom: 1pt solid ${({ dark }) => (dark ? '#444444' : 'white')};
+  border-bottom: 1pt solid ${({ dark }) => (dark ? 'white' : '#444444')};
 `;
 
 const RightSideContentTitleBox = styled.View`
   margin: ${({ first }) => (first ? '10pt 0 15pt' : '25pt 0 15pt')};
   padding: 5pt 0;
   font-size: 11pt;
-  background: #eee5e6;
+  background-color: ${({ colorId }) => colorId || '#eee5e6'};
 `;
 const RightSideContentTitle = styled.Text`
   font-size: 9.5pt;
   text-transform: uppercase;
   letter-spacing: 1pt;
   font-weight: semiBold;
-  color: #444;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444')};
   text-align: center;
 `;
 
@@ -192,7 +193,7 @@ const SectionTitleLeft = styled.Text`
   text-transform: capitalize;
   width: 100%;
   height: 15pt;
-  color: #444444;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444')};
   font-size: 9.8pt;
   font-weight: semiBold;
   letter-spacing: 0.2pt;
@@ -207,7 +208,7 @@ const SectionTitleLeftIcon = styled.View`
   /* border: 1px solid #444; */
 `;
 const Link = styled.Link`
-  color: #444444;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444')};
   font-size: 8.5pt;
 `;
 
@@ -215,6 +216,7 @@ const TextSection = styled.View`
   position: relative;
   /* margin-bottom: 10pt; */
   padding-right: 10pt;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444')};
 `;
 
 const SectionLeftBox = styled.View`
@@ -235,7 +237,7 @@ const RightSide = styled.View`
   flex-wrap: wrap;
   position: relative;
   max-width: 230pt;
-  color: #444444;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444')};
   padding-left: 5pt;
 `;
 
@@ -246,7 +248,7 @@ const LeftSide = styled.View`
 `;
 const SectionTitle = styled.Text`
   font-size: 9pt;
-  color: ${({ white }) => (white ? 'white' : '#444444;')};
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444;')};
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
   letter-spacing: 0.2pt;
   text-align: ${({ right }) => (right ? 'right' : 'left')};
@@ -255,7 +257,7 @@ const SectionTitle = styled.Text`
 `;
 
 const Section = styled.Text`
-  color: #444;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444;')};
   font-size: 9pt;
   padding: 5pt 0 5pt 5pt;
   letter-spacing: 0.3pt;
@@ -304,7 +306,7 @@ const FooterText = styled.Text`
 class MyDocument extends Component {
   render() {
     const state = store.getState();
-    const { language } = this.props;
+    const { language, color, index } = this.props;
     const { currentCv, personalData, confidential } = state;
     const { name, surname, email, adress, phone, github, linkedin, profession } = personalData;
     const {
@@ -321,12 +323,13 @@ class MyDocument extends Component {
       currentItem,
       webApi,
     } = currentCv;
-    // console.log('state', state);
+    const bgIsDark = index !== 3 && index !== 7;
+
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4">
           <Masking fixed>
-            <MaskContent />
+            <MaskContent colorId={color} />
           </Masking>
           <TopHeader>
             <UserNameContainer bold>
@@ -338,20 +341,22 @@ class MyDocument extends Component {
               <Profession bold>{profession}</Profession>
             </UserNameContainer>
           </TopHeader>
-          <LeftColumn>
+          <LeftColumn colorId={color}>
             <HeadContainerLeft>
               {!state.image.image || <ImageRound src={state.image.image} />}
             </HeadContainerLeft>
 
             <ContentTitleBox wrap={false} first>
-              <ContentTitle>{language === 'PL' ? 'dane osobowe' : 'personal'}</ContentTitle>
-              <TitleDecoration dark />
+              <ContentTitle bgIsDark={bgIsDark}>
+                {language === 'PL' ? 'dane osobowe' : 'personal'}
+              </ContentTitle>
+              <TitleDecoration dark={bgIsDark} />
             </ContentTitleBox>
             {!phone || (
               <PersonalDataSection>
                 <SectionTitleLeftIcon white bold>
                   <Icon src={phoneIcon} />
-                  <IconText>{phone}</IconText>
+                  <IconText bgIsDark={bgIsDark}>{phone}</IconText>
                 </SectionTitleLeftIcon>
               </PersonalDataSection>
             )}
@@ -359,7 +364,7 @@ class MyDocument extends Component {
               <PersonalDataSection>
                 <SectionTitleLeftIcon white bold>
                   <Icon src={emailIcon} />
-                  <IconText> {email}</IconText>
+                  <IconText bgIsDark={bgIsDark}> {email}</IconText>
                 </SectionTitleLeftIcon>
               </PersonalDataSection>
             )}
@@ -367,7 +372,7 @@ class MyDocument extends Component {
               <PersonalDataSection>
                 <SectionTitleLeftIcon white bold>
                   <Icon src={addressIcon} />
-                  <IconText> {adress}</IconText>
+                  <IconText bgIsDark={bgIsDark}> {adress}</IconText>
                 </SectionTitleLeftIcon>
               </PersonalDataSection>
             )}
@@ -376,6 +381,7 @@ class MyDocument extends Component {
                 <SectionTitleLeftIcon white bold>
                   <Icon src={githubIcon} />
                   <Link
+                    bgIsDark={bgIsDark}
                     href={github}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -391,6 +397,7 @@ class MyDocument extends Component {
                 <SectionTitleLeftIcon white bold>
                   <Icon src={linkedIcon} />
                   <Link
+                    bgIsDark={bgIsDark}
                     href={linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -403,52 +410,62 @@ class MyDocument extends Component {
             )}
 
             {!languages.length || (
-              <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
-                <TitleDecoration dark />
+              <ContentTitleBox wrap={false} bgIsDark={bgIsDark}>
+                <ContentTitle bgIsDark={bgIsDark}>
+                  {language === 'PL' ? 'Języki obce' : 'Languages'}
+                </ContentTitle>
+                <TitleDecoration dark={bgIsDark} />
               </ContentTitleBox>
             )}
 
             {languages.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox>
-                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                    {item.name}
+                  </SectionTitleLeft>
                 </SectionLeftBox>
-                <SectionLeft>{`${item.description}`}</SectionLeft>
+                <SectionLeft bgIsDark={bgIsDark}>{`${item.description}`}</SectionLeft>
               </TextSection>
             ))}
 
             {!skills.length || (
-              <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'Umiejętności' : 'Skills'}</ContentTitle>
-                <TitleDecoration dark />
+              <ContentTitleBox wrap={false} bgIsDark={bgIsDark}>
+                <ContentTitle bgIsDark={bgIsDark}>
+                  {language === 'PL' ? 'Umiejętności' : 'Skills'}
+                </ContentTitle>
+                <TitleDecoration dark={bgIsDark} />
               </ContentTitleBox>
             )}
 
             {skills.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox>
-                  <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                    {item.name}
+                  </SectionTitleLeft>
                 </SectionLeftBox>
-                <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+                <SectionLeft bgIsDark={bgIsDark}>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
             ))}
             {!interests.length || (
-              <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'zainteresowania' : 'interests'}</ContentTitle>
-                <TitleDecoration dark />
+              <ContentTitleBox wrap={false} bgIsDark={bgIsDark}>
+                <ContentTitle bgIsDark={bgIsDark}>
+                  {language === 'PL' ? 'zainteresowania' : 'interests'}
+                </ContentTitle>
+                <TitleDecoration dark={bgIsDark} />
               </ContentTitleBox>
             )}
             {interests.map(item => (
               <TextSection key={item.id} wrap={false}>
-                <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+                <SectionLeft bgIsDark={bgIsDark}>{`${item.description || ''}`}</SectionLeft>
               </TextSection>
             ))}
           </LeftColumn>
-          <RightColumn>
+          <RightColumn colorId={color}>
             {!experience.length || (
-              <RightSideContentTitleBox wrap={false}>
-                <RightSideContentTitle>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
+                <RightSideContentTitle bgIsDark={bgIsDark}>
                   {language === 'PL' ? 'Doświadczenie zawodowe' : 'work experiance'}
                 </RightSideContentTitle>
               </RightSideContentTitleBox>
@@ -481,8 +498,8 @@ class MyDocument extends Component {
             ))}
 
             {!education.length || (
-              <RightSideContentTitleBox wrap={false}>
-                <RightSideContentTitle>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
+                <RightSideContentTitle bgIsDark={bgIsDark}>
                   {language === 'PL' ? 'edukacja' : 'education'}
                 </RightSideContentTitle>
               </RightSideContentTitleBox>
@@ -513,8 +530,8 @@ class MyDocument extends Component {
               </TextSection>
             ))}
             {!webApi.length || (
-              <RightSideContentTitleBox wrap={false}>
-                <RightSideContentTitle>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
+                <RightSideContentTitle bgIsDark={bgIsDark}>
                   {language === 'PL' ? 'Aplikacje webowe' : 'Web application'}
                 </RightSideContentTitle>
               </RightSideContentTitleBox>
@@ -540,8 +557,8 @@ class MyDocument extends Component {
             ))}
 
             {!certificates.length || (
-              <RightSideContentTitleBox wrap={false} orphans={3}>
-                <RightSideContentTitle>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
+                <RightSideContentTitle bgIsDark={bgIsDark}>
                   {language === 'PL' ? 'certyfikaty' : 'certificates'}
                 </RightSideContentTitle>
               </RightSideContentTitleBox>
@@ -568,8 +585,8 @@ class MyDocument extends Component {
             ))}
 
             {!courses.length || (
-              <RightSideContentTitleBox>
-                <RightSideContentTitle>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
+                <RightSideContentTitle bgIsDark={bgIsDark}>
                   {language === 'PL' ? 'kursy' : 'courses'}
                 </RightSideContentTitle>
               </RightSideContentTitleBox>
@@ -596,8 +613,8 @@ class MyDocument extends Component {
             ))}
 
             {!publications.length || (
-              <RightSideContentTitleBox>
-                <RightSideContentTitle>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
+                <RightSideContentTitle bgIsDark={bgIsDark}>
                   {language === 'PL' ? 'publikacje' : 'publications'}
                 </RightSideContentTitle>
               </RightSideContentTitleBox>
@@ -624,8 +641,8 @@ class MyDocument extends Component {
             ))}
 
             {!conferences.length || (
-              <RightSideContentTitleBox>
-                <RightSideContentTitle>
+              <RightSideContentTitleBox wrap={false} colorId={color}>
+                <RightSideContentTitle bgIsDark={bgIsDark}>
                   {language === 'PL' ? 'konferencje' : 'conferences'}
                 </RightSideContentTitle>
               </RightSideContentTitleBox>
@@ -652,8 +669,8 @@ class MyDocument extends Component {
             ))}
 
             {!licenses.length || (
-              <RightSideContentTitleBox>
-                <RightSideContentTitle>
+              <RightSideContentTitleBox colorId={color}>
+                <RightSideContentTitle bgIsDark={bgIsDark}>
                   {language === 'PL' ? 'licencje' : 'licenses'}
                 </RightSideContentTitle>
               </RightSideContentTitleBox>

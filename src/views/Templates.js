@@ -25,20 +25,15 @@ const StyledWrapper = styled.div`
   min-height: calc(100vh - 50px);
   padding: 90px 50px 0;
   color: black;
-  div {
+
+  .colorPicker {
     display: flex;
-    flex-direction: row;
-    .colorPicker {
-      display: flex;
-      width: 80px;
-      position: absolute;
-      left: 50%;
-      bottom: -50px;
-      justify-content: space-between;
-    }
-    .disabled {
-      display: none;
-    }
+    width: 200px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 100px;
+    justify-content: space-between;
   }
 
   @media ${({ theme }) => theme.media.small} {
@@ -73,7 +68,8 @@ class Template extends Component {
   componentDidUpdate(prevProps) {
     const { isSet, currentCv } = this.props;
     if (isSet !== undefined) {
-      if (prevProps.isSet.template === isSet.template) return;
+      if (prevProps.isSet.template === isSet.template && prevProps.isSet.color === isSet.color)
+        return;
 
       const token =
         localStorage.getItem('userID') !== null
@@ -97,44 +93,37 @@ class Template extends Component {
     const { isVisible, error, language } = this.props.appState;
     const { template } = this.props.isSet;
     const { color } = this.props.isSet;
-    console.log(cvColors);
     return (
       <>
         <NavBar language={language} />
         <StyledWrapper>
-          <div>
-            <TemplateItem
-              active={parseInt(template) === 1}
-              img={temp0}
-              id={1}
-              changeTemplate={this.handleChangeTemplate}
-              language={language}
-              ratio="1:1"
-            />
-          </div>
-          <div>
-            <TemplateItem
-              active={parseInt(template) === 2}
-              img={temp1}
-              id={2}
-              changeTemplate={this.handleChangeTemplate}
-              language={language}
-              ratio="1:1"
-            />
-          </div>
-          <div>
-            <TemplateItem
-              active={parseInt(template) === 3}
-              img={temp2}
-              id={3}
-              changeTemplate={this.handleChangeTemplate}
-              language={language}
-              ratio="3:4"
-            />
-          </div>
-          <div className={parseInt(template) === 1 ? 'colorPicker' : 'colorPicker disabled'}>
-            {cvColors.map(({ color, index }) => (
-              <ColorButton key={index} color={color} active={template == index} />
+          <TemplateItem
+            active={parseInt(template) === 1}
+            img={temp0}
+            id={1}
+            changeTemplate={this.handleChangeTemplate}
+            language={language}
+            ratio="1:1"
+          />
+          <TemplateItem
+            active={parseInt(template) === 2}
+            img={temp1}
+            id={2}
+            changeTemplate={this.handleChangeTemplate}
+            language={language}
+            ratio="1:1"
+          />
+          <TemplateItem
+            active={parseInt(template) === 3}
+            img={temp2}
+            id={3}
+            changeTemplate={this.handleChangeTemplate}
+            language={language}
+            ratio="3:4"
+          />
+          <div className={'colorPicker'}>
+            {cvColors.map(({ colorValue, index }) => (
+              <ColorButton key={index} color={colorValue} active={color === index} id={index} />
             ))}
           </div>
         </StyledWrapper>
