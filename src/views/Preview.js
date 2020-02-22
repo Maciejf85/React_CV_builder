@@ -109,7 +109,7 @@ class Preview extends Component {
     const templateNumber = parseInt(template) - 1;
     let isMobile = window.orientation > -1;
     const colorId = cvColors[color - 1];
-    const { colorValue } = colorId;
+    const { colorValue, index } = colorId;
     return (
       <>
         <NavBar language={language} />
@@ -120,9 +120,9 @@ class Preview extends Component {
               <PDFDownloadLink
                 document={
                   [
-                    [<FirstStyle language={language} key={1} color={colorValue} />],
-                    [<SecondStyle language={language} key={2} color={colorValue} />],
-                    [<ThirdStyle language={language} key={3} color={colorValue} />],
+                    [<FirstStyle language={language} key={1} color={colorValue} index={index} />],
+                    [<SecondStyle language={language} key={2} color={colorValue} index={index} />],
+                    [<ThirdStyle language={language} key={3} color={colorValue} index={index} />],
                   ][templateNumber]
                 }
                 fileName={`${CVtitle}.pdf`}
@@ -147,6 +147,7 @@ class Preview extends Component {
                 downloadButton={this.handleButton}
                 language={language}
                 color={colorValue}
+                index={index}
               />
             )}
             {parseInt(template) === 2 && (
@@ -154,6 +155,7 @@ class Preview extends Component {
                 downloadButton={this.handleButton}
                 language={language}
                 color={colorValue}
+                index={index}
               />
             )}
             {parseInt(template) === 3 && (
@@ -161,6 +163,7 @@ class Preview extends Component {
                 downloadButton={this.handleButton}
                 language={language}
                 color={colorValue}
+                index={index}
               />
             )}
           </PDFViewer>
