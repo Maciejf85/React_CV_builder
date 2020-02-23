@@ -61,7 +61,7 @@ const RightColumn = styled.View`
 `;
 
 const HeadContainerLeft = styled.View`
-  display: flex;
+  display: ${({ isPhoto }) => (isPhoto ? 'flex' : 'none')};
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -76,7 +76,7 @@ const UserNameContainer = styled.View`
   flex-wrap: wrap;
   border: 1px solid grey;
   border-radius: 3pt;
-  margin-top: 45pt;
+  margin-top: ${({ isPhoto }) => (isPhoto ? '45pt' : '15pt')};
   margin-bottom: 7pt;
   padding-left: 5pt;
   padding-right: 5pt;
@@ -312,16 +312,16 @@ class MyDocument extends Component {
       interests,
       currentItem,
     } = currentCv;
-    // console.log('state', state);
+    const isPhoto = state.image.image || false;
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4" colorId={color}>
           <Masking fixed />
           <LeftColumn>
-            <HeadContainerLeft>
+            <HeadContainerLeft isPhoto={isPhoto}>
               {!state.image.image || <ImageRound src={state.image.image} />}
             </HeadContainerLeft>
-            <UserNameContainer bold>
+            <UserNameContainer bold isPhoto={isPhoto}>
               <UserName>{name}</UserName>
               <UserName>{surname}</UserName>
             </UserNameContainer>

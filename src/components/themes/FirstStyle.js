@@ -5,10 +5,15 @@ import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import linkedIcon from 'assets/icons/linked.png';
+import linkedIcon_dark from 'assets/icons/linked_d.png';
 import phoneIcon from 'assets/icons/phone.png';
+import phoneIcon_dark from 'assets/icons/phone_d.png';
 import emailIcon from 'assets/icons/email.png';
+import emailIcon_dark from 'assets/icons/email_d.png';
 import githubIcon from 'assets/icons/github.png';
+import githubIcon_dark from 'assets/icons/github_d.png';
 import addressIcon from 'assets/icons/address.png';
+import addressIcon_dark from 'assets/icons/address_d.png';
 import store from 'store';
 
 Font.register({
@@ -65,7 +70,7 @@ const RightColumn = styled.View`
 `;
 
 const HeadContainerLeft = styled.View`
-  display: flex;
+  display: ${({ isPhoto }) => (isPhoto ? 'flex' : 'none')};
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -120,11 +125,12 @@ const ContentTitle = styled.Text`
   text-transform: uppercase;
   letter-spacing: 0.5pt;
   font-weight: semiBold;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
 `;
 const TitleDecoration = styled.View`
   width: 30pt;
   height: 5pt;
-  border-bottom: 3pt solid ${({ white }) => (white ? 'white' : '#494949')};
+  border-bottom: 3pt solid ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
 `;
 
 const SectionTitle = styled.Text`
@@ -165,26 +171,29 @@ const SectionLeftBox = styled.View`
 `;
 const Icon = styled.Image`
   width: 15pt;
-  height: 9pt;
+  height: 10pt;
   background-position: center center;
 `;
 
 const SectionTitleLeft = styled.Text`
   display: flex;
+  height: 15pt;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  margin: 5pt 0;
   text-transform: capitalize;
-  color: white;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
   font-size: 9.8pt;
   font-weight: semiBold;
   letter-spacing: 0.2pt;
 `;
+
 const SectionTitleLeftDot = styled.View`
   margin: 0 4pt;
   width: 4pt;
   height: 4pt;
-  background: white;
+  background: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
   border-radius: 50pt;
 `;
 
@@ -195,7 +204,7 @@ const PersonalDataSection = styled.View`
 
 const SectionLeft = styled.Text`
   margin: 0 0 10pt;
-  color: white;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
   font-size: 9pt;
   padding: 5pt 0 0 11pt;
 `;
@@ -206,7 +215,7 @@ const Link = styled.Link`
   padding: 5pt 0 0 11pt;
   font-size: 8.5pt;
   font-family: 'Montserrat';
-  color: white;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
 `;
 
 const TextSection = styled.View`
@@ -278,7 +287,7 @@ const FooterText = styled.Text`
 class MyDocument extends Component {
   render() {
     const state = store.getState();
-    const { language, color } = this.props;
+    const { language, color, index } = this.props;
     const { currentCv, personalData, confidential } = state;
     const { name, surname, email, adress, phone, github, linkedin, profession } = personalData;
     const {
@@ -295,51 +304,59 @@ class MyDocument extends Component {
       currentItem,
       webApi,
     } = currentCv;
+    const bgIsDark = index !== 3 && index !== 7;
+    const isPhoto = state.image.image || false;
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4" colorId={color}>
           <Masking fixed />
           <LeftColumn>
-            <HeadContainerLeft>
+            <HeadContainerLeft isPhoto={isPhoto}>
               {!state.image.image || <ImageRound src={state.image.image} />}
             </HeadContainerLeft>
 
             <LeftSide leftSide>
               <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'dane osobowe' : 'personal'}</ContentTitle>
-                <TitleDecoration white />
+                <ContentTitle bgIsDark={bgIsDark}>
+                  {language === 'PL' ? 'dane osobowe' : 'personal'}
+                </ContentTitle>
+                <TitleDecoration bgIsDark={bgIsDark} />
               </ContentTitleBox>
               {!phone || (
                 <PersonalDataSection>
-                  <SectionTitleLeft white bold>
-                    <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                    <Icon src={bgIsDark ? phoneIcon : phoneIcon_dark} bgIsDark={bgIsDark} />{' '}
+                    {language === 'PL' ? 'telefon' : 'phone'}:
                   </SectionTitleLeft>
-                  <SectionLeft>{phone}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {phone}</SectionLeft>
                 </PersonalDataSection>
               )}
               {!email || (
                 <PersonalDataSection>
-                  <SectionTitleLeft white bold>
-                    <Icon src={emailIcon} /> Email:
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                    <Icon src={bgIsDark ? emailIcon : emailIcon_dark} bgIsDark={bgIsDark} /> Email:
                   </SectionTitleLeft>
-                  <SectionLeft>{email}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {email}</SectionLeft>
                 </PersonalDataSection>
               )}
               {!adress || (
                 <PersonalDataSection>
-                  <SectionTitleLeft white bold>
-                    <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                    <Icon src={bgIsDark ? addressIcon : addressIcon_dark} bgIsDark={bgIsDark} />{' '}
+                    {language === 'PL' ? 'adres' : 'address'}:
                   </SectionTitleLeft>
-                  <SectionLeft>{adress}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {adress}</SectionLeft>
                 </PersonalDataSection>
               )}
               {!github || (
                 <>
-                  <SectionTitleLeft white bold>
-                    <Icon src={githubIcon} /> Github:
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                    <Icon src={bgIsDark ? githubIcon : githubIcon_dark} bgIsDark={bgIsDark} />{' '}
+                    Github:
                   </SectionTitleLeft>
                   <PersonalDataSection>
                     <Link
+                      bgIsDark={bgIsDark}
                       href={github}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -352,11 +369,13 @@ class MyDocument extends Component {
               )}
               {!linkedin || (
                 <>
-                  <SectionTitleLeft white bold>
-                    <Icon src={linkedIcon} /> Linkedin:
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                    <Icon src={bgIsDark ? linkedIcon : linkedIcon_dark} bgIsDark={bgIsDark} />{' '}
+                    Linkedin:
                   </SectionTitleLeft>
                   <PersonalDataSection>
                     <Link
+                      bgIsDark={bgIsDark}
                       href={linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -370,46 +389,56 @@ class MyDocument extends Component {
 
               {!languages.length || (
                 <ContentTitleBox wrap={false}>
-                  <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
-                  <TitleDecoration white />
+                  <ContentTitle bgIsDark={bgIsDark}>
+                    {language === 'PL' ? 'Języki obce' : 'Languages'}
+                  </ContentTitle>
+                  <TitleDecoration bgIsDark={bgIsDark} />
                 </ContentTitleBox>
               )}
 
               {languages.map(item => (
                 <TextSection key={item.id} wrap={false}>
                   <SectionLeftBox>
-                    <SectionTitleLeftDot />
-                    <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                    <SectionTitleLeftDot bgIsDark={bgIsDark} />
+                    <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                      {item.name}
+                    </SectionTitleLeft>
                   </SectionLeftBox>
-                  <SectionLeft>{`${item.description}`}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {`${item.description}`}</SectionLeft>
                 </TextSection>
               ))}
 
               {!skills.length || (
                 <ContentTitleBox wrap={false}>
-                  <ContentTitle>{language === 'PL' ? 'Umiejętności' : 'Skills'}</ContentTitle>
-                  <TitleDecoration white />
+                  <ContentTitle bgIsDark={bgIsDark}>
+                    {language === 'PL' ? 'Umiejętności' : 'Skills'}
+                  </ContentTitle>
+                  <TitleDecoration bgIsDark={bgIsDark} />
                 </ContentTitleBox>
               )}
 
               {skills.map(item => (
                 <TextSection key={item.id} wrap={false}>
                   <SectionLeftBox>
-                    <SectionTitleLeftDot />
-                    <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                    <SectionTitleLeftDot bgIsDark={bgIsDark} />
+                    <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                      {item.name}
+                    </SectionTitleLeft>
                   </SectionLeftBox>
-                  <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {`${item.description || ''}`}</SectionLeft>
                 </TextSection>
               ))}
               {!interests.length || (
                 <ContentTitleBox wrap={false}>
-                  <ContentTitle>{language === 'PL' ? 'zainteresowania' : 'interests'}</ContentTitle>
-                  <TitleDecoration white />
+                  <ContentTitle bgIsDark={bgIsDark}>
+                    {language === 'PL' ? 'zainteresowania' : 'interests'}
+                  </ContentTitle>
+                  <TitleDecoration bgIsDark={bgIsDark} />
                 </ContentTitleBox>
               )}
               {interests.map(item => (
                 <TextSection key={item.id} wrap={false}>
-                  <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {`${item.description || ''}`}</SectionLeft>
                 </TextSection>
               ))}
             </LeftSide>
