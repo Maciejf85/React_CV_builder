@@ -5,10 +5,15 @@ import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import linkedIcon from 'assets/icons/linked_dark.png';
+import linkedIcon_w from 'assets/icons/linked.png';
 import phoneIcon from 'assets/icons/phone_dark.png';
+import phoneIcon_w from 'assets/icons/phone.png';
 import emailIcon from 'assets/icons/email_dark.png';
+import emailIcon_w from 'assets/icons/email.png';
 import githubIcon from 'assets/icons/github_dark.png';
+import githubIcon_w from 'assets/icons/github.png';
 import addressIcon from 'assets/icons/address_dark.png';
+import addressIcon_w from 'assets/icons/address.png';
 import store from 'store';
 
 Font.register({
@@ -129,9 +134,8 @@ const HeadContainerLeft = styled.View`
 `;
 
 const Icon = styled.Image`
-  width: 13pt;
   height: 13pt;
-  background-position: center center;
+  width: 13pt;
   margin-right: 5pt;
   /* border: 1px solid red; */
 `;
@@ -355,32 +359,36 @@ class MyDocument extends Component {
             </ContentTitleBox>
             {!phone || (
               <PersonalDataSection>
-                <SectionTitleLeftIcon white bold>
-                  <Icon src={phoneIcon} />
+                <SectionTitleLeftIcon bold>
+                  <Icon src={bgIsDark ? phoneIcon_w : phoneIcon} bgIsDark={bgIsDark} />
                   <IconText bgIsDark={bgIsDark}>{phone}</IconText>
                 </SectionTitleLeftIcon>
               </PersonalDataSection>
             )}
             {!email || (
               <PersonalDataSection>
-                <SectionTitleLeftIcon white bold>
-                  <Icon src={emailIcon} />
+                <SectionTitleLeftIcon bold>
+                  <Icon
+                    src={bgIsDark ? emailIcon_w : emailIcon}
+                    bgIsDark={bgIsDark}
+                    style={{ width: '16px' }}
+                  />
                   <IconText bgIsDark={bgIsDark}> {email}</IconText>
                 </SectionTitleLeftIcon>
               </PersonalDataSection>
             )}
             {!adress || (
               <PersonalDataSection>
-                <SectionTitleLeftIcon white bold>
-                  <Icon src={addressIcon} />
+                <SectionTitleLeftIcon bold>
+                  <Icon src={bgIsDark ? addressIcon_w : addressIcon} bgIsDark={bgIsDark} />
                   <IconText bgIsDark={bgIsDark}> {adress}</IconText>
                 </SectionTitleLeftIcon>
               </PersonalDataSection>
             )}
             {!github || (
               <>
-                <SectionTitleLeftIcon white bold>
-                  <Icon src={githubIcon} />
+                <SectionTitleLeftIcon bold>
+                  <Icon src={bgIsDark ? githubIcon_w : githubIcon} bgIsDark={bgIsDark} />
                   <Link
                     bgIsDark={bgIsDark}
                     href={github}
@@ -395,8 +403,8 @@ class MyDocument extends Component {
             )}
             {!linkedin || (
               <>
-                <SectionTitleLeftIcon white bold>
-                  <Icon src={linkedIcon} />
+                <SectionTitleLeftIcon bold>
+                  <Icon src={bgIsDark ? linkedIcon_w : linkedIcon} bgIsDark={bgIsDark} />
                   <Link
                     bgIsDark={bgIsDark}
                     href={linkedin}

@@ -34,6 +34,26 @@ const StyledWrapper = styled.div`
     transform: translateX(-50%);
     bottom: 100px;
     justify-content: space-between;
+
+    @media ${({ theme }) => theme.media.small} {
+      position: fixed;
+      left: 10px;
+      flex-direction: column;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    @media ${({ theme }) => theme.media.medium} {
+      position: fixed;
+      left: 10px;
+      flex-direction: column;
+      top: 50%;
+      height: 200px;
+      width: 35px;
+      transform: translateY(-50%);
+    }
+    @media ${({ theme }) => theme.media.tablet} {
+      bottom: 200px;
+    }
   }
 
   @media ${({ theme }) => theme.media.small} {
@@ -51,6 +71,7 @@ const StyledWrapper = styled.div`
     flex-direction: row;
     align-items: center;
   }
+
   @media ${({ theme }) => theme.media.desktop} {
     padding: 0;
     padding-bottom: 100px;

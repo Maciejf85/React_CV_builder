@@ -76,7 +76,7 @@ const UserNameContainer = styled.View`
   flex-wrap: wrap;
   border: 1px solid grey;
   border-radius: 3pt;
-  margin-top: ${({ isPhoto }) => (isPhoto ? '45pt' : '16pt')};
+  margin-top: ${({ isPhoto }) => (isPhoto ? '45pt' : '15pt')};
   margin-bottom: 7pt;
   padding-left: 5pt;
   padding-right: 5pt;

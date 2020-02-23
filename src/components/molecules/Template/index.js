@@ -72,6 +72,11 @@ const StyledWrapper = styled.div`
     height: 210px;
     margin: 0 35px;
   }
+  @media ${'(min-width: 1200px) and (max-width: 1598.98px) and (orientation:landscape)'} {
+    width: 212px;
+    height: 300px;
+    margin: 0 55px;
+  }
 `;
 
 const Template = ({ active, img, changeTemplate, id, language, ratio }) => {

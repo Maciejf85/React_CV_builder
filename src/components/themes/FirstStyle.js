@@ -5,10 +5,15 @@ import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import linkedIcon from 'assets/icons/linked.png';
+import linkedIcon_dark from 'assets/icons/linked_d.png';
 import phoneIcon from 'assets/icons/phone.png';
+import phoneIcon_dark from 'assets/icons/phone_d.png';
 import emailIcon from 'assets/icons/email.png';
+import emailIcon_dark from 'assets/icons/email_d.png';
 import githubIcon from 'assets/icons/github.png';
+import githubIcon_dark from 'assets/icons/github_d.png';
 import addressIcon from 'assets/icons/address.png';
+import addressIcon_dark from 'assets/icons/address_d.png';
 import store from 'store';
 
 Font.register({
@@ -166,21 +171,24 @@ const SectionLeftBox = styled.View`
 `;
 const Icon = styled.Image`
   width: 15pt;
-  height: 9pt;
+  height: 10pt;
   background-position: center center;
 `;
 
 const SectionTitleLeft = styled.Text`
   display: flex;
+  height: 15pt;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  margin: 5pt 0;
   text-transform: capitalize;
   color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
   font-size: 9.8pt;
   font-weight: semiBold;
   letter-spacing: 0.2pt;
 `;
+
 const SectionTitleLeftDot = styled.View`
   margin: 0 4pt;
   width: 4pt;
@@ -317,7 +325,8 @@ class MyDocument extends Component {
               {!phone || (
                 <PersonalDataSection>
                   <SectionTitleLeft bold bgIsDark={bgIsDark}>
-                    <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
+                    <Icon src={bgIsDark ? phoneIcon : phoneIcon_dark} bgIsDark={bgIsDark} />{' '}
+                    {language === 'PL' ? 'telefon' : 'phone'}:
                   </SectionTitleLeft>
                   <SectionLeft bgIsDark={bgIsDark}> {phone}</SectionLeft>
                 </PersonalDataSection>
@@ -325,7 +334,7 @@ class MyDocument extends Component {
               {!email || (
                 <PersonalDataSection>
                   <SectionTitleLeft bold bgIsDark={bgIsDark}>
-                    <Icon src={emailIcon} /> Email:
+                    <Icon src={bgIsDark ? emailIcon : emailIcon_dark} bgIsDark={bgIsDark} /> Email:
                   </SectionTitleLeft>
                   <SectionLeft bgIsDark={bgIsDark}> {email}</SectionLeft>
                 </PersonalDataSection>
@@ -333,7 +342,8 @@ class MyDocument extends Component {
               {!adress || (
                 <PersonalDataSection>
                   <SectionTitleLeft bold bgIsDark={bgIsDark}>
-                    <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
+                    <Icon src={bgIsDark ? addressIcon : addressIcon_dark} bgIsDark={bgIsDark} />{' '}
+                    {language === 'PL' ? 'adres' : 'address'}:
                   </SectionTitleLeft>
                   <SectionLeft bgIsDark={bgIsDark}> {adress}</SectionLeft>
                 </PersonalDataSection>
@@ -341,7 +351,8 @@ class MyDocument extends Component {
               {!github || (
                 <>
                   <SectionTitleLeft bold bgIsDark={bgIsDark}>
-                    <Icon src={githubIcon} /> Github:
+                    <Icon src={bgIsDark ? githubIcon : githubIcon_dark} bgIsDark={bgIsDark} />{' '}
+                    Github:
                   </SectionTitleLeft>
                   <PersonalDataSection>
                     <Link
@@ -359,7 +370,8 @@ class MyDocument extends Component {
               {!linkedin || (
                 <>
                   <SectionTitleLeft bold bgIsDark={bgIsDark}>
-                    <Icon src={linkedIcon} /> Linkedin:
+                    <Icon src={bgIsDark ? linkedIcon : linkedIcon_dark} bgIsDark={bgIsDark} />{' '}
+                    Linkedin:
                   </SectionTitleLeft>
                   <PersonalDataSection>
                     <Link
