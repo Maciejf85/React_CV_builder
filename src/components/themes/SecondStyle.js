@@ -120,7 +120,7 @@ const Profession = styled.Text`
 `;
 
 const HeadContainerLeft = styled.View`
-  display: flex;
+  display: ${({ isPhoto }) => (isPhoto ? 'flex' : 'none')};
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -324,6 +324,7 @@ class MyDocument extends Component {
       webApi,
     } = currentCv;
     const bgIsDark = index !== 3 && index !== 7;
+    const isPhoto = state.image.image || false;
 
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
@@ -342,7 +343,7 @@ class MyDocument extends Component {
             </UserNameContainer>
           </TopHeader>
           <LeftColumn colorId={color}>
-            <HeadContainerLeft>
+            <HeadContainerLeft isPhoto={isPhoto}>
               {!state.image.image || <ImageRound src={state.image.image} />}
             </HeadContainerLeft>
 

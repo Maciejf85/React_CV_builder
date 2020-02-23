@@ -65,7 +65,7 @@ const RightColumn = styled.View`
 `;
 
 const HeadContainerLeft = styled.View`
-  display: flex;
+  display: ${({ isPhoto }) => (isPhoto ? 'flex' : 'none')};
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -120,11 +120,12 @@ const ContentTitle = styled.Text`
   text-transform: uppercase;
   letter-spacing: 0.5pt;
   font-weight: semiBold;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
 `;
 const TitleDecoration = styled.View`
   width: 30pt;
   height: 5pt;
-  border-bottom: 3pt solid ${({ white }) => (white ? 'white' : '#494949')};
+  border-bottom: 3pt solid ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
 `;
 
 const SectionTitle = styled.Text`
@@ -175,7 +176,7 @@ const SectionTitleLeft = styled.Text`
   align-items: center;
   justify-content: flex-start;
   text-transform: capitalize;
-  color: white;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
   font-size: 9.8pt;
   font-weight: semiBold;
   letter-spacing: 0.2pt;
@@ -184,7 +185,7 @@ const SectionTitleLeftDot = styled.View`
   margin: 0 4pt;
   width: 4pt;
   height: 4pt;
-  background: white;
+  background: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
   border-radius: 50pt;
 `;
 
@@ -195,7 +196,7 @@ const PersonalDataSection = styled.View`
 
 const SectionLeft = styled.Text`
   margin: 0 0 10pt;
-  color: white;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
   font-size: 9pt;
   padding: 5pt 0 0 11pt;
 `;
@@ -206,7 +207,7 @@ const Link = styled.Link`
   padding: 5pt 0 0 11pt;
   font-size: 8.5pt;
   font-family: 'Montserrat';
-  color: white;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
 `;
 
 const TextSection = styled.View`
@@ -278,7 +279,7 @@ const FooterText = styled.Text`
 class MyDocument extends Component {
   render() {
     const state = store.getState();
-    const { language, color } = this.props;
+    const { language, color, index } = this.props;
     const { currentCv, personalData, confidential } = state;
     const { name, surname, email, adress, phone, github, linkedin, profession } = personalData;
     const {
@@ -295,51 +296,56 @@ class MyDocument extends Component {
       currentItem,
       webApi,
     } = currentCv;
+    const bgIsDark = index !== 3 && index !== 7;
+    const isPhoto = state.image.image || false;
     return (
       <Document title={currentItem.title} author="Maciej Fiałkowski">
         <MainContainer size="A4" colorId={color}>
           <Masking fixed />
           <LeftColumn>
-            <HeadContainerLeft>
+            <HeadContainerLeft isPhoto={isPhoto}>
               {!state.image.image || <ImageRound src={state.image.image} />}
             </HeadContainerLeft>
 
             <LeftSide leftSide>
               <ContentTitleBox wrap={false}>
-                <ContentTitle>{language === 'PL' ? 'dane osobowe' : 'personal'}</ContentTitle>
-                <TitleDecoration white />
+                <ContentTitle bgIsDark={bgIsDark}>
+                  {language === 'PL' ? 'dane osobowe' : 'personal'}
+                </ContentTitle>
+                <TitleDecoration bgIsDark={bgIsDark} />
               </ContentTitleBox>
               {!phone || (
                 <PersonalDataSection>
-                  <SectionTitleLeft white bold>
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
                     <Icon src={phoneIcon} /> {language === 'PL' ? 'telefon' : 'phone'}:
                   </SectionTitleLeft>
-                  <SectionLeft>{phone}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {phone}</SectionLeft>
                 </PersonalDataSection>
               )}
               {!email || (
                 <PersonalDataSection>
-                  <SectionTitleLeft white bold>
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
                     <Icon src={emailIcon} /> Email:
                   </SectionTitleLeft>
-                  <SectionLeft>{email}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {email}</SectionLeft>
                 </PersonalDataSection>
               )}
               {!adress || (
                 <PersonalDataSection>
-                  <SectionTitleLeft white bold>
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
                     <Icon src={addressIcon} /> {language === 'PL' ? 'adres' : 'address'}:
                   </SectionTitleLeft>
-                  <SectionLeft>{adress}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {adress}</SectionLeft>
                 </PersonalDataSection>
               )}
               {!github || (
                 <>
-                  <SectionTitleLeft white bold>
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
                     <Icon src={githubIcon} /> Github:
                   </SectionTitleLeft>
                   <PersonalDataSection>
                     <Link
+                      bgIsDark={bgIsDark}
                       href={github}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -352,11 +358,12 @@ class MyDocument extends Component {
               )}
               {!linkedin || (
                 <>
-                  <SectionTitleLeft white bold>
+                  <SectionTitleLeft bold bgIsDark={bgIsDark}>
                     <Icon src={linkedIcon} /> Linkedin:
                   </SectionTitleLeft>
                   <PersonalDataSection>
                     <Link
+                      bgIsDark={bgIsDark}
                       href={linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -370,46 +377,56 @@ class MyDocument extends Component {
 
               {!languages.length || (
                 <ContentTitleBox wrap={false}>
-                  <ContentTitle>{language === 'PL' ? 'Języki obce' : 'Languages'}</ContentTitle>
-                  <TitleDecoration white />
+                  <ContentTitle bgIsDark={bgIsDark}>
+                    {language === 'PL' ? 'Języki obce' : 'Languages'}
+                  </ContentTitle>
+                  <TitleDecoration bgIsDark={bgIsDark} />
                 </ContentTitleBox>
               )}
 
               {languages.map(item => (
                 <TextSection key={item.id} wrap={false}>
                   <SectionLeftBox>
-                    <SectionTitleLeftDot />
-                    <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                    <SectionTitleLeftDot bgIsDark={bgIsDark} />
+                    <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                      {item.name}
+                    </SectionTitleLeft>
                   </SectionLeftBox>
-                  <SectionLeft>{`${item.description}`}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {`${item.description}`}</SectionLeft>
                 </TextSection>
               ))}
 
               {!skills.length || (
                 <ContentTitleBox wrap={false}>
-                  <ContentTitle>{language === 'PL' ? 'Umiejętności' : 'Skills'}</ContentTitle>
-                  <TitleDecoration white />
+                  <ContentTitle bgIsDark={bgIsDark}>
+                    {language === 'PL' ? 'Umiejętności' : 'Skills'}
+                  </ContentTitle>
+                  <TitleDecoration bgIsDark={bgIsDark} />
                 </ContentTitleBox>
               )}
 
               {skills.map(item => (
                 <TextSection key={item.id} wrap={false}>
                   <SectionLeftBox>
-                    <SectionTitleLeftDot />
-                    <SectionTitleLeft bold>{item.name}</SectionTitleLeft>
+                    <SectionTitleLeftDot bgIsDark={bgIsDark} />
+                    <SectionTitleLeft bold bgIsDark={bgIsDark}>
+                      {item.name}
+                    </SectionTitleLeft>
                   </SectionLeftBox>
-                  <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {`${item.description || ''}`}</SectionLeft>
                 </TextSection>
               ))}
               {!interests.length || (
                 <ContentTitleBox wrap={false}>
-                  <ContentTitle>{language === 'PL' ? 'zainteresowania' : 'interests'}</ContentTitle>
-                  <TitleDecoration white />
+                  <ContentTitle bgIsDark={bgIsDark}>
+                    {language === 'PL' ? 'zainteresowania' : 'interests'}
+                  </ContentTitle>
+                  <TitleDecoration bgIsDark={bgIsDark} />
                 </ContentTitleBox>
               )}
               {interests.map(item => (
                 <TextSection key={item.id} wrap={false}>
-                  <SectionLeft>{`${item.description || ''}`}</SectionLeft>
+                  <SectionLeft bgIsDark={bgIsDark}> {`${item.description || ''}`}</SectionLeft>
                 </TextSection>
               ))}
             </LeftSide>
