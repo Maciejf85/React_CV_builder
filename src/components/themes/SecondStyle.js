@@ -5,15 +5,15 @@ import Montserrat from 'assets/fonts/Montserrat-Regular.ttf';
 import MontserratSemiBold from 'assets/fonts/Montserrat-SemiBold.ttf';
 import MontserratBold from 'assets/fonts/Montserrat-Bold.ttf';
 import linkedIcon from 'assets/icons/linked_dark.png';
-import linkedIcon_w from 'assets/icons/linked.png';
+import linkedIcon_w from 'assets/icons/linked_white.png';
 import phoneIcon from 'assets/icons/phone_dark.png';
-import phoneIcon_w from 'assets/icons/phone.png';
+import phoneIcon_w from 'assets/icons/phone_white.png';
 import emailIcon from 'assets/icons/email_dark.png';
-import emailIcon_w from 'assets/icons/email.png';
+import emailIcon_w from 'assets/icons/email_white.png';
 import githubIcon from 'assets/icons/github_dark.png';
-import githubIcon_w from 'assets/icons/github.png';
+import githubIcon_w from 'assets/icons/github_white.png';
 import addressIcon from 'assets/icons/address_dark.png';
-import addressIcon_w from 'assets/icons/address.png';
+import addressIcon_w from 'assets/icons/address_white.png';
 import store from 'store';
 
 Font.register({
@@ -62,7 +62,6 @@ const RightColumn = styled.View`
   margin-top: 144pt;
   font-family: 'Montserrat';
   padding: 0 19pt;
-  /* background: #eee; */
 `;
 
 const TopHeader = styled.View`
@@ -134,8 +133,8 @@ const HeadContainerLeft = styled.View`
 `;
 
 const Icon = styled.Image`
-  height: 13pt;
-  width: 13pt;
+  height: 13px;
+  /* width: 13px; */
   margin-right: 5pt;
   /* border: 1px solid red; */
 `;
@@ -252,6 +251,7 @@ const LeftSide = styled.View`
 `;
 const SectionTitle = styled.Text`
   font-size: 9pt;
+  width:100%;
   color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#444444;')};
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
   letter-spacing: 0.2pt;
@@ -368,11 +368,7 @@ class MyDocument extends Component {
             {!email || (
               <PersonalDataSection>
                 <SectionTitleLeftIcon bold>
-                  <Icon
-                    src={bgIsDark ? emailIcon_w : emailIcon}
-                    bgIsDark={bgIsDark}
-                    style={{ width: '16px' }}
-                  />
+                  <Icon src={bgIsDark ? emailIcon_w : emailIcon} bgIsDark={bgIsDark} />
                   <IconText bgIsDark={bgIsDark}> {email}</IconText>
                 </SectionTitleLeftIcon>
               </PersonalDataSection>
@@ -546,7 +542,7 @@ class MyDocument extends Component {
               </RightSideContentTitleBox>
             )}
             {webApi.map(item => (
-              <TextSection key={item.id} wrap={false}>
+              <TextSection key={item.id}>
                 <ContentBox>
                   <LeftSide small>
                     <SectionDate>{`${item.endYear}`}</SectionDate>
@@ -556,10 +552,10 @@ class MyDocument extends Component {
                     <LiveDemo href={item.link} target="_blank" rel="noopener noreferrer">
                       {item.link}
                     </LiveDemo>
-                    <SectionTitle>Użyte technologie : </SectionTitle>
-                    <Section>{`${item.technology}`}</Section>
-                    <SectionTitle>Opis aplikacji :</SectionTitle>
-                    <Section>{`${item.description}`}</Section>
+                    <SectionTitle wrap={false}>Użyte technologie : </SectionTitle>
+                    <Section minPresenceAhead={1}>{`${item.technology}`}</Section>
+                    <SectionTitle wrap={false}>Opis aplikacji :</SectionTitle>
+                    <Section minPresenceAhead={1}>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
               </TextSection>
@@ -585,9 +581,7 @@ class MyDocument extends Component {
                     <SectionDate />
                   </LeftSide>
                   <RightSide>
-                    <SectionTitle bold orphans={20} widows={20}>
-                      {item.description}
-                    </SectionTitle>
+                    <SectionTitle bold>{item.description}</SectionTitle>
                   </RightSide>
                 </ContentBox>
               </TextSection>
