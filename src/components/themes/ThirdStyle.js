@@ -129,7 +129,7 @@ const ContentTitle = styled.Text`
   margin-top: 10pt;
   text-align: ${({ leftSide }) => (leftSide ? 'center' : 'left')};
   color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
-  border-bottom: ${({ leftSide }) => (leftSide ? '1pt solid #ddd' : 'none')};
+  border-bottom: ${({ leftSide }) => (leftSide ? '1pt solid #494949' : 'none')};
 `;
 const TitleDecoration = styled.View`
   width: 30pt;
@@ -185,7 +185,7 @@ const SectionTitleLeft = styled.Text`
   justify-content: center;
   text-transform: uppercase;
   text-align: center;
-  color: white;
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
   font-size: 9.8pt;
   font-weight: normal;
   letter-spacing: -0.1pt;
@@ -198,7 +198,7 @@ const SectionTitleLeftDot = styled.View`
   margin: 0 4pt;
   width: 4pt;
   height: 4pt;
-  background: white;
+  background: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
   border-radius: 50pt;
   margin-top: 9pt;
 `;
@@ -224,6 +224,7 @@ const SectionLeft = styled.Text`
   min-width: 145pt;
   text-align: center;
   text-align: ${({ leftSide }) => (leftSide ? 'left' : 'center')};
+  color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
 `;
 
 const Link = styled.Link`
@@ -368,7 +369,7 @@ class MyDocument extends Component {
                       {language === 'PL' ? 'adres' : 'address'}
                     </SectionTitleLeft>
 
-                    <SectionLeft>{adress}</SectionLeft>
+                    <SectionLeft bgIsDark={bgIsDark}>{adress}</SectionLeft>
                   </PersonalDataSection>
                 )}
                 {!github || (
@@ -393,7 +394,7 @@ class MyDocument extends Component {
                 {!linkedin || (
                   <>
                     <PersonalDataSection>
-                      <SectionTitleLeft white bold>
+                      <SectionTitleLeft bold bgIsDark={bgIsDark}>
                         Linkedin
                       </SectionTitleLeft>
 
@@ -423,12 +424,12 @@ class MyDocument extends Component {
             {languages.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox bgIsDark={bgIsDark}>
-                  <SectionTitleLeftDot />
+                  <SectionTitleLeftDot bgIsDark={bgIsDark} />
                   <SectionTitleLeft bold listItems bgIsDark={bgIsDark}>
                     {item.name}
                   </SectionTitleLeft>
                 </SectionLeftBox>
-                <SectionLeft>{`${item.description}`}</SectionLeft>
+                <SectionLeft bgIsDark={bgIsDark}>{`${item.description}`}</SectionLeft>
               </TextSection>
             ))}
 
@@ -443,7 +444,7 @@ class MyDocument extends Component {
             {skills.map(item => (
               <TextSection key={item.id} wrap={false}>
                 <SectionLeftBox bgIsDark={bgIsDark}>
-                  <SectionTitleLeftDot />
+                  <SectionTitleLeftDot bgIsDark={bgIsDark} />
                   <SectionTitleLeft bold listItems bgIsDark={bgIsDark}>
                     {item.name}
                   </SectionTitleLeft>
