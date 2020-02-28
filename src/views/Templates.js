@@ -5,9 +5,6 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import TemplateItem from 'components/molecules/Template';
-import temp0 from 'assets/template/template_0.jpg';
-import temp1 from 'assets/template/template_1.jpg';
-import temp2 from 'assets/template/template_2.jpg';
 import { changeTemplate } from 'actions';
 import { setNewCurrentCVData } from 'functions';
 import ColorButton from 'components/atoms/Buttons/TemplateColorButton';
@@ -120,15 +117,15 @@ class Template extends Component {
         <StyledWrapper>
           <TemplateItem
             active={parseInt(template) === 1}
-            img={temp0}
             id={1}
             changeTemplate={this.handleChangeTemplate}
             language={language}
+            color={color}
             ratio="1:1"
           />
           <TemplateItem
             active={parseInt(template) === 2}
-            img={temp1}
+            color={color}
             id={2}
             changeTemplate={this.handleChangeTemplate}
             language={language}
@@ -136,8 +133,8 @@ class Template extends Component {
           />
           <TemplateItem
             active={parseInt(template) === 3}
-            img={temp2}
             id={3}
+            color={color}
             changeTemplate={this.handleChangeTemplate}
             language={language}
             ratio="3:4"

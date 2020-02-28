@@ -99,6 +99,7 @@ const NameAndSurname = styled.View`
 `;
 
 const ImageRound = styled.Image`
+  margin-top: 25pt;
   width: 100pt;
   height: 100pt;
   border-radius: 100pt;
@@ -159,7 +160,7 @@ const SectionLeft = styled.Text`
 `;
 
 const ContentTitleBox = styled.View`
-  margin: ${({ first }) => (first ? '10pt 0 15pt' : '15pt 0')};
+  margin: ${({ first }) => (first ? '25pt 0 15pt' : '15pt 0')};
   font-size: 11pt;
   text-transform: uppercase;
 `;

@@ -129,7 +129,8 @@ const ContentTitle = styled.Text`
   margin-top: 10pt;
   text-align: ${({ leftSide }) => (leftSide ? 'center' : 'left')};
   color: ${({ bgIsDark }) => (bgIsDark ? 'white' : '#494949')};
-  border-bottom: ${({ leftSide }) => (leftSide ? '1pt solid #494949' : 'none')};
+  border-bottom: ${({ leftSide, bgIsDark }) =>
+    leftSide ? (bgIsDark ? '1pt solid white' : '1pt solid #494949') : 'none'};
 `;
 const TitleDecoration = styled.View`
   width: 30pt;
