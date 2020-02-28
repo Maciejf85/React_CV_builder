@@ -1,5 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
+import temp1_1 from 'assets/template/t1-1.jpg';
+import temp1_2 from 'assets/template/t1-2.jpg';
+import temp1_3 from 'assets/template/t1-3.jpg';
+import temp1_4 from 'assets/template/t1-4.jpg';
+import temp1_5 from 'assets/template/t1-5.jpg';
+import temp1_6 from 'assets/template/t1-6.jpg';
+import temp1_7 from 'assets/template/t1-7.jpg';
+import temp2_1 from 'assets/template/t2-1.jpg';
+import temp2_2 from 'assets/template/t2-2.jpg';
+import temp2_3 from 'assets/template/t2-3.jpg';
+import temp2_4 from 'assets/template/t2-4.jpg';
+import temp2_5 from 'assets/template/t2-5.jpg';
+import temp2_6 from 'assets/template/t2-6.jpg';
+import temp2_7 from 'assets/template/t2-7.jpg';
+import temp3_1 from 'assets/template/t3-1.jpg';
+import temp3_2 from 'assets/template/t3-2.jpg';
+import temp3_3 from 'assets/template/t3-3.jpg';
+import temp3_4 from 'assets/template/t3-4.jpg';
+import temp3_5 from 'assets/template/t3-5.jpg';
+import temp3_6 from 'assets/template/t3-6.jpg';
+import temp3_7 from 'assets/template/t3-7.jpg';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -79,14 +100,19 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Template = ({ active, img, changeTemplate, id, language, ratio }) => {
+const Template = ({ active, changeTemplate, id, language, ratio, color }) => {
   const isPolish = language === 'PL';
+  const images = [
+    [temp1_1, temp1_2, temp1_3, temp1_4, temp1_5, temp1_6, temp1_7],
+    [temp2_1, temp2_2, temp2_3, temp2_4, temp2_5, temp2_6, temp2_7],
+    [temp3_1, temp3_2, temp3_3, temp3_4, temp3_5, temp3_6, temp3_7],
+  ];
   return (
     <StyledWrapper active={active} onClick={changeTemplate}>
       <header>
         {isPolish ? 'Szablon ' : 'Template '} #{id}
       </header>
-      <img src={img} alt="pdf template" id={id} />
+      <img src={images[id - 1][color - 1]} alt="pdf template" id={id} />
       <div className="info">
         <div>
           {' '}
