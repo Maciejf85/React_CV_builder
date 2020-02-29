@@ -15,7 +15,7 @@ Aplikacja internetowa do tworzenia CV i eksportu do pdf.
 ### Opis i prezentacja
 
 Single page aplication zrealizowana przy użyciu <b> React, React-router, Redux, Redux-thunk, Axios, PHP5, MySql </b>.
-Struktura komponentów zgodna z założeniami [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/)
+Struktura komponentów zgodna z założeniami [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) <br>
 Aplikacja umożliwia rejestrację oraz logowanie przy użyciu standardowego formularza lub przez API facebooka.
 Rejestrację i logowanie obsługuje <b>PHP</b> i <b>MySQL</b>.
 
