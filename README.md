@@ -20,4 +20,8 @@ Rejestrację i logowanie obsługuje <b>PHP</b> i <b>MySQL</b>.
 
 #### Zakładanie nowego użytkownika:
 
-![alt text](https://maciejf.pl/cv-builder/images/templates.gif)
+![alt text](https://maciejf.pl/cv-builder/images/rejestracja.gif)
+
+#### Logowanie
+
+![alt text](https://maciejf.pl/cv-builder/images/logowanie.gif)
