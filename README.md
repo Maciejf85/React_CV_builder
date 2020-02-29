@@ -29,22 +29,29 @@ Rejestrować można się za pomocą formularza lub facebooka.
 
 ![logowanie-img](https://maciejf.pl/cv-builder/images/logowanie.gif)
 
+#### Wypełniamy dane
+
+Dane osobowe są jedne dla wszystkich CV natomiast pozostale zakładki "Edukacja", "Doświadczenie" itd.
+zapisywane są dla każdego utworzonego CV osobno. Wpisywane dane są wysyłane na serwer niemal natychmiast, wyskakująca ikonka po prawej stronie informuje użytkownika że strona żyje i backend robi swoje.
+![resizer-img](https://maciejf.pl/cv-builder/images/edit.png)
+
 #### Resizer
 
 Resizer umożliwia dodanie zdjęcia, zmianę proporcji oraz przycięcie do pożądanej wielkości.
-![resizer-img](https://maciejf.pl/cv-builder/images/resizer.gif)
+![resizer-img](https://maciejf.pl/cv-builder/images/resizer.png)
+![resizer-img](https://maciejf.pl/cv-builder/images/resizer2.png)
 Zdjęcie przechowywane jest na serwerze, jedno dla wszystkich CV. Można je w dowolnej chwili zmienić lub usunąć w zakładce "Strona główna" -> Moje konto lub "Edytor" -> dane osobowe.
 
 #### Szablony
 
 Do wyboru są 3 szablony w 7 kolorach.
-![szablon-img](https://maciejf.pl/cv-builder/images/szablony.gif)
+![szablon-img](https://maciejf.pl/cv-builder/images/szablony.png)
 
 #### Podgląd
 
 Podgląd pozwala ocenić ostateczny wygląd CV, pobrać lub wydrukować.
 Użyta biblioteka nie obsługuje podglądu na urządzeniach mobilnych.
-![podglad-img](https://maciejf.pl/cv-builder/images/podglad.gif)
+![podglad-img](https://maciejf.pl/cv-builder/images/preview.png)
 
 ##### Na zakończenie
 
