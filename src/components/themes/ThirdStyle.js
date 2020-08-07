@@ -564,9 +564,14 @@ class MyDocument extends Component {
                     <LiveDemo href={item.link} target="_blank" rel="noopener noreferrer">
                       {item.link}
                     </LiveDemo>
-                    <SectionTitle>Użyte technologie : </SectionTitle>
+                    <SectionTitle>
+                      {language === 'PL' ? 'Użyte technologie' : 'Technologies used'}{' '}
+                    </SectionTitle>
                     <Section>{`${item.technology}`}</Section>
-                    <SectionTitle>Opis aplikacji :</SectionTitle>
+                    <SectionTitle>
+                      {' '}
+                      {language === 'PL' ? 'Opis aplikacji' : 'Description'}{' '}
+                    </SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
