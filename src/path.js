@@ -1,5 +1,5 @@
-const basePath = '/';
-// const basePath = '/cv-builder/';
+// const basePath = '/';
+const basePath = '/cv-builder/';
 
 const path = {
   login: basePath,
