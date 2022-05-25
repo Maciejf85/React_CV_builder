@@ -496,7 +496,7 @@ class MyDocument extends Component {
                   </LeftSide>
                   <RightSide>
                     <SectionTitle uppercase bold>{`${item.position} `}</SectionTitle>
-                    <SectionTitle>{`/ ${item.name}`}</SectionTitle>
+                    <SectionTitle>{`${item.name}`}</SectionTitle>
                     <Section>{`${item.description}`}</Section>
                   </RightSide>
                 </ContentBox>
